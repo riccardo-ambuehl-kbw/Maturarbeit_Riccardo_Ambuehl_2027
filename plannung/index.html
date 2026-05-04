@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Maturarbeit Todo</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Maturarbeit</p>
+        <h1>Todo Board</h1>
+      </div>
+      <div class="header-actions">
+        <button id="exportBtn" class="button secondary" type="button">Export</button>
+        <label class="button secondary file-button">
+          Import
+          <input id="importInput" type="file" accept="application/json,.json">
+        </label>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <section class="panel editor-panel" aria-labelledby="formTitle">
+        <h2 id="formTitle">Neue Aufgabe</h2>
+        <form id="todoForm" autocomplete="off">
+          <input id="todoId" type="hidden">
+
+          <label>
+            Titel
+            <input id="titleInput" name="title" type="text" maxlength="90" required placeholder="z.B. Quellen sortieren">
+          </label>
+
+          <label>
+            Beschreibung
+            <textarea id="descriptionInput" name="description" rows="5" maxlength="900" placeholder="Was genau muss erledigt werden?"></textarea>
+          </label>
+
+          <div class="form-grid">
+            <label>
+              Relevanz
+              <select id="relevanceInput" name="relevance">
+                <option value="hoch">Hoch</option>
+                <option value="mittel" selected>Mittel</option>
+                <option value="niedrig">Niedrig</option>
+              </select>
+            </label>
+
+            <label>
+              Status
+              <select id="statusInput" name="status">
+                <option value="offen" selected>Offen</option>
+                <option value="in-arbeit">In Arbeit</option>
+                <option value="erledigt">Erledigt</option>
+              </select>
+            </label>
+
+            <label>
+              Deadline
+              <input id="dueInput" name="due" type="date">
+            </label>
+
+            <label>
+              Kategorie
+              <input id="categoryInput" name="category" type="text" maxlength="50" placeholder="Recherche">
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button id="submitBtn" class="button primary" type="submit">Hinzufügen</button>
+            <button id="cancelEditBtn" class="button ghost" type="button" hidden>Abbrechen</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="workspace">
+        <section class="toolbar" aria-label="Filter und Suche">
+          <input id="searchInput" type="search" placeholder="Suchen nach Titel, Beschreibung oder Kategorie">
+          <select id="statusFilter">
+            <option value="alle">Alle Status</option>
+            <option value="offen">Offen</option>
+            <option value="in-arbeit">In Arbeit</option>
+            <option value="erledigt">Erledigt</option>
+          </select>
+          <select id="sortInput">
+            <option value="createdDesc">Neueste zuerst</option>
+            <option value="dueAsc">Deadline zuerst</option>
+            <option value="relevanceDesc">Relevanz zuerst</option>
+          </select>
+        </section>
+
+        <section class="stats" aria-label="Übersicht">
+          <div>
+            <strong id="totalCount">0</strong>
+            <span>Gesamt</span>
+          </div>
+          <div>
+            <strong id="openCount">0</strong>
+            <span>Offen</span>
+          </div>
+          <div>
+            <strong id="doneCount">0</strong>
+            <span>Erledigt</span>
+          </div>
+        </section>
+
+        <section id="todoList" class="todo-list" aria-live="polite"></section>
+        <p id="emptyState" class="empty-state" hidden>Keine passenden Aufgaben vorhanden.</p>
+      </section>
+    </main>
+
+    <template id="todoTemplate">
+      <article class="todo-card">
+        <div class="todo-card-header">
+          <div>
+            <span class="pill relevance"></span>
+            <span class="pill status"></span>
+          </div>
+          <div class="card-actions">
+            <button class="icon-button edit-btn" type="button" title="Bearbeiten">Bearbeiten</button>
+            <button class="icon-button delete-btn" type="button" title="Löschen">Löschen</button>
+          </div>
+        </div>
+        <h3></h3>
+        <p class="description"></p>
+        <dl class="meta">
+          <div>
+            <dt>Deadline</dt>
+            <dd class="due"></dd>
+          </div>
+          <div>
+            <dt>Kategorie</dt>
+            <dd class="category"></dd>
+          </div>
+        </dl>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
