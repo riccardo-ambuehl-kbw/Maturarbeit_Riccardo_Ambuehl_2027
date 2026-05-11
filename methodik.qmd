@@ -1,0 +1,34 @@
+# Methodik
+
+## Datenquellen
+
+Für die spätere Analyse sollen historische Finanzdaten verwendet werden. Mögliche Datenquellen sind Kursdaten von Indizes, ETFs oder ausgewählten Aktien. In diesem Grundgerüst werden zunächst lokale Platzhalterdaten genutzt, damit alle Beispiele ohne externe APIs funktionieren.
+
+## Vorgehen
+
+Das Vorgehen besteht aus mehreren Schritten:
+
+1. Daten laden oder vorbereiten
+2. Renditen berechnen
+3. Strategien definieren
+4. Portfolios simulieren
+5. Kennzahlen berechnen
+6. Ergebnisse visualisieren und interpretieren
+
+## Portfolio-Simulation
+
+Eine Portfolio-Simulation kombiniert mehrere Anlagen mit bestimmten Gewichtungen. Aus den Einzelrenditen wird eine Portfoliorendite berechnet. Später können unterschiedliche Gewichtungen, Rebalancing-Regeln oder Anlagehorizonte verglichen werden.
+
+## Kennzahlen
+
+Wichtige Kennzahlen sind unter anderem:
+
+- durchschnittliche Rendite
+- annualisierte Rendite
+- Volatilität
+- maximaler Verlust
+- Sharpe Ratio als vereinfachtes Risiko-Rendite-Mass
+
+## Reproduzierbarkeit
+
+Alle Berechnungsschritte sollen nachvollziehbar dokumentiert werden. Quarto, Jupyter-Notebooks und Python-Code ermöglichen es, Analysen erneut auszuführen und Ergebnisse transparent zu prüfen.

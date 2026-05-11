@@ -1,0 +1,19 @@
+# Überblick
+
+Diese Maturarbeit untersucht, wie langfristige Anlagestrategien anhand historischer Finanzdaten analysiert, simuliert und verglichen werden können. Der Schwerpunkt liegt auf einem reproduzierbaren Python-Workflow, der Datenanalyse, Portfolio-Simulation und Ergebnisdarstellung nachvollziehbar miteinander verbindet.
+
+## Forschungsfrage
+
+Wie können historische Finanzdaten mithilfe eines Python-basierten Modells verwendet werden, um langfristige Investmentstrategien hinsichtlich Risiko und Rendite zu vergleichen?
+
+## Ziel der Arbeit
+
+Ziel ist es, verschiedene langfristige Anlagestrategien systematisch zu untersuchen. Dabei sollen Rendite, Risiko, Volatilität und Diversifikation verständlich erklärt und mit einfachen Simulationen praktisch ausgewertet werden.
+
+## Projektbeschreibung
+
+Das Projekt ist als Quarto Book organisiert. Die schriftliche Arbeit liegt in einzelnen `.qmd`-Kapiteln, während ausführlichere Experimente und Zwischenschritte in ausgelagerten Jupyter-Notebooks dokumentiert werden. Quellen werden über `references.bib` verwaltet, sodass Literatur aus Zotero oder Better BibTeX sauber zitiert werden kann.
+
+::: {.callout-note}
+Dieses Grundgerüst enthält Platzhaltertexte und einfache Beispieldaten. Fachliche Inhalte, Quellen und Interpretationen müssen im Verlauf der Arbeit geprüft und ergänzt werden.
+:::

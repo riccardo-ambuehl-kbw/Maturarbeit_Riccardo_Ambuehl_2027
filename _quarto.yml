@@ -1,0 +1,63 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Langfristige Anlagestrategien anhand historischer Finanzdaten"
+  author: "Riccardo Ambühl"
+  date: today
+  chapters:
+    - index.qmd
+    - einleitung.qmd
+    - theorie.qmd
+    - methodik.qmd
+    - analyse.qmd
+    - fazit.qmd
+  page-footer:
+    left: "Riccardo Ambühl"
+    right: "Maturarbeit"
+
+lang: de
+bibliography: references.bib
+
+number-sections: true
+toc: true
+toc-depth: 3
+
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+
+format:
+  html:
+    theme:
+      - cosmo
+      - styles/custom.scss
+    css: styles/styles.css
+    code-fold: true
+    code-summary: "Code anzeigen"
+    code-copy: true
+    code-overflow: wrap
+    df-print: paged
+    fig-width: 8
+    fig-height: 5
+  pdf:
+    documentclass: scrreprt
+    classoption:
+      - oneside
+    papersize: a4
+    geometry:
+      - margin=2.5cm
+    colorlinks: true
+    fig-width: 6.5
+    fig-height: 4.2
+    include-in-header:
+      text: |
+        \usepackage{booktabs}
+        \usepackage{float}
+        \floatplacement{figure}{H}
+  docx:
+    toc: true
+    number-sections: true

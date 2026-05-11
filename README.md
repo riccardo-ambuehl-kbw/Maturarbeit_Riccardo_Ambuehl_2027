@@ -1,37 +1,110 @@
 # Maturarbeit
 
-**Thema:** Simulation langfristiger Investmentstrategien
+**Titel:** Langfristige Anlagestrategien anhand historischer Finanzdaten  
+**Autor:** Riccardo Ambühl
 
-**Leitfrage:** Wie lassen sich langfristige Investmentstrategien anhand historischer Finanzdaten analysieren und vergleichen und welche Strategien weisen unter Berücksichtigung von Risiko und Rendite die besten Ergebnisse auf?
+Dieses Repository enthält ein Quarto-Book-Setup für die Maturarbeit. Die Arbeit ist in einzelne Kapitel aufgeteilt, Python-Experimente liegen in `notebooks/`, Quellen in `references.bib`, Styles in `styles/` und spätere Ergebnisse in `outputs/`.
 
-Dabei soll untersucht werden, inwiefern ein Python-basiertes Modell historische Markdaten nutzen kann, um verschiedene Portfolio-Strategien zu simulieren und deren Performance systematisch zu bewerten.
-
-**Ursprüngliche Leitfrage:** Welche Strategien weisen unter Berücksichtigung von Risiko und Rendite die besten Ergebnisse auf?
-
-## Konkretisierte Leitfragen
-
-**Variante 1 (Wissenschaftlich):** Inwiefern erzielen diversifizierte Investmentstrategien langfristig ein besseres Risiko-Rendite-Verhältnis als konzentrierte Anlagestrategien?
-
-**Variante 2 (ursprüngliche Idee):** Welche langfristige Investmentstrategie bietet unter historischen Marktbedingungen das beste Verhältnis zwischen Rendite und Risiko?
-
-**Variante 3 (Informatik):** Wie können historische Finanzdaten mithilfe eines Python-basierten Modells verwendet werden, um langfristige Investmentstrategien hinsichtlich Risiko und Rendite zu vergleichen?
-
-## Finale Leitfrage
+## Forschungsfrage
 
 Wie können historische Finanzdaten mithilfe eines Python-basierten Modells verwendet werden, um langfristige Investmentstrategien hinsichtlich Risiko und Rendite zu vergleichen?
 
-**Grund:** Ich habe mich für diese Leitfrage entschieden, weil sie Informatik mit Investing kombiniert und mich beides sehr interessiert.
+## Installationsempfehlungen
 
-## Hypothese
+Installiere lokal:
 
-Langfristiger Anlageerfolg hängt stärker vom Risikomanagement als von der maximalen Rendite ab.
+- [Quarto](https://quarto.org/)
+- [VS Code](https://code.visualstudio.com/)
+- VS-Code-Erweiterungen: Quarto, Python, Jupyter
+- Python 3.11 oder neuer
+- Python-Pakete: `jupyter`, `pandas`, `matplotlib`
+- Zotero mit Better BibTeX
 
-## Was ich testen will
+Beispiel für eine lokale Python-Umgebung:
 
-**Vergleich Diversifikation und konzentriertes Anlegen**
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install jupyter pandas matplotlib
+```
 
-**Vegleich Index Funds vs. Aktien**
+## Quarto-Befehle
 
-**Crypto**
+Vorschau im Browser:
 
-**Inwiefern kann mir ein Python Modell helfen Risiko und Rendite im Gleichgewicht zu halten**
+```powershell
+quarto preview
+```
+
+Alle Formate rendern:
+
+```powershell
+quarto render
+```
+
+Nur HTML rendern:
+
+```powershell
+quarto render --to html
+```
+
+Nur PDF rendern:
+
+```powershell
+quarto render --to pdf
+```
+
+## Zotero und Better BibTeX Workflow
+
+1. Quellen in Zotero sammeln.
+2. Better BibTeX installieren.
+3. Eine Sammlung für die Maturarbeit anlegen.
+4. Die Sammlung als BibLaTeX oder BibTeX nach `references.bib` exportieren.
+5. Wenn möglich automatische Aktualisierung aktivieren.
+6. Kurze, stabile Citation Keys verwenden, zum Beispiel `markowitz1952`.
+
+## Quellen verwenden
+
+Quellen werden in den `.qmd`-Kapiteln mit Quarto-Zitationssyntax eingebunden:
+
+```markdown
+Die moderne Portfoliotheorie beschreibt Diversifikation systematisch [@markowitz1952].
+```
+
+Die globale Bibliographie ist in `_quarto.yml` über `references.bib` eingebunden.
+
+## Neue Kapitel hinzufügen
+
+1. Neue Datei erstellen, zum Beispiel `resultate.qmd`.
+2. Kapitelüberschrift mit `# Resultate` beginnen.
+3. Datei in `_quarto.yml` unter `book: chapters:` ergänzen.
+4. Mit `quarto preview` prüfen.
+
+## Notebooks sinnvoll auslagern
+
+Nutze `notebooks/` für explorative Arbeit, Zwischenschritte und Tests. Übertrage nur die relevanten, geprüften Ergebnisse in die `.qmd`-Kapitel. Dadurch bleibt das Book lesbar, während der Analyseprozess trotzdem nachvollziehbar bleibt.
+
+## Projektstruktur
+
+```text
+.
+├── _quarto.yml
+├── index.qmd
+├── einleitung.qmd
+├── theorie.qmd
+├── methodik.qmd
+├── analyse.qmd
+├── fazit.qmd
+├── references.bib
+├── styles/
+├── notebooks/
+├── data/
+├── images/
+├── outputs/
+└── documentation/ai-usage/
+```
+
+## KI-Nachweise
+
+Die Nutzung von KI-Tools wird unter `documentation/ai-usage/` dokumentiert. Dort wird festgehalten, wann KI eingesetzt wurde, wofür sie genutzt wurde, welche Inhalte übernommen wurden und was manuell geprüft werden muss.

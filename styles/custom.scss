@@ -1,0 +1,31 @@
+/*-- scss:defaults --*/
+$font-family-sans-serif: "Source Sans Pro", "Segoe UI", Arial, sans-serif;
+$font-family-monospace: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+$body-color: #1f2933;
+$link-color: #25636f;
+$headings-color: #16232e;
+$code-block-bg: #f6f8fa;
+$code-block-border-color: #d8dee6;
+$table-border-color: #d8dee6;
+
+/*-- scss:rules --*/
+.chapter-title,
+.title {
+  letter-spacing: 0;
+}
+
+.quarto-title-meta {
+  color: #5b6773;
+}
+
+.table {
+  border-color: #d8dee6;
+}
+
+.cell-output-display {
+  margin-block: 0.8rem 1.2rem;
+}
+
+.sourceCode {
+  border-radius: 8px;
+}
