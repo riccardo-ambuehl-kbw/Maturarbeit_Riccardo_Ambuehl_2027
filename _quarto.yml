@@ -19,6 +19,7 @@ book:
 
 lang: de
 bibliography: references.bib
+csl: styles/chicago-shortened-notes-bibliography-17th-edition.csl
 
 number-sections: true
 toc: true
