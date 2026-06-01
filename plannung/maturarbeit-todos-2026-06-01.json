@@ -1,0 +1,51 @@
+{
+  "app": "maturarbeit-todo",
+  "version": 1,
+  "exportedAt": "2026-06-01T22:20:18.260Z",
+  "todos": [
+    {
+      "id": "6fca63d1-eb97-4a59-8cec-87cc1f330464",
+      "title": "Methodik",
+      "description": "-Welche Investment Strategien\n-Welche Daten von wo?\n-Aufbereitung und Dokumentation\n-Welche Kennzahlen für den Vergleich\n-Bedingungen beim Vergleich von Strategien\n-Grenzen der Methode",
+      "relevance": "hoch",
+      "status": "in-arbeit",
+      "due": "",
+      "category": "Disposition",
+      "createdAt": "2026-06-01T22:19:21.455Z",
+      "updatedAt": "2026-06-01T22:19:21.455Z"
+    },
+    {
+      "id": "e4409e53-6bfd-4863-b34b-e7a3cbb36cda",
+      "title": "Fragestellung",
+      "description": "Leitfragen, was soll am Ende beantwortet sein?, klares Ziel setzen (umgekehrter Fragentrichter)",
+      "relevance": "mittel",
+      "status": "in-arbeit",
+      "due": "",
+      "category": "Plannung",
+      "createdAt": "2026-05-04T21:26:34.756Z",
+      "updatedAt": "2026-06-01T06:29:53.850Z"
+    },
+    {
+      "id": "0bd326a9-d6b0-42a2-bf22-cf02f345c5ef",
+      "title": "Erstes Gespräch abmachen",
+      "description": "Ein erstes Gespräch vereinbaren und alles wichtige für den Anfang klären.",
+      "relevance": "mittel",
+      "status": "erledigt",
+      "due": "",
+      "category": "Plannung",
+      "createdAt": "2026-05-04T21:24:30.519Z",
+      "updatedAt": "2026-06-01T06:36:54.789Z"
+    },
+    {
+      "id": "03e44756-2491-449e-be1b-5db4a06308f1",
+      "title": "Plannung",
+      "description": "Das ganze Projekt durchplanen, danach Punkt für Punkt abarbeiten, damit das Projekt geordnet ist.",
+      "relevance": "hoch",
+      "status": "in-arbeit",
+      "due": "2026-05-11",
+      "category": "Plannung",
+      "createdAt": "2026-05-04T21:23:42.130Z",
+      "updatedAt": "2026-06-01T06:29:53.850Z"
+    }
+  ]
+}
