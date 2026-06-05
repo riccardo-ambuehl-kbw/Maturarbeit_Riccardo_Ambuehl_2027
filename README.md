@@ -1,6 +1,6 @@
 # Maturarbeit
 
-**Titel:** Langfristige Anlagestrategien anhand historischer Finanzdaten  
+**Titel:** Langfristige Anlagestrategien anhand historischer Finanzdaten 
 **Autor:** Riccardo Ambühl
 
 Dieses Repository enthält ein Quarto-Book-Setup für die Maturarbeit. Die Arbeit ist in einzelne Kapitel aufgeteilt, Python-Experimente liegen in `notebooks/`, Quellen in `references.bib`, Styles in `styles/` und spätere Ergebnisse in `outputs/`.
