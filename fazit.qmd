@@ -1,17 +1,1 @@
 # Fazit
-
-## Zusammenfassung
-
-In diesem Kapitel werden die wichtigsten Ergebnisse der Arbeit zusammengefasst. Dabei soll deutlich werden, welche Strategien untersucht wurden und welche Unterschiede sich bezüglich Rendite und Risiko gezeigt haben.
-
-## Beantwortung der Forschungsfrage
-
-Die Forschungsfrage wird auf Grundlage der theoretischen Grundlagen, der Methodik und der Analyse beantwortet. Wichtig ist, nicht nur die höchste Rendite zu betrachten, sondern auch Risiko, Schwankungen und Nachvollziehbarkeit einzubeziehen.
-
-## Grenzen der Arbeit
-
-Mögliche Grenzen sind die Qualität und Länge der historischen Daten, vereinfachte Annahmen in der Simulation, Transaktionskosten, Steuern und die Tatsache, dass vergangene Ergebnisse keine sicheren Aussagen über die Zukunft erlauben.
-
-## Ausblick
-
-Eine spätere Erweiterung könnte reale Kursdaten, zusätzliche Anlageklassen, Rebalancing-Strategien, Monte-Carlo-Simulationen oder eine interaktive Visualisierung enthalten.

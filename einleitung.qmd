@@ -1,17 +1,1 @@
 # Einleitung
-
-## Problemstellung
-
-Langfristige Geldanlage ist mit Unsicherheit verbunden. Historische Kursdaten können helfen, unterschiedliche Strategien zu vergleichen, sie garantieren jedoch keine zukünftigen Ergebnisse. Eine zentrale Herausforderung besteht darin, Rendite und Risiko gemeinsam zu betrachten.
-
-## Motivation
-
-Investieren verbindet wirtschaftliche Fragestellungen mit Informatik und Datenanalyse. Python eignet sich gut, um Finanzdaten zu verarbeiten, Strategien zu simulieren und Ergebnisse nachvollziehbar zu visualisieren.
-
-## Zielsetzung
-
-Diese Arbeit soll zeigen, wie ein reproduzierbarer Analyseprozess aufgebaut werden kann. Dazu gehören die Auswahl geeigneter Daten, die Berechnung wichtiger Kennzahlen und der Vergleich verschiedener Portfolio-Strategien.
-
-## Aufbau der Arbeit
-
-Zuerst werden die theoretischen Grundlagen erläutert. Danach folgt die Methodik mit Datenquellen, Vorgehen und Kennzahlen. Anschliessend werden Beispielanalysen durchgeführt und visualisiert. Im Fazit werden die Forschungsfrage beantwortet, Grenzen benannt und mögliche Weiterentwicklungen aufgezeigt.

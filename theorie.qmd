@@ -1,29 +1,2 @@
 # Theorie
 
-## Aktien
-
-Aktien sind Anteile an Unternehmen. Anlegerinnen und Anleger können durch Kurssteigerungen und Dividenden profitieren, tragen aber auch das Risiko von Kursverlusten.
-
-## ETFs
-
-Exchange Traded Funds (ETFs) bilden häufig einen Index ab und ermöglichen eine breite Streuung mit vergleichsweise geringem Aufwand. Dadurch können sie für langfristige Strategien interessant sein.
-
-## Rendite
-
-Die Rendite beschreibt die prozentuale Veränderung des investierten Kapitals über einen bestimmten Zeitraum. Sie kann für einzelne Perioden oder annualisiert berechnet werden.
-
-## Risiko
-
-Risiko bedeutet in diesem Kontext, dass zukünftige Ergebnisse unsicher sind. In quantitativen Analysen wird Risiko oft über Schwankungen der Renditen oder über Verlustkennzahlen angenähert.
-
-## Volatilität
-
-Volatilität beschreibt die Schwankungsbreite von Renditen. Eine höhere Volatilität deutet auf stärkere Kursschwankungen hin, ist aber nicht automatisch gleichbedeutend mit einer schlechten Anlage.
-
-## Diversifikation
-
-Diversifikation bedeutet, Kapital auf mehrere Anlagen zu verteilen. Dadurch kann das Risiko einzelner Positionen reduziert werden. Die moderne Portfoliotheorie beschreibt diesen Zusammenhang systematisch [@markowitz1952].
-
-::: {.callout-tip}
-Hier können später weitere Quellen zu Kapitalmarkttheorie, ETFs, Risiko-Rendite-Kennzahlen und langfristigem Investieren ergänzt werden.
-:::
