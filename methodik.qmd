@@ -1,34 +1,23 @@
 # Methodik
 
+## Investment Strategien
+
+**Buy & Hold:**
+Mit ETFs und Index Fonds kann man in die Gesamtwirtschaft investieren und kann über einen langen Zeitraum meistens Rendite erzielen.
+
+**60/40 balanced Portfolio:**
+Es wird in 60% Aktien für Rendite und 40% Staatsanleihen für die Sicherheit investiert.
+
+**Trendfolge-Strategie:**
+Es wird ein allgemeiner Trend mit Hilfe von einem langfristigen Indikator erkannt und man folgt dann einfach dem Trend.
+
+**BIP-Gewichtet investieren (Gerd Kommer):**
+Der Gerd-Kommer-ETF ist ein All-Cap– und All-World-ETF, also ein ETF auf die „Welt-AG“, der bei der Ländergewichtung sowohl Markt­kapitalisierung als auch Wirtschafts­leistung („BIP“) berücksichtigt, dabei die wichtigsten fünf Faktor­prämien („Factor Investing“) übergewichtet und mit über 4.000 Einzelaktien Ultradiversifikation bietet. {@gerdkommerInvestieren2026}
+
 ## Datenquellen
 
-Für die spätere Analyse sollen historische Finanzdaten verwendet werden. Mögliche Datenquellen sind Kursdaten von Indizes, ETFs oder ausgewählten Aktien. In diesem Grundgerüst werden zunächst lokale Platzhalterdaten genutzt, damit alle Beispiele ohne externe APIs funktionieren.
 
-## Vorgehen
-
-Das Vorgehen besteht aus mehreren Schritten:
-
-1. Daten laden oder vorbereiten
-2. Renditen berechnen
-3. Strategien definieren
-4. Portfolios simulieren
-5. Kennzahlen berechnen
-6. Ergebnisse visualisieren und interpretieren
-
-## Portfolio-Simulation
-
-Eine Portfolio-Simulation kombiniert mehrere Anlagen mit bestimmten Gewichtungen. Aus den Einzelrenditen wird eine Portfoliorendite berechnet. Später können unterschiedliche Gewichtungen, Rebalancing-Regeln oder Anlagehorizonte verglichen werden.
 
 ## Kennzahlen
 
-Wichtige Kennzahlen sind unter anderem:
-
-- durchschnittliche Rendite
-- annualisierte Rendite
-- Volatilität
-- maximaler Verlust
-- Sharpe Ratio als vereinfachtes Risiko-Rendite-Mass
-
-## Reproduzierbarkeit
-
-Alle Berechnungsschritte sollen nachvollziehbar dokumentiert werden. Quarto, Jupyter-Notebooks und Python-Code ermöglichen es, Analysen erneut auszuführen und Ergebnisse transparent zu prüfen.
+## Bedingungen

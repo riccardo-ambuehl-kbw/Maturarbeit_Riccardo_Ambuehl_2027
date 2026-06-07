@@ -1,5 +1,6 @@
 *.pdf
 _book/
+_freeze/
 .quarto/
 .venv/
 __pycache__/
