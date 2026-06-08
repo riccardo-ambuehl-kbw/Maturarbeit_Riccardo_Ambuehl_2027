@@ -152,5 +152,3 @@ Ich erhoffe mir von diesem Buch das theoretische Fundament für meine Trendfolge
 
 ### Der leichte Einstieg in die Welt der ETFs (ISBN: 978-3-95972-842-3)
 Ich erhoffe mir von Gerd Kommers Buch das theoretische Fundament für mein passives Portfolio. Es soll mir dabei helfen, verständlich und wissenschaftlich zu erklären, warum breit gestreutes Investieren mit ETFs funktioniert, wie das 60/40-Portfolio aufgebaut ist und worin genau die Vorteile einer BIP-Gewichtung liegen.
-
-@MaximumDrawdown
