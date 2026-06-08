@@ -110,28 +110,28 @@ Die Nutzung von KI-Tools wird unter `documentation/ai-usage/` dokumentiert. Dort
 
 ## Pendenzenliste
 
-- Einleitung schreiben
-- Theorie
-- Daten importieren
-- Daten verarbeiten
-- Analyse
-    - Funktionen für die Formeln erstellen
-    - Alle Funktionen bündeln und eine Simulations Funktion erstellen
-    - Simulation verschiedener Strategien
-- Auswertung
-    - Auswertungen bündeln
-    - Auswertungen Grafisch darstellen (SVG)
-- Fazit
-- Erste Fassung
-- Gegenlesen
-- Überarbeitung
-- Export PDF/Webseite hochladen (Abgabe)
-- Präsentation
+- [ ] :date: Einleitung schreiben
+- [ ] :date: Theorie
+- [ ] :date: Daten importieren
+- [ ] :date: Daten verarbeiten
+- [ ] :date: Analyse
+    - [ ] :date: Funktionen für die Formeln erstellen
+    - [ ] :date: Alle Funktionen bündeln und eine Simulations Funktion erstellen
+    - [ ] :date: Simulation verschiedener Strategien
+- [ ] :date: Auswertung
+    - [ ] :date: Auswertungen bündeln
+    - [ ] :date: Auswertungen Grafisch darstellen (SVG)
+- [ ] :date: Fazit
+- [ ] :date: Erste Fassung
+- [ ] :date: Gegenlesen
+- [ ] :date: Überarbeitung
+- [ ] :date: Export PDF/Webseite hochladen (Abgabe)
+- [ ] :date: Präsentation
 
 **Optional:**
-- Simulation Tool basierend auf der Simulation Funktion
-- Automatisiertes testen von weiteren Strategien auf dem Server
-- Verschiedene anschauliche Grafik Typen (SVG)
+- [ ] :date: Simulation Tool basierend auf der Simulation Funktion
+- [ ] :date: Automatisiertes testen von weiteren Strategien auf dem Server
+- [ ] :date: Verschiedene anschauliche Grafik Typen (SVG)
 
 ## Quellen
 
