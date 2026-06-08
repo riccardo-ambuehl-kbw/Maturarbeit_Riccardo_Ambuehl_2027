@@ -1,6 +1,6 @@
 # Überblick
 
-**Titel:** Langfristige Anlagestrategien anhand historischer Finanzdaten 
+**Titel:** Langfristige Anlagestrategien anhand historischer Finanzdaten  
 **Autor:** Riccardo Ambühl
 
 ## Forschungsfrage

@@ -94,7 +94,6 @@ Nutze `notebooks/` für explorative Arbeit, Zwischenschritte und Tests. Übertra
 ├── einleitung.qmd
 ├── theorie.qmd
 ├── methodik.qmd
-├── analyse.qmd
 ├── fazit.qmd
 ├── references.bib
 ├── styles/
@@ -108,3 +107,48 @@ Nutze `notebooks/` für explorative Arbeit, Zwischenschritte und Tests. Übertra
 ## KI-Nachweise
 
 Die Nutzung von KI-Tools wird unter `documentation/ai-usage/` dokumentiert. Dort wird festgehalten, wann KI eingesetzt wurde, wofür sie genutzt wurde, welche Inhalte übernommen wurden und was manuell geprüft werden muss.
+
+## Pendenzenliste
+
+- Einleitung schreiben
+- Theorie
+- Daten importieren
+- Daten verarbeiten
+- Analyse
+    - Funktionen für die Formeln erstellen
+    - Alle Funktionen bündeln und eine Simulations Funktion erstellen
+    - Simulation verschiedener Strategien
+- Auswertung
+    - Auswertungen bündeln
+    - Auswertungen Grafisch darstellen (SVG)
+- Fazit
+- Erste Fassung
+- Gegenlesen
+- Überarbeitung
+- Export PDF/Webseite hochladen (Abgabe)
+- Präsentation
+
+**Optional:**
+- Simulation Tool basierend auf der Simulation Funktion
+- Automatisiertes testen von weiteren Strategien auf dem Server
+- Verschiedene anschauliche Grafik Typen (SVG)
+
+## Quellen
+
+### Yahoo Finance
+Yahoo Finance bietet historische Kursdaten für eine Vielzahl von Finanzinstrumenten, darunter Aktien, ETFs und Anleihen. Diese Daten können für die Berechnung von Renditen, Volatilität und anderen Kennzahlen verwendet werden.
+
+### FRED (Federal Reserve Economic Data)
+FRED ist eine umfangreiche Datenbank der Federal Reserve Bank of St. Louis, die wirtschaftliche und finanzielle Daten bereitstellt. Hier können makroökonomische Indikatoren wie das Bruttoinlandsprodukt (BIP), Arbeitslosenzahlen und Zinssätze abgerufen werden, die für die Analyse von Anlagestrategien relevant sein können.
+
+### Vanguard
+Vanguard ist einer der grössten Anbieter von ETFs und bietet umfangreiche Informationen zu seinen Produkten, einschliesslich historischer Renditen, Kostenquoten und Fondsinformationen. Diese Daten können für die Analyse von ETF-basierten Anlagestrategien verwendet werden.
+
+### Fidelity Investments
+Fidelity ist ein internationaler Online-Anbieter im Finanzsektor, der neben Finanzdienstleistungen auch fundiertes Fachwissen über verschiedene Anlagestrategien vermittelt. Für die vorliegende Arbeit dient die Plattform als wertvolle Quelle, um tiefere Einblicke in die praktische Nutzung und Anwendung dieser Finanztheorien zu gewinnen.
+
+### Mit Handelssystemen zum Börsenerfolg (ISBN: 978-3-98609-292-4)
+Ich erhoffe mir von diesem Buch das theoretische Fundament für meine Trendfolgestrategie. Es soll mir dabei helfen, die mathematischen Hintergründe von Indikatoren wie dem RSI und dem MA exakt zu definieren und zu erklären.
+
+### Der leichte Einstieg in die Welt der ETFs (ISBN: 978-3-95972-842-3)
+Ich erhoffe mir von Gerd Kommers Buch das theoretische Fundament für mein passives Portfolio. Es soll mir dabei helfen, verständlich und wissenschaftlich zu erklären, warum breit gestreutes Investieren mit ETFs funktioniert, wie das 60/40-Portfolio aufgebaut ist und worin genau die Vorteile einer BIP-Gewichtung liegen.

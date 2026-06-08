@@ -11,7 +11,7 @@ book:
     - einleitung.qmd
     - theorie.qmd
     - methodik.qmd
-    - analyse.qmd
+    - notebooks/02_analyse.ipynb
     - fazit.qmd
   page-footer:
     left: "Riccardo Ambühl"
