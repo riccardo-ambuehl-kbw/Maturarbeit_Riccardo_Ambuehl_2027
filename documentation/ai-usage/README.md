@@ -22,3 +22,5 @@ Für jede relevante Nutzung sollten folgende Informationen dokumentiert werden:
 
 - `ai-usage-log.md`: laufendes Kurzlog aller KI-Nutzungen
 - `codex-setup-entry.md`: ausführlicher Nachweis für die initiale technische Einrichtung dieses Quarto-Projekts
+- `book-sync.md`: wiederverwendbare Arbeitsanweisung `KI-DOKUMENTATION-BUCH-SYNC` für den Abgleich des KI-Nutzungslogs mit dem Anhang der Buchversion
+- `../readme-ueberblick-sync.md`: wiederverwendbare Arbeitsanweisung `README-ÜBERBLICK-SYNC` für die Übertragung der README-Inhalte in die Überblick-Seite des Quarto-Books

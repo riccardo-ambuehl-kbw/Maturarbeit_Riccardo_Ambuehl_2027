@@ -97,6 +97,7 @@ Nutze `notebooks/` für explorative Arbeit, Zwischenschritte und Tests. Übertra
 ├── fazit.qmd
 ├── references.bib
 ├── styles/
+├── src/
 ├── notebooks/
 ├── data/
 ├── images/
@@ -189,5 +190,6 @@ Ich erhoffe mir von diesem Buch die mathematische Erklärung für meine Trendfol
 - pandas-ta (Technische Indikatoren)
 - matplotlib (Visualisierung)
 - plotly (interaktive Kursverläufe)
+- bt (Portfolio-Backtesting und Rebalancing)
 
 Das ist eine Auswahl an Libraries, die ich testen möchte, jedoch nicht unbedingt alle schlussendlich verwenden werde. Es ist sinnvoll, möglichst viele geeignete Libraries zu nutzen, um den Aufwand gering zu halten. Das Ziel ist es, etwas Neues zu schaffen und nicht bereits Vorhandenes erneut zu programmieren.

@@ -1,0 +1,61 @@
+# Dokumentation der KI-Nutzung
+
+Dieses Kapitel dokumentiert transparent, wie Codex bei der Erstellung der Maturarbeit eingesetzt wurde. Die ausführlichen Arbeitsnachweise werden projektintern im KI-Nutzungslog geführt. Hier wird der für die Buchversion relevante aktuelle Stand zusammengefasst.
+
+Die KI-Nutzungsdokumentation wurde von Codex formuliert und fortgeführt. In den jeweiligen Prompts wurde Codex ausdrücklich gebeten, die ausgeführten Arbeiten und die Art der KI-Nutzung direkt zu dokumentieren. Der Autor hat diese Dokumentation gelesen und inhaltlich überprüft, sie jedoch nicht selbst geschrieben.
+
+## Grundsätze
+
+Codex wurde vor allem für technische Einrichtung, Strukturierung, Übertragung bereits vorhandener Inhalte und sprachliche Unterstützung eingesetzt. KI-Ausgaben ersetzen keine fachliche Prüfung. Fachliche Aussagen, Quellenqualität, mathematische Korrektheit und die Interpretation der Resultate müssen vom Autor kontrolliert und verantwortet werden.
+
+Bei sprachlichen Korrekturen durfte Codex Rechtschreibung, Grammatik und Satzbau verbessern, den Inhalt und den persönlichen Schreibton jedoch grundsätzlich nicht verändern. Bei Überarbeitungen zur besseren Lesbarkeit durften Formulierungen und Satzstrukturen vereinfacht werden. Wichtige Fachbegriffe sollten dabei möglichst erhalten bleiben.
+
+## Bisherige Einsätze
+
+### Technische Einrichtung des Projekts
+
+Am 11. Mai 2026 wurde Codex für die initiale technische Einrichtung des Quarto-Book-Projekts verwendet. Dazu gehörten die Projektstruktur, Kapitelgerüste, Bibliografie-Einbindung, Styles, Beispielnotebooks und die Dokumentation der KI-Nutzung. Diese Unterstützung betraf das technische Grundgerüst und nicht die endgültige fachliche Argumentation.
+
+### Planung der Maturarbeit
+
+Am 6. August 2026 übertrug und strukturierte Codex den bereits in der README vorhandenen Zeitplan in der Todo-Anwendung. Die Planung wurde anschliessend manuell geprüft.
+
+### Übertragung der Überblick-Inhalte
+
+Am 7. August 2026 übertrug Codex alle bereits vorhandenen Inhalte aus `README.md` in die Überblick-Seite des Quarto-Books. Codex verfasste dabei weder die Daten noch die fachlichen Texte und ergänzte keine neuen fachlichen Inhalte. Zusätzlich wurde ein wiederverwendbarer Ablauf für spätere Aktualisierungen dokumentiert.
+
+### Korrektur des Titels des Theoriekapitels
+
+Am 8. August 2026 untersuchte und korrigierte Codex die fehlerhafte Anzeige des Titels von Kapitel 3. Dafür wurden die Quarto-Konfiguration und der YAML-Frontmatter des Jupyter Notebooks angepasst. Der Fachtext, die Berechnungen und die Quellen des Theoriekapitels wurden nicht verändert.
+
+### Ordnung der Python-Dateien
+
+Am 8. August 2026 wurde Codex verwendet, um die lose Datei `funktionen.py` sinnvoll im Repository einzuordnen. Sie wurde als wiederverwendbarer Analysecode nach `src/funktionen.py` verschoben. Der bereits vorhandene Funktionscode wurde bei dieser organisatorischen Änderung nicht fachlich neu verfasst.
+
+### Bündelung der Analysefunktionen
+
+Am 8. August 2026 übertrug Codex die nach `maximum_drawdown()` folgenden eigenen Funktionen aus dem Theoriekapitel in `src/funktionen.py`. Beispielaufrufe und erklärende Notebook-Kommentare wurden nicht übernommen. Ziel war eine einheitliche Funktionssammlung für die spätere Analyse und den Vergleich der Anlagestrategien. Die Vollständigkeit sowie grundlegende Funktionsaufrufe wurden technisch geprüft.
+
+### Rechtschreibung, Grammatik und Satzbau
+
+Codex wurde für die sprachliche Korrektur der Texte im Projekt eingesetzt. Dabei wurden Rechtschreibung, Grammatik und Satzbau kontrolliert. Inhalt, fachliche Aussagen und persönlicher Schreibton durften grundsätzlich nicht verändert werden. Starke sprachliche Eingriffe waren ausdrücklich nicht erlaubt. Die endgültige Kontrolle bleibt beim Autor.
+
+### Verbesserung der Lesbarkeit
+
+Codex wurde ausserdem verwendet, um Formulierungen in den Texten des Repositorys allgemein verständlicher zu gestalten. Die Überarbeitung orientierte sich an der Wiener Sachtextformel, dem Flesch-Index und dem Gunning-Fog-Index. Komplexe Sätze und Formulierungen wurden vereinfacht, wichtige Fachbegriffe jedoch möglichst beibehalten, damit Präzision und Professionalität erhalten bleiben. Die fachlichen Aussagen wurden nicht von Codex entwickelt.
+
+### Erstellung der KI-Nutzungsdokumentation
+
+Codex wurde in den jeweiligen Prompts ausdrücklich angewiesen, den eigenen Einsatz und die ausgeführten Arbeiten zu dokumentieren. Codex formulierte und aktualisierte deshalb das projektinterne KI-Nutzungslog, dieses Kapitel der Buchversion und die wiederverwendbaren Arbeitsanweisungen. Der Autor überprüfte die Dokumentation, schrieb sie jedoch nicht selbst. Die Formulierungen der KI-Dokumentation stammen somit von Codex; der Autor erteilte die Aufträge, kontrollierte die Ergebnisse und übernahm die geprüfte Fassung.
+
+### Einheitliche Formatierung
+
+Codex wurde mehrfach verwendet, um Dateien und Inhalte im gesamten Repository einheitlich, übersichtlich und technisch korrekt zu formatieren. Dies betraf unter anderem HTML-, Markdown-, QMD-, Quarto- und Python-Strukturen sowie Überschriften, Listen, Tabellen, Codeblöcke, Abstände und die Darstellung der Buchversion. Ziel war eine konsistente und gut lesbare Gestaltung. Die Formatierung durfte fachliche Aussagen und den persönlichen Schreibton nicht verändern. Die endgültige Darstellung und die Einhaltung der formalen Vorgaben müssen vom Autor kontrolliert werden.
+
+### Einbindung des KI-Nachweises in die Buchversion
+
+Am 8. August 2026 wurde Codex verwendet, um den bisherigen KI-Nutzungsnachweis als Anhang in das Quarto-Book einzubinden. Der Inhalt dieses Kapitels ist eine für die Arbeit aufbereitete Zusammenfassung des bestehenden KI-Nutzungslogs. Zusätzlich wurde ein wiederverwendbarer Ablauf eingerichtet, mit dem zukünftige Logeinträge in diese Buchversion übertragen werden können.
+
+## Manuelle Verantwortung
+
+Der Autor muss sämtliche übernommenen Änderungen kontrollieren. Dazu gehören insbesondere die unveränderte fachliche Bedeutung, die korrekte Wiedergabe der Quellen, die mathematische Richtigkeit, die Nachvollziehbarkeit des Codes und der Erhalt des persönlichen Schreibtons. Die Verantwortung für die endgültige Fassung der Arbeit bleibt beim Autor.

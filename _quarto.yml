@@ -9,10 +9,13 @@ book:
   chapters:
     - index.qmd
     - einleitung.qmd
-    - theorie.qmd
+    - href: notebooks/Theorie.ipynb
+      text: Theorie
     - methodik.qmd
     - notebooks/02_analyse.ipynb
     - fazit.qmd
+  appendices:
+    - ki-nutzung.qmd
   page-footer:
     left: "Riccardo Ambühl"
     right: "Maturarbeit"
@@ -20,6 +23,8 @@ book:
 lang: de
 bibliography: references.bib
 csl: styles/chicago-shortened-notes-bibliography-17th-edition.csl
+filters:
+  - filters/date-icon.lua
 
 number-sections: true
 toc: true
@@ -58,7 +63,10 @@ format:
       text: |
         \usepackage{booktabs}
         \usepackage{float}
+        \usepackage{fontawesome5}
+        \usepackage{fvextra}
         \floatplacement{figure}{H}
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},breaklines=true,breakanywhere=true}
   docx:
     toc: true
     number-sections: true
