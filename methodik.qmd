@@ -9,7 +9,7 @@ Mit ETFs und Index Fonds kann man in die Gesamtwirtschaft investieren und kann �
 Es wird in 60% Aktien für Rendite und 40% Staatsanleihen für die Sicherheit investiert. @phamPerformance60402025
 
 ### Trendfolge-Strategie
-Hinter der Trendfolgestrategie steckt die Annahme, dass es einfacher ist, bereits bestehende Trends auszunutzen als frühzeitig eine Trendumkehr zu erkennen. Man partizipiert dann zwar nicht von Tiefststand zu Höchststand (oder umgekehrt, wenn man Short geht) von einem Trend, läuft aber auch nicht Gefahr, die völlig falsche Entscheidung getroffen haben, wenn das Gegenteil von dem eintritt, was man angenommen hat. @trendfolgeStrategie2026 Um den Trend zu erkennen, werden technische Indikatoren wie der gleitende Durchschnitt (Moving Average) @probstGleitendeDurchschnittBestimmen2025 oder der Relative Strength Index (RSI) @ratgeberRelativeStrengthIndex2022 verwendet.
+Hinter der Trendfolgestrategie steckt die Annahme, dass es einfacher ist, bereits bestehende Trends auszunutzen als frühzeitig eine Trendumkehr zu erkennen. Man partizipiert dann zwar nicht von Tiefststand zu Höchststand (oder umgekehrt, wenn man Short geht) von einem Trend, läuft aber auch nicht Gefahr, die völlig falsche Entscheidung getroffen haben, wenn das Gegenteil von dem eintritt, was man angenommen hat. @admiralsWieSieMit2026 Um den Trend zu erkennen, werden technische Indikatoren wie der gleitende Durchschnitt (Moving Average) @probstGleitendeDurchschnittBestimmen2025 oder der Relative Strength Index (RSI) @ratgeberRelativeStrengthIndex2022 verwendet.
 
 ### BIP-Gewichtet investieren (Gerd Kommer)
 Der Gerd-Kommer-ETF ist ein All-Cap– und All-World-ETF, also ein ETF auf die „Welt-AG“, der bei der Ländergewichtung sowohl Markt­kapitalisierung als auch Wirtschafts­leistung („BIP“) berücksichtigt, dabei die wichtigsten fünf Faktor­prämien („Factor Investing“) übergewichtet und mit über 4.000 Einzelaktien Ultradiversifikation bietet. @gerdkommerInvestieren2026
@@ -17,25 +17,25 @@ Der Gerd-Kommer-ETF ist ein All-Cap– und All-World-ETF, also ein ETF auf die �
 ## Datenquellen
 
 ### Yahoo Finance
-Yahoo Finance bietet historische Kursdaten für eine Vielzahl von Finanzinstrumenten, darunter Aktien, ETFs und Anleihen. Diese Daten können für die Berechnung von Renditen, Volatilität und anderen Kennzahlen verwendet werden. @YahooFinanzenDeutschlandBoerse
+Yahoo Finance bietet historische Kursdaten für eine Vielzahl von Finanzinstrumenten, darunter Aktien, ETFs und Anleihen. Diese Daten können für die Berechnung von Renditen, Volatilität und anderen Kennzahlen verwendet werden. @yahooYahooFinanzenDeutschlandBoerse2026
 
 ### FRED (Federal Reserve Economic Data)
-FRED ist eine umfangreiche Datenbank der Federal Reserve Bank of St. Louis, die wirtschaftliche und finanzielle Daten bereitstellt. Hier können makroökonomische Indikatoren wie das Bruttoinlandsprodukt (BIP), Arbeitslosenzahlen und Zinssätze abgerufen werden, die für die Analyse von Anlagestrategien relevant sein können. @FederalReserveEconomic
+FRED ist eine umfangreiche Datenbank der Federal Reserve Bank of St. Louis, die wirtschaftliche und finanzielle Daten bereitstellt. Hier können makroökonomische Indikatoren wie das Bruttoinlandsprodukt (BIP), Arbeitslosenzahlen und Zinssätze abgerufen werden, die für die Analyse von Anlagestrategien relevant sein können. @federalreservebankofst.louisFederalReserveEconomic2026
 
 ### Vanguard
-Vanguard ist einer der grössten Anbieter von ETFs und bietet umfangreiche Informationen zu seinen Produkten, einschliesslich historischer Renditen, Kostenquoten und Fondsinformationen. Diese Daten können für die Analyse von ETF-basierten Anlagestrategien verwendet werden. @StartseiteVanguardSwitzerland
+Vanguard ist einer der grössten Anbieter von ETFs und bietet umfangreiche Informationen zu seinen Produkten, einschliesslich historischer Renditen, Kostenquoten und Fondsinformationen. Diese Daten können für die Analyse von ETF-basierten Anlagestrategien verwendet werden. @vanguardStartseiteVanguardSwitzerland2026
 
 ## Kennzahlen
 
 ### Stabilität
 
-**Volatilität**: Die Volatilität misst die Schwankungsbreite der Renditen. Eine hohe Volatilität deutet auf starke Kursschwankungen hin, während eine niedrige Volatilität auf stabilere Renditen hindeutet. @VolatilitatEinfachErklart
+**Volatilität**: Die Volatilität misst die Schwankungsbreite der Renditen. Eine hohe Volatilität deutet auf starke Kursschwankungen hin, während eine niedrige Volatilität auf stabilere Renditen hindeutet. @buchhaltung-einfach-sicherVolatilitatEinfachErklart2026
 
 **Verlustphasen**: Verlustphasen sind Zeiträume, in denen die Renditen negativ sind. Sie können durch verschiedene Faktoren verursacht werden, wie z.B. wirtschaftliche Abschwünge, geopolitische Ereignisse oder Unternehmenskrisen. Das Verständnis von Verlustphasen ist wichtig, um die Risiken einer Anlagestrategie zu bewerten und um angemessene Massnahmen zur Risikominderung zu ergreifen. Gegenspieler von positiven Phasen.
 
 **Positive Phasen**: Positive Phasen sind Zeiträume, in denen die Renditen positiv sind. Sie können durch wirtschaftliches Wachstum, technologische Innovationen oder andere günstige Faktoren verursacht werden. Das Verständnis von positiven Phasen ist wichtig, um die Chancen einer Anlagestrategie zu bewerten und um angemessene Massnahmen zur Maximierung der Rendite zu ergreifen. Gegenspieler von Verlustphasen.
 
-**Maximaler Drawdown**: Der maximale Drawdown misst den grössten prozentualen Verlust vom Höchststand bis zum Tiefststand eines Portfolios. Er gibt an, wie viel ein Anleger in einem ungünstigen Szenario verlieren könnte. @MaximumDrawdown
+**Maximaler Drawdown**: Der maximale Drawdown misst den grössten prozentualen Verlust vom Höchststand bis zum Tiefststand eines Portfolios. Er gibt an, wie viel ein Anleger in einem ungünstigen Szenario verlieren könnte. @fidelityMaximumDrawdown2026
 
 **Krisenfestigkeit**: Die Krisenfestigkeit eines Portfolios beschreibt, wie gut es in Zeiten wirtschaftlicher oder finanzieller Krisen performt. Ein krisenfestes Portfolio sollte in der Lage sein, Verluste zu minimieren und sich schneller von Rückschlägen zu erholen. Beispiel Krisen: Dotcom-Blase, Finanzkrise 2008, Corona-Krise
 
@@ -46,7 +46,7 @@ Vanguard ist einer der grössten Anbieter von ETFs und bietet umfangreiche Infor
 **Durchschnittliche jährliche Rendite**: Diese Kennzahl berechnet die durchschnittliche jährliche Rendite über einen bestimmten Zeitraum, indem sie die Gesamtrendite auf eine jährliche Basis umrechnet.
 
 ### Sharpe Ratio
-Die Sharpe Ratio misst die risikobereinigte Rendite einer Anlagestrategie. Sie berechnet sich als Differenz zwischen der Rendite der Strategie und der risikofreien Rendite, dividiert durch die Volatilität der Strategie. Eine höhere Sharpe Ratio deutet auf eine bessere risikobereinigte Performance hin. @SharpeRatio
+Die Sharpe Ratio misst die risikobereinigte Rendite einer Anlagestrategie. Sie berechnet sich als Differenz zwischen der Rendite der Strategie und der risikofreien Rendite, dividiert durch die Volatilität der Strategie. Eine höhere Sharpe Ratio deutet auf eine bessere risikobereinigte Performance hin. @fidelitySharpeRatio2026
 
 ## Bedingungen
 
