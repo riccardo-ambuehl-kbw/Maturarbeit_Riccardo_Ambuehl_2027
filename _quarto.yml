@@ -12,7 +12,8 @@ book:
     - href: notebooks/Theorie.ipynb
       text: Theorie
     - methodik.qmd
-    - notebooks/02_analyse.ipynb
+    - href: notebooks/Analyse.ipynb
+      text: Analyse
     - fazit.qmd
   appendices:
     - ki-nutzung.qmd
