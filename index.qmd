@@ -89,20 +89,20 @@ Nutze `notebooks/` für explorative Arbeit, Zwischenschritte und Tests. Übertra
 
 ```text
 .
-├── _quarto.yml
-├── index.qmd
-├── einleitung.qmd
-├── theorie.qmd
-├── methodik.qmd
-├── fazit.qmd
-├── references.bib
-├── styles/
-├── src/
-├── notebooks/
-├── data/
-├── images/
-├── outputs/
-└── documentation/ai-usage/
+|-- _quarto.yml
+|-- index.qmd
+|-- einleitung.qmd
+|-- theorie.qmd
+|-- methodik.qmd
+|-- fazit.qmd
+|-- references.bib
+|-- styles/
+|-- src/
+|-- notebooks/
+|-- data/
+|-- images/
+|-- outputs/
+`-- documentation/ai-usage/
 ```
 
 ## KI-Nachweise

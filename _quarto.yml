@@ -66,8 +66,9 @@ format:
         \usepackage{float}
         \usepackage{fontawesome5}
         \usepackage{fvextra}
+        \usepackage{xurl}
         \floatplacement{figure}{H}
-        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},breaklines=true,breakanywhere=true}
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},breaklines=true,breakanywhere=true,fontsize=\footnotesize}
   docx:
     toc: true
     number-sections: true
