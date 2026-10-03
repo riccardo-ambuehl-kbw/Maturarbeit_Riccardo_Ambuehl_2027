@@ -7,6 +7,7 @@ from ..funktionen import WEIGHT_TOLERANCE, CAPITAL_TOLERANCE
 HISTORY_COLUMNS = ["date", "strategy", "portfolio_value", "period_return", "drawdown"]
 WEIGHTS_COLUMNS = ["date", "strategy", "asset_id", "weight_before", "target_weight", "weight_after"]
 TRADES_COLUMNS = ["date", "strategy", "asset_id", "value_before", "target_value", "transaction_value"]
+SIGNALS_COLUMNS = ["date", "strategy", "asset_id", "signal", "position", "signal_value", "sma_short", "sma_long"]
 
 
 @dataclass(frozen=True)
@@ -35,7 +36,26 @@ class StrategyResult:
         if not np.allclose(expected, h.period_return.iloc[1:], rtol=1e-12, atol=1e-14):
             raise ValueError("History returns disagree with wealth ratios.")
         self._validate_allocations()
+        self._validate_signals()
         return self
+
+    def _validate_signals(self):
+        s = self.signals
+        if s is None:
+            if self.strategy == "trend":
+                raise ValueError("Trend requires a signals table.")
+            return
+        if (list(s.columns) != SIGNALS_COLUMNS or len(s) != len(self.portfolio_history)
+                or not pd.DatetimeIndex(s.date).equals(pd.DatetimeIndex(self.portfolio_history.date))
+                or not (s.strategy == self.strategy).all() or s.asset_id.nunique() != 1
+                or not s.asset_id.map(lambda a: isinstance(a, str) and bool(a.strip())).all()):
+            raise ValueError("Signals must cover the complete ordered history for one asset.")
+        if (not np.isfinite(s[["signal", "signal_value", "sma_short", "sma_long"]].to_numpy(dtype=float)).all()
+                or not s.signal.isin([0, 1]).all()
+                or not np.array_equal(s.signal.to_numpy(), (s.sma_short > s.sma_long).astype(int).to_numpy())
+                or not pd.isna(s.position.iloc[0])
+                or not np.array_equal(s.position.iloc[1:].to_numpy(), s.signal.iloc[:-1].to_numpy())):
+            raise ValueError("Invalid complete SMA signals or one-period positions.")
 
     def _validate_allocations(self):
         w, t, h = self.weights_history, self.trades, self.portfolio_history
@@ -98,4 +118,16 @@ def validate_results(context, results):
         result.validate(context.config.start_capital)
         if not pd.DatetimeIndex(result.portfolio_history.date).equals(context.performance.index):
             raise ValueError("Every strategy must use the complete shared valuation calendar.")
+        if result.strategy == "trend":
+            signals = result.signals
+            if not (signals.asset_id == context.config.trend_asset).all():
+                raise ValueError("Trend signal asset differs from configuration.")
+            expected = context.trend_signals
+            if expected is None or not np.array_equal(
+                    signals[["signal_value", "sma_short", "sma_long", "signal"]].to_numpy(), expected.to_numpy()):
+                raise ValueError("Trend signals differ from the prepared source and SMA context.")
+            prices = context.performance[context.config.trend_asset].to_numpy()
+            returns = (prices[1:] / prices[:-1] - 1) * signals.position.iloc[1:].to_numpy()
+            if not np.array_equal(result.portfolio_history.period_return.iloc[1:].to_numpy(), returns):
+                raise ValueError("Trend returns must use lagged positions and performance values.")
     return results

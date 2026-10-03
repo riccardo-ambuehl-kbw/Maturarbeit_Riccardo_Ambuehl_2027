@@ -1,14 +1,14 @@
-# Engine v1 – Core, Multi-Asset und Rebalancing
+# Engine v1 – Core, Rebalancing und SMA-Trendfolge
 
-**Stand:** 2026-10-04, Engine 0.2.0 / weiterhin Konfigurationsschema 1.0.
-**Aufträge:** [Core](../ai-usage/prompts/2026-10-02-engine-v1-core-implementation.md) und [Multi-Asset/Rebalancing](../ai-usage/prompts/2026-10-04-engine-v1-rebalancing-implementation.md).
+**Stand:** 2026-10-04, Engine 0.3.0 / weiterhin Konfigurationsschema 1.0.
+**Aufträge:** [Core](../ai-usage/prompts/2026-10-02-engine-v1-core-implementation.md), [Multi-Asset/Rebalancing](../ai-usage/prompts/2026-10-04-engine-v1-rebalancing-implementation.md) und [Trendfolge](../ai-usage/prompts/2026-10-04-engine-v1-trend-implementation.md).
 **Fachliche Grundlage:** Analyse 5.3–5.9, Theorie und die vom Autor verbindlich festgelegten [OD-01 bis OD-13](decisions.md).
 
-Der Autor hat den Core mit Tag `engine-core-v0.1.0` abgenommen (Commit `1a193094b312354c39a72bdf44ef2f6a20573011`). Der Arbeitsbeginn dieser Erweiterung war Commit `045bfcb2580e09dc473a571216b5c40bcf2c8397`; gegenüber dem Tag war nur der neue Auftrag hinzugekommen. Die technische Prüfung dieser Erweiterung ist getrennt von ihrer noch ausstehenden fachlichen Abnahme.
+Der Autor hat den Core mit Tag `engine-core-v0.1.0` abgenommen (Commit `1a193094b312354c39a72bdf44ef2f6a20573011`) und Rebalancing mit Tag `engine-rebalancing-v0.2.0` (Commit `37edc79f4211c734423ca89ef3899d1cbc0b81b4`). Der saubere Arbeitsbeginn der Trend-Erweiterung auf `10d70e73826dc7e11dbe3eb5bf5770fa833e4ae6` enthält gegenüber dem letzten Tag ausschliesslich den neuen Prompt. Die technische Prüfung der Trend-Erweiterung ist getrennt von ihrer noch ausstehenden fachlichen Abnahme.
 
 ## Umfang und Struktur
 
-Ein einzelner lokaler Run kann Buy-and-Hold, jährliches Rebalancing oder beide Strategien ausführen. CSV-Dateien und JSON-Konfiguration werden validiert, alle benötigten Anlagen auf einen gemeinsamen Kalender ausgerichtet und die Strategien über denselben Kontext ausgewertet. Der Core mit Einzelanlagen-Buy-and-Hold bleibt erhalten. Es gibt keine externen Cashflows; die Total-Return-Behandlung muss bereits in `performance_value` enthalten sein.
+Ein einzelner lokaler Run kann Buy-and-Hold, jährliches Rebalancing und SMA-Long/Cash-Trendfolge einzeln oder gemeinsam ausführen. CSV-Dateien und JSON-Konfiguration werden validiert, alle benötigten Performance-Anlagen auf einen gemeinsamen Kalender ausgerichtet und die Strategien über denselben Kontext ausgewertet. Der zusätzliche Signal-Kontext mit Warm-up verändert diesen Performance-Kalender nicht. Es gibt keine externen Cashflows; die Total-Return-Behandlung muss bereits in `performance_value` enthalten sein.
 
 | Dateien | Aufgabe |
 |---|---|
@@ -17,13 +17,15 @@ Ein einzelner lokaler Run kann Buy-and-Hold, jährliches Rebalancing oder beide 
 | `src/funktionen.py` | Bestehende mathematische Funktionen mit den unten dokumentierten Korrekturen |
 | `src/data/{__init__,validate,normalize}.py` | CSV-Snapshots, Datenprüfung, gemeinsame Bewertungen, Risk-Free-Ausrichtung |
 | `src/engine/{__init__,config,context,result,simulation}.py` | JSON-Vertrag, SimulationContext, StrategyResult und gemeinsamer Ablauf |
-| `src/strategies/{__init__,buy_hold,rebalance}.py` | Einzelanlage und allgemeines jährlich rebalanciertes Portfolio |
+| `src/strategies/{__init__,buy_hold,rebalance,trend}.py` | Einzelanlage, jährliches Portfolio und SMA-Long/Cash |
 | `src/analysis/{__init__,metrics}.py` | Einheitliche Zusammenfassung und Verfügbarkeitsstatus |
 | `src/export/{__init__,results}.py` | Vollständige Run-Verzeichnisse, Manifest und SHA-256 |
 | `configs/demo_buy_hold.json`, `configs/demo/*.csv` | Ausschliesslich künstliche Demo |
 | `configs/demo_rebalance.json`, `configs/rebalance_demo/*.csv` | Zweite künstliche Demo, Buy-and-Hold und 60/40 im selben Run |
+| `configs/demo_trend.json`, `configs/trend_demo/*.csv` | Dritte künstliche Demo mit getrennten Signal-/Performance-Reihen und allen drei Strategien |
 | `tests/{conftest,test_functions,test_core}.py` | Synthetische Funktions-, Integrations- und CLI-Prüfungen |
 | `tests/test_rebalance.py` | Allgemeine Gewichte, Zustandsfolge, Jahresereignisse, Multi-Asset-/Exportregression |
+| `tests/test_trend.py` | SMA-Handrechnung, Warm-up, Signalquelle, Lag, Cash, Vergleich und Regression |
 
 Die geplante physische Struktur unter `src/` bleibt erhalten. Setuptools installiert sie unter dem eindeutigen Paketnamen `maturarbeit_engine`. Es gibt keine zweite CLI-Berechnungslogik: CLI und Python rufen `engine.simulation.run_simulation()` auf.
 
@@ -65,11 +67,11 @@ CSV-Dateien verwenden UTF-8, optional mit BOM, Kommatrennung und ISO-Datumswerte
 - Metadaten: `asset_id,name,asset_class,country,currency,provider,provider_symbol`.
 - Normalisierte risikofreie Renditen: `period_start,period_end,series_id,period_return`.
 
-`signal_value` und weitere Marktspalten werden in diesem Slice nicht verwendet und im Qualitätsbericht aufgeführt. Pflichtwerte, doppelte Spaltennamen, doppelte Markt-Schlüssel, doppelte Metadaten-IDs und doppelte Risk-Free-Perioden pro Reihe werden geprüft. Marktwerte müssen endlich und positiv sein; fehlende numerische Beobachtungen werden abgelehnt. Alle geladenen Markt-IDs benötigen Metadaten, die verwendete Anlage muss zur Basiswährung passen. Es erfolgt keine Auffüllung, Interpolation, FX-Konvertierung oder erneute Total-Return-Bereinigung.
+`performance_value` bestimmt ausschliesslich Marktrenditen. Optionales `signal_value` wird bei ausdrücklich so konfigurierter Trendfolge ausschliesslich für SMAs/Signale verwendet; ohne diese Verwendung bleibt es im Qualitätsbericht unbenutzt. Pflichtwerte, doppelte Spaltennamen, doppelte Markt-Schlüssel, doppelte Metadaten-IDs und doppelte Risk-Free-Perioden pro Reihe werden geprüft. Performance-Werte müssen endlich und positiv sein. Benötigte Signalwerte müssen reale numerische, vollständige und endliche Beobachtungen sein. Alle geladenen Markt-IDs benötigen Metadaten, verwendete Anlagen müssen zur Basiswährung passen. Es erfolgt keine Auffüllung, Interpolation, FX-Konvertierung oder erneute Total-Return-Bereinigung.
 
 `align_performance()` unterstützt mehrere benötigte Anlagen: zuerst Schnittmenge tatsächlich vorhandener Bewertungen bilden, danach den gewünschten Zeitraum auswählen, erst anschliessend Renditen berechnen. Der Kontext verwendet jetzt die sortierte Vereinigung der Anlagen **aller aktivierten Strategien**; auch ein Buy-and-Hold-Asset ausserhalb der Rebalancing-Zielgewichte gehört dazu. Mindestens zwei Bewertungen müssen im gewünschten Zeitraum verbleiben. Entfernte nicht gemeinsame Termine und Beobachtungen ausserhalb des gewünschten Zeitraums werden separat berichtet. Zusätzliche unbenötigte Anlagen und Anlagen ausschliesslich deaktivierter Strategien bestimmen den Vergleichskalender nicht. Auch Anlagen mit explizitem Zielgewicht 0 benötigen Daten und Metadaten.
 
-Die Demo-Konfigurationen zeigen den vollständigen JSON-Vertrag. Pflichtfelder sind `schema_version`, `run_name`, `period` mit `start/end`, `start_capital`, `base_currency`, `periods_per_year`, `data` mit `market/assets` und `strategies`. Unterstützt werden `buy_hold` mit `enabled/asset` und `rebalance` mit `enabled/target_weights/rebalance_frequency`. Mindestens eine Strategie muss aktiviert sein. Vorhandene Strategieblöcke werden vollständig geprüft, auch wenn sie deaktiviert sind; ihre Anlagen werden dann nicht für den Kontext angefordert. Es gibt keine fachlichen Defaults. Unbekannte Felder/Strategieoptionen, ungültige Typen und nicht endliche Zahlen werden abgelehnt. Relative Dateipfade beziehen sich auf die Konfigurationsdatei; ein fehlendes `output_dir` bedeutet technisch `outputs/runs` im aktuellen Arbeitsverzeichnis. URLs sind keine Datenreferenzen. Bestehende Core-Konfigurationen bleiben gültig.
+Die Demo-Konfigurationen zeigen den vollständigen JSON-Vertrag. Pflichtfelder sind `schema_version`, `run_name`, `period` mit `start/end`, `start_capital`, `base_currency`, `periods_per_year`, `data` mit `market/assets` und `strategies`. Unterstützt werden `buy_hold` mit `enabled/asset`, `rebalance` mit `enabled/target_weights/rebalance_frequency` und `trend` mit `enabled/asset/short_window/long_window/signal_lag/signal_source`. Mindestens eine Strategie muss aktiviert sein. Vorhandene Strategieblöcke werden vollständig geprüft, auch wenn sie deaktiviert sind; ihre Anlagen werden dann nicht für den Kontext angefordert. Es gibt keine fachlichen Defaults. Unbekannte Felder/Strategieoptionen, ungültige Typen und nicht endliche Zahlen werden abgelehnt. Relative Dateipfade beziehen sich auf die Konfigurationsdatei; ein fehlendes `output_dir` bedeutet technisch `outputs/runs` im aktuellen Arbeitsverzeichnis. URLs sind keine Datenreferenzen. Bestehende Core-/Rebalancing-Konfigurationen bleiben gültig.
 
 `data.risk_free` ist optional. Bei vollständigem Fehlen bleibt Sharpe nicht verfügbar. Bei einer angegebenen Datei sind Serien-ID und beide Grenzen **jeder** tatsächlichen Renditeperiode verbindlich: fehlende, verschobene oder zusätzlich überlappende Intervalle führen zum Fehler. Ausserhalb des Laufs liegende Intervalle werden gezählt und nicht verwendet. FRED-Jahreszinsumrechnung und Beschaffung gehören nicht zum Core.
 
@@ -103,7 +105,7 @@ Der [Audit](audit.md) enthält die ursprünglichen Gegenbeispiele; die Tests rep
 | `sharpe_ratio()` | QuantStats-Aufruf durch `mean(r-rf) / std(r-rf, ddof=1) * sqrt(m)` ersetzt. Beide Reihen müssen eindeutige, identische Periodenindizes und endliche Werte besitzen. Test mit Renditen über 100 % verhindert Preis-Heuristik. Weniger als zwei Werte oder konstante Überschussrendite liefern intern einen undefinierten Wert, der im Engine-Output als nicht verfügbar mit Status erscheint. OD-07/08. |
 | QuantStats-Import | Aus `src/funktionen.py` entfernt, weil nach der autorisierten Sharpe-Korrektur keine Funktion dieses Imports mehr bedarf. Keine QuantStats-Abhängigkeit im Core; historische Definitionen im geschützten Theorie-Notebook bleiben unverändert. |
 
-Die Core-Prüfhilfen `_positive_periods()` und `_finite_returns()` dienen ausschliesslich der Eingabeprüfung. `buy_and_hold()`, `geometrisches_mittel()` und `annualisierte_volatilitaet()` werden mit validierten Eingaben wiederverwendet; ihre Formeln wurden nicht ersetzt. Die nachfolgende Erweiterung härtet zusätzlich `neue_gewichtung()` und `rebalancing()`. Die anderen historischen Funktionen bleiben unverändert; insbesondere ist `trendfolge()` weiterhin keine geprüfte vollständige Engine-Strategie.
+Die Core-Prüfhilfen `_positive_periods()` und `_finite_returns()` dienen ausschliesslich der Eingabeprüfung. `buy_and_hold()`, `geometrisches_mittel()` und `annualisierte_volatilitaet()` werden mit validierten Eingaben wiederverwendet; ihre Formeln wurden nicht ersetzt. Die Rebalancing-Erweiterung härtete `neue_gewichtung()` und `rebalancing()`. Die Trend-Erweiterung refaktoriert ausschliesslich die bestehende `trendfolge()` auf einen gemeinsamen SMA-Helper; Einzelheiten stehen unten. Die übrigen vorhandenen Funktionen bleiben gegenüber dem akzeptierten Rebalancing-Tag unverändert.
 
 ## Exporte und Reproduzierbarkeit
 
@@ -116,11 +118,13 @@ Jeder erfolgreiche Lauf erzeugt unter `output_dir/<run_name>-<uuid>/` die Core-D
 
 Bei aktiviertem Rebalancing kommen `weights_history.csv` und `trades.csv` hinzu, beide ebenfalls mit SHA-256 im Manifest. Ein ereignisfreier Rebalancing-Lauf hat eine korrekt benannte Trade-Tabelle mit Kopfzeile und ohne Datenzeilen. Ein reiner Buy-and-Hold-Lauf behält genau vier Dateien; ihm werden keine Gewichts-/Trade-Zeilen erfunden. Mehrere Strategien werden in Verlauf und Summary gemeinsam exportiert, ohne ihre Zahlen miteinander zu vermischen. Sortierung: `strategy,date`, bei Gewichten/Trades zusätzlich `asset_id`, jeweils stabil. Die Summary hat eine Zeile pro Strategie in Namensreihenfolge.
 
+Eine tatsächlich ausgeführte Trendstrategie ergänzt `signals.csv`, ebenfalls atomisch und mit SHA-256. Ohne Signaldaten wird diese Datei nicht erzeugt. Die Startposition ist die einzige reguläre Zahlenlücke dieser Tabelle; Warm-up-Zeilen werden nicht exportiert.
+
 JSON wird mit `allow_nan=False` geschrieben. Verfügbarkeitsfelder verwenden `null`, CSV-Zahlenlücken erhalten einen nachvollziehbaren Status. Der nicht beobachtete Startwert der Rendite ist die einzige reguläre Datenlücke im Verlauf. Numerischer Überlauf oder nicht endliche berechnete Ergebnisse führen zum Fehler.
 
 Eingabe-Hashes beschreiben die gelesenen Bytes; vor dem Export wird eine zwischenzeitliche Dateiänderung abgefangen. Zusätzlich zu Git werden alle Python-Quellen und, im Checkout, `pyproject.toml` und `requirements.lock` gehasht, damit ein Dirty-Lauf unterscheidbar bleibt. Bei einer Wheel-Installation ausserhalb eines Git-Checkouts sind Git-Commit/Dirty ausdrücklich `null` mit Status `unavailable`; die installierten Python-Quellen werden weiterhin gehasht. Für archivierte wissenschaftliche Runs sind die Eingabedateien und der passende Checkout bzw. das installierte Paket zusätzlich aufzubewahren; der Core kopiert sie nicht in den Ergebnisordner.
 
-Resultate werden erst vollständig in einem temporären Verzeichnis geschrieben und anschliessend innerhalb derselben Ausgabeablage umbenannt. Bestehende Runs werden nicht überschrieben. Run-ID und Zeitstempel variieren; fachliche CSV-Dateien und Datenqualitätsbericht sind bei identischen Inputs und Code bytegleich. Das Manifest hasht alle übrigen Ergebnisdateien: drei bei reinem Buy-and-Hold, fünf bei aktiviertem Rebalancing. Es enthält keinen eigenen Selbst-Hash.
+Resultate werden erst vollständig in einem temporären Verzeichnis geschrieben und anschliessend innerhalb derselben Ausgabeablage umbenannt. Bestehende Runs werden nicht überschrieben. Run-ID und Zeitstempel variieren; fachliche CSV-Dateien und Datenqualitätsbericht sind bei identischen Inputs und Code bytegleich. Das Manifest hasht alle übrigen Ergebnisdateien: drei Basisdateien, gegebenenfalls zwei Rebalancing-Dateien und eine Signaldatei. Es enthält keinen eigenen Selbst-Hash.
 
 ## Ursprüngliche Core-Demo vom 2026-10-03
 
@@ -143,7 +147,7 @@ Die vier Dateien, Standard-JSON, alle Eingabe-/Ergebnis-/Code-Hashes und der Git
 
 ## Grenzen und Verantwortlichkeiten
 
-Noch nicht implementiert: Trendfolge-/SMA- und BIP-Strategien, Warm-up, historische BIP-Verfügbarkeit, reale Datenadapter, FRED-Zinsumrechnung, FX, Transaktionskosten, Steuern, Inflation, Batch, Web/API, Parameteroptimierung, reale Hauptversuche und Zusatzanalysen. Rebalancing unterstützt ausschliesslich `annual`. Signale bleiben optional und werden hier nicht erzeugt. Die unveränderte Core-Prüfung der Annualisierung ist weiterhin auf die oben beschriebenen Kalendergitter beschränkt; es gibt keine Börsenkalender-Aufbereitung.
+Noch nicht implementiert: BIP-Strategie und historische BIP-Verfügbarkeit, reale Datenadapter, FRED-Zinsumrechnung, FX, verzinstes Cash, Long/Short, Transaktionskosten, Steuern, Inflation, Batch, Web/API, Parameteroptimierung, reale Hauptversuche und Zusatzanalysen. Rebalancing unterstützt ausschliesslich `annual`; Trend ausschliesslich Lag 1 und unverzinstes Long/Cash. Die unveränderte Core-Prüfung der Annualisierung ist weiterhin auf die oben beschriebenen Kalendergitter beschränkt; es gibt keine Börsenkalender-Aufbereitung.
 
 Vom Autor vorgegeben sind Datenvertrag, mathematische Definitionen, OD-01 bis OD-13 und die Arbeitsgrenze. Codex hat Paketname, strikten JSON-Vertrag, CSV-Lesetechnik, optionale Frequenzdeklaration als Prüfhilfe, Verfügbarkeitsstatus, Hashes, Exportablauf und synthetische Tests technisch umgesetzt. Neue finanzwirtschaftliche Regeln wurden nicht beschlossen; `decisions.md` wurde nicht geändert. Endgültige Versuchswerte bleiben beim Autor. Die bestandenen synthetischen Tests ersetzen keine fachliche Abnahme oder Prüfung realer Daten. Geschützte Notebooks, Methodik, Bibliographie und Buchkapitel bleiben unverändert.
 
@@ -151,7 +155,7 @@ Vom Autor vorgegeben sind Datenvertrag, mathematische Definitionen, OD-01 bis OD
 
 `RunConfig` ergänzt Aktivierung, immutable sortierte Zielgewichts-Paare und `rebalance_frequency`. `required_assets` ermittelt die Vereinigungsmenge für genau einen Kontext. Die vorhandenen CSV-/Kalender-/RF-Prüfungen werden weiterverwendet, ohne eine zweite Datenaufbereitung in der Strategie. `BuyAndHold` und gemeinsame Kennzahlenformeln sind unverändert. Beide Strategien lesen den Kontext, kopieren die benötigten Performance-Werte und verändern keine gemeinsam verwendeten Daten.
 
-`RunOutcome.results` enthält alle Ergebnisse als Mapping nach Strategienamen. Für bestehende Python-Aufrufe bleibt `.result` verfügbar: bei aktiviertem Buy-and-Hold dessen Ergebnis, andernfalls das einzige Rebalancing-Ergebnis. Der bestehende Einzelstrategie-Status `metric_status` bleibt im Manifest erhalten; `metric_status_by_strategy` liefert nun für jeden Run einen einheitlichen Strategienamen-zu-Status-Nachweis. `executed_strategies` nennt die ausgeführten Strategien. Es gibt keine Plugin-Plattform und keine zweite CLI-Logik.
+`RunOutcome.results` enthält alle Ergebnisse als Mapping nach Strategienamen. Für bestehende Python-Aufrufe bleibt `.result` verfügbar: das in Namensreihenfolge erste Ergebnis, damit bei aktiviertem Buy-and-Hold weiterhin dessen Ergebnis. Ohne Buy-and-Hold ist dies Rebalancing oder bei Trend allein das Trend-Ergebnis. Der bestehende Einzelstrategie-Status `metric_status` bleibt im Manifest erhalten; `metric_status_by_strategy` liefert für jeden Run einen einheitlichen Strategienamen-zu-Status-Nachweis. `executed_strategies` nennt die ausgeführten Strategien. Es gibt keine Plugin-Plattform und keine zweite CLI-Logik.
 
 ### Zielgewichte und Wiederverwendung
 
@@ -209,4 +213,58 @@ Die fünf Demo-Bewertungen bilden absichtlich kein regelmässiges Periodengitter
 
 Der ursprüngliche Buy-and-Hold-Demo-Lauf wurde ebenfalls erneut ausgeführt: `outputs/runs/synthetic_buy_hold-81a32b30ed1442b185e762ed5b841f0d/`, weiterhin **100 → 110 → 99**. Beide fachlichen CSV-Dateien und `data_quality.json` sind bytegleich zum vor der Erweiterung erzeugten Kontrolllauf. Unterschiedliche Run-Metadaten und die neue Engine-/Codeversion sind ausdrücklich erlaubt. Alle neuen und bisherigen Exporte, Standard-JSON, Eingabe-/Code-/Ergebnis-Hashes und Kapitalbilanzen wurden kontrolliert; siehe [testing.md](testing.md).
 
-Neue fachliche Entscheidungen waren nicht erforderlich. Technische Entscheidungen von Codex in diesem Schritt: additive Konfigurationsfelder, sortierte Vereinigungsmenge, rückwärtskompatibles Result-Mapping, benannte Rundungstoleranzen, einheitliche Mehrstrategien-Sortierung, optionale Exporte und Versionsnummer 0.2.0. Der Auftrag endet nach Rebalancing; Trendfolge und BIP bleiben späteren bestätigten Aufträgen vorbehalten.
+Neue fachliche Entscheidungen waren für Rebalancing nicht erforderlich. Technische Entscheidungen von Codex in jenem Schritt: additive Konfigurationsfelder, sortierte Vereinigungsmenge, rückwärtskompatibles Result-Mapping, benannte Rundungstoleranzen, einheitliche Mehrstrategien-Sortierung, optionale Exporte und Versionsnummer 0.2.0. Der damalige Auftrag endete nach Rebalancing. Trendfolge wurde anschliessend separat bestätigt; BIP bleibt einem späteren Auftrag vorbehalten.
+
+## Trend-Erweiterung vom 2026-10-04
+
+### Konfiguration und Datenrollen
+
+`Trend.run(context, params)` benötigt ausdrücklich `asset`, `short_window`, `long_window`, `signal_lag` und `signal_source`; der JSON-Block zusätzlich `enabled`. Fenster sind positive ganze Zahlen, keine Bool-Werte und keine gerundeten Dezimalzahlen; `short_window < long_window`. Lag ist exakt die ganze Zahl 1. Unterstützte Quellen sind ausschliesslich `signal_value` und `performance_value`. Unbekannte Optionen für Short, Cash-Verzinsung oder Filter werden abgelehnt.
+
+Die Quelle bestimmt nur die SMA-Basis. Marktrenditen entstehen stets aus `performance_value` des gemeinsamen Kontextkalenders. Bei `signal_source="signal_value"` führen eine fehlende Spalte oder fehlende/nicht numerische/nicht endliche benötigte Beobachtungen zum Fehler für den gesamten Run. Es gibt keinen Fallback. `signal_source="performance_value"` ist eine ausdrücklich konfigurierte zweite Möglichkeit, die in der aufgelösten Manifest-Konfiguration erhalten bleibt; eine daneben liegende unbenutzte Signalspalte wird nicht als Ersatz verwendet.
+
+### Warm-up, SMA und Zeitfolge
+
+Die Performance-Vereinigungsmenge enthält jetzt auch das aktivierte Trend-Asset, selbst wenn es nicht in den anderen Portfolios liegt. Der vorhandene Core bereitet zuerst den gemeinsamen Performance-Kalender auf. `prepare_trend_signals()` bereitet danach eine zusätzliche Sicht der konfigurierten Signalquelle vor, ohne den Performance-Kalender zu verändern.
+
+Die Fenster zählen tatsächlich beobachtete Werte der Trend-Anlage, gemäss Theorie 3.12.1. Verwendet werden die letzten `long_window - 1` vorhandenen Beobachtungen vor dem **effektiven** gemeinsamen Start sowie die eigene beobachtete Signalhistorie vom effektiven Start bis zum effektiven Ende. Ältere nicht benötigte Signaldaten und spätere Daten liegen ausserhalb dieser Sicht. Benötigte Fehlwerte werden nicht entfernt, um stattdessen weiter zurückliegende gültige Werte einzusetzen. Zusätzliche Signalbeobachtungen zwischen gemeinsamen Bewertungsterminen bleiben für den SMA beobachtete Historie; Signale für Positionen werden ausschliesslich an den gemeinsamen Performance-Bewertungen entnommen. Der Lag zählt diese gemeinsamen Bewertungen, keine Zwischenbeobachtungen. Es wird weder resampelt noch interpoliert.
+
+`SimulationContext.trend_signals` enthält die an den gemeinsamen Bewertungen vorbereiteten Signalwerte, SMAs und Signale. Alle exportierten SMAs müssen definiert sein, insbesondere beide am Start. Fehlt genügend Vorlauf, scheitert der gesamte Run ohne späteren Trendstart. Vorlaufwerte verdienen keine Rendite, verändern das Startkapital nicht und zählen nicht zur Kennzahlenstichprobe. Der Qualitätsbericht enthält Trend-Asset/Quelle, verfügbare historische Zeilenzahl, benötigtes langes Fenster, tatsächlich verwendete Vorlaufzahl/-grenzen, effektiven Start und `valid_start_signal=true`. Die verfügbare Zahl zählt gelieferte Beobachtungen; die tatsächlich verwendeten werden vollständig validiert.
+
+SMA ist der arithmetische Mittelwert der letzten N Signalbeobachtungen. `signal(t)=1` gilt ausschliesslich bei `sma_short(t)>sma_long(t)`, sonst 0; Gleichheit ist Cash. Es gibt keine Toleranzzone, Optimierung oder zusätzliche Filter. Für eine bei t endende Renditeperiode gilt `position(t)=signal(t-1)` und `strategy_return(t)=position(t)*market_return(t)`. Das Startsignal steuert die erste folgende Periode. Das aktuelle Signal steuert niemals die gerade vergangene Rendite. Long verdient die Marktrendite; Cash verdient exakt 0, auch bei positiver oder negativer Marktrendite. Die RF-Reihe bleibt allein Vergleich für Sharpe.
+
+### Gemeinsame Mathematik und Resultate
+
+Vor dem Refactoring regulär reproduziert: `trendfolge([1,2,3],2,3)` setzte Signal 0 und Strategierendite 0 vor gültigem langen SMA. Bei `[1,NaN,3,4]` entfernte es die zweite Beobachtung und berechnete eine künstlich überbrückte Rendite. Dies ist der bereits dokumentierte und im Trend-Prompt zur Korrektur freigegebene Audit-Befund, kein neu entschiedener Strategiewechsel.
+
+Neu in `src/funktionen.py`: `validate_sma_windows()` und **ein** `sma_signal()`-Helper mit vollständigen Fenstern, eindeutigen geordneten Indizes und vollständigen endlichen realen Werten. Während der noch undefinierten Anlaufphase bleiben Signale NaN. Die alte `trendfolge()` behält Namen und sechs Ausgabespalten als explizites Einreihen-Beispiel; sie verwendet denselben Helper und `prozentuale_aenderung()`, entfernt keine Zeilen und erzeugt kein künstliches Anlauf-Cash. Die Engine kombiniert die getrennte Performance-Rendite ausschliesslich in `Trend`, verwendet die bestehenden Vermögens-/Drawdown-Funktionen und verändert die anderen mathematischen Funktionen nicht.
+
+`StrategyResult` prüft Signalspalten, vollständigen gemeinsamen Kalender, Asset, endliche SMAs, binäre Signalwerte, exakten SMA-Vergleich und verzögerte Positionen. Die gemeinsame Resultprüfung vergleicht zusätzlich mit vorbereitetem Signal-Kontext und Performance-Rendite. Buy-and-Hold, Rebalancing, RF-Ausrichtung und Kennzahlenformeln bleiben unverändert. Alle Strategien kopieren ihre benötigten Daten und verändern den geteilten Kontext nicht.
+
+`signals.csv` hat exakt `date,strategy,asset_id,signal,position,signal_value,sma_short,sma_long`. `signal` beschreibt die Entscheidung an diesem Datum; `position` beschreibt die Position der dort endenden Renditeperiode. Am Start ist Position leer, danach das Signal der vorherigen Bewertung. Signalwert und beide SMAs gehören zum angegebenen Datum. Die letzte Entscheidung darf dokumentiert sein, auch ohne nächste Periode. Exportiert werden nur Untersuchungsbewertungen, keine Vorlaufzeilen. Sortierung und Hash-/Exportablauf entsprechen den bestehenden optionalen Tabellen.
+
+### Dritte künstliche Demo
+
+```powershell
+.\.venv\Scripts\python.exe -m maturarbeit_engine run --config configs/demo_trend.json
+```
+
+Tatsächlich geprüfter Run: `outputs/runs/synthetic_trend-d5d6bcd322664a9d9f2a6665ba67fe43/`. Alle drei Strategien verwenden sieben Monatsendbewertungen, Kapital 100 CHF und explizites `m=12`. Demo-Fenster 2/3, Lag 1 und künstliche Anlagen legen keine Werte des Hauptversuchs fest. Vorlauf: 2019-11-30 und 2019-12-31 mit Signalwert jeweils 10; nur die Trend-Anlage besitzt diese Vorlaufzeilen.
+
+| Bewertung | Performance-Wert | Signalwert | SMA kurz | SMA lang | Signal | Position | Trendvermögen |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 2020-01-31 | 100 | 10 | 10 | 10 | 0 | leer | 100 |
+| 2020-02-29 | 80 | 20 | 15 | 40/3 | 1 | 0 | 100 |
+| 2020-03-31 | 88 | 30 | 25 | 20 | 1 | 1 | 110 |
+| 2020-04-30 | 70.4 | 10 | 20 | 20 | 0 | 1 | 88 |
+| 2020-05-31 | 140.8 | 10 | 10 | 50/3 | 0 | 0 | 88 |
+| 2020-06-30 | 70.4 | 30 | 20 | 50/3 | 1 | 0 | 88 |
+| 2020-07-31 | 77.44 | 30 | 30 | 70/3 | 1 | 1 | 96.8 |
+
+Trendrenditen: **0, +10 %, −20 %, 0, 0, +10 %**. Das Februar-Signal Long beeinflusst nicht den bereits vergangenen Marktverlust −20 %. Das April-Signal Cash vermeidet nicht rückwirkend den im Long verdienten Verlust. Mai +100 % und Juni −50 % bleiben bei gehaltenem Cash ohne Vermögensänderung.
+
+Trend: Gesamtrendite **−3.2 %**, annualisierte Rendite **−6.2976 %**, annualisierte Volatilität **37.9473319220 %**, Sharpe **−0.0475924749**, maximaler Drawdown **−20 %**. Buy-and-Hold endet bei **77.44**, Rebalancing bei **86.464**. Das regelmässige Monatsendgitter erlaubt die bestehenden annualisierten Kennzahlen; die sechs synthetischen RF-Intervalle werden für alle Strategien identisch verwendet. Die Trend-Demo erzeugt sieben Dateien, darunter sieben Signalzeilen und eine Rebalancing-Trade-Tabelle ohne Ereigniszeilen.
+
+Die ursprünglichen Buy-and-Hold-/Rebalancing-Demos wurden erneut ausgeführt; ihre fachlichen CSVs und Qualitätsberichte sind bytegleich zu den vor der Trend-Erweiterung erzeugten Kontrollläufen. Details und sämtliche Test-/Hashnachweise stehen in [testing.md](testing.md).
+
+Technische Entscheidungen durch Codex: additive Konfigurations-/Kontextfelder, einmal vorbereitete SMA-Sicht, vollständige Resultprüfung, Wiederverwendung des optionalen Exports und Version 0.3.0. Keine neue finanzwirtschaftliche Entscheidung war nötig. Die akzeptierte Core-/Rebalancing-Abnahme bleibt erhalten; fachliche Trend-Abnahme steht aus. Keine endgültige Versuchsauswahl, kein BIP und keine weiteren ausgeschlossenen Funktionen. Dieser Auftrag endet nach Trend.

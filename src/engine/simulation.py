@@ -6,6 +6,7 @@ from .context import prepare_context
 from .result import StrategyResult, validate_results
 from ..strategies.buy_hold import BuyAndHold
 from ..strategies.rebalance import Rebalance
+from ..strategies.trend import Trend
 from ..analysis.metrics import compute_metrics
 from ..export.results import export_run
 import pandas as pd
@@ -34,6 +35,8 @@ def run_simulation(config: str | Path | RunConfig) -> RunOutcome:
     if config.rebalance_enabled:
         results.append(Rebalance().run(context, {"target_weights": dict(config.target_weights),
                                                 "rebalance_frequency": config.rebalance_frequency}))
+    if config.trend_enabled:
+        results.append(Trend().run(context, config.trend_params()))
     results = validate_results(context, results)
     summaries, statuses = [], {}
     for result in results:

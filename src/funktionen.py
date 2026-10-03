@@ -195,14 +195,40 @@ def buy_and_hold(renditen: pd.Series, startkapital: float):
     return startkapital * (1 + renditen).cumprod()
 
 
-def trendfolge(preise: pd.Series, kurzes_fenster: int, langes_fenster: int):
-    if kurzes_fenster >= langes_fenster:
-        raise ValueError("Das kurze Fenster muss kleiner als das lange Fenster sein.")
+def validate_sma_windows(short_window, long_window):
+    """Windows count observations; no defaults, rounding or boolean integers."""
+    for window in [short_window, long_window]:
+        if isinstance(window, (bool, np.bool_)) or not isinstance(window, (int, np.integer)) or window <= 0:
+            raise ValueError("SMA windows must be positive integers.")
+    if short_window >= long_window:
+        raise ValueError("The short SMA window must be smaller than the long window.")
 
-    daten = pd.DataFrame({"Kurs": preise}).dropna().sort_index()
-    daten["SMA kurz"] = daten["Kurs"].rolling(kurzes_fenster).mean()
-    daten["SMA lang"] = daten["Kurs"].rolling(langes_fenster).mean()
-    daten["Signal"] = np.where(daten["SMA kurz"] > daten["SMA lang"], 1, 0)
-    daten["Marktrendite"] = daten["Kurs"].pct_change()
+
+def sma_signal(values: pd.Series, short_window: int, long_window: int):
+    """One SMA/Long-Cash definition; undefined warm-up signals remain NaN."""
+    validate_sma_windows(short_window, long_window)
+    if (not isinstance(values, pd.Series) or values.empty or not values.index.is_unique
+            or not values.index.is_monotonic_increasing or values.index.hasnans
+            or not pd.api.types.is_numeric_dtype(values) or pd.api.types.is_bool_dtype(values)
+            or not np.isrealobj(values.to_numpy())):
+        raise ValueError("Signals require an ordered, unique, real numeric Series.")
+    values = values.astype(float).copy()
+    if not np.isfinite(values.to_numpy()).all():
+        raise ValueError("Signal observations must be complete and finite; no filling or dropping.")
+    short = values.rolling(short_window, min_periods=short_window).mean()
+    long = values.rolling(long_window, min_periods=long_window).mean()
+    signal = pd.Series(np.nan, index=values.index, dtype=float)
+    valid = short.notna() & long.notna()
+    if not np.isfinite(short.loc[valid]).all() or not np.isfinite(long.loc[valid]).all():
+        raise ValueError("SMA calculation exceeded finite numerical precision.")
+    signal.loc[valid] = (short.loc[valid] > long.loc[valid]).astype(float)
+    return pd.DataFrame({"signal_value": values, "sma_short": short, "sma_long": long, "signal": signal})
+
+
+def trendfolge(preise: pd.Series, kurzes_fenster: int, langes_fenster: int):
+    """Legacy single-series example using the same validated SMA definition."""
+    daten = sma_signal(preise, kurzes_fenster, langes_fenster).rename(columns={
+        "signal_value": "Kurs", "sma_short": "SMA kurz", "sma_long": "SMA lang", "signal": "Signal"})
+    daten["Marktrendite"] = prozentuale_aenderung(daten["Kurs"])
     daten["Strategierendite"] = daten["Signal"].shift(1) * daten["Marktrendite"]
     return daten

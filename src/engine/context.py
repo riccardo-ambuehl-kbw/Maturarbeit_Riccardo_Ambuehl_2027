@@ -2,7 +2,7 @@
 from dataclasses import dataclass
 import pandas as pd
 from .config import RunConfig
-from ..data.normalize import read_csv_snapshot, align_performance, align_risk_free
+from ..data.normalize import read_csv_snapshot, align_performance, align_risk_free, prepare_trend_signals
 from ..data.validate import validate_assets, validate_market, validate_risk_free
 
 
@@ -15,6 +15,7 @@ class SimulationContext:
     input_files: tuple[dict, ...]
     annualization_available: bool
     annualization_status: str
+    trend_signals: pd.DataFrame | None = None
 
 
 def check_period_logic(index, frequency, periods_per_year):
@@ -38,7 +39,14 @@ def prepare_context(config: RunConfig) -> SimulationContext:
     required = config.required_assets
     market = validate_market(market, assets, required, config.base_currency)
     performance, quality = align_performance(market, required, config.start, config.end)
-    quality["unused_market_columns"] = sorted(set(market.columns) - {"date", "asset_id", "performance_value"})
+    used_columns = {"date", "asset_id", "performance_value"}
+    trend_signals = None
+    if config.trend_enabled:
+        trend_signals, quality["trend"] = prepare_trend_signals(
+            market, config.trend_asset, config.signal_source, config.short_window, config.long_window,
+            performance.index)
+        used_columns.add(config.signal_source)
+    quality["unused_market_columns"] = sorted(set(market.columns) - used_columns)
     quality["requested_period"] = {"start": config.start.isoformat(), "end": config.end.isoformat()}
     quality["periods_per_year"] = config.periods_per_year
     rf = None
@@ -58,4 +66,4 @@ def prepare_context(config: RunConfig) -> SimulationContext:
                                 "period_frequency": config.period_frequency}
     if not available:
         quality["warnings"].append(f"Annual metrics unavailable: {status}. No frequency is inferred.")
-    return SimulationContext(config, performance, rf, quality, tuple(inputs), available, status)
+    return SimulationContext(config, performance, rf, quality, tuple(inputs), available, status, trend_signals)

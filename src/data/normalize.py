@@ -4,7 +4,8 @@ from io import StringIO
 from pathlib import Path
 import csv
 import pandas as pd
-from .validate import DataValidationError
+from .validate import DataValidationError, numeric
+from ..funktionen import sma_signal
 
 
 def read_csv_snapshot(path: Path, kind: str):
@@ -68,4 +69,32 @@ def align_risk_free(frame, series_id, valuation_dates):
     return pd.Series(values.to_numpy(), index=valuation_dates[1:], name="risk_free_return"), {
         "series_id": series_id, "loaded_periods": len(rows), "used_periods": len(expected),
         "unused_periods": len(rows) - len(expected),
+    }
+
+
+def prepare_trend_signals(market, asset, source, short_window, long_window, valuation_dates):
+    """Own observed signal history, separate from the shared performance calendar."""
+    if source not in market.columns:
+        raise DataValidationError(f"Configured signal source is missing: {source}")
+    series = market.loc[market.asset_id == asset].set_index("date")[source].sort_index()
+    start, end = valuation_dates[0], valuation_dates[-1]
+    available = series.loc[series.index < start]
+    warm = available.iloc[-(long_window - 1):]
+    study = series.loc[(series.index >= start) & (series.index <= end)]
+    used = numeric(pd.concat([warm, study]))
+    try:
+        prepared = sma_signal(used, short_window, long_window).loc[valuation_dates].copy()
+    except (ValueError, KeyError, OverflowError) as exc:
+        raise DataValidationError(f"Invalid trend signal history: {exc}") from exc
+    if prepared.isna().any().any():
+        raise DataValidationError("Insufficient SMA warm-up: both SMAs must be defined at the effective start.")
+    return prepared, {
+        "asset_id": asset, "signal_source": source,
+        "available_warm_up_observations": len(available), "used_warm_up_observations": len(warm),
+        "long_window": long_window,
+        "warm_up_period": {"start": None if warm.empty else warm.index[0].date().isoformat(),
+                           "end": None if warm.empty else warm.index[-1].date().isoformat()},
+        "used_signal_observations": len(used), "study_signal_observations": len(study),
+        "effective_start": start.date().isoformat(), "valid_start_signal": True,
+        "signal_calendar": "observed_asset_history; sampled_at_shared_valuations",
     }

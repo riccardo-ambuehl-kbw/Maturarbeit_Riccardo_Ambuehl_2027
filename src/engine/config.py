@@ -7,7 +7,7 @@ import json
 import math
 import re
 import pandas as pd
-from ..funktionen import validate_target_weights
+from ..funktionen import validate_target_weights, validate_sma_windows
 
 
 class ConfigError(ValueError):
@@ -60,13 +60,26 @@ class RunConfig:
     rebalance_enabled: bool = False
     target_weights: tuple[tuple[str, float], ...] = ()
     rebalance_frequency: str | None = None
+    trend_enabled: bool = False
+    trend_asset: str | None = None
+    short_window: int | None = None
+    long_window: int | None = None
+    signal_lag: int | None = None
+    signal_source: str | None = None
 
     @property
     def required_assets(self):
         assets = {self.asset} if self.buy_hold_enabled else set()
         if self.rebalance_enabled:
             assets.update(a for a, _ in self.target_weights)
+        if self.trend_enabled:
+            assets.add(self.trend_asset)
         return tuple(sorted(assets))
+
+    def trend_params(self):
+        return {"asset": self.trend_asset, "short_window": self.short_window,
+                "long_window": self.long_window, "signal_lag": self.signal_lag,
+                "signal_source": self.signal_source}
 
     def strategies(self):
         strategies = {}
@@ -76,6 +89,8 @@ class RunConfig:
             strategies["rebalance"] = {"enabled": self.rebalance_enabled,
                                        "target_weights": dict(self.target_weights),
                                        "rebalance_frequency": self.rebalance_frequency}
+        if self.trend_asset is not None:
+            strategies["trend"] = {"enabled": self.trend_enabled, **self.trend_params()}
         return strategies
 
     def resolved(self):
@@ -137,12 +152,16 @@ def load_config(path: str | Path) -> RunConfig:
     if frequency is not None and (not isinstance(frequency, str)
                                   or frequency not in {"D", "W", "MS", "ME", "YS", "YE"}):
         raise ConfigError("Unsupported period_frequency. Use D, W, MS, ME, YS, YE or null.")
-    exact_keys(raw["strategies"], [], ["buy_hold", "rebalance"])
+    exact_keys(raw["strategies"], [], ["buy_hold", "rebalance", "trend"])
     buy_enabled = rebalance_enabled = False
+    trend_enabled = False
+    trend_asset = short_window = long_window = signal_lag = signal_source = None
     asset = rebalance_frequency = None
     target_weights = ()
     for name, params in raw["strategies"].items():
-        required = ["enabled", "asset"] if name == "buy_hold" else ["enabled", "target_weights", "rebalance_frequency"]
+        required = {"buy_hold": ["enabled", "asset"],
+                    "rebalance": ["enabled", "target_weights", "rebalance_frequency"],
+                    "trend": ["enabled", "asset", "short_window", "long_window", "signal_lag", "signal_source"]}[name]
         exact_keys(params, required)
         if not isinstance(params["enabled"], bool):
             raise ConfigError("Strategy enabled must be a JSON boolean.")
@@ -150,7 +169,7 @@ def load_config(path: str | Path) -> RunConfig:
             buy_enabled, asset = params["enabled"], params["asset"]
             if not isinstance(asset, str) or not asset.strip():
                 raise ConfigError("Buy-and-Hold requires an explicit asset_id.")
-        else:
+        elif name == "rebalance":
             rebalance_enabled = params["enabled"]
             rebalance_frequency = params["rebalance_frequency"]
             if rebalance_frequency != "annual":
@@ -165,7 +184,21 @@ def load_config(path: str | Path) -> RunConfig:
             except (ValueError, TypeError, OverflowError) as exc:
                 raise ConfigError(f"Invalid target weights: {exc}") from exc
             target_weights = tuple(sorted(validated.items()))
-    if not (buy_enabled or rebalance_enabled):
+        else:
+            trend_enabled, trend_asset = params["enabled"], params["asset"]
+            if not isinstance(trend_asset, str) or not trend_asset.strip():
+                raise ConfigError("Trend requires an explicit asset_id.")
+            short_window, long_window = params["short_window"], params["long_window"]
+            try:
+                validate_sma_windows(short_window, long_window)
+            except ValueError as exc:
+                raise ConfigError(str(exc)) from exc
+            signal_lag, signal_source = params["signal_lag"], params["signal_source"]
+            if type(signal_lag) is not int or signal_lag != 1:
+                raise ConfigError("Trend signal_lag must be exactly integer 1.")
+            if not isinstance(signal_source, str) or signal_source not in {"signal_value", "performance_value"}:
+                raise ConfigError("Trend signal_source must explicitly select signal_value or performance_value.")
+    if not (buy_enabled or rebalance_enabled or trend_enabled):
         raise ConfigError("At least one supported strategy must be enabled.")
     data = raw["data"]
     exact_keys(data, ["market", "assets"], ["risk_free"])
@@ -181,4 +214,5 @@ def load_config(path: str | Path) -> RunConfig:
                      currency, float(raw["periods_per_year"]), frequency,
                      local_path(data["market"], path.parent), local_path(data["assets"], path.parent),
                      rf_path, rf_series, asset, output.resolve(), path, sha256(content).hexdigest(),
-                     buy_enabled, rebalance_enabled, target_weights, rebalance_frequency)
+                     buy_enabled, rebalance_enabled, target_weights, rebalance_frequency,
+                     trend_enabled, trend_asset, short_window, long_window, signal_lag, signal_source)

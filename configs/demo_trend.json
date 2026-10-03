@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "run_name": "synthetic_trend",
+  "period": {"start": "2020-01-01", "end": "2020-07-31"},
+  "start_capital": 100,
+  "base_currency": "CHF",
+  "periods_per_year": 12,
+  "period_frequency": "ME",
+  "data": {
+    "market": "trend_demo/market.csv",
+    "assets": "trend_demo/assets.csv",
+    "risk_free": {"path": "trend_demo/risk_free.csv", "series_id": "RF_SYNTHETIC"}
+  },
+  "strategies": {
+    "buy_hold": {"enabled": true, "asset": "TREND_SYNTH"},
+    "rebalance": {
+      "enabled": true,
+      "target_weights": {"TREND_SYNTH": 0.6, "BD_SYNTH": 0.4},
+      "rebalance_frequency": "annual"
+    },
+    "trend": {
+      "enabled": true,
+      "asset": "TREND_SYNTH",
+      "short_window": 2,
+      "long_window": 3,
+      "signal_lag": 1,
+      "signal_source": "signal_value"
+    }
+  },
+  "output_dir": "../outputs/runs"
+}

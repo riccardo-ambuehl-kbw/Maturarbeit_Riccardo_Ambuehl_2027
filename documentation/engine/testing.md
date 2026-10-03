@@ -1,4 +1,4 @@
-# Engine v1 – ausgeführte Core- und Rebalancing-Prüfungen
+# Engine v1 – ausgeführte Core-, Rebalancing- und Trend-Prüfungen
 
 **Core-Prüfung:** 2026-10-03. **Plattform:** Windows, CPython 3.14.0.
 **Versionen:** Engine 0.1.0, NumPy 2.3.5, pandas 2.3.3, pytest 8.4.2; weitere Versionen siehe `requirements.lock`.
@@ -159,3 +159,96 @@ Die letzte Datei ist ein lokaler, ignorierter Kontrollblock dieses Arbeitsauftra
 Die bestehenden Änderungen und neuen Dateien wurden vollständig geprüft; `git diff --check` und ergänzende Textprüfungen sind erfolgreich. SHA-256-Abgleich aller 66 anfänglich versionierten Dateien sichert die geschützten Notebooks, Methodik, Bibliographie, Buchkapitel, `decisions.md`, AGENTS.md, bisherigen Tests und ursprünglichen Demodaten. Ein AST-Abgleich sichert zusätzlich, dass von den bereits vorhandenen Funktionsdefinitionen nur `neue_gewichtung()` und `rebalancing()` geändert wurden; ihre Härtung ist ausdrücklich autorisiert und dokumentiert. Kein Commit und keine neue fachliche Entscheidung.
 
 Die Core-Abnahme durch den Autor bleibt gültig; die fachliche Abnahme dieser neuen Erweiterung steht aus. Geprüft sind künstliche Daten auf Windows/CPython 3.14.0. Andere Plattformen, reale Daten und sämtliche noch ausgeschlossenen Strategien/Adapter sind weiterhin ungeprüft. Keine Trendfolge, BIP-, FX-, Kosten-, Steuer-, Inflations-, Batch- oder Hauptversuchslogik wurde ergänzt. Der Auftrag endet hier.
+
+## Trendfolge – Prüfung vom 2026-10-04
+
+Der Autor hat Core und Rebalancing mit `engine-rebalancing-v0.2.0` auf Commit `37edc79f4211c734423ca89ef3899d1cbc0b81b4` akzeptiert. Dieser Schritt begann sauber auf `10d70e73826dc7e11dbe3eb5bf5770fa833e4ae6`; einzig der neue Trend-Prompt unterschied den Beginn vom akzeptierten Tag. Die vorangehenden Abschnitte sind historische Prüfprotokolle ihrer jeweiligen Aufträge.
+
+### Ausgangspunkt, Refactoring und Umgebung
+
+Die gesamte bisherige Suite wurde vor Änderungen ausgeführt: **164 passed in 23.59s**. Vor dem Refactoring wurde die bestehende `trendfolge()` regulär importiert und geprüft:
+
+- `[1,2,3]`, Fenster 2/3: Signale 0/0 vor definiertem langem SMA und eine frühe Strategierendite 0.
+- `[1,NaN,3,4]`, Fenster 2/3: zweite Beobachtung verschwand; Marktrendite von 1 auf 3 wurde als +200 % überbrückt.
+
+Die neuen Helper-/Legacy-Tests verlangen vollständige Beobachtungen, geprüfte Fenster und undefinierte Signale während des Anlaufs. Die Engine verlangt beide SMAs vollständig ab dem effektiven Start. Diese Korrekturen sind durch den dokumentierten Trend-Prompt autorisiert und beziehen sich auf Theorie 3.12 sowie OD-04. Keine andere vorhandene mathematische Funktion wurde für Trend geändert.
+
+Weiterhin Windows, **CPython 3.14.0**, NumPy **2.3.5**, pandas **2.3.3**, pytest **8.4.2**. Keine neuen Runtime-Abhängigkeiten; `requirements.lock` unverändert. Lokale editierbare Neuinstallation und Prüfung tatsächlich ausgeführt:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install --no-cache-dir --disable-pip-version-check --no-deps -e .
+.\.venv\Scripts\python.exe -m pip check
+```
+
+Ergebnis: Paket **0.3.0** erfolgreich installiert, **No broken requirements found.** pip verwendete ausschliesslich die bereits fixierten isolierten Build-Werkzeuge. Simulation und Testfälle laden keine Daten aus dem Internet. Für 0.3.0 wurde keine separate nicht editierbare Wheel-Installation behauptet; die historische Wheel-Prüfung oben gilt für den Core 0.1.0.
+
+### Tatsächlich ausgeführte vollständige pytest-Läufe
+
+Frische Testablagen wurden als absolute Pfade unter dem Workspace `.venv/` geprüft und verwendet:
+
+| Befehl mit Python aus `.venv` | Ergebnis |
+|---|---|
+| `python -m pytest -q --basetemp=.venv/pytest-trend-baseline` | **164 passed in 23.59s** |
+| `python -m pytest -q --basetemp=.venv/pytest-trend-001` | **236 passed in 45.90s** |
+| `python -m pytest -q --basetemp=.venv/pytest-trend-002` | **242 passed in 37.36s** |
+
+Final: **164 unveränderte bisherige Fälle + 78 neue Trend-Fälle**. Nach dem ersten Erweiterungslauf wurden sechs zusätzliche Randfälle ergänzt: effektiver gemeinsamer Start, eigenes Trend-Asset in der Vereinigungsmenge, ausschliesslich Cash, SMA-Vergleich ohne Toleranzzone, fehlende RF-Periode und unvollständige/fehlerhafte Signal-Startposition. Danach wurde die gesamte Suite erneut ausgeführt. Keine bisherigen Tests wurden geändert oder abgeschwächt. Der bestehende Netzwerk-Guard und Warnungen als Fehler gelten weiterhin. Nach dem finalen Lauf wurde kein Engine-Code mehr geändert.
+
+### Pflichtgruppen A–M
+
+| Gruppe | Unabhängig geprüfter Fall |
+|---|---|
+| A – SMA | Werte 10/10/10/20/30/10/10/30/30, Handmittelwerte für Fenster 2/3; Gleichheit gibt 0, striktes Grössersignal auch ohne Toleranzzone |
+| B – Fenster | Null/negative, gleiche/vertauschte Fenster, Bool, Float, Text, fehlende Angaben abgelehnt; gemeinsamer Helper und Konfiguration |
+| C – Warm-up | Zwei Vorlaufwerte reichen für langes Fenster 3; fehlender Wert lehnt gesamten Run ab; Start bleibt 100; keine Vorlaufrendite/-Zeile/-Kennzahlen; effektiver Start Februar nutzt Dezember/Januar als Vorlauf |
+| D – Rollen | Absichtlich getrennte Reihen; Änderung nur Signalwert verändert Position, lässt Buy-and-Hold-/Rebalancing-Performance identisch; spätere Performanceänderung verändert kein Signal |
+| E – Quelle | Explizite Signalspalte und explizite Performance-Quelle funktionieren; fehlende Spalte/Beobachtung und unbekannte Quellen scheitern; kein zeilenweiser Fallback |
+| F – Lag | Februar-Signal 1 gilt erst für März; April-Signal 0 gilt erst für Mai; Startsignal steuert erste folgende Periode; Position am Start leer |
+| G – Long/Cash | Long verdient +10 %/−20 %; Cash verdient exakt 0 bei −20 %, +100 % und −50 %; kein Short; vollständig definierter reiner Cash-Lauf ebenfalls geprüft |
+| H – RF | Änderung nur RF lässt alle Portfolio- und Signaldaten unverändert; nur Sharpe ändert sich; Cash wird nicht verzinst; fehlende RF-Periode ist Fehler |
+| I – Export | Exakte Signalspalten, Datums-/Assetzuordnung, sieben Untersuchungszeilen ohne Vorlauf, binäre Signale, vollständig definierte SMAs, verzögerte Position und Hash |
+| J – Vergleich | Alle drei Strategien, identische Kalender/Summary-Einträge; Kontext bei vertauschter Ausführung unverändert; Warm-up verlängert andere Portfolios nicht; eigenes Trend-Asset gehört zur Performance-Vereinigung |
+| K – Zukunft | Spätere Signal-/Performanceänderungen lassen frühere Signale, Positionen und Vermögen unverändert; neues Signal verändert auch die an demselben Datum endende Rendite nicht |
+| L – Fehlwerte | Leere/NaN/Inf/Text in benötigten Vorlauf-/Studienwerten scheitern; Helper lehnt auch Bool, komplexe Werte, doppelte/ungeordnete Indizes ab; kein Auffüllen oder `dropna()` |
+| M – Regression | Alle 164 bisherigen Tests sowie beide bisherigen CLI-Demos unverändert; deren sämtliche fachlichen Exporte bytegleich zum Stand vor Trend |
+
+Weitere Kontrollen: Trend allein, deaktivierte unbekannte Anlage ohne Signalspalte, Währung/Asset-Vertrag, vertauschte CSV-/Strategiereihenfolge mit bytegleichen Exports, gemeinsame Kalenderausdünnung vor Marktrenditen mit eigener beobachteter SMA-Historie, Result-Korruption sowie CLI aus anderem Arbeitsverzeichnis. Signale beziehen sich auf die beobachtete Historie der Trend-Anlage; der Positions-Lag bezieht sich auf gemeinsame Performance-Bewertungen. Diese getrennten Zeitsichten werden im Qualitätsbericht dokumentiert.
+
+### Drei CLI-Demos und manuelle Skalarkontrolle
+
+Nach dem letzten Codewechsel tatsächlich ausgeführt, alle Exit **0**:
+
+```powershell
+.\.venv\Scripts\python.exe -m maturarbeit_engine run --config configs/demo_buy_hold.json
+.\.venv\Scripts\python.exe -m maturarbeit_engine run --config configs/demo_rebalance.json
+.\.venv\Scripts\python.exe -m maturarbeit_engine run --config configs/demo_trend.json
+.\.venv\Scripts\python.exe .venv/check_trend_exports.py
+```
+
+Die letzte Datei ist ein lokaler, ignorierter Kontrollblock dieses Auftrags mit unabhängigen skalaren Formeln und CSV-/JSON-/Hashprüfungen. Dauerhafte Regressionen liegen in `tests/test_trend.py`.
+
+- Buy-and-Hold: `outputs/runs/synthetic_buy_hold-f2ccd5314fd34969bac07e63bab27e3c/`, weiterhin **100 → 110 → 99**, vier Dateien. Beide CSVs und Datenqualität bytegleich zum vor dieser Erweiterung erzeugten Kontrolllauf `synthetic_buy_hold-bfee55e0f2c84f26b5a9cca48538002b`.
+- Rebalancing: `outputs/runs/synthetic_rebalance-8367ea25c0754a7681bc754961400b88/`, weiterhin **100 → 106 → 112.6 → 110.348 → 116.4284**, sechs Dateien. Alle CSVs und Datenqualität bytegleich zum Kontrolllauf `synthetic_rebalance-5ee833616a9f43bdbf62b5da1d79c07e`; kein künstliches `signals.csv`.
+- Trend-Vergleich: `outputs/runs/synthetic_trend-d5d6bcd322664a9d9f2a6665ba67fe43/`, sieben Dateien. Drei Portfolioverläufe und Summary-Zeilen, sieben Signaldatenzeilen, 14 Rebalancing-Gewichtszeilen und korrekt leere Rebalancing-Trades mit Kopfzeile.
+
+Handkontrolle der sieben SMA-/Signalzeilen:
+
+| Datum | SMA kurz | SMA lang | Signal | Verdiente Position | Trendwert |
+|---|---:|---:|---:|---:|---:|
+| 2020-01-31 | 10 | 10 | 0 | leer | 100 |
+| 2020-02-29 | 15 | 40/3 | 1 | 0 | 100 |
+| 2020-03-31 | 25 | 20 | 1 | 1 | 110 |
+| 2020-04-30 | 20 | 20 | 0 | 1 | 88 |
+| 2020-05-31 | 10 | 50/3 | 0 | 0 | 88 |
+| 2020-06-30 | 20 | 50/3 | 1 | 0 | 88 |
+| 2020-07-31 | 30 | 70/3 | 1 | 1 | 96.8 |
+
+Nur sechs echte Trendrenditen: **0, 0.1, −0.2, 0, 0, 0.1**. Vorlauf nicht einbezogen. Gesamtrendite **−3.2 %**, Jahresrendite `0.968^2−1 = −6.2976 %`, Jahresvolatilität `sqrt(0.06/5)*sqrt(12) = 37.9473319220 %`, Sharpe mit RF 0.001/0.002 im Wechsel **−0.0475924749**, maximaler Drawdown **−20 %**, Schlussdrawdown **−12 %**. Das unabhängige Kontrollprogramm rechnete auch Kennzahlen/Drawdowns von Buy-and-Hold und Rebalancing vollständig nach; ihre Endwerte sind 77.44 und 86.464.
+
+Alle Manifeste und Qualitätsberichte strikt ohne NaN/Infinity gelesen. Jede Eingabe, jede Ergebnisdatei, alle einzelnen Quellcode-Hashes und der aggregierte Code-Hash wurden nachgerechnet. Engine 0.3.0, UTC-Zeit, unveränderter Git-Commit mit `dirty=true`, aufgelöste Signalquelle/Fenster/Lag, effektiver Zeitraum, Warm-up und identische RF-Perioden sind geprüft. Unterschiedliche Version-/Run-Metadaten sind erwartbar; die bisherigen fachlichen Exporte bleiben bytegleich.
+
+### Abschluss und verbleibende Grenzen
+
+`git diff` einschliesslich neuer Quellen/Tests/Daten geprüft; `git diff --check` und Text-/Link-/JSON-Prüfungen erfolgreich. SHA-256-Abgleich aller **73** zu Beginn versionierten Dateien bestätigt unveränderte geschützte Notebooks, Methodik, Bibliographie, Buchkapitel, `decisions.md`, AGENTS.md, bestehende Tests und beide bisherigen Demo-Datensätze. AST-Vergleich gegenüber dem akzeptierten Tag bestätigt, dass von den vorhandenen Definitionen in `src/funktionen.py` ausschliesslich `trendfolge()` refaktoriert wurde. Neue Helper sind gesondert dokumentiert. Kein Commit erstellt.
+
+Keine neue fachliche Entscheidung nötig. Core-/Rebalancing-Abnahme laut Autor akzeptiert; fachliche Trend-Abnahme offen. Geprüft sind künstliche Daten auf Windows/CPython 3.14.0, keine realen Daten und keine anderen Plattformen. Endgültige SMA-Fenster/Signalreihe bleiben beim Autor. Keine BIP-, Liveadapter-, FX-, verzinste Cash-, Short-, Kosten-, Steuer-, Inflations-, Batch-, Optimierungs- oder Hauptversuchslogik ergänzt. Dieser Auftrag endet nach Trend.
