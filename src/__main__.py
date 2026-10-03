@@ -5,7 +5,7 @@ from .engine.simulation import run_simulation
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="Local Buy-and-Hold backtest core")
+    parser = argparse.ArgumentParser(description="Local Buy-and-Hold and annual rebalancing backtests")
     sub = parser.add_subparsers(dest="command", required=True)
     run = sub.add_parser("run")
     run.add_argument("--config", required=True)

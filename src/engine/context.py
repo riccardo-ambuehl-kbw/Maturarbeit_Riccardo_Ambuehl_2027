@@ -35,7 +35,7 @@ def prepare_context(config: RunConfig) -> SimulationContext:
     assets, asset_info = read_csv_snapshot(config.assets_path, "assets")
     assets = validate_assets(assets)
     market, market_info = read_csv_snapshot(config.market_path, "market")
-    required = (config.asset,)
+    required = config.required_assets
     market = validate_market(market, assets, required, config.base_currency)
     performance, quality = align_performance(market, required, config.start, config.end)
     quality["unused_market_columns"] = sorted(set(market.columns) - {"date", "asset_id", "performance_value"})

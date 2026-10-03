@@ -2,8 +2,11 @@
 from dataclasses import dataclass
 import numpy as np
 import pandas as pd
+from ..funktionen import WEIGHT_TOLERANCE, CAPITAL_TOLERANCE
 
 HISTORY_COLUMNS = ["date", "strategy", "portfolio_value", "period_return", "drawdown"]
+WEIGHTS_COLUMNS = ["date", "strategy", "asset_id", "weight_before", "target_weight", "weight_after"]
+TRADES_COLUMNS = ["date", "strategy", "asset_id", "value_before", "target_value", "transaction_value"]
 
 
 @dataclass(frozen=True)
@@ -31,4 +34,68 @@ class StrategyResult:
         expected = h.portfolio_value.iloc[1:].to_numpy() / h.portfolio_value.iloc[:-1].to_numpy() - 1
         if not np.allclose(expected, h.period_return.iloc[1:], rtol=1e-12, atol=1e-14):
             raise ValueError("History returns disagree with wealth ratios.")
+        self._validate_allocations()
         return self
+
+    def _validate_allocations(self):
+        w, t, h = self.weights_history, self.trades, self.portfolio_history
+        if w is None and t is None:
+            if self.strategy == "rebalance":
+                raise ValueError("Rebalancing requires weights and trades tables.")
+            return
+        if w is None or t is None or list(w.columns) != WEIGHTS_COLUMNS or list(t.columns) != TRADES_COLUMNS:
+            raise ValueError("Invalid weights/trades columns.")
+        assets = tuple(sorted(w.asset_id.unique()))
+        expected_keys = {(date, asset) for date in h.date for asset in assets}
+        if (not assets or w.duplicated(["date", "asset_id"]).any()
+                or set(zip(w.date, w.asset_id)) != expected_keys):
+            raise ValueError("Weights must cover every valuation and asset exactly once.")
+        for table, columns in [(w, WEIGHTS_COLUMNS), (t, TRADES_COLUMNS)]:
+            if (not (table.strategy == self.strategy).all() or table.date.isna().any()
+                    or table.duplicated(["date", "asset_id"]).any()
+                    or not np.isfinite(table[columns[3:]].to_numpy(dtype=float)).all()):
+                raise ValueError("Invalid finite, unique allocation/trade rows.")
+        if (w[WEIGHTS_COLUMNS[3:]] < 0).any().any():
+            raise ValueError("Weights must be long-only.")
+        sums = w.groupby("date")[WEIGHTS_COLUMNS[3:]].sum()
+        if not np.allclose(sums, 1.0, rtol=0, atol=WEIGHT_TOLERANCE):
+            raise ValueError("Weights must sum to 1 at every valuation.")
+        target = w.loc[w.date == h.date.iloc[0]].set_index("asset_id").target_weight.sort_index()
+        trade_dates = set(t.date)
+        wealth = h.set_index("date").portfolio_value
+        for date, group in w.groupby("date", sort=True):
+            group = group.set_index("asset_id").sort_index()
+            if not np.array_equal(group.target_weight.to_numpy(), target.to_numpy()):
+                raise ValueError("Configured target weights must remain fixed.")
+            expected_after = group.target_weight if date in trade_dates or date == h.date.iloc[0] else group.weight_before
+            if not np.allclose(group.weight_after, expected_after, rtol=0, atol=WEIGHT_TOLERANCE):
+                raise ValueError("Weight states disagree with rebalancing events.")
+            if date == h.date.iloc[0] and not np.allclose(group.weight_before, target, rtol=0, atol=WEIGHT_TOLERANCE):
+                raise ValueError("Initial weights must equal targets.")
+        for date, group in t.groupby("date", sort=True):
+            if date not in set(h.date.iloc[1:-1]) or tuple(sorted(group.asset_id)) != assets:
+                raise ValueError("Trades require a complete asset set, no initial/final trades.")
+            group = group.set_index("asset_id").sort_index()
+            wg = w.loc[w.date == date].set_index("asset_id").sort_index()
+            total = wealth.loc[date]
+            if ((group[["value_before", "target_value"]] < 0).any().any()
+                    or not np.allclose(group.transaction_value, group.target_value - group.value_before,
+                                       rtol=CAPITAL_TOLERANCE, atol=CAPITAL_TOLERANCE * total)
+                    or not np.allclose([group.value_before.sum(), group.target_value.sum()], total,
+                                       rtol=CAPITAL_TOLERANCE, atol=0)
+                    or abs(group.transaction_value.sum()) > CAPITAL_TOLERANCE * total
+                    or not np.allclose(group.value_before / total, wg.weight_before, rtol=0, atol=WEIGHT_TOLERANCE)
+                    or not np.allclose(group.target_value / total, wg.target_weight, rtol=0, atol=WEIGHT_TOLERANCE)):
+                raise ValueError("Trade values, weights and capital conservation disagree.")
+
+
+def validate_results(context, results):
+    results = (results,) if isinstance(results, StrategyResult) else tuple(results)
+    results = tuple(sorted(results, key=lambda r: r.strategy))
+    if not results or len({r.strategy for r in results}) != len(results):
+        raise ValueError("A run requires unique strategy results.")
+    for result in results:
+        result.validate(context.config.start_capital)
+        if not pd.DatetimeIndex(result.portfolio_history.date).equals(context.performance.index):
+            raise ValueError("Every strategy must use the complete shared valuation calendar.")
+    return results

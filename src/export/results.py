@@ -8,7 +8,9 @@ from uuid import uuid4
 import json
 import subprocess
 import sys
+import pandas as pd
 from .. import __version__
+from ..engine.result import validate_results
 
 
 def file_sha256(path):
@@ -43,7 +45,9 @@ def code_provenance():
 
 
 def export_run(context, result, summary, metric_status):
-    result.validate(context.config.start_capital)
+    results = validate_results(context, result)
+    if summary.strategy.tolist() != [r.strategy for r in results]:
+        raise ValueError("Summary must contain one ordered row per strategy.")
     # Detect edits after reading: every recorded hash must describe the consumed file.
     for info in context.input_files:
         if file_sha256(info["path"]) != info["sha256"]:
@@ -57,12 +61,22 @@ def export_run(context, result, summary, metric_status):
         stage = Path(temporary).resolve()
         if not stage.is_relative_to(root):
             raise ValueError("Staging directory escaped output root.")
-        result.portfolio_history.to_csv(stage / "portfolio_history.csv", index=False,
+        pd.concat([r.portfolio_history for r in results], ignore_index=True).sort_values(
+            ["strategy", "date"], kind="stable").to_csv(stage / "portfolio_history.csv", index=False,
                                        date_format="%Y-%m-%d", float_format="%.17g", na_rep="",
                                        lineterminator="\n", encoding="utf-8")
         summary.to_csv(stage / "summary.csv", index=False, float_format="%.17g", na_rep="",
                        lineterminator="\n", encoding="utf-8")
         write_json(stage / "data_quality.json", context.data_quality)
+        names = ["portfolio_history.csv", "summary.csv", "data_quality.json"]
+        for attribute in ["weights_history", "trades"]:
+            tables = [getattr(r, attribute) for r in results if getattr(r, attribute) is not None]
+            if tables:
+                name = attribute + ".csv"
+                pd.concat(tables, ignore_index=True).sort_values(["strategy", "date", "asset_id"], kind="stable").to_csv(
+                    stage / name, index=False, date_format="%Y-%m-%d", float_format="%.17g",
+                    na_rep="", lineterminator="\n", encoding="utf-8")
+                names.append(name)
         manifest = {
             "engine_version": __version__, "schema_version": context.config.schema_version,
             "run_id": run_id, "run_name": context.config.run_name,
@@ -74,8 +88,10 @@ def export_run(context, result, summary, metric_status):
             "input_files": list(context.input_files), "code": code_provenance(),
             "python_version": sys.version, "packages": {p: version(p) for p in ["numpy", "pandas"]},
             "metric_status": metric_status,
+            "executed_strategies": [r.strategy for r in results],
+            "metric_status_by_strategy": ({results[0].strategy: metric_status} if len(results) == 1 else metric_status),
             "results": [{"path": name, "sha256": file_sha256(stage / name)}
-                        for name in ["portfolio_history.csv", "summary.csv", "data_quality.json"]],
+                        for name in names],
         }
         write_json(stage / "run_manifest.json", manifest)
         # UUID directory names avoid collisions; never replace an existing successful run.

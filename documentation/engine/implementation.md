@@ -1,12 +1,14 @@
-# Engine v1 Core – technische Implementierung
+# Engine v1 – Core, Multi-Asset und Rebalancing
 
-**Stand:** 2026-10-03, Engine 0.1.0 / Konfigurationsschema 1.0.
-**Auftrag:** [vollständiger Implementierungsprompt](../ai-usage/prompts/2026-10-02-engine-v1-core-implementation.md).
+**Stand:** 2026-10-04, Engine 0.2.0 / weiterhin Konfigurationsschema 1.0.
+**Aufträge:** [Core](../ai-usage/prompts/2026-10-02-engine-v1-core-implementation.md) und [Multi-Asset/Rebalancing](../ai-usage/prompts/2026-10-04-engine-v1-rebalancing-implementation.md).
 **Fachliche Grundlage:** Analyse 5.3–5.9, Theorie und die vom Autor verbindlich festgelegten [OD-01 bis OD-13](decisions.md).
+
+Der Autor hat den Core mit Tag `engine-core-v0.1.0` abgenommen (Commit `1a193094b312354c39a72bdf44ef2f6a20573011`). Der Arbeitsbeginn dieser Erweiterung war Commit `045bfcb2580e09dc473a571216b5c40bcf2c8397`; gegenüber dem Tag war nur der neue Auftrag hinzugekommen. Die technische Prüfung dieser Erweiterung ist getrennt von ihrer noch ausstehenden fachlichen Abnahme.
 
 ## Umfang und Struktur
 
-Implementiert ist ein einzelner lokaler Buy-and-Hold-Lauf: CSV-Dateien und JSON-Konfiguration validieren, gemeinsamen Kontext vorbereiten, die konfigurierte Anlage mit Gewicht 1 halten, gemeinsame Kennzahlen berechnen und vier Ergebnisdateien exportieren. Es gibt keine externen Cashflows; die Total-Return-Behandlung muss bereits in `performance_value` enthalten sein.
+Ein einzelner lokaler Run kann Buy-and-Hold, jährliches Rebalancing oder beide Strategien ausführen. CSV-Dateien und JSON-Konfiguration werden validiert, alle benötigten Anlagen auf einen gemeinsamen Kalender ausgerichtet und die Strategien über denselben Kontext ausgewertet. Der Core mit Einzelanlagen-Buy-and-Hold bleibt erhalten. Es gibt keine externen Cashflows; die Total-Return-Behandlung muss bereits in `performance_value` enthalten sein.
 
 | Dateien | Aufgabe |
 |---|---|
@@ -15,11 +17,13 @@ Implementiert ist ein einzelner lokaler Buy-and-Hold-Lauf: CSV-Dateien und JSON-
 | `src/funktionen.py` | Bestehende mathematische Funktionen mit den unten dokumentierten Korrekturen |
 | `src/data/{__init__,validate,normalize}.py` | CSV-Snapshots, Datenprüfung, gemeinsame Bewertungen, Risk-Free-Ausrichtung |
 | `src/engine/{__init__,config,context,result,simulation}.py` | JSON-Vertrag, SimulationContext, StrategyResult und gemeinsamer Ablauf |
-| `src/strategies/{__init__,buy_hold}.py` | Einzelanlage mit Startbewertung und Gewicht 1 |
+| `src/strategies/{__init__,buy_hold,rebalance}.py` | Einzelanlage und allgemeines jährlich rebalanciertes Portfolio |
 | `src/analysis/{__init__,metrics}.py` | Einheitliche Zusammenfassung und Verfügbarkeitsstatus |
 | `src/export/{__init__,results}.py` | Vollständige Run-Verzeichnisse, Manifest und SHA-256 |
 | `configs/demo_buy_hold.json`, `configs/demo/*.csv` | Ausschliesslich künstliche Demo |
+| `configs/demo_rebalance.json`, `configs/rebalance_demo/*.csv` | Zweite künstliche Demo, Buy-and-Hold und 60/40 im selben Run |
 | `tests/{conftest,test_functions,test_core}.py` | Synthetische Funktions-, Integrations- und CLI-Prüfungen |
+| `tests/test_rebalance.py` | Allgemeine Gewichte, Zustandsfolge, Jahresereignisse, Multi-Asset-/Exportregression |
 
 Die geplante physische Struktur unter `src/` bleibt erhalten. Setuptools installiert sie unter dem eindeutigen Paketnamen `maturarbeit_engine`. Es gibt keine zweite CLI-Berechnungslogik: CLI und Python rufen `engine.simulation.run_simulation()` auf.
 
@@ -63,9 +67,9 @@ CSV-Dateien verwenden UTF-8, optional mit BOM, Kommatrennung und ISO-Datumswerte
 
 `signal_value` und weitere Marktspalten werden in diesem Slice nicht verwendet und im Qualitätsbericht aufgeführt. Pflichtwerte, doppelte Spaltennamen, doppelte Markt-Schlüssel, doppelte Metadaten-IDs und doppelte Risk-Free-Perioden pro Reihe werden geprüft. Marktwerte müssen endlich und positiv sein; fehlende numerische Beobachtungen werden abgelehnt. Alle geladenen Markt-IDs benötigen Metadaten, die verwendete Anlage muss zur Basiswährung passen. Es erfolgt keine Auffüllung, Interpolation, FX-Konvertierung oder erneute Total-Return-Bereinigung.
 
-`align_performance()` unterstützt mehrere benötigte Anlagen: zuerst Schnittmenge tatsächlich vorhandener Bewertungen bilden, danach den gewünschten Zeitraum auswählen, erst anschliessend Renditen berechnen. Der Core benötigt für Buy-and-Hold nur eine Anlage. Mindestens zwei Bewertungen müssen im gewünschten Zeitraum verbleiben. Entfernte nicht gemeinsame Termine und Beobachtungen ausserhalb des gewünschten Zeitraums werden separat berichtet. Zusätzliche geladene Anlagen bestimmen den Kalender der verwendeten Anlage nicht.
+`align_performance()` unterstützt mehrere benötigte Anlagen: zuerst Schnittmenge tatsächlich vorhandener Bewertungen bilden, danach den gewünschten Zeitraum auswählen, erst anschliessend Renditen berechnen. Der Kontext verwendet jetzt die sortierte Vereinigung der Anlagen **aller aktivierten Strategien**; auch ein Buy-and-Hold-Asset ausserhalb der Rebalancing-Zielgewichte gehört dazu. Mindestens zwei Bewertungen müssen im gewünschten Zeitraum verbleiben. Entfernte nicht gemeinsame Termine und Beobachtungen ausserhalb des gewünschten Zeitraums werden separat berichtet. Zusätzliche unbenötigte Anlagen und Anlagen ausschliesslich deaktivierter Strategien bestimmen den Vergleichskalender nicht. Auch Anlagen mit explizitem Zielgewicht 0 benötigen Daten und Metadaten.
 
-Die Demo-Konfiguration zeigt den vollständigen JSON-Vertrag. Pflichtfelder sind `schema_version`, `run_name`, `period` mit `start/end`, `start_capital`, `base_currency`, `periods_per_year`, `data` mit `market/assets` und `strategies.buy_hold` mit `enabled/asset`. Unbekannte Felder oder Strategieoptionen, deaktiviertes Buy-and-Hold, ungültige Typen und nicht endliche Zahlen werden abgelehnt. Es gibt keine fachlichen Defaults. Relative Dateipfade beziehen sich auf die Konfigurationsdatei; ein fehlendes `output_dir` bedeutet technisch `outputs/runs` im aktuellen Arbeitsverzeichnis. URLs sind keine Datenreferenzen.
+Die Demo-Konfigurationen zeigen den vollständigen JSON-Vertrag. Pflichtfelder sind `schema_version`, `run_name`, `period` mit `start/end`, `start_capital`, `base_currency`, `periods_per_year`, `data` mit `market/assets` und `strategies`. Unterstützt werden `buy_hold` mit `enabled/asset` und `rebalance` mit `enabled/target_weights/rebalance_frequency`. Mindestens eine Strategie muss aktiviert sein. Vorhandene Strategieblöcke werden vollständig geprüft, auch wenn sie deaktiviert sind; ihre Anlagen werden dann nicht für den Kontext angefordert. Es gibt keine fachlichen Defaults. Unbekannte Felder/Strategieoptionen, ungültige Typen und nicht endliche Zahlen werden abgelehnt. Relative Dateipfade beziehen sich auf die Konfigurationsdatei; ein fehlendes `output_dir` bedeutet technisch `outputs/runs` im aktuellen Arbeitsverzeichnis. URLs sind keine Datenreferenzen. Bestehende Core-Konfigurationen bleiben gültig.
 
 `data.risk_free` ist optional. Bei vollständigem Fehlen bleibt Sharpe nicht verfügbar. Bei einer angegebenen Datei sind Serien-ID und beide Grenzen **jeder** tatsächlichen Renditeperiode verbindlich: fehlende, verschobene oder zusätzlich überlappende Intervalle führen zum Fehler. Ausserhalb des Laufs liegende Intervalle werden gezählt und nicht verwendet. FRED-Jahreszinsumrechnung und Beschaffung gehören nicht zum Core.
 
@@ -99,24 +103,26 @@ Der [Audit](audit.md) enthält die ursprünglichen Gegenbeispiele; die Tests rep
 | `sharpe_ratio()` | QuantStats-Aufruf durch `mean(r-rf) / std(r-rf, ddof=1) * sqrt(m)` ersetzt. Beide Reihen müssen eindeutige, identische Periodenindizes und endliche Werte besitzen. Test mit Renditen über 100 % verhindert Preis-Heuristik. Weniger als zwei Werte oder konstante Überschussrendite liefern intern einen undefinierten Wert, der im Engine-Output als nicht verfügbar mit Status erscheint. OD-07/08. |
 | QuantStats-Import | Aus `src/funktionen.py` entfernt, weil nach der autorisierten Sharpe-Korrektur keine Funktion dieses Imports mehr bedarf. Keine QuantStats-Abhängigkeit im Core; historische Definitionen im geschützten Theorie-Notebook bleiben unverändert. |
 
-Die zusätzlichen privaten Prüfhilfen `_positive_periods()` und `_finite_returns()` dienen ausschliesslich der Eingabeprüfung. `buy_and_hold()`, `geometrisches_mittel()` und `annualisierte_volatilitaet()` werden mit validierten Eingaben wiederverwendet; ihre Formeln wurden nicht ersetzt. Das neue Strategieobjekt ergänzt Startzeile, Vertrag und Exportfähigkeit um das bestehende `buy_and_hold()`. Die übrigen historischen Funktionen wurden nicht verändert. Insbesondere gelten alte `rebalancing()`-/`trendfolge()`-Funktionen dadurch nicht als geprüfte vollständige Engine-Strategien.
+Die Core-Prüfhilfen `_positive_periods()` und `_finite_returns()` dienen ausschliesslich der Eingabeprüfung. `buy_and_hold()`, `geometrisches_mittel()` und `annualisierte_volatilitaet()` werden mit validierten Eingaben wiederverwendet; ihre Formeln wurden nicht ersetzt. Die nachfolgende Erweiterung härtet zusätzlich `neue_gewichtung()` und `rebalancing()`. Die anderen historischen Funktionen bleiben unverändert; insbesondere ist `trendfolge()` weiterhin keine geprüfte vollständige Engine-Strategie.
 
 ## Exporte und Reproduzierbarkeit
 
-Ein erfolgreicher Lauf erzeugt unter `output_dir/<run_name>-<uuid>/` genau:
+Jeder erfolgreiche Lauf erzeugt unter `output_dir/<run_name>-<uuid>/` die Core-Dateien:
 
 - `portfolio_history.csv`: Datum, Strategie, Vermögen, Periodenrendite und Drawdown; Start-Rendite leer.
 - `summary.csv`: Start-/Endwert, Gesamtrendite, annualisierte Rendite/Volatilität, Sharpe und maximaler Drawdown. Nicht verfügbare Zahlen sind leer; ihr Grund steht im Manifest.
 - `data_quality.json`: Status, geladene/benötigte Anlagen, ursprüngliche und effektive Grenzen, Beobachtungszahlen, entfernte Termine, Risk-Free- und Annualisierungsprüfung, Warnungen.
 - `run_manifest.json`: Engine-/Schema-Version, Run-ID, UTC-Zeit, vollständig aufgelöste Konfiguration, gewünschte/effektive Grenzen, Währung, `m`, Eingabepfade und SHA-256, Git-Commit und Dirty-Status, Python-/Runtime-Paketversionen, Kennzahlstatus und Ergebnis-Hashes.
 
+Bei aktiviertem Rebalancing kommen `weights_history.csv` und `trades.csv` hinzu, beide ebenfalls mit SHA-256 im Manifest. Ein ereignisfreier Rebalancing-Lauf hat eine korrekt benannte Trade-Tabelle mit Kopfzeile und ohne Datenzeilen. Ein reiner Buy-and-Hold-Lauf behält genau vier Dateien; ihm werden keine Gewichts-/Trade-Zeilen erfunden. Mehrere Strategien werden in Verlauf und Summary gemeinsam exportiert, ohne ihre Zahlen miteinander zu vermischen. Sortierung: `strategy,date`, bei Gewichten/Trades zusätzlich `asset_id`, jeweils stabil. Die Summary hat eine Zeile pro Strategie in Namensreihenfolge.
+
 JSON wird mit `allow_nan=False` geschrieben. Verfügbarkeitsfelder verwenden `null`, CSV-Zahlenlücken erhalten einen nachvollziehbaren Status. Der nicht beobachtete Startwert der Rendite ist die einzige reguläre Datenlücke im Verlauf. Numerischer Überlauf oder nicht endliche berechnete Ergebnisse führen zum Fehler.
 
 Eingabe-Hashes beschreiben die gelesenen Bytes; vor dem Export wird eine zwischenzeitliche Dateiänderung abgefangen. Zusätzlich zu Git werden alle Python-Quellen und, im Checkout, `pyproject.toml` und `requirements.lock` gehasht, damit ein Dirty-Lauf unterscheidbar bleibt. Bei einer Wheel-Installation ausserhalb eines Git-Checkouts sind Git-Commit/Dirty ausdrücklich `null` mit Status `unavailable`; die installierten Python-Quellen werden weiterhin gehasht. Für archivierte wissenschaftliche Runs sind die Eingabedateien und der passende Checkout bzw. das installierte Paket zusätzlich aufzubewahren; der Core kopiert sie nicht in den Ergebnisordner.
 
-Resultate werden erst vollständig in einem temporären Verzeichnis geschrieben und anschliessend innerhalb derselben Ausgabeablage umbenannt. Bestehende Runs werden nicht überschrieben. Run-ID und Zeitstempel variieren; fachliche CSV-Dateien und Datenqualitätsbericht sind bei identischen Inputs und Code bytegleich. Das Manifest hasht die drei übrigen Ergebnisdateien; es enthält keinen unmöglichen eigenen Selbst-Hash.
+Resultate werden erst vollständig in einem temporären Verzeichnis geschrieben und anschliessend innerhalb derselben Ausgabeablage umbenannt. Bestehende Runs werden nicht überschrieben. Run-ID und Zeitstempel variieren; fachliche CSV-Dateien und Datenqualitätsbericht sind bei identischen Inputs und Code bytegleich. Das Manifest hasht alle übrigen Ergebnisdateien: drei bei reinem Buy-and-Hold, fünf bei aktiviertem Rebalancing. Es enthält keinen eigenen Selbst-Hash.
 
-## Tatsächlich ausgeführte Demo
+## Ursprüngliche Core-Demo vom 2026-10-03
 
 Aufruf: `python -m maturarbeit_engine run --config configs/demo_buy_hold.json` in der lokalen `.venv`.
 
@@ -137,6 +143,70 @@ Die vier Dateien, Standard-JSON, alle Eingabe-/Ergebnis-/Code-Hashes und der Git
 
 ## Grenzen und Verantwortlichkeiten
 
-Noch nicht implementiert: vollständige 60/40-/Rebalancing-, Trendfolge-/SMA- und BIP-Strategien, Warm-up, historische BIP-Verfügbarkeit, reale Marktdatenadapter, FRED-Zinsumrechnung, Batch, Web/API, Parameteroptimierung und Zusatzanalysen. Gewichte, Trades und Signale sind in `StrategyResult` optional und im Einzelanlage-Slice nicht exportiert. Es gibt noch keine Benchmark- oder Vergleichsauswertung mehrerer Strategien und keine Börsenkalender-Aufbereitung.
+Noch nicht implementiert: Trendfolge-/SMA- und BIP-Strategien, Warm-up, historische BIP-Verfügbarkeit, reale Datenadapter, FRED-Zinsumrechnung, FX, Transaktionskosten, Steuern, Inflation, Batch, Web/API, Parameteroptimierung, reale Hauptversuche und Zusatzanalysen. Rebalancing unterstützt ausschliesslich `annual`. Signale bleiben optional und werden hier nicht erzeugt. Die unveränderte Core-Prüfung der Annualisierung ist weiterhin auf die oben beschriebenen Kalendergitter beschränkt; es gibt keine Börsenkalender-Aufbereitung.
 
 Vom Autor vorgegeben sind Datenvertrag, mathematische Definitionen, OD-01 bis OD-13 und die Arbeitsgrenze. Codex hat Paketname, strikten JSON-Vertrag, CSV-Lesetechnik, optionale Frequenzdeklaration als Prüfhilfe, Verfügbarkeitsstatus, Hashes, Exportablauf und synthetische Tests technisch umgesetzt. Neue finanzwirtschaftliche Regeln wurden nicht beschlossen; `decisions.md` wurde nicht geändert. Endgültige Versuchswerte bleiben beim Autor. Die bestandenen synthetischen Tests ersetzen keine fachliche Abnahme oder Prüfung realer Daten. Geschützte Notebooks, Methodik, Bibliographie und Buchkapitel bleiben unverändert.
+
+## Multi-Asset- und Rebalancing-Erweiterung vom 2026-10-04
+
+`RunConfig` ergänzt Aktivierung, immutable sortierte Zielgewichts-Paare und `rebalance_frequency`. `required_assets` ermittelt die Vereinigungsmenge für genau einen Kontext. Die vorhandenen CSV-/Kalender-/RF-Prüfungen werden weiterverwendet, ohne eine zweite Datenaufbereitung in der Strategie. `BuyAndHold` und gemeinsame Kennzahlenformeln sind unverändert. Beide Strategien lesen den Kontext, kopieren die benötigten Performance-Werte und verändern keine gemeinsam verwendeten Daten.
+
+`RunOutcome.results` enthält alle Ergebnisse als Mapping nach Strategienamen. Für bestehende Python-Aufrufe bleibt `.result` verfügbar: bei aktiviertem Buy-and-Hold dessen Ergebnis, andernfalls das einzige Rebalancing-Ergebnis. Der bestehende Einzelstrategie-Status `metric_status` bleibt im Manifest erhalten; `metric_status_by_strategy` liefert nun für jeden Run einen einheitlichen Strategienamen-zu-Status-Nachweis. `executed_strategies` nennt die ausgeführten Strategien. Es gibt keine Plugin-Plattform und keine zweite CLI-Logik.
+
+### Zielgewichte und Wiederverwendung
+
+Zielgewichte sind ausdrücklich konfigurierte, nichtnegative reale Zahlen mit Summe 1. Die absolute Toleranz für Gewichtssummen und Gewichtszustände beträgt **1e-12**; Kapitalvergleiche haben relative Toleranz **1e-12**, und die tolerierte absolute Transaktionssumme beträgt `portfolio_value * 1e-12`. Diese technischen Rundungstoleranzen werden in `src/funktionen.py` zentral benannt. Es wird keine falsche Summe normalisiert, kein Cash ergänzt und kein Default 60/40 gewählt. Werte nahe 1 innerhalb der Toleranz bleiben unverändert; die Prüfungen erlauben nur entsprechend kleine Rundungsabweichungen der Kapitalbilanz.
+
+Die Audit-Gegenbeispiele wurden vor der Änderung erneut ausgeführt: `neue_gewichtung({A:60,B:40},{A:0.1})` lieferte `A=66,B=NaN` und Gewicht `A=1`; `rebalancing({A:60,B:40},{A:0.5,B:0.4})` erzeugte Transaktionssumme −10. Beide Fälle werden jetzt abgelehnt, wie vom aktuellen Prompt und OD-13 erlaubt.
+
+- `neue_gewichtung()`: eindeutige nicht leere Asset-Labels, exakt gleiche Labelmengen, vollständige endliche reale Renditen und nichtnegative Positionen mit positivem endlichem Gesamtwert prüfen. Anders angeordnete Labels werden ausdrücklich auf die Positionsreihenfolge ausgerichtet. Die vorhandene Formel `value * (1 + return)` und die Gewichtsermittlung bleiben erhalten. Renditen ≤ −100 % werden für die positiven Performance-Reihen abgelehnt; numerischer Über-/Unterlauf wird nicht als gültiger Zustand übernommen.
+- `rebalancing()`: dieselben Positions-/Labelprüfungen, geprüfte Zielgewichte und Kapitalerhaltung. Die bestehenden Zielwert-, Transaktions- und Gewichtsformeln sowie die fünfteilige Rückgabe bleiben erhalten. Der Helper berechnet die Transaktionen; die neue Strategie übernimmt die Zielwerte als tatsächlichen Folgezustand.
+- Neu: `validate_target_weights()`, `_asset_vector()`, `_position_values()` und `_same_assets()` bündeln diese Eingabeprüfungen. Extrem grosse, auch einzeln endliche Gewichte werden vor einer überlaufenden Summe abgelehnt. Es gibt keine zweite unabhängige Sammlung von Rebalancing-Formeln.
+
+`StrategyResult` prüft zusätzlich die vollständigen Datum-/Asset-Raster, feste Zielgewichte, Gewichts- und Kapitalbilanzen sowie die Tradegleichung. Die Orchestrierung und der Export prüfen, dass jede Strategie genau den gesamten Kontextkalender liefert. Optionale Dateien werden innerhalb des bestehenden atomischen Exportablaufs geschrieben und erst danach gemeinsam veröffentlicht.
+
+### Zustandsfolge und Jahresereignisse
+
+Am effektiven Start gilt `position_value = start_capital * target_weight`. Die Startzeile ist unverändert eine Bewertung ohne beobachtete Rendite; die anfängliche Allokation erzeugt keinen Trade.
+
+Für jedes folgende Intervall: gehaltene Positionen mit Asset-Renditen fortschreiben → Portfoliowert und echte Portfoliorendite berechnen → Driftgewichte ausweisen → gegebenenfalls Rebalancing berechnen → Zielpositionen für das nächste Intervall übernehmen. Der Portfoliowert am Ereignisdatum ist der bereits verdiente Wert vor den kostenfreien Trades und bleibt innerhalb der dokumentierten Toleranz danach identisch.
+
+Ein Ereignis liegt am letzten gemeinsamen Bewertungsdatum eines Kalenderjahres, wenn das nächste vorhandene Bewertungsdatum in einem anderen Jahr liegt. Dafür wird nur der vorbereitete Bewertungskalender betrachtet, kein späterer Performance-Wert. Die Startbewertung wird nicht erneut rebalanciert. Das letzte Datum des gesamten Laufs erzeugt unabhängig vom Jahresultimo keine Abschlusstransaktionen. Fehlende Kalenderdaten werden nicht ergänzt.
+
+### Gewichtungs- und Trade-Semantik
+
+`weights_history` enthält jede Bewertung und jedes Rebalancing-Asset genau einmal:
+
+| Datum | `weight_before` | `target_weight` | `weight_after` |
+|---|---|---|---|
+| Start | Initiales Zielgewicht | Konfigurierte Referenz | Initiales Zielgewicht |
+| Ohne Ereignis | Tatsächliches Gewicht nach Rendite | Konfigurierte Referenz | Unverändertes Driftgewicht |
+| Jahresereignis | Tatsächliches Gewicht nach Rendite, vor Trade | Konfigurierte Referenz | Tatsächlich gehaltenes Gewicht nach Trade |
+
+Eine Referenz-Zielspalte an jedem Datum bedeutet kein periodisches Zurücksetzen. Vor-/Nachgewichte summieren je Datum zu 1 innerhalb der Toleranz.
+
+`trades` enthält nur tatsächliche geplante Jahresereignisse mit `transaction_value = target_value - value_before`, positiven Werten für Käufe und negativen für Verkäufe. Bei einem Ereignis werden alle Assets dokumentiert, auch bei Transaktionswert 0. Initiale Aufteilung und endgültiges Laufende erzeugen keine Trades. Je Ereignis stimmen Positions- und Zielsumme überein; die Transaktionssumme ist 0 innerhalb der Kapitaltoleranz.
+
+### Zweite künstliche Demo und Regression
+
+```powershell
+.\.venv\Scripts\python.exe -m maturarbeit_engine run --config configs/demo_rebalance.json
+```
+
+Tatsächlich geprüfter neuer Run: `outputs/runs/synthetic_rebalance-7535fb30fd80407f9fa5fe04522e0d26/`. Anlagen sind ausschliesslich `EQ_SYNTH` und `BD_SYNTH`, Kapital 100 CHF, Demo-Zielgewichte 60/40. Diese Angaben wählen keine realen Versuchsanlagen oder Untersuchungsparameter aus.
+
+| Datum | Aktien-/Anleihenwertreihe | Rebalancing-Portfolio | Zustand |
+|---|---|---:|---|
+| 2020-01-31 | 100 / 100 | 100 | Initiale Positionen 60 / 40 |
+| 2020-06-30 | 110 / 100 | 106 | Positionen 66 / 40; Aktiengewicht 66/106 |
+| 2020-12-30 | 121 / 100 | 112.6 | Erst Positionen 72.6 / 40, dann Zielpositionen 67.56 / 45.04 |
+| 2021-06-30 | 108.9 / 110 | 110.348 | Neue Zielpositionen verdienen −10 % / +10 %: 60.804 / 49.544 |
+| 2021-12-31 | 119.79 / 110 | 116.4284 | Positionen 66.8844 / 49.544; kein Abschlusstrade |
+
+Am 2020-12-30: Aktien verkaufen 5.04, Anleihen kaufen 5.04; Kapital vor/nach Trades 112.6. Rebalancing-Gesamtrendite **16.4284 %**, maximaler Drawdown **−2 %**. Buy-and-Hold derselben Aktienreihe endet bei **119.79**, Gesamtrendite **19.79 %**, maximaler Drawdown **−10 %**. Ein fälschliches Zurücksetzen nach jedem Intervall ergäbe schon vor dem Jahresereignis 112.36 statt 112.6.
+
+Die fünf Demo-Bewertungen bilden absichtlich kein regelmässiges Periodengitter. `period_frequency=null` ist explizit; der konfigurierte Demo-Wert `periods_per_year=12` wird nicht zur stillen Kalenderannahme. Annualisierte Rendite/Volatilität/Sharpe bleiben für beide Strategien mit Status `period_frequency_not_declared` nicht verfügbar. Die vier RF-Intervalle sind vollständig und exakt ausgerichtet. Zusätzliche reguläre monatliche Tests prüfen Sharpe für beide Strategien mit jeweils eigenen Renditen gegen dieselbe RF-Reihe.
+
+Der ursprüngliche Buy-and-Hold-Demo-Lauf wurde ebenfalls erneut ausgeführt: `outputs/runs/synthetic_buy_hold-81a32b30ed1442b185e762ed5b841f0d/`, weiterhin **100 → 110 → 99**. Beide fachlichen CSV-Dateien und `data_quality.json` sind bytegleich zum vor der Erweiterung erzeugten Kontrolllauf. Unterschiedliche Run-Metadaten und die neue Engine-/Codeversion sind ausdrücklich erlaubt. Alle neuen und bisherigen Exporte, Standard-JSON, Eingabe-/Code-/Ergebnis-Hashes und Kapitalbilanzen wurden kontrolliert; siehe [testing.md](testing.md).
+
+Neue fachliche Entscheidungen waren nicht erforderlich. Technische Entscheidungen von Codex in diesem Schritt: additive Konfigurationsfelder, sortierte Vereinigungsmenge, rückwärtskompatibles Result-Mapping, benannte Rundungstoleranzen, einheitliche Mehrstrategien-Sortierung, optionale Exporte und Versionsnummer 0.2.0. Der Auftrag endet nach Rebalancing; Trendfolge und BIP bleiben späteren bestätigten Aufträgen vorbehalten.

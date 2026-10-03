@@ -1,6 +1,9 @@
 import numpy as np
 import pandas as pd
 
+WEIGHT_TOLERANCE = 1e-12
+CAPITAL_TOLERANCE = 1e-12
+
 
 def resample_dataframe(df: pd.DataFrame, frequenz: str, aggregation: dict):
     return df.resample(frequenz).agg(aggregation)
@@ -112,18 +115,80 @@ def portfolio_risiko(renditen, gewichte):
 
 
 def neue_gewichtung(startwerte: pd.Series, renditen: pd.Series):
-    neue_werte = startwerte * (1 + renditen)
+    """Advance complete, identically labelled long-only positions (OD-06/13)."""
+    startwerte = _position_values(startwerte)
+    renditen = _asset_vector(renditen, "Returns")
+    _same_assets(startwerte, renditen)
+    renditen = renditen.reindex(startwerte.index)
+    if (renditen <= -1).any():
+        raise ValueError("Positive performance values require returns above -100%.")
+    try:
+        with np.errstate(over="raise", invalid="raise"):
+            neue_werte = startwerte * (1 + renditen)
+    except FloatingPointError as exc:
+        raise ValueError("Position update exceeded finite numerical precision.") from exc
+    neue_werte = _position_values(neue_werte)
+    if ((startwerte > 0) & (neue_werte == 0)).any():
+        raise ValueError("Position update underflowed to zero.")
     gesamtwert = neue_werte.sum()
     neue_gewichte = neue_werte / gesamtwert
     return neue_werte, neue_gewichte
 
 
 def rebalancing(aktuelle_werte: pd.Series, zielgewichte: pd.Series):
+    """Calculate capital-preserving trades; the caller applies the target state."""
+    aktuelle_werte = _position_values(aktuelle_werte)
+    zielgewichte = validate_target_weights(zielgewichte)
+    _same_assets(aktuelle_werte, zielgewichte)
+    zielgewichte = zielgewichte.reindex(aktuelle_werte.index)
     gesamtwert = aktuelle_werte.sum()
     zielwerte = gesamtwert * zielgewichte
     transaktionen = zielwerte - aktuelle_werte
     aktuelle_gewichte = aktuelle_werte / gesamtwert
+    if not np.isfinite(zielwerte.to_numpy()).all() or not np.isfinite(transaktionen.to_numpy()).all():
+        raise ValueError("Rebalancing exceeded finite numerical precision.")
+    if (not np.isclose(zielwerte.sum(), gesamtwert, rtol=CAPITAL_TOLERANCE, atol=0)
+            or abs(transaktionen.sum()) > CAPITAL_TOLERANCE * gesamtwert):
+        raise ValueError("Rebalancing must preserve capital.")
     return aktuelle_werte, aktuelle_gewichte, zielgewichte, zielwerte, transaktionen
+
+
+def _asset_vector(values, name):
+    if (not isinstance(values, pd.Series) or values.empty or not values.index.is_unique
+            or not all(isinstance(a, str) and a.strip() for a in values.index)):
+        raise ValueError(f"{name} require nonempty, unique asset labels.")
+    if (not pd.api.types.is_numeric_dtype(values) or pd.api.types.is_bool_dtype(values)
+            or not np.isrealobj(values.to_numpy())):
+        raise ValueError(f"{name} must be real numeric values.")
+    values = values.astype(float).copy()
+    if not np.isfinite(values.to_numpy()).all():
+        raise ValueError(f"{name} must be complete and finite.")
+    return values
+
+
+def _position_values(values):
+    values = _asset_vector(values, "Positions")
+    if (values < 0).any():
+        raise ValueError("Positions must be nonnegative.")
+    with np.errstate(over="ignore"):
+        total = values.sum()
+    if not np.isfinite(total) or total <= 0:
+        raise ValueError("Total portfolio value must be finite and positive.")
+    return values
+
+
+def _same_assets(one, two):
+    if set(one.index) != set(two.index):
+        raise ValueError("Asset labels must match exactly; no missing or extra assets.")
+
+
+def validate_target_weights(weights):
+    """OD-13: validate, never normalize; absolute sum tolerance is 1e-12."""
+    weights = _asset_vector(weights, "Target weights")
+    if ((weights < 0).any() or (weights > 1.0 + WEIGHT_TOLERANCE).any()
+            or not np.isclose(weights.sum(), 1.0, atol=WEIGHT_TOLERANCE, rtol=0)):
+        raise ValueError("Target weights must be nonnegative and sum to 1 (tolerance 1e-12).")
+    return weights
 
 
 def buy_and_hold(renditen: pd.Series, startkapital: float):

@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "run_name": "synthetic_rebalance",
+  "period": {"start": "2020-01-01", "end": "2021-12-31"},
+  "start_capital": 100,
+  "base_currency": "CHF",
+  "periods_per_year": 12,
+  "period_frequency": null,
+  "data": {
+    "market": "rebalance_demo/market.csv",
+    "assets": "rebalance_demo/assets.csv",
+    "risk_free": {"path": "rebalance_demo/risk_free.csv", "series_id": "RF_SYNTHETIC"}
+  },
+  "strategies": {
+    "buy_hold": {"enabled": true, "asset": "EQ_SYNTH"},
+    "rebalance": {
+      "enabled": true,
+      "target_weights": {"EQ_SYNTH": 0.60, "BD_SYNTH": 0.40},
+      "rebalance_frequency": "annual"
+    }
+  },
+  "output_dir": "../outputs/runs"
+}

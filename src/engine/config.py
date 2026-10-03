@@ -6,6 +6,8 @@ from pathlib import Path
 import json
 import math
 import re
+import pandas as pd
+from ..funktionen import validate_target_weights
 
 
 class ConfigError(ValueError):
@@ -50,10 +52,31 @@ class RunConfig:
     assets_path: Path
     risk_free_path: Path | None
     risk_free_series: str | None
-    asset: str
+    asset: str | None
     output_dir: Path
     config_path: Path
     config_sha256: str
+    buy_hold_enabled: bool = True
+    rebalance_enabled: bool = False
+    target_weights: tuple[tuple[str, float], ...] = ()
+    rebalance_frequency: str | None = None
+
+    @property
+    def required_assets(self):
+        assets = {self.asset} if self.buy_hold_enabled else set()
+        if self.rebalance_enabled:
+            assets.update(a for a, _ in self.target_weights)
+        return tuple(sorted(assets))
+
+    def strategies(self):
+        strategies = {}
+        if self.asset is not None:
+            strategies["buy_hold"] = {"enabled": self.buy_hold_enabled, "asset": self.asset}
+        if self.rebalance_frequency is not None:
+            strategies["rebalance"] = {"enabled": self.rebalance_enabled,
+                                       "target_weights": dict(self.target_weights),
+                                       "rebalance_frequency": self.rebalance_frequency}
+        return strategies
 
     def resolved(self):
         return {
@@ -65,7 +88,7 @@ class RunConfig:
             "data": {"market": str(self.market_path), "assets": str(self.assets_path),
                      "risk_free": None if self.risk_free_path is None else {
                          "path": str(self.risk_free_path), "series_id": self.risk_free_series}},
-            "strategies": {"buy_hold": {"enabled": True, "asset": self.asset}},
+            "strategies": self.strategies(),
             "output_dir": str(self.output_dir),
         }
 
@@ -114,13 +137,36 @@ def load_config(path: str | Path) -> RunConfig:
     if frequency is not None and (not isinstance(frequency, str)
                                   or frequency not in {"D", "W", "MS", "ME", "YS", "YE"}):
         raise ConfigError("Unsupported period_frequency. Use D, W, MS, ME, YS, YE or null.")
-    exact_keys(raw["strategies"], ["buy_hold"])
-    params = raw["strategies"]["buy_hold"]
-    exact_keys(params, ["enabled", "asset"])
-    if params["enabled"] is not True:
-        raise ConfigError("This core requires an enabled Buy-and-Hold strategy.")
-    if not isinstance(params["asset"], str) or not params["asset"].strip():
-        raise ConfigError("Buy-and-Hold requires an explicit asset_id.")
+    exact_keys(raw["strategies"], [], ["buy_hold", "rebalance"])
+    buy_enabled = rebalance_enabled = False
+    asset = rebalance_frequency = None
+    target_weights = ()
+    for name, params in raw["strategies"].items():
+        required = ["enabled", "asset"] if name == "buy_hold" else ["enabled", "target_weights", "rebalance_frequency"]
+        exact_keys(params, required)
+        if not isinstance(params["enabled"], bool):
+            raise ConfigError("Strategy enabled must be a JSON boolean.")
+        if name == "buy_hold":
+            buy_enabled, asset = params["enabled"], params["asset"]
+            if not isinstance(asset, str) or not asset.strip():
+                raise ConfigError("Buy-and-Hold requires an explicit asset_id.")
+        else:
+            rebalance_enabled = params["enabled"]
+            rebalance_frequency = params["rebalance_frequency"]
+            if rebalance_frequency != "annual":
+                raise ConfigError("Only annual rebalancing is supported.")
+            weights = params["target_weights"]
+            if (not isinstance(weights, dict) or not weights
+                    or any(not isinstance(a, str) or not a.strip() for a in weights)
+                    or any(isinstance(w, bool) or not isinstance(w, (int, float)) for w in weights.values())):
+                raise ConfigError("target_weights must be a nonempty asset-to-number mapping.")
+            try:
+                validated = validate_target_weights(pd.Series(weights))
+            except (ValueError, TypeError, OverflowError) as exc:
+                raise ConfigError(f"Invalid target weights: {exc}") from exc
+            target_weights = tuple(sorted(validated.items()))
+    if not (buy_enabled or rebalance_enabled):
+        raise ConfigError("At least one supported strategy must be enabled.")
     data = raw["data"]
     exact_keys(data, ["market", "assets"], ["risk_free"])
     rf_path = rf_series = None
@@ -134,4 +180,5 @@ def load_config(path: str | Path) -> RunConfig:
     return RunConfig("1.0", raw["run_name"], start, end, float(raw["start_capital"]),
                      currency, float(raw["periods_per_year"]), frequency,
                      local_path(data["market"], path.parent), local_path(data["assets"], path.parent),
-                     rf_path, rf_series, params["asset"], output.resolve(), path, sha256(content).hexdigest())
+                     rf_path, rf_series, asset, output.resolve(), path, sha256(content).hexdigest(),
+                     buy_enabled, rebalance_enabled, target_weights, rebalance_frequency)
