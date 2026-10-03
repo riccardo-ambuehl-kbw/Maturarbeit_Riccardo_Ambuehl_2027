@@ -8,3 +8,9 @@ __pycache__/
 
 /.quarto/
 **/*.quarto_ipynb
+
+# Local engine installation, tests and generated runs
+*.egg-info/
+build/
+.pytest_cache/
+outputs/runs/

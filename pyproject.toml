@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools==80.9.0", "wheel==0.45.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "maturarbeit-engine"
+version = "0.1.0"
+description = "Local reproducible Buy-and-Hold backtesting core"
+requires-python = ">=3.11,<3.15"
+dependencies = ["numpy==2.3.5", "pandas==2.3.3"]
+
+[project.optional-dependencies]
+test = ["pytest==8.4.2"]
+
+[tool.setuptools]
+package-dir = {maturarbeit_engine = "src"}
+packages = ["maturarbeit_engine", "maturarbeit_engine.data", "maturarbeit_engine.engine", "maturarbeit_engine.strategies", "maturarbeit_engine.analysis", "maturarbeit_engine.export"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+filterwarnings = ["error"]

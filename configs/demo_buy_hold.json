@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "run_name": "synthetic_buy_hold",
+  "period": {"start": "2020-01-01", "end": "2020-03-31"},
+  "start_capital": 100,
+  "base_currency": "CHF",
+  "periods_per_year": 12,
+  "period_frequency": "ME",
+  "data": {
+    "market": "demo/market.csv",
+    "assets": "demo/assets.csv",
+    "risk_free": {"path": "demo/risk_free.csv", "series_id": "RF_SYNTHETIC"}
+  },
+  "strategies": {"buy_hold": {"enabled": true, "asset": "DEMO_SYNTHETIC"}},
+  "output_dir": "../outputs/runs"
+}

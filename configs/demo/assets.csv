@@ -1,0 +1,2 @@
+asset_id,name,asset_class,country,currency,provider,provider_symbol
+DEMO_SYNTHETIC,Artificial total-return series,synthetic,SYNTHETIC,CHF,synthetic,ARTIFICIAL

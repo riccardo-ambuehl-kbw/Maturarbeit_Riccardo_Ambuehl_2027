@@ -1,0 +1,3 @@
+period_start,period_end,series_id,period_return
+2020-01-31,2020-02-29,RF_SYNTHETIC,0.001
+2020-02-29,2020-03-31,RF_SYNTHETIC,0.002
