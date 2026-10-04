@@ -1,6 +1,6 @@
 # Engine v1 – Core, Rebalancing, SMA-Trendfolge und BIP-Ländergewichtung
 
-**Stand:** 2026-10-04, Engine 0.4.1 / weiterhin Konfigurationsschema 1.0. Die gezielten Sicherungen EB-01 bis EB-03 sind im letzten Abschnitt und in [blocker-fixes.md](blocker-fixes.md) dokumentiert.
+**Stand:** 2026-10-04, Engine 0.4.2 / weiterhin Konfigurationsschema 1.0. Die gezielten Sicherungen EB-01 bis EB-03 samt nach dem ersten Review verbliebenem Portfoliozustandsfix sind in den letzten Abschnitten und in [blocker-fixes.md](blocker-fixes.md) dokumentiert.
 **Aufträge:** [Core](../ai-usage/prompts/2026-10-02-engine-v1-core-implementation.md), [Multi-Asset/Rebalancing](../ai-usage/prompts/2026-10-04-engine-v1-rebalancing-implementation.md), [Trendfolge](../ai-usage/prompts/2026-10-04-engine-v1-trend-implementation.md) und [BIP-Ländergewichtung](../ai-usage/prompts/2026-10-04-engine-v1-country-weighting-implementation.md).
 **Fachliche Grundlage:** Analyse 5.3–5.9, Theorie und die vom Autor verbindlich festgelegten [OD-01 bis OD-13](decisions.md).
 
@@ -364,3 +364,13 @@ Runner und Export verwenden dieselbe Zusammenführung `compute_run_metrics()` mi
 Alle vier CSV-Eingabeklassen werden zentral vor pandas mit der CSV-Standardbibliothek auf benannte eindeutige Header und exakt passende Datensatzbreite geprüft. Fehlende/zusätzliche Felder werden mit Datei und Zeile abgelehnt. Korrekt gequotete Kommas und Zeilenumbrüche sowie benannte Zusatzspalten bleiben zulässig. Danach verwendet pandas ausdrücklich `index_col=False`; kein Abschneiden oder implizites Verschieben.
 
 Paketversion jetzt 0.4.1; Konfigurationsschema 1.0 und Abhängigkeitsbindung bleiben unverändert. Alle bisherigen fachlichen Demo-Ausgaben bleiben bytegleich. Keine SB-/NB-Bearbeitung, neue fachliche Entscheidung, Commit-Erstellung oder v1.0-Tag; ausgeführte Paket-/Testprüfungen siehe [testing.md](testing.md).
+
+## Verbleibender EB-02-Konsistenzfix nach Review (Engine 0.4.2)
+
+Die zuvor geprüften Tabellen-/Kapitalbilanzen und Config-/GDP-Ziele bewiesen noch nicht, dass die vollständige wirtschaftliche Portfolioentwicklung aus den tatsächlichen Kontext-Marktrenditen entstanden war. Der [gezielte Folgeauftrag](../ai-usage/prompts/2026-10-04-engine-v1-portfolio-state-validation-fix.md) schliesst ausschliesslich diese nach dem ersten Fix-Review verbliebene Restlücke.
+
+Bei `require_complete=True` rekonstruiert `validate_market_portfolio_state()` für Fixed Rebalancing und Country-Weighting den Erwartungszustand mit der unveränderten gemeinsamen Funktion `run_annual_portfolio()`. Bereits gegen Config/GDP geprüfte Ziele, tatsächliche Performance-Werte, Startkapital und bestätigter Jahreskalender bestimmen Initialpositionen, Rendite, Drift, mögliche Trades und die für die nächste Periode gehaltenen Zielpositionen. Danach werden alle Vermögens-/Renditewerte, Vor-/Ziel-/Nachgewichte und Vortrade-/Ziel-/Transaktionsbeträge geprüft. Es entsteht keine parallele Finanzberechnung und keine Reparatur der gelieferten Tabellen.
+
+Bestehende Kapital-, Rendite- und Gewichtstoleranzen bleiben erhalten. Der Vergleich richtet Allokations-/Tradezeilen nach Datum/Asset aus und unterstützt ereignislose leere Trade-Tabellen. Lokale Teilresultprüfung bleibt möglich; Runner und Export nutzen weiterhin die strenge vollständige Grenze vor jeder Ablage. Ein Aufrufimport verhindert einen Modulzyklus; der rekonstruierende Portfolioaufruf verwendet ausschliesslich lokale Resultvalidierung und verändert weder Kontext noch Makroentscheidungen.
+
+Paketversion 0.4.2, unveränderte mathematische Funktionen, Portfolio-Ausführung, fachliche Regeln, Schemas und Abhängigkeiten. 22 zusätzliche Regressionen und vier bytegleiche Demo-Vergleiche siehe [testing.md](testing.md); Gegenbeispiele und Grenzen siehe [blocker-fixes.md](blocker-fixes.md). Keine neue fachliche Entscheidung und kein Commit.

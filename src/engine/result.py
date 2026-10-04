@@ -181,4 +181,7 @@ def validate_results(context, results, *, require_complete=False):
             returns = (prices[1:] / prices[:-1] - 1) * signals.position.iloc[1:].to_numpy()
             if not np.array_equal(result.portfolio_history.period_return.iloc[1:].to_numpy(), returns):
                 raise ValueError("Trend returns must use lagged positions and performance values.")
+        if require_complete and result.strategy in {"rebalance", "country_weighting"}:
+            from .portfolio import validate_market_portfolio_state
+            validate_market_portfolio_state(context, result)
     return results

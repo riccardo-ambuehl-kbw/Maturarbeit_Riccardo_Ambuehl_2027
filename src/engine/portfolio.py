@@ -2,7 +2,7 @@
 import numpy as np
 import pandas as pd
 from ..funktionen import (prozentuale_aenderung, neue_gewichtung, rebalancing, drawdown,
-                          validate_target_weights, allocate_target_values)
+                          validate_target_weights, allocate_target_values, CAPITAL_TOLERANCE, WEIGHT_TOLERANCE)
 from .result import StrategyResult, HISTORY_COLUMNS, WEIGHTS_COLUMNS, TRADES_COLUMNS, annual_rebalance_dates
 
 
@@ -43,3 +43,34 @@ def run_annual_portfolio(context, strategy, target_at):
     h.loc[1:, "drawdown"] = drawdown(observed).to_numpy()
     return StrategyResult(strategy, h, pd.DataFrame(weights, columns=WEIGHTS_COLUMNS),
                           pd.DataFrame(trades, columns=TRADES_COLUMNS)).validate(capital)
+
+
+def validate_market_portfolio_state(context, result):
+    """Replay the shared state sequence after targets/calendar have been validated."""
+    weights = result.weights_history.set_index(["date", "asset_id"]).sort_index()
+
+    def target_at(date, kind):
+        # Config/GDP binding was checked first; preserve the accepted target tolerance.
+        return weights.xs(date, level="date").target_weight
+
+    expected = run_annual_portfolio(context, result.strategy, target_at)
+    history, wanted = result.portfolio_history, expected.portfolio_history
+    if (not np.allclose(history.portfolio_value, wanted.portfolio_value,
+                        rtol=CAPITAL_TOLERANCE, atol=0)
+            or not np.allclose(history.period_return.iloc[1:], wanted.period_return.iloc[1:],
+                               rtol=CAPITAL_TOLERANCE, atol=1e-14)):
+        raise ValueError(f"{result.strategy} history disagrees with the market portfolio state.")
+    wanted_weights = expected.weights_history.set_index(["date", "asset_id"]).sort_index()
+    if (not weights.index.equals(wanted_weights.index)
+            or not np.allclose(weights[WEIGHTS_COLUMNS[3:]], wanted_weights[WEIGHTS_COLUMNS[3:]],
+                               rtol=0, atol=WEIGHT_TOLERANCE)):
+        raise ValueError(f"{result.strategy} weights disagree with the market portfolio state.")
+    trades = result.trades.set_index(["date", "asset_id"]).sort_index()
+    wanted_trades = expected.trades.set_index(["date", "asset_id"]).sort_index()
+    if not trades.index.equals(wanted_trades.index):
+        raise ValueError(f"{result.strategy} trades disagree with the market portfolio state.")
+    totals = wanted.set_index("date").portfolio_value.reindex(wanted_trades.index.get_level_values("date"))
+    if not np.allclose(trades[TRADES_COLUMNS[3:]].to_numpy(dtype=float),
+                       wanted_trades[TRADES_COLUMNS[3:]].to_numpy(dtype=float),
+                       rtol=CAPITAL_TOLERANCE, atol=CAPITAL_TOLERANCE * totals.to_numpy()[:, None]):
+        raise ValueError(f"{result.strategy} trades disagree with the market portfolio state.")

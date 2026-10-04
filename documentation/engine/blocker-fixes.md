@@ -1,4 +1,6 @@
-# Engine 0.4.1 – gezielte Korrektur EB-01 bis EB-03
+# Engine – gezielte Korrekturen EB-01 bis EB-03
+
+**Aktueller Stand:** Engine 0.4.2. Der erste Fix-Bericht unten betrifft 0.4.1; die nach dessen Review verbliebene EB-02-Restlücke und ihr gezielter Konsistenzfix sind im letzten Abschnitt dokumentiert.
 
 **Datum:** 2026-10-04. **Auftrag:** [vollständiger Blocker-Prompt](../ai-usage/prompts/2026-10-04-engine-v1-blocker-fixes.md). **Fachliche Grundlage:** AGENTS.md und unveränderte [OD-01 bis OD-13](decisions.md).
 
@@ -80,3 +82,45 @@ Geändert: `pyproject.toml`, `src/__init__.py`, `src/funktionen.py`, `src/data/n
 93 zu Beginn versionierte Dateien wurden per SHA-256 gesichert. Der Abschlussvergleich und Diff prüfen ausschliesslich diese 13 geänderten vorhandenen Dateien und zwei erlaubten neuen Dateien; alle übrigen Ausgangsdateien bleiben bytegleich. Geschützte wissenschaftliche Inhalte, AGENTS.md, Entscheidungen, beide historischen Auditdateien, sämtliche bisherige Tests, Configs/Demodaten und Abhängigkeitsbindung bleiben unverändert; der bisherige KI-Loginhalt bleibt bytegleich als Präfix erhalten.
 
 Keine neue fachliche oder methodische Entscheidung war erforderlich. Autorvorgaben bleiben OD-01 bis OD-13 und der begrenzte Blocker-Auftrag; Codex ergänzt ausschliesslich technische Prüfstellen, Regressionen, Paketversion und Nachweise. Keine SB-01 bis SB-07 oder NB-01 bis NB-03 bearbeitet, keine realen Daten oder endgültigen Versuchsparameter gewählt. Synthetische Prüfungen auf einer Plattform ersetzen keine fachliche Abnahme durch den Autor. Kein Commit und kein Tag erstellt, kein v1.0-Freeze erklärt. Der Auftrag endet nach diesen drei Fixes.
+
+## EB-02-Restfix nach dem ersten Fix-Review (Engine 0.4.2)
+
+**Auftrag:** [Portfoliozustands-Konsistenzfix](../ai-usage/prompts/2026-10-04-engine-v1-portfolio-state-validation-fix.md), 2026-10-04. Arbeitsbeginn sauber auf `78b7d34`; der vorherige Commit `f05f0bd` enthält die überprüften 0.4.1-Fixes. Die akzeptierten OD-01 bis OD-13 bleiben verbindlich. Dies schliesst ausschliesslich die nach dem ersten Fix-Review verbliebene EB-02-Restlücke; EB-01/03, SB-/NB-Punkte und historische Auditdokumente werden nicht geändert.
+
+### Ursache und unabhängiger Nachweis
+
+Die vollständige 0.4.1-Prüfung band bereits Assetmengen, Ziele, Ereignisse, historische GDP-Entscheidungen, Drawdowns, Summary und Kapitalbilanzen. Zwischen zwei Bewertungen war aber noch nicht nachgewiesen, dass gespeicherte Positionen/Gewichte und Vermögen tatsächlich aus den Performance-Renditen des Kontextes entstanden waren. Algebraisch stimmige Fälschungen konnten deshalb die strenge Run-/Exportgrenze passieren.
+
+Beide Strategien wurden separat mit demselben künstlichen Zwei-Bewertungs-Fall geprüft: Kapital 100, Ziele A/B 60/40, A 100 → 110, B 100 → 100, beide Termine im Jahr 2020 ohne Rebalancing. Country-Weighting besitzt hierfür eine gültige historische GDP-2019-Entscheidung mit Werten 60/40, verfügbar vor dem Start. Unabhängig ergeben gehaltene Positionen 60 → 66 und 40 → 40, somit Vermögen **106** und Driftgewichte **66/106, 40/106**.
+
+Danach wurden bewusst Vermögen **100 → 120**, Rendite **20 %**, Drawdowns **0/0**, unveränderte gültige Ziele, plausibel aussehende Vor-/Nachgewichte **60/40** und leere Trades konstruiert. Die Summary wurde aus dieser falschen History mit der bestehenden Kennzahlenfunktion neu berechnet; GDP-Entscheidung und Provenienz blieben unverändert. Vor dem Fix akzeptierte Version 0.4.1 beide Resultate einschliesslich Export mit Endwert 120. Die temporäre Kontrolle `.venv/portfolio_state_fix/reproduce.py before` dokumentiert beide tatsächlich veröffentlichten künstlichen Gegenbeispiele ausschliesslich in der ignorierten Prüfablage.
+
+### Technische Korrektur und Toleranzen
+
+`validate_results(..., require_complete=True)` ruft nach den bestehenden Struktur-/Config-/GDP-Prüfungen für beide Portfoliostrategien den gemeinsamen `validate_market_portfolio_state()` auf. Dieser verwendet unverändert `run_annual_portfolio()` zur Rekonstruktion des erwarteten gesamten Zustands aus `context.performance`, Startkapital und den bereits geprüften Zielgewichten.
+
+Damit gibt es weiterhin nur eine Portfolio-Zustandsfolge und dieselben Funktionen `allocate_target_values()`, `prozentuale_aenderung()`, `neue_gewichtung()` und `rebalancing()`. Initial gehaltene Positionen verdienen die tatsächlichen Renditen, daraus entstehen Vortradepositionen und Drift, und ausschliesslich an den bestätigten jährlichen Ereignissen werden Zielpositionen gebildet. Diese gehaltenen Positionen werden in die nächste Periode übernommen. Weder gespeicherte falsche Gewichte noch gespeicherte falsche Vermögenswerte bestimmen die Rekonstruktion.
+
+Verglichen werden der vollständige Vermögens-/Renditepfad, alle Vor-/Ziel-/Nachgewichte sowie alle Vortrade-, Ziel- und Transaktionswerte. Gewicht-/Tradezeilen werden nach Datum und Asset ausgerichtet; ihre Reihenfolge bleibt irrelevant. Leere Trade-Tabellen bleiben zulässig, sofern nach bestehendem Kalender kein Ereignis erforderlich ist. Alle Abweichungen führen zu einem klaren Fehler mit Strategie und betroffenem Tabellentyp, bevor der bestehende Export eine Ablage anlegt.
+
+Bestehende Toleranzen bleiben erhalten: Vermögen relativ `CAPITAL_TOLERANCE=1e-12`, ohne kapitalunabhängige absolute Toleranz; Renditen relativ `1e-12` / absolut `1e-14`; Gewichte absolut `WEIGHT_TOLERANCE=1e-12`; Tradebeträge relativ `1e-12` plus die bereits verwendete kapitalabhängige absolute Toleranz `1e-12 × Portfoliowert`. Bereits gegen Config/GDP geprüfte gespeicherte Ziele werden zur Rekonstruktion benutzt, damit die akzeptierte Fixed-Rebalancing-Zieltoleranz nicht durch aufsummierte Unterschiede zu nochmals eingesetzten Config-Gewichten verschärft wird. Country-Ziele bleiben zuvor exakt an die historische GDP-Auswahl gebunden. Keine Gewichtsnormalisierung oder Reparatur eines Resultats.
+
+Der Helper wird erst innerhalb der vollständigen Prüfung importiert, weil das bestehende Portfoliomodul selbst die Resulttypen verwendet. Die Rekonstruktion ruft nur lokale `StrategyResult.validate()` auf; es gibt keine rekursive vollständige Run-Prüfung. Lokale Teilresultvalidierung bleibt erhalten, die wissenschaftliche Exportgrenze ist streng. Initiale Bewertung, Start-/Endtrade-Regeln, gesamte ursprüngliche Portfoliofunktion und mathematische Funktionen bleiben unverändert.
+
+### Regressionen und Ergebnis
+
+Neu ist `tests/test_portfolio_state_validation.py` mit **22 Fällen**, davon 16 negative Gegenbeispiele und sechs positive Kontrollen: gefälschter Endwert 120 statt 106 für beide Strategien und Kapital 100 / `1e-200` / `1e200`; falsche Gewichte bei richtigem Vermögen; falsche Drift zwischen Entscheidungen und am finalen Datum; intern kapitalerhaltende falsche Vortradepositionen samt passenden Trades/Gewichten; verlorene Übernahme der Nachtradepositionen; unabhängige Handrechnung über zwei Jahresereignisse; unveränderter Kontext, beliebige Zeilenreihenfolge und erhaltene Gewichtstoleranz.
+
+Vor Produktionsänderungen wurden **406 Tests bestanden**. Nach Korrektur einer neuen Fixture, die bei Fixed Rebalancing fälschlich eine Makrotabelle voraussetzte, zeigten die neuen Tests auf 0.4.1 genau **16 erwartete Fehlschläge / 6 bestandene Normalfälle**. Nach dem ersten Codefix wurden **20 bestanden / 2 Fehler** gefunden: die zulässige leere Trade-Tabelle besitzt pandas-Objektdtype und benötigte für den Vergleich eine ausdrückliche Float-Sicht. Dieser technische Fehler wurde behoben, ohne Tests oder Toleranzen zu lockern. Die vollständige finale Quellsuite besteht mit **428 Tests**; die bisherigen 406 bleiben unverändert.
+
+Die beiden exakten 100 → 120-Gegenbeispiele werden nach dem Fix an vollständiger Validierung und Export abgelehnt: `rebalance history disagrees with the market portfolio state.` beziehungsweise `country_weighting history disagrees with the market portfolio state.` Kein Ausgabe- oder Staging-Verzeichnis wird dabei angelegt. Beide Reproduktionen wurden auch mit dem frisch installierten 0.4.2-Wheel ausgeführt und werden dort genauso abgelehnt.
+
+Alle vier bestehenden CLI-Demos wurden vor dem Fix mit 0.4.1 und nachher jeweils aus Checkout und Wheel mit 0.4.2 ausgeführt. Alle fachlichen CSV-Dateien und `data_quality.json` bleiben **bytegleich**; unabhängige skalare Rechnungen und Offline-/Hashkontrollen bestehen. Die normalen Endwerte bleiben 99 / 116.4284 / 96.8 / 117.667. Manifest-Version, Codehash, Run-ID und Zeitpunkt unterscheiden sich erwartungsgemäss. Paket-/Suite-Ergebnisse und Run-IDs stehen im aktuellen Abschnitt von [testing.md](testing.md).
+
+### Dateien, Verantwortung und verbleibende Grenzen
+
+Geändert für diesen Restfix: `src/engine/portfolio.py`, `src/engine/result.py`, `src/__init__.py`, `pyproject.toml` sowie die vier beauftragten Dokumentationen `blocker-fixes.md`, `implementation.md`, `testing.md`, `../ai-usage/ai-usage-log.md`. Neu: `tests/test_portfolio_state_validation.py`. Paket-/Quellversion konsistent **0.4.2**, Konfigurationsschema, Exportschemas und Abhängigkeiten unverändert.
+
+Autorvorgaben sind der begrenzte Restfix-Auftrag und die bestehende fachliche Zustandsfolge. Codex wählt ausschliesslich die gemeinsame Rekonstruktion als technische Prüfmethode, ergänzt Regressionen und dokumentiert die ausgeführten Kontrollen. Keine neue fachliche Entscheidung nötig. Die zusätzliche Validierung kostet Rechenzeit, führt aber keine zweite Strategieimplementierung oder neue Finanzformeln ein. Sie prüft Konsistenz mit dem gelieferten Kontext innerhalb der vorhandenen Toleranzen; die historische Wahrheit realer Daten bleibt eine gesonderte Studienvoraussetzung.
+
+Geschützte Dateien und historische Auditnachweise bleiben unverändert. Kein Commit oder Tag erstellt, kein v1.0-Freeze oder realer Hauptversuch. Dieser Auftrag endet nach dem verbleibenden EB-02-Konsistenzfix.

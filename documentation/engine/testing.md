@@ -3,7 +3,7 @@
 **Core-Prüfung:** 2026-10-03. **Plattform:** Windows, CPython 3.14.0.
 **Versionen:** Engine 0.1.0, NumPy 2.3.5, pandas 2.3.3, pytest 8.4.2; weitere Versionen siehe `requirements.lock`.
 
-**Aktueller Abschluss:** 2026-10-04, Engine 0.4.1: **406 Tests bestanden**, im Checkout und gegen das frisch installierte Wheel. Die älteren Abschnitte dokumentieren die damaligen Prüfläufe; die gezielten Blocker-Fixes und ihre Grenzen stehen im letzten Abschnitt.
+**Aktueller Abschluss:** 2026-10-04, Engine 0.4.2: **428 Tests bestanden**, im Checkout und gegen das frisch installierte Wheel. Die älteren Abschnitte dokumentieren die damaligen Prüfläufe; die gezielten Blocker-Fixes und der nach Review verbliebene EB-02-Konsistenzfix stehen in den letzten Abschnitten.
 
 ## Saubere Projektumgebung
 
@@ -420,3 +420,85 @@ Alle vorhandenen Ergebnisdateien ausser dem Manifest sind **bytegleich vor/nach 
 Diff einschliesslich neuer Dateien sowie `git diff --check` geprüft. SHA-256-Vergleich der 93 Ausgangsdateien bestätigt Änderungen ausschliesslich in den 13 freigegebenen bestehenden Dateien; neu sind nur die Regressionsdatei und `blocker-fixes.md`. Geschützte wissenschaftliche Inhalte, AGENTS.md, Entscheidungen, historische Auditdokumente, alte Tests, sämtliche Configs/Demodaten und Lock bleiben bytegleich. Das KI-Log wurde ausschliesslich angehängt; sein bisheriger Inhalt bleibt bytegleich erhalten.
 
 Keine neue fachliche Entscheidung nötig, kein Commit und kein Tag erstellt, kein v1.0-Freeze erklärt. SB-01 bis SB-07 und NB-01 bis NB-03 bleiben ausserhalb dieses Auftrags. Reale Daten, andere Plattformen, historische Wahrheit gelieferter Daten und fachliche Abnahme durch den Autor sind durch diese synthetischen technischen Prüfungen nicht bestätigt. Der Auftrag endet nach EB-01 bis EB-03.
+
+## Verbleibender EB-02-Portfoliozustandsfix (Engine 0.4.2)
+
+Der [Restfix-Auftrag](../ai-usage/prompts/2026-10-04-engine-v1-portfolio-state-validation-fix.md) schliesst ausschliesslich die nach dem ersten Fix-Review verbliebene fehlende Bindung der wirtschaftlichen Portfolio-Zustandsfolge an die Marktrenditen des Kontextes. Arbeitsbeginn sauber auf `78b7d34`; 96 versionierte Dateien per SHA-256 vor Änderungen gesichert. Ursachen, technische Lösung und Verantwortung stehen im letzten Abschnitt von [blocker-fixes.md](blocker-fixes.md).
+
+### Tatsächlich ausgeführte Tests
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q --basetemp=.venv/portfolio_state_fix/pytest-baseline
+.\.venv\Scripts\python.exe -m pytest -q tests/test_portfolio_state_validation.py --basetemp=.venv/portfolio_state_fix/pytest-counterexamples-before
+.\.venv\Scripts\python.exe -m pytest -q tests/test_portfolio_state_validation.py --tb=no --basetemp=.venv/portfolio_state_fix/pytest-counterexamples-confirmed
+.\.venv\Scripts\python.exe -m pytest -q tests/test_portfolio_state_validation.py --basetemp=.venv/portfolio_state_fix/pytest-new-after
+.\.venv\Scripts\python.exe -m pytest -q --basetemp=.venv/portfolio_state_fix/pytest-source-final
+```
+
+| Lauf | Ergebnis |
+|---|---|
+| Vor Änderungen, gesamte bestehende Suite | **406 passed in 74.62s** |
+| Neue Datei auf ungeändertem 0.4.1-Code | 17 failed / 5 passed in 4.16s; davon ein neuer Fixturefehler |
+| Nach Fixture-Korrektur, weiterhin vor Codefix | **16 failed / 6 passed in 3.35s**, fehlende Marktbindung bestätigt |
+| Erster Codefix | 20 passed / 2 failed in 7.99s; leere Trade-Tabelle im Vergleich korrigiert |
+| Vollständiger finaler Quellstand 0.4.2 | **428 passed in 101.11s** |
+| Bestätigt frisch installiertes Wheel 0.4.2 | **428 passed in 60.80s** |
+
+Die neue Fixture setzte zuerst auch für Fixed Rebalancing eine geladene Makrotabelle voraus; bei deaktivierter Länderstrategie ist `context.macro` korrekt `None`. Nur die neue Fixture/Kontextkontrolle wurde korrigiert. Die beiden späteren Codefehler betrafen die pandas-Objektdtypes einer korrekt leeren Trade-Tabelle; der Zahlenvergleich verwendet nun ausdrücklich Float-Arrays, auch bei null Zeilen. Alle bisherigen **406 Fälle und Testdateien bleiben unverändert**; hinzu kommen **22 Fälle** in `tests/test_portfolio_state_validation.py`, davon 16 negative und sechs positive Kontrollen. Warnungen bleiben Fehler, der bestehende Netzwerk-Guard bleibt aktiv.
+
+Die negativen Fälle passieren vor dem neuen Marktvergleich bewusst weiterhin die lokale Result-/GDP-Prüfung und die aus der manipulierten History neu berechnete Summary. Danach werden sowohl `validate_results(..., require_complete=True)` als auch `export_run()` separat auf Ablehnung geprüft, einschliesslich des fehlenden Ausgabeordners. Damit unterscheiden die Tests die neue Konsistenzsicherung von bereits vorhandenen Struktur-/Summary-Prüfungen.
+
+Abdeckung: gefälschtes Portfolio 120 statt 106 in beiden Strategien bei Kapital 100 / `1e-200` / `1e200`; gefälschte Gewichte bei korrektem Vermögen; Drift zwischen Entscheidungen und am Enddatum; kapitalerhaltende falsche Vortradepositionen mit algebraisch passenden Trades; fehlende Übernahme des Nachtradezustands. Positive Kontrollen rechnen beide Strategien über zwei Jahresereignisse unabhängig nach, prüfen unveränderten Kontext, vertauschte Tabellenzeilen und die erhaltene Gewichtstoleranz. Vorhandene normale Demo-/Kalender-/Nullgewicht-/GDP-/Revisionstests bestehen weiterhin.
+
+### Beide exakten Gegenbeispiele vor und nach Fix
+
+```powershell
+.\.venv\Scripts\python.exe .venv/portfolio_state_fix/reproduce.py before
+.\.venv\Scripts\python.exe .venv/portfolio_state_fix/reproduce.py after
+.\.venv\portfolio_state_fix\installed\Scripts\python.exe .venv/portfolio_state_fix/reproduce.py wheel
+```
+
+Der erste Aufruf wurde tatsächlich **vor** der Produktionsänderung ausgeführt. Die beiden anderen Aufrufe liefen nachher, der Wheel-Aufruf mit der frischen Installation aus der temporären Prüfablage. Ergebnisse liegen ausschliesslich unter ignoriertem `.venv/portfolio_state_fix/reproduce-{before,after,wheel}/`.
+
+| Fall | Vorher 0.4.1 | Nachher Checkout und Wheel 0.4.2 |
+|---|---|---|
+| Fixed Rebalancing: A 100 → 110, B 100 → 100, Ziele 60/40, falsches Portfolio 100 → 120 | Vollständige Validierung und Export akzeptieren falschen Endwert 120 statt 106 | History widerspricht dem Marktportfolio; Validierung und Export abgelehnt, kein Ausgabeordner |
+| Country-Weighting: gleiche Märkte, gültige historische GDP-Ziele 60/40, falsches Portfolio 100 → 120 | Vollständige Validierung und Export akzeptieren bei unveränderter GDP-Provenienz | Derselbe Konsistenzfehler, Validierung und Export abgelehnt, kein Ausgabeordner |
+
+Korrekte Positionen unabhängig 66/40 und Wert 106. Die aus der falschen History neu berechnete Summary besitzt tatsächlich Endwert 120 und Rendite 20 %, Drawdown 0; die Ablehnung stammt deshalb aus der zusätzlichen Marktzustandsbindung. Alle drei Kontrollprogramm-Aufrufe enden erfolgreich, weil sie das jeweilige erwartete Vorher-/Nachherverhalten ausdrücklich kontrollieren.
+
+### Paketbau und frische Prüfung
+
+```powershell
+.\.venv\Scripts\python.exe -m pip wheel --no-cache-dir --disable-pip-version-check --no-deps --wheel-dir .venv/portfolio_state_fix/wheels .
+.\.venv\Scripts\python.exe -m venv .venv/portfolio_state_fix/installed
+.\.venv\portfolio_state_fix\installed\Scripts\python.exe -m pip install --no-cache-dir --disable-pip-version-check -c requirements.lock .venv/portfolio_state_fix/wheels/maturarbeit_engine-0.4.2-py3-none-any.whl pytest==8.4.2
+.\.venv\portfolio_state_fix\installed\Scripts\python.exe -m pip check
+.\.venv\Scripts\python.exe -m pip install --no-cache-dir --disable-pip-version-check --no-deps -e .
+.\.venv\Scripts\python.exe -m pip check
+```
+
+Alle Build-/Installationsbefehle erfolgreich; beide endgültigen Paketprüfungen melden **No broken requirements found.** Wheel `maturarbeit_engine-0.4.2-py3-none-any.whl`, **29873 Bytes**, SHA-256 **`397101f49ed4d2390fe38801dc716f6311e9882f15551a117df6d1a3c4abb095`**. Die frische Umgebung hat `include-system-site-packages = false`; Import- und Distributionsversion sind beide 0.4.2. Geprüfter Importpfad: `.venv/portfolio_state_fix/installed/Lib/site-packages/maturarbeit_engine/__init__.py`. Keine globale Installation und keine Abhängigkeits-/Lockänderung.
+
+Ein zu früh gestarteter erster Wheel-Testaufruf lief noch während der Installation und scheiterte mit sieben `ModuleNotFoundError` bei der Sammlung in 1.18s. Nach ausdrücklich bestätigtem Installationsabschluss und Import-/Versionsprüfung wurde die komplette Suite erfolgreich wiederholt. Kein Engine- oder Testcode wurde wegen dieses Aufruffehlers geändert. Der erfolgreiche Aufruf erfolgte aus `.venv/portfolio_state_fix` mit dem installierten Interpreter und absoluten Pfaden zu Tests, `pyproject.toml` und der frischen Ablage `pytest-wheel-confirmed`.
+
+Geprüfte Plattform weiterhin Windows / CPython 3.14.0, NumPy 2.3.5, pandas 2.3.3, pytest 8.4.2. Seit dem finalen Quell-/Wheel-Stand wurden nur Dokumentation und lokale Kontrollhilfen geändert.
+
+### Vier fachliche Demo-Regressionen
+
+Alle vier vorhandenen Konfigurationen wurden vor Änderungen unter 0.4.1 und nachher jeweils unter Checkout und Wheel 0.4.2 tatsächlich mit der CLI ausgeführt. Die lokale Kontrolle `.venv/portfolio_state_fix/check_demos.py` verwendet die vorherige unabhängige skalare Kontrollrechnung, Hashprüfung und einen Socket-/DNS-Guard in allen acht CLI-Unterprozessen. Alle nachherigen CLI-Runs Exit 0.
+
+| Demo | Ausgangsrun 0.4.1 unter `outputs/runs/` | Finaler Checkout | Finales Wheel |
+|---|---|---|---|
+| Buy-and-Hold | `synthetic_buy_hold-603668f1469f4f46a0febb17da1db9f8` | `synthetic_buy_hold-f0aad12a805f4395be473d606f4555ef` | `synthetic_buy_hold-2aa560015ea6421db48705ec918971d5` |
+| Rebalancing | `synthetic_rebalance-4e5e52033be84a37adcdfbdab67f650f` | `synthetic_rebalance-4a7c27b46b984889b1fe035be812d53c` | `synthetic_rebalance-3bd88c68d2ff4db9b29f7ec99e288f64` |
+| Trend | `synthetic_trend-5275bcac3b15451d95048388b94e696f` | `synthetic_trend-7d353daebd864a99961613e63f56b53f` | `synthetic_trend-a74a5c24e1344fda92430505aeec8d8b` |
+| Country-Weighting | `synthetic_country_weighting-f6a055f25a6e44b5b688201218ff84a6` | `synthetic_country_weighting-fd2a8ed2a8db49be92b46201ef30ef53` | `synthetic_country_weighting-ddacead92b02443ba9da410c873ffa9c` |
+
+Sämtliche CSV-Dateien und `data_quality.json` sind bytegleich vor/nach Fix und zwischen Checkout/Wheel. Alle Strategie-Verläufe, Summary-Werte, Drawdowns, Signale, GDP-Entscheidungen und Trades stimmen mit den unabhängigen Kontrollen überein. Endwerte weiterhin 99 / 116.4284 / 96.8 / 117.667. Input-/Output-/Quellcodehashes und Engineversion 0.4.2 geprüft; normale Versions-/Run-/Code-Provenienzänderungen im Manifest sind erwartbar.
+
+### Umfang und Abschlusskontrolle
+
+96 Ausgangsdateien per SHA-256 abgeglichen: nur die acht beauftragten bestehenden Dateien geändert, eine neue Regressionsdatei ergänzt. Geschützte Notebooks, Methodik, Bibliographie, Buchkapitel, Entscheidungen und beide historischen Auditdokumente bleiben bytegleich, ebenso AGENTS.md, mathematische Funktionen, alle bisherigen Tests, Configs/Demodaten und Lock. AST-Vergleich bestätigt unverändertes `run_annual_portfolio()`; ausschliesslich der gemeinsame Validator wurde daneben ergänzt. Das KI-Log wird ausschliesslich angehängt, bisherige Bytes bleiben erhalten. Diff einschliesslich neuer Datei, Whitespace und Dokumentationslinks geprüft.
+
+Keine neue fachliche Entscheidung erforderlich. Dies ist ausschliesslich die Schliessung der nach dem ersten Fix-Review verbliebenen EB-02-Konsistenzlücke. Keine SB-/NB-Bearbeitung, Commit-/Tag-Erstellung, neue Strategie, reale Daten oder Versuchsparameter; keine v1.0-Freigabe. Grenzen und Verantwortung siehe [blocker-fixes.md](blocker-fixes.md). Danach endet der Auftrag.
