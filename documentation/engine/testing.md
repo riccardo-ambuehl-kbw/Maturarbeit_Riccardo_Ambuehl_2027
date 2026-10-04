@@ -3,7 +3,7 @@
 **Core-Prüfung:** 2026-10-03. **Plattform:** Windows, CPython 3.14.0.
 **Versionen:** Engine 0.1.0, NumPy 2.3.5, pandas 2.3.3, pytest 8.4.2; weitere Versionen siehe `requirements.lock`.
 
-**Aktueller Abschluss:** 2026-10-04, Engine 0.4.2: **428 Tests bestanden**, im Checkout und gegen das frisch installierte Wheel. Die älteren Abschnitte dokumentieren die damaligen Prüfläufe; die gezielten Blocker-Fixes und der nach Review verbliebene EB-02-Konsistenzfix stehen in den letzten Abschnitten.
+**Aktueller Abschluss:** 2026-10-04, Engine 0.4.3: **441 Tests bestanden**, im Checkout und gegen das frisch installierte Wheel. Die älteren Abschnitte dokumentieren die damaligen Prüfläufe; gezielte Blocker-Fixes, EB-02-Konsistenzfix und CSV-NUL-Fix NEW-EB-01 stehen in den letzten Abschnitten.
 
 ## Saubere Projektumgebung
 
@@ -502,3 +502,75 @@ Sämtliche CSV-Dateien und `data_quality.json` sind bytegleich vor/nach Fix und 
 96 Ausgangsdateien per SHA-256 abgeglichen: nur die acht beauftragten bestehenden Dateien geändert, eine neue Regressionsdatei ergänzt. Geschützte Notebooks, Methodik, Bibliographie, Buchkapitel, Entscheidungen und beide historischen Auditdokumente bleiben bytegleich, ebenso AGENTS.md, mathematische Funktionen, alle bisherigen Tests, Configs/Demodaten und Lock. AST-Vergleich bestätigt unverändertes `run_annual_portfolio()`; ausschliesslich der gemeinsame Validator wurde daneben ergänzt. Das KI-Log wird ausschliesslich angehängt, bisherige Bytes bleiben erhalten. Diff einschliesslich neuer Datei, Whitespace und Dokumentationslinks geprüft.
 
 Keine neue fachliche Entscheidung erforderlich. Dies ist ausschliesslich die Schliessung der nach dem ersten Fix-Review verbliebenen EB-02-Konsistenzlücke. Keine SB-/NB-Bearbeitung, Commit-/Tag-Erstellung, neue Strategie, reale Daten oder Versuchsparameter; keine v1.0-Freigabe. Grenzen und Verantwortung siehe [blocker-fixes.md](blocker-fixes.md). Danach endet der Auftrag.
+
+## CSV-NUL-Fix NEW-EB-01 vom 2026-10-04 (Engine 0.4.3)
+
+Auftrag: [vollständiger CSV-NUL-Prompt](../ai-usage/prompts/2026-10-04-engine-v1-csv-nul-fix.md), ausschliesslich NEW-EB-01. Akzeptierter Code-Commit `2020d5377449e23b1a9e7c36bb0caa1c3a9ebf44` / 0.4.2; sauberer Arbeitsbeginn `2861efc2b490c40d382ea495df8cc3b317034f02`, dazwischen nur Dokumentation. Plattform weiterhin Windows / CPython 3.14.0, NumPy 2.3.5, pandas 2.3.3, pytest 8.4.2 und alle transitiven Versionen aus dem unveränderten `requirements.lock`.
+
+### Ausgeführte Regressionen
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q --basetemp .venv/csv_nul_fix/pytest-baseline
+.\.venv\Scripts\python.exe -m pytest -q tests/test_csv_nul.py --tb=short --basetemp .venv/csv_nul_fix/pytest-new-before-corrected
+.\.venv\Scripts\python.exe -m pytest -q tests/test_csv_nul.py --basetemp .venv/csv_nul_fix/pytest-new-after
+.\.venv\Scripts\python.exe -m pytest -q --basetemp .venv/csv_nul_fix/pytest-source
+```
+
+| Lauf | Ergebnis |
+|---|---|
+| Bestehende Suite vor Änderungen unter 0.4.2 | **428 passed in 78.90s** |
+| Neue Datei vor Codefix | **11 failed, 2 passed in 1.48s** |
+| Neue Datei nach Codefix | **13 passed in 0.87s** |
+| Gesamte Quellsuite 0.4.3 | **441 passed in 96.52s** |
+| Gesamte Suite gegen frisches Wheel 0.4.3 | **441 passed in 79.55s** |
+
+Der erste neue positive Test hatte einen falschen erwarteten Endwert 103.88. Vor dem Produktionsfix wurde allein diese neue Kontrollrechnung berichtigt: ohne Jahresereignis bleiben die initialen Stückzahlen erhalten, also `60 × 0.99 + 40 × 1.10 = 103.4`. Danach bestehen beide positiven Fälle bereits unter unverändertem 0.4.2; die elf verbleibenden Fehler belegen ausschliesslich, dass NUL-Inhalt pandas erreicht. Vorhandene Tests oder Engine-Regeln wurden dafür nicht geändert.
+
+`tests/test_csv_nul.py` ergänzt 13 Fälle: die acht Pflichtfeldvarianten für alle vier Dateiklassen, den exakten `1\x00e2`-Vollrun, NUL im BOM-Header und in einer ungenutzten letzten Zusatzspalte sowie zwei positive UTF-8-/BOM-Vollruns. Negative Tests blockieren pandas ausdrücklich, verlangen `DataValidationError` mit Dateiname, unveränderte Eingabebytes und keinen Ausgabe-/Staging-Ordner. Positive Tests prüfen vollständige unveränderte Textfelder, benannte Zusatzspalten, gequotete Kommas/Zeilenumbrüche, RangeIndex, Original-SHA und unabhängig berechnetes Vermögen 100/106/103.4.
+
+Alle bisherigen **428 Fälle und Testdateien bleiben bytegleich**, einschliesslich der 84 Fälle aus `test_blocker_fixes.py` und `test_portfolio_state_validation.py`. EB-01-/EB-02-Logik unverändert: initialer/jährlicher positiver Allokationsunterlauf, vollständiger Drawdown, Summary/Status, Strategie-Set, Buy-and-Hold-Assetbindung, Fixed-Config-/Marktportfolio- und Country-GDP-/Marktportfoliobindung weiterhin geprüft. Warnungen bleiben Fehler; der bestehende Netzwerk-Guard bleibt aktiv.
+
+### Original-Gegenbeispiele gegen Checkout und Wheel
+
+```powershell
+.\.venv\Scripts\python.exe .venv/csv_nul_fix/reproduce.py source
+.\.venv\csv_nul_fix\installed\Scripts\python.exe .venv/csv_nul_fix/reproduce.py wheel
+```
+
+Das temporäre Kontrollprogramm kopiert exakt die acht Eingaben aus dem historischen Re-Audit und dessen zusätzlichen Minimalfall, ohne alte Dateien/Runs zu ändern. Markt `100.0\x00INVALID`, Währung `CHF\x00INVALID`, RF `0.001\x00INVALID`, Makro `60\x00INVALID`, jeweils gequotet/ungequotet; Minimalfall Markt `1\x00e2`, danach 110. **Alle neun Fälle je Installation** am Leser und vollständigen Runner mit `DataValidationError` abgelehnt. pandas wird nicht erreicht, sämtliche Eingabe-/Configbytes bleiben gleich, kein Ausgabeordner. Ergebnisse in ignoriertem `.venv/csv_nul_fix/nul-results-{source,wheel}.json`; keine Präfixinterpretation oder Reparatur.
+
+### Paketbau und bestätigte frische Installation
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install --no-deps -e .
+.\.venv\Scripts\python.exe -m pip wheel --no-cache-dir --disable-pip-version-check --no-deps --wheel-dir .venv/csv_nul_fix/wheels .
+.\.venv\Scripts\python.exe -m venv .venv/csv_nul_fix/installed
+.\.venv\csv_nul_fix\installed\Scripts\python.exe -m pip install --no-cache-dir --disable-pip-version-check -c requirements.lock .venv/csv_nul_fix/wheels/maturarbeit_engine-0.4.3-py3-none-any.whl pytest==8.4.2
+.\.venv\Scripts\python.exe -m pip check
+.\.venv\csv_nul_fix\installed\Scripts\python.exe -m pip check
+```
+
+Alle Befehle erfolgreich; beide Paketprüfungen: **No broken requirements found.** Wheel **29899 Bytes**, SHA-256 **`bafe83a8edbba129e23894c4e0b70a57f8e4b6465bce0fff1dd8e9f79159299c`**. Neue Umgebung mit `include-system-site-packages = false`, Import-/Distributionsversion jeweils **0.4.3**, Import aus `.venv/csv_nul_fix/installed/Lib/site-packages/maturarbeit_engine/__init__.py`. Jede Pythondatei im Wheel ist bytegleich zum aktuellen `src/`. Keine globale Installation, keine Änderung am Lock.
+
+Die vollständige Wheel-Suite wurde erst nach bestätigtem Installationsabschluss und Importprüfung aus `.venv/csv_nul_fix` gestartet:
+
+```powershell
+installed/Scripts/python.exe -m pytest -q -c C:/Users/modic/Documents/GitHub/Maturarbeit_Engine/pyproject.toml C:/Users/modic/Documents/GitHub/Maturarbeit_Engine/tests --basetemp C:/Users/modic/Documents/GitHub/Maturarbeit_Engine/.venv/csv_nul_fix/pytest-wheel
+```
+
+### Vier Demo-Vergleiche mit dem frischen Vor-Fix-Stand
+
+Alle vier Originalkonfigurationen vor Produktionsänderung unter 0.4.2 ausgeführt, danach jeweils als CLI aus Checkout und Wheel 0.4.3. Temporäre Kontrollen `before_demos.py`, `check_demos.py` und `extra_demo_checks.py` liegen ausschliesslich unter ignoriertem `.venv/csv_nul_fix/`. Socket-/DNS-Guard in allen Demo-Unterprozessen, Exit-Code jeweils 0; unabhängige skalare Portfolio-/Rendite-/Drawdown-/Summary-, RF-Intervall-, Trade-, SMA-/Lag-, GDP-As-of-/Revisions- und Manifest-/Hashkontrollen bestanden.
+
+| Demo / Endwert | Vor Fix 0.4.2 unter `outputs/runs/` | Checkout 0.4.3 | Wheel 0.4.3 |
+|---|---|---|---|
+| Buy-and-Hold / **99** | `synthetic_buy_hold-06d696ef84f14b07a5b57f4146ca7125` | `synthetic_buy_hold-9f54378fbdb04e5c9ec0dc4cbf08b565` | `synthetic_buy_hold-3286d9d90e634d32996ba754ae3cc522` |
+| Rebalancing / **116.4284** | `synthetic_rebalance-52a1f4e5adfd4f269693a2c7460c93a2` | `synthetic_rebalance-7fbad25c5d974108a3d7b77dbe495810` | `synthetic_rebalance-50438b6aaef94b44988e597893f030d1` |
+| Trend / **96.8** | `synthetic_trend-7d0bf667a66646199d6144097f267c77` | `synthetic_trend-b6453c7241d8408dbae7de3cfeb7cd57` | `synthetic_trend-7b65ebc6f91147b997c39bcc63b05b74` |
+| Country-Weighting / **117.667** | `synthetic_country_weighting-e24885dedc804955a68eac9e791d6dbe` | `synthetic_country_weighting-787c626929f5415cbcc05cf51c062710` | `synthetic_country_weighting-ec2fb66a327a47d68bf3c73048fea8ea` |
+
+**Alle CSVs und `data_quality.json` bytegleich** vor/nach Fix und zwischen Checkout/Wheel. Ausschliesslich erwartete Manifest-/Versions-/Code-/Run-Provenienz weicht ab; Quellmanifest enthält unveränderten HEAD und `dirty=true`, Wheelmanifest markiert Git als nicht verfügbar.
+
+### Abschliessende Umfangskontrolle
+
+100 Ausgangsdateien per SHA-256 geprüft: sieben erlaubte bestehende Dateien geändert, `tests/test_csv_nul.py` neu, alle übrigen 93 bytegleich. Insbesondere EB-01-/EB-02-Code, bestehende Tests, Configs/Demos, `src/funktionen.py`, Lock, Entscheidungen, wissenschaftliche Dateien und alle drei historischen Auditnachweise unverändert. `normalize.py` ist nach Entfernen der beiden Guard-Zeilen per AST identisch zum akzeptierten Code. Bisherige KI-Logbytes erhalten; Diff, neue Datei, Whitespace und Dokumentationslinks kontrolliert. Keine neue fachliche Entscheidung, SB-/NB-Bearbeitung, Commit-/Tag-Erstellung oder v1.0-Freeze-Erklärung. Auftrag nach Behebung und Prüfung von NEW-EB-01 abgeschlossen.

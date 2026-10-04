@@ -1,6 +1,6 @@
 # Engine v1 – Core, Rebalancing, SMA-Trendfolge und BIP-Ländergewichtung
 
-**Stand:** 2026-10-04, Engine 0.4.2 / weiterhin Konfigurationsschema 1.0. Die gezielten Sicherungen EB-01 bis EB-03 samt nach dem ersten Review verbliebenem Portfoliozustandsfix sind in den letzten Abschnitten und in [blocker-fixes.md](blocker-fixes.md) dokumentiert.
+**Stand:** 2026-10-04, Engine 0.4.3 / weiterhin Konfigurationsschema 1.0. Die gezielten Sicherungen EB-01 bis EB-03, der Portfoliozustandsfix und der CSV-NUL-Fix NEW-EB-01 sind in den letzten Abschnitten und in [blocker-fixes.md](blocker-fixes.md) dokumentiert.
 **Aufträge:** [Core](../ai-usage/prompts/2026-10-02-engine-v1-core-implementation.md), [Multi-Asset/Rebalancing](../ai-usage/prompts/2026-10-04-engine-v1-rebalancing-implementation.md), [Trendfolge](../ai-usage/prompts/2026-10-04-engine-v1-trend-implementation.md) und [BIP-Ländergewichtung](../ai-usage/prompts/2026-10-04-engine-v1-country-weighting-implementation.md).
 **Fachliche Grundlage:** Analyse 5.3–5.9, Theorie und die vom Autor verbindlich festgelegten [OD-01 bis OD-13](decisions.md).
 
@@ -374,3 +374,11 @@ Bei `require_complete=True` rekonstruiert `validate_market_portfolio_state()` f�
 Bestehende Kapital-, Rendite- und Gewichtstoleranzen bleiben erhalten. Der Vergleich richtet Allokations-/Tradezeilen nach Datum/Asset aus und unterstützt ereignislose leere Trade-Tabellen. Lokale Teilresultprüfung bleibt möglich; Runner und Export nutzen weiterhin die strenge vollständige Grenze vor jeder Ablage. Ein Aufrufimport verhindert einen Modulzyklus; der rekonstruierende Portfolioaufruf verwendet ausschliesslich lokale Resultvalidierung und verändert weder Kontext noch Makroentscheidungen.
 
 Paketversion 0.4.2, unveränderte mathematische Funktionen, Portfolio-Ausführung, fachliche Regeln, Schemas und Abhängigkeiten. 22 zusätzliche Regressionen und vier bytegleiche Demo-Vergleiche siehe [testing.md](testing.md); Gegenbeispiele und Grenzen siehe [blocker-fixes.md](blocker-fixes.md). Keine neue fachliche Entscheidung und kein Commit.
+
+## Zentraler CSV-NUL-Fix (Engine 0.4.3)
+
+Der [gezielte Folgeauftrag](../ai-usage/prompts/2026-10-04-engine-v1-csv-nul-fix.md) behebt ausschliesslich NEW-EB-01: pandas konnte trotz korrekter CSV-Feldbreite am eingebetteten NUL still kürzen. `read_csv_snapshot()` durchsucht nun den gesamten unveränderten Bytesnapshot unmittelbar nach dem Lesen. Ein NUL-Byte irgendwo in der Datei führt vor Dekodierung und Parsing zu `DataValidationError` mit Dateiname. Dies gilt gemeinsam für Markt, Metadaten, Risk-Free und Makro, auch für Header oder unbenutzte Zusatzspalten. Kein Feld wird repariert oder teilweise interpretiert; kein Run wird veröffentlicht.
+
+NUL-freie UTF-8-/BOM-Dateien werden unverändert weitergegeben. Bestehende strenge Header-, Quote- und Feldbreitenprüfung, gequotete Kommas/Zeilenumbrüche, benannte Zusatzspalten, pandas-RangeIndex und Originalbyte-Hashes bleiben erhalten. Keine Neuentwicklung des CSV-Parsers, Änderung an EB-01/EB-02, Finanzformeln, Konfiguration, Ergebnisformaten oder Abhängigkeiten. Technische Wahl durch Codex: zwei zentrale Guard-Zeilen; vollständige NUL-Ablehnung ist ausdrücklich vom Autor vorgegeben und benötigt keine neue fachliche Entscheidung.
+
+Paket- und Quellversion konsistent 0.4.3. 13 neue Regressionen, alle 441 Tests im Checkout und frischen Wheel, neun Original-NUL-Gegenbeispiele je Installation sowie vier unveränderte Demos geprüft; Details in [testing.md](testing.md) und [blocker-fixes.md](blocker-fixes.md). Historische Auditnachweise, Entscheidungen und wissenschaftliche Inhalte bleiben bytegleich. Kein Commit oder Tag erstellt.

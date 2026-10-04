@@ -10,6 +10,8 @@ from ..funktionen import sma_signal
 
 def read_csv_snapshot(path: Path, kind: str):
     content = path.read_bytes()
+    if b"\x00" in content:
+        raise DataValidationError(f"CSV contains NUL byte: {path.name}.")
     text = content.decode("utf-8-sig")
     try:
         reader = csv.reader(StringIO(text), strict=True)

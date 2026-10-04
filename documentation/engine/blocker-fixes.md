@@ -1,6 +1,6 @@
 # Engine – gezielte Korrekturen EB-01 bis EB-03
 
-**Aktueller Stand:** Engine 0.4.2. Der erste Fix-Bericht unten betrifft 0.4.1; die nach dessen Review verbliebene EB-02-Restlücke und ihr gezielter Konsistenzfix sind im letzten Abschnitt dokumentiert.
+**Aktueller Stand:** Engine 0.4.3. Die datierten Abschnitte dokumentieren die ursprünglichen Fixes 0.4.1, den EB-02-Konsistenzfix 0.4.2 und zuletzt ausschliesslich den CSV-NUL-Fix NEW-EB-01 aus dem unabhängigen Re-Audit.
 
 **Datum:** 2026-10-04. **Auftrag:** [vollständiger Blocker-Prompt](../ai-usage/prompts/2026-10-04-engine-v1-blocker-fixes.md). **Fachliche Grundlage:** AGENTS.md und unveränderte [OD-01 bis OD-13](decisions.md).
 
@@ -124,3 +124,34 @@ Geändert für diesen Restfix: `src/engine/portfolio.py`, `src/engine/result.py`
 Autorvorgaben sind der begrenzte Restfix-Auftrag und die bestehende fachliche Zustandsfolge. Codex wählt ausschliesslich die gemeinsame Rekonstruktion als technische Prüfmethode, ergänzt Regressionen und dokumentiert die ausgeführten Kontrollen. Keine neue fachliche Entscheidung nötig. Die zusätzliche Validierung kostet Rechenzeit, führt aber keine zweite Strategieimplementierung oder neue Finanzformeln ein. Sie prüft Konsistenz mit dem gelieferten Kontext innerhalb der vorhandenen Toleranzen; die historische Wahrheit realer Daten bleibt eine gesonderte Studienvoraussetzung.
 
 Geschützte Dateien und historische Auditnachweise bleiben unverändert. Kein Commit oder Tag erstellt, kein v1.0-Freeze oder realer Hauptversuch. Dieser Auftrag endet nach dem verbleibenden EB-02-Konsistenzfix.
+
+## NEW-EB-01 – CSV-NUL-Fix (Engine 0.4.3, 2026-10-04)
+
+**Auftrag:** [vollständiger CSV-NUL-Prompt](../ai-usage/prompts/2026-10-04-engine-v1-csv-nul-fix.md), ausschliesslich NEW-EB-01 aus [blocker-reaudit.md](blocker-reaudit.md). Akzeptierter Code ist `2020d5377449e23b1a9e7c36bb0caa1c3a9ebf44`, Version 0.4.2. Arbeitsbeginn war sauber auf `2861efc2b490c40d382ea495df8cc3b317034f02`; die dazwischenliegenden Commits ändern nur Dokumentation. Die drei historischen Auditdateien bleiben unverändert.
+
+**Ursache:** Die bestehende `csv.reader`-Prüfung erkennt Strukturfehler, lehnt aber eingebettete NUL-Zeichen nicht ab. Der nachfolgende pandas-C-Parser kürzt solche Felder am NUL still. Damit erreicht beispielsweise `1\x00e2` als `1` die numerische Validierung. Der historische Minimalrun veröffentlichte Vermögen 100 → 11000 und Qualitätsstatus `passed`, obwohl der Originalwert ungültig war. Derselbe Fehler wurde für Pflichtfelder aller vier Eingabeklassen, jeweils gequotet und ungequotet, nachgewiesen.
+
+**Korrektur:** `read_csv_snapshot()` prüft unmittelbar nach `path.read_bytes()` den unveränderten Gesamtinhalt mit `b"\x00" in content`. Bei einem Treffer wirft es `DataValidationError("CSV contains NUL byte: <Dateiname>.")`, bevor Dekodierung, CSV-Strukturprüfung oder pandas aufgerufen werden. Die vollständige Datei wird verworfen; keine Reparatur, Ersetzung, Entfernung oder Präfixinterpretation. Reguläre UTF-8-/BOM-Bytes und ihre SHA-256 bleiben unverändert. Strukturprüfung, `index_col=False`, Finanzformeln und Ergebnisvalidierung bleiben erhalten.
+
+### Acht Original-Gegenbeispiele und exakter Minimalfall
+
+Die Originaldateien aus dem Re-Audit wurden bytegleich in neue lokale Prüfablagen kopiert; keine alte Eingabe oder alter Run wurde überschrieben. Jeder Fall wurde im Checkout und gegen das frisch installierte Wheel 0.4.3 separat am Leser und im vollständigen Run geprüft.
+
+| Pflichtfeld | Originalinhalt | Ungequotet | Gequotet |
+|---|---|---|---|
+| market / performance_value | `100.0\x00INVALID` | DataValidationError | DataValidationError |
+| assets / currency | `CHF\x00INVALID` | DataValidationError | DataValidationError |
+| risk_free / period_return | `0.001\x00INVALID` | DataValidationError | DataValidationError |
+| macro / value | `60\x00INVALID` | DataValidationError | DataValidationError |
+
+Das exakte zusätzliche Marktbeispiel `performance_value = 1\x00e2`, danach 110, scheitert ebenfalls mit `DataValidationError`. Alle neun Fälle je Installation: pandas nicht erreicht, Eingabebytes unverändert, kein Ausgabe- oder Staging-Verzeichnis. NEW-EB-01 ist damit im geprüften 0.4.3-Stand technisch behoben; der historische Re-Audit-Befund wird nicht umgeschrieben.
+
+### Regression, Paket und Umfang
+
+Neu: `tests/test_csv_nul.py` mit 13 Fällen: acht Pflichtfeldvarianten, exakter Minimalrun, NUL im BOM-Header bzw. in einer ungenutzten Zusatzspalte und zwei positive UTF-8-/BOM-Vollruns mit gequoteten Kommas, Zeilenumbrüchen und benannten Zusatzspalten. Vor dem Codefix: 11 negative Fälle scheitern erwartungsgemäss, zwei positive bestehen; nachher alle 13 bestanden. Die 428 vorhandenen Fälle und Testdateien bleiben unverändert. Vollständiger Checkout: **441 passed in 96.52s**; frisches Wheel: **441 passed in 79.55s**.
+
+Wheel 0.4.3 frisch gebaut und in isolierter lokaler Umgebung mit unverändertem `requirements.lock` installiert, Import aus `site-packages`, Import-/Distributionsversion 0.4.3, beide `pip check` erfolgreich. Alle Wheel-Pythondateien stimmen bytegleich mit `src/` überein. Vier Demos vor Fix unter 0.4.2, nachher jeweils unter Checkout und Wheel: Endwerte **99 / 116.4284 / 96.8 / 117.667**, sämtliche CSVs und `data_quality.json` bytegleich. Offline-, skalare Portfolio-/Kennzahlen-, Trade-, SMA-, GDP- und Hashkontrollen erfolgreich; konkrete Befehle und Run-IDs siehe [testing.md](testing.md).
+
+EB-01-/EB-02-Implementierungen und sämtliche vorhandenen Tests bleiben bytegleich: positiver Allokationsunterlauf, vollständiger Drawdown, Summary/Status, Strategie-Set, Buy-and-Hold-Configbindung sowie Fixed-/Country-Marktportfolio- und GDP-Bindung weiterhin geprüft. AST-Vergleich von `normalize.py` nach Entfernen der beiden neuen Guard-Zeilen bestätigt identischen bisherigen Code.
+
+Geändert: `src/data/normalize.py`, Versionsangaben in `src/__init__.py` und `pyproject.toml`, neue Testdatei und die vier beauftragten Dokumentationen. Alle 100 Ausgangsdateien per SHA-256 geprüft; die übrigen 93, einschliesslich Entscheidungen, wissenschaftlicher Dateien, historischer Audits, bestehender Tests, Configs, mathematischer Funktionen und Lock, bleiben bytegleich. Bisherige KI-Logbytes bleiben erhalten. Autorvorgabe ist die ausdrückliche vollständige NUL-Ablehnung; Codex wählt die zentrale Byteprüfung und ergänzt technische Nachweise. Keine neue fachliche Entscheidung, keine SB-/NB-Bearbeitung, kein Commit oder Tag und keine v1.0-Freeze-Erklärung. Der Auftrag endet hier.
