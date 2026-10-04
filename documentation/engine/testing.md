@@ -3,7 +3,7 @@
 **Core-Prüfung:** 2026-10-03. **Plattform:** Windows, CPython 3.14.0.
 **Versionen:** Engine 0.1.0, NumPy 2.3.5, pandas 2.3.3, pytest 8.4.2; weitere Versionen siehe `requirements.lock`.
 
-**Aktueller Abschluss:** 2026-10-04, Engine 0.4.3: **441 Tests bestanden**, im Checkout und gegen das frisch installierte Wheel. Die älteren Abschnitte dokumentieren die damaligen Prüfläufe; gezielte Blocker-Fixes, EB-02-Konsistenzfix und CSV-NUL-Fix NEW-EB-01 stehen in den letzten Abschnitten.
+**Aktueller Abschluss:** 2026-10-04, Engine **1.0.0**: **441 Quelltests und 441 Wheeltests bestanden**, frisches Wheel, beide Paketprüfungen und acht Offline-CLI-Demos erfolgreich. Finaler [Release-Testnachweis](#release-freeze-v100-vom-2026-10-04) und [Release-/Freeze-Dokument](release-v1.0.md); die nachfolgenden historischen Protokolle bleiben erhalten.
 
 ## Saubere Projektumgebung
 
@@ -574,3 +574,67 @@ Alle vier Originalkonfigurationen vor Produktionsänderung unter 0.4.2 ausgefüh
 ### Abschliessende Umfangskontrolle
 
 100 Ausgangsdateien per SHA-256 geprüft: sieben erlaubte bestehende Dateien geändert, `tests/test_csv_nul.py` neu, alle übrigen 93 bytegleich. Insbesondere EB-01-/EB-02-Code, bestehende Tests, Configs/Demos, `src/funktionen.py`, Lock, Entscheidungen, wissenschaftliche Dateien und alle drei historischen Auditnachweise unverändert. `normalize.py` ist nach Entfernen der beiden Guard-Zeilen per AST identisch zum akzeptierten Code. Bisherige KI-Logbytes erhalten; Diff, neue Datei, Whitespace und Dokumentationslinks kontrolliert. Keine neue fachliche Entscheidung, SB-/NB-Bearbeitung, Commit-/Tag-Erstellung oder v1.0-Freeze-Erklärung. Auftrag nach Behebung und Prüfung von NEW-EB-01 abgeschlossen.
+
+## Release-/Freeze v1.0.0 vom 2026-10-04
+
+Auftrag: [vollständiger Release-/Freeze-Prompt](../ai-usage/prompts/2026-10-04-engine-v1-release-freeze.md). Der erfolgreiche 0.4.3-[Freeze-Re-Audit](freeze-reaudit.md) ist in Commit `27470204e3805a18a11f6630813b982b3174ea0d` enthalten. Sauberer Beginn auf Branch `engine-v1`, HEAD `04cab0673bfe48f733b3e50dd531ee282ff16a88`; gegenüber diesem Re-Audit-Commit nur der Release-Prompt hinzugefügt. Änderungen ausschliesslich Versionswerte 0.4.3 → 1.0.0 und erlaubte Dokumentation. Keine Engine-Logik, Testdatei, Config, Demodatei oder Abhängigkeitsbindung geändert.
+
+### Tatsächlich ausgeführte Befehle
+
+Aus dem Repository-Stamm, PowerShell:
+
+```powershell
+.venv/Scripts/python.exe -m pip install --no-cache-dir --disable-pip-version-check --no-deps -e .
+.venv/Scripts/python.exe -m pip check
+.venv/Scripts/python.exe -m pytest -q --basetemp .venv/release_v1/pytest-source
+.venv/Scripts/python.exe -m pip wheel --no-cache-dir --disable-pip-version-check --no-deps --wheel-dir .venv/release_v1/wheels .
+.venv/Scripts/python.exe -m venv .venv/release_v1/installed
+.venv/release_v1/installed/Scripts/python.exe -m pip install --no-cache-dir --disable-pip-version-check -c requirements.lock .venv/release_v1/wheels/maturarbeit_engine-1.0.0-py3-none-any.whl pytest==8.4.2
+.venv/release_v1/installed/Scripts/python.exe -m pip check
+```
+
+Nach bestätigtem Installationsabschluss und Import-/Versions-/Lockprüfung aus `.venv/release_v1`:
+
+```powershell
+installed/Scripts/python.exe -m pytest -q -c C:/Users/modic/Documents/GitHub/Maturarbeit_Engine/pyproject.toml C:/Users/modic/Documents/GitHub/Maturarbeit_Engine/tests --basetemp C:/Users/modic/Documents/GitHub/Maturarbeit_Engine/.venv/release_v1/pytest-wheel
+```
+
+| Prüfung | Ergebnis |
+|---|---|
+| Vollständige unveränderte Quellsuite | **441 passed in 149.56s**, Exit 0 |
+| Vollständige unveränderte Suite gegen das frische Wheel | **441 passed in 84.08s**, Exit 0 |
+| Beide `pip check` | **No broken requirements found.** |
+| Wheel-Bau und nicht editierbare Installation | Erfolgreich, Version/Distributionsversion 1.0.0; alle zwölf geltenden Lock-Versionen bestätigt |
+| Vier CLI-Demos je Installation | Acht erfolgreiche Offline-Runs, unabhängige skalare und Metadatenkontrollen bestanden |
+| Vergleich zum akzeptierten 0.4.3-Stand | Alle fachlichen CSVs und `data_quality.json` bytegleich |
+
+Keine neuen Tests, keine Abschwächung; alle **441** bisherigen Fälle/Dateien unverändert. Warnungen bleiben Fehler; bestehender pytest-Netzwerk-Guard aktiv. Beide vollständigen Läufe enden ohne Fehler. Seit den finalen Läufen ausschliesslich deren Dokumentationsnachweis ergänzt, kein Engine-Code oder Test geändert.
+
+### Paket- und Isolationsnachweis
+
+Wheel `maturarbeit_engine-1.0.0-py3-none-any.whl`, **29899 Bytes**, SHA-256 **`045f0dda4fa4bdb4774390fd166140290ae061d1478e99c1a356c8fc91ed46d2`**. Isolierte Umgebung `.venv/release_v1/installed` mit `include-system-site-packages = false`, Import aus deren `Lib/site-packages/maturarbeit_engine/__init__.py`. Import- und Distributionsversion beide 1.0.0; `sys.base_prefix = C:\Python314`. Direct-URL-Metadaten bestätigen das konkrete Wheel und dessen SHA, keinen Editable-Install. Jede im Wheel enthaltene Pythondatei bytegleich zum aktuellen `src/`; keine zusätzlichen Pythonquellen.
+
+Plattform: Windows 11 / CPython 3.14.0, NumPy 2.3.5, pandas 2.3.3, pytest 8.4.2; alle geltenden Versionen aus dem unveränderten Lock bestätigt, insbesondere pytz/tzdata 2026.4. Keine globale Installation oder Aussagen über ungeprüfte Plattformen. Netzwerkgenehmigung nur für Paketbau/-installation; Backtests davon getrennt. Logs und temporäre Prüfprogramme unter ignoriertem `.venv/release_v1/`, Demo-Runs unter ignoriertem `outputs/runs/`, übliche Build-Artefakte ebenfalls ignoriert.
+
+### Acht Demos und bytegleiche 0.4.3-Regression
+
+Die vier unveränderten Original-Configs wurden in tatsächlichen CLI-Unterprozessen mit `python -m maturarbeit_engine run --config <absoluter Configpfad>` aus `.venv/release_v1/` aufgerufen. `check_demos.py` verwendet die zuvor kontrollierten unabhängigen skalaren Rechnungen und sperrt über temporäres `sitecustomize` Socket-`connect`, `connect_ex`, `create_connection` und DNS-`getaddrinfo`. Guardaktivierung für beide Interpreter separat bestätigt. `extra_demo_checks.py` prüft zusätzlich vollständige Metadaten, RF-Intervalle, Trades, SMA-Handmittelwerte, Warm-up und historische GDP-Entscheidungen. Beide Programme erfolgreich, alle acht Runs Exit 0.
+
+Referenz sind die akzeptierten 0.4.3-Runs des [Freeze-Re-Audits](freeze-reaudit.md); ihre damaligen Input-/Outputhashes wurden vor dem Versionswechsel gegen die vorhandenen Bytes geprüft. Die aktuellen Inputs sind dieselben. Jede fachliche CSV und `data_quality.json` wurde anschliessend vollständig gegen diese Referenz und zwischen Checkout/Wheel byteverglichen.
+
+| Demo | Referenz 0.4.3 unter `outputs/runs/` | Release-Checkout 1.0.0 | Release-Wheel 1.0.0 |
+|---|---|---|---|
+| Buy-and-Hold | `synthetic_buy_hold-31e8c571989d4c3490e570928ed62b8f` | `synthetic_buy_hold-d3ac996076df4fea83f4be9f24224f8e` | `synthetic_buy_hold-4a63bcc09af14edc80857b902ac3d715` |
+| Fixed Rebalancing | `synthetic_rebalance-1224dc9dd86b41c3910fb5211bfd6338` | `synthetic_rebalance-a5285be5d9c74256ba5cbdebef1f56bd` | `synthetic_rebalance-4ad2d31c818c4230b956ac0a1bf9696c` |
+| Trend | `synthetic_trend-43a72abfbf7d43948965db9876b70966` | `synthetic_trend-82a18d5c602043ccb92c5cd3019f36a7` | `synthetic_trend-5372ca951be246dba94f8f844ff8dd08` |
+| Country Weighting | `synthetic_country_weighting-39da6ed39de0434490254202dcce7681` | `synthetic_country_weighting-bd1103a1dce9421ba95ca8c36d1d9207` | `synthetic_country_weighting-4a06fbaab6e7410db635ffba566405d4` |
+
+Bestätigte Endwerte: **Buy-and-Hold 99**, **Fixed Rebalancing 116.4284**, **Trend 96.8**, **Country Weighting 117.667**. Unabhängig geprüft wurden alle mitausgeführten Strategiehistorien, echten Renditen, vollständigen Drawdowns und Kennzahlen. Jahreskennzahlen von unregelmässigem Rebalancing/Country bleiben korrekt nicht verfügbar; reguläre BH-/Trend-Demos behalten die bisherigen Sharpe-/Stichprobenformeln. Fixed-Trades −5.04/+5.04 zu 67.56/45.04; Trend Lag 1/Cash 0; GDP-2018 60/40 → historisch verfügbares GDP-2019 50/50, Trades −16.3/+16.3 zu je 56.3, keine spätere Revision oder Schlussallokation.
+
+Erwartete vier/sechs/sieben/sieben Dateien, striktes JSON, UTC, gemeinsame Grenzen, RF-/SMA-/GDP-Status sowie sämtliche Input-/Output-/Quellcode-/Gesamthashes geprüft. Die Manifeste unterscheiden sich zur jeweiligen 0.4.3-Installation **ausschliesslich** in Version, Versionsquell-/Gesamtcodehash, Run-ID und Zeit, im Checkout zusätzlich `pyproject.toml`-Hash und Git-/Dirty-Angaben. Checkout nennt unveränderten Release-Auftrags-HEAD, `dirty=true`; Wheel Git `unavailable`. Die technische Versionsänderung hat damit keine fachliche Outputregression.
+
+### Finale Schreibgrenze und Verantwortung
+
+104 anfänglich versionierte Dateien per SHA-256 erfasst. Nur fünf erlaubte bestehende Dateien geändert; die übrigen **99 bytegleich**. Neu ausschliesslich `documentation/engine/release-v1.0.md`. `pyproject.toml` und `src/__init__.py` enthalten exakt die zwei Versionswechsel; alle anderen Pythondateien, Tests, Configs/Demos, Lock, AGENTS, Entscheidungen, historischen Audit-/Fixberichte und geschützten wissenschaftlichen Dateien bleiben bytegleich. Historische Implementierungs-/Testprotokolle und alle bisherigen KI-Logbytes erhalten. Diff einschliesslich neuer Datei, Whitespace, Links, unveränderter HEAD und Tagbestand geprüft.
+
+Autorvorgaben: Release-Version, akzeptierter Ausgangspunkt, unveränderte Fachverträge und Schreibgrenze. Codex: reine Versions-/Standdokumentation, isolierte Paketprüfung und erneut ausgeführte Kontrollen; keine neue fachliche Entscheidung oder Parameterwahl. Fachliche Kontrolle des Autors, reale Daten und deren historische Wahrheit bleiben offen. SB-01 bis SB-07 und NB-01 bis NB-03 siehe [release-v1.0.md](release-v1.0.md). Technisch bereit für Release-Commit und Tag `engine-v1.0`; **kein Commit und kein Tag erstellt**. Stopp nach diesem Auftrag.

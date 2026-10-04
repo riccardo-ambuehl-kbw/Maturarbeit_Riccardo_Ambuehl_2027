@@ -1,6 +1,6 @@
 # Engine v1 – Core, Rebalancing, SMA-Trendfolge und BIP-Ländergewichtung
 
-**Stand:** 2026-10-04, Engine 0.4.3 / weiterhin Konfigurationsschema 1.0. Die gezielten Sicherungen EB-01 bis EB-03, der Portfoliozustandsfix und der CSV-NUL-Fix NEW-EB-01 sind in den letzten Abschnitten und in [blocker-fixes.md](blocker-fixes.md) dokumentiert.
+**Stand:** 2026-10-04, Engine **1.0.0 technisch eingefroren**, weiterhin Konfigurationsschema 1.0. [Release-/Freeze-Dokument](release-v1.0.md): reine Versions- und Dokumentationsänderung, keine neue Methodik. Alle nachfolgenden historischen Abschnitte bleiben erhalten; die aktuelle technische Abnahme steht in [freeze-reaudit.md](freeze-reaudit.md).
 **Aufträge:** [Core](../ai-usage/prompts/2026-10-02-engine-v1-core-implementation.md), [Multi-Asset/Rebalancing](../ai-usage/prompts/2026-10-04-engine-v1-rebalancing-implementation.md), [Trendfolge](../ai-usage/prompts/2026-10-04-engine-v1-trend-implementation.md) und [BIP-Ländergewichtung](../ai-usage/prompts/2026-10-04-engine-v1-country-weighting-implementation.md).
 **Fachliche Grundlage:** Analyse 5.3–5.9, Theorie und die vom Autor verbindlich festgelegten [OD-01 bis OD-13](decisions.md).
 
