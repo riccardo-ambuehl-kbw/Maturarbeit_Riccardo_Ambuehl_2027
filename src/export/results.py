@@ -11,6 +11,7 @@ import sys
 import pandas as pd
 from .. import __version__
 from ..engine.result import validate_results
+from ..analysis.metrics import validate_run_metrics
 
 
 def file_sha256(path):
@@ -45,13 +46,12 @@ def code_provenance():
 
 
 def export_run(context, result, summary, metric_status):
-    results = validate_results(context, result)
-    if summary.strategy.tolist() != [r.strategy for r in results]:
-        raise ValueError("Summary must contain one ordered row per strategy.")
     # Detect edits after reading: every recorded hash must describe the consumed file.
     for info in context.input_files:
         if file_sha256(info["path"]) != info["sha256"]:
             raise ValueError(f"Input changed during run: {info['kind']}")
+    results = validate_results(context, result, require_complete=True)
+    validate_run_metrics(results, context, summary, metric_status)
     root = context.config.output_dir.resolve()
     root.mkdir(parents=True, exist_ok=True)
     now = datetime.now(timezone.utc)

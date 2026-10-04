@@ -21,4 +21,4 @@ class BuyAndHold:
             "period_return": np.r_[np.nan, returns.to_numpy()],
             "drawdown": np.r_[0.0, dd.to_numpy()],
         })
-        return StrategyResult("buy_hold", h).validate(context.config.start_capital)
+        return StrategyResult("buy_hold", h, asset_id=params["asset"]).validate(context.config.start_capital)

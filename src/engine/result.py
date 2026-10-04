@@ -2,7 +2,7 @@
 from dataclasses import dataclass
 import numpy as np
 import pandas as pd
-from ..funktionen import WEIGHT_TOLERANCE, CAPITAL_TOLERANCE
+from ..funktionen import WEIGHT_TOLERANCE, CAPITAL_TOLERANCE, drawdown, prozentuale_aenderung
 from ..data.macro import select_gdp_targets
 
 HISTORY_COLUMNS = ["date", "strategy", "portfolio_value", "period_return", "drawdown"]
@@ -24,6 +24,7 @@ class StrategyResult:
     trades: pd.DataFrame | None = None
     signals: pd.DataFrame | None = None
     macro_decisions: tuple[dict, ...] | None = None
+    asset_id: str | None = None
 
     def validate(self, start_capital):
         h = self.portfolio_history
@@ -42,6 +43,10 @@ class StrategyResult:
         expected = h.portfolio_value.iloc[1:].to_numpy() / h.portfolio_value.iloc[:-1].to_numpy() - 1
         if not np.allclose(expected, h.period_return.iloc[1:], rtol=1e-12, atol=1e-14):
             raise ValueError("History returns disagree with wealth ratios.")
+        observed = pd.Series(h.period_return.iloc[1:].to_numpy(), index=h.date.iloc[1:])
+        expected_drawdown = np.r_[0.0, drawdown(observed).to_numpy()]
+        if not np.array_equal(h.drawdown.to_numpy(), expected_drawdown):
+            raise ValueError("History drawdowns disagree with the complete return-based path.")
         self._validate_allocations()
         self._validate_signals()
         return self
@@ -120,15 +125,36 @@ class StrategyResult:
                 raise ValueError("Trade values, weights and capital conservation disagree.")
 
 
-def validate_results(context, results):
+def validate_results(context, results, *, require_complete=False):
+    """Local context checks; require_complete additionally binds the entire run to config."""
     results = (results,) if isinstance(results, StrategyResult) else tuple(results)
     results = tuple(sorted(results, key=lambda r: r.strategy))
     if not results or len({r.strategy for r in results}) != len(results):
         raise ValueError("A run requires unique strategy results.")
+    if require_complete:
+        enabled = sorted(name for name, params in context.config.strategies().items() if params["enabled"])
+        if [r.strategy for r in results] != enabled:
+            raise ValueError("Complete run results must match exactly the enabled strategies.")
     for result in results:
         result.validate(context.config.start_capital)
         if not pd.DatetimeIndex(result.portfolio_history.date).equals(context.performance.index):
             raise ValueError("Every strategy must use the complete shared valuation calendar.")
+        if require_complete and result.strategy == "buy_hold":
+            if result.asset_id != context.config.asset:
+                raise ValueError("Buy-and-Hold result asset differs from configuration.")
+            expected = prozentuale_aenderung(context.performance[context.config.asset]).iloc[1:]
+            if not np.array_equal(result.portfolio_history.period_return.iloc[1:].to_numpy(), expected.to_numpy()):
+                raise ValueError("Buy-and-Hold returns differ from the configured asset.")
+        if require_complete and result.strategy == "rebalance":
+            targets = pd.Series(dict(context.config.target_weights), dtype=float).sort_index()
+            if set(result.weights_history.asset_id) != set(targets.index):
+                raise ValueError("Rebalancing assets differ from configuration.")
+            for _, group in result.weights_history.groupby("date", sort=False):
+                actual = group.set_index("asset_id").target_weight.reindex(targets.index)
+                if not np.allclose(actual, targets, rtol=0, atol=WEIGHT_TOLERANCE):
+                    raise ValueError("Rebalancing targets differ from configuration.")
+            if set(result.trades.date) != set(annual_rebalance_dates(context.performance.index)):
+                raise ValueError("Rebalancing trades must match the annual shared calendar.")
         if result.strategy == "country_weighting":
             events = annual_rebalance_dates(context.performance.index)
             if context.macro is None or set(result.trades.date) != set(events):

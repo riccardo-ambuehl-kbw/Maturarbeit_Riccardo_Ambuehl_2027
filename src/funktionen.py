@@ -142,7 +142,7 @@ def rebalancing(aktuelle_werte: pd.Series, zielgewichte: pd.Series):
     _same_assets(aktuelle_werte, zielgewichte)
     zielgewichte = zielgewichte.reindex(aktuelle_werte.index)
     gesamtwert = aktuelle_werte.sum()
-    zielwerte = gesamtwert * zielgewichte
+    zielwerte = allocate_target_values(gesamtwert, zielgewichte)
     transaktionen = zielwerte - aktuelle_werte
     aktuelle_gewichte = aktuelle_werte / gesamtwert
     if not np.isfinite(zielwerte.to_numpy()).all() or not np.isfinite(transaktionen.to_numpy()).all():
@@ -189,6 +189,27 @@ def validate_target_weights(weights):
             or not np.isclose(weights.sum(), 1.0, atol=WEIGHT_TOLERANCE, rtol=0)):
         raise ValueError("Target weights must be nonnegative and sum to 1 (tolerance 1e-12).")
     return weights
+
+
+def allocate_target_values(portfolio_value, target_weights):
+    """Apply the same finite, positive-allocation contract at start and rebalancing."""
+    if (isinstance(portfolio_value, (bool, np.bool_))
+            or not isinstance(portfolio_value, (int, float, np.number))
+            or not np.isrealobj(portfolio_value)
+            or not np.isfinite(portfolio_value) or portfolio_value <= 0):
+        raise ValueError("Allocation requires finite positive portfolio value.")
+    target_weights = validate_target_weights(target_weights)
+    with np.errstate(over="ignore", invalid="ignore"):
+        target_values = portfolio_value * target_weights
+    if not np.isfinite(target_values.to_numpy()).all():
+        raise ValueError("Target allocation exceeded finite numerical precision.")
+    if ((target_weights > 0) & (target_values <= 0)).any():
+        raise ValueError("Positive target allocation underflowed to zero.")
+    with np.errstate(over="ignore"):
+        total = target_values.sum()
+    if not np.isclose(total, portfolio_value, rtol=CAPITAL_TOLERANCE, atol=0):
+        raise ValueError("Target allocation must preserve capital.")
+    return target_values
 
 
 def buy_and_hold(renditen: pd.Series, startkapital: float):

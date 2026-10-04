@@ -3,7 +3,7 @@
 **Core-Prüfung:** 2026-10-03. **Plattform:** Windows, CPython 3.14.0.
 **Versionen:** Engine 0.1.0, NumPy 2.3.5, pandas 2.3.3, pytest 8.4.2; weitere Versionen siehe `requirements.lock`.
 
-**Aktueller Abschluss:** 2026-10-04, Engine 0.4.0: **344 Tests bestanden**. Die älteren Abschnitte dokumentieren die damaligen Prüfläufe; Länder-Erweiterung und aktuelle Grenzen stehen im letzten Abschnitt.
+**Aktueller Abschluss:** 2026-10-04, Engine 0.4.1: **406 Tests bestanden**, im Checkout und gegen das frisch installierte Wheel. Die älteren Abschnitte dokumentieren die damaligen Prüfläufe; die gezielten Blocker-Fixes und ihre Grenzen stehen im letzten Abschnitt.
 
 ## Saubere Projektumgebung
 
@@ -344,3 +344,79 @@ Alle Manifeste und Qualitätsberichte strikt ohne NaN/Infinity gelesen. Jede Ein
 Gesamten Diff einschliesslich neuer Quellen/Tests/Daten geprüft; `git diff --check`, JSON-/Text-/Linkprüfungen sowie SHA-256-Abgleich der 80 zu Beginn versionierten Dateien durchgeführt. Geschützte Notebooks, Methodik, Bibliographie, Buchkapitel, `decisions.md`, AGENTS.md, alle bisherigen Tests/Demos und `src/funktionen.py` unverändert. Dessen sämtliche 26 Funktionsdefinitionen bleiben erhalten. Buy-and-Hold, Trend, Kennzahlen und Kalenderaufbereitung sind bytegleich; nur feste Rebalancing-Zustandsfolge wurde technisch in den gemeinsamen Helper verschoben. Kein Commit erstellt.
 
 Keine neue fachliche Entscheidung nötig. Core, Rebalancing und Trend laut Autor akzeptiert; fachliche Länder-Abnahme offen. Synthetische Daten auf Windows/CPython 3.14.0 geprüft, andere Plattformen und reale Daten nicht geprüft. Die Engine setzt gelieferte Verfügbarkeitsdaten konsequent um, kann deren historische Richtigkeit aber nicht beweisen. Keine realen Quellen/Länder/Proxies oder Hauptversuchsparameter gewählt. Keine gemischte Kommer-/Faktor-/Marktkapitalisierungsstrategie, Downloads, FX, Kosten, Steuern, Inflation, Batch, Web/API oder Optimierung ergänzt. Der Auftrag endet hier nach der Länder-Erweiterung.
+
+## Gezielte Blocker-Fixes vom 2026-10-04 (Engine 0.4.1)
+
+Arbeitsbeginn sauber auf `70a703c`, akzeptierte fachliche Grundlage `engine-country-weighting-v0.4.0` (`5a06432457c76de925258db16a5bcbb5dc48cdc2`). Vor Änderungen wurden die vollständige Suite und alle vier vorhandenen Demos ausgeführt sowie 93 versionierte Dateien per SHA-256 gesichert. Ursachen, technische Korrekturen und Umfang stehen in [blocker-fixes.md](blocker-fixes.md).
+
+### Vollständige Suite und neue Regressionen
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q --basetemp=.venv/blocker_fixes/pytest-baseline
+.\.venv\Scripts\python.exe -m pytest -q tests/test_blocker_fixes.py --basetemp=.venv/blocker_fixes/pytest-new-first
+.\.venv\Scripts\python.exe -m pytest -q --basetemp=.venv/blocker_fixes/pytest-fixes-first
+.\.venv\Scripts\python.exe -m pytest -q --basetemp=.venv/blocker_fixes/pytest-final-source
+```
+
+| Lauf | Ergebnis |
+|---|---|
+| Vor Änderungen | **344 passed in 61.05s** |
+| Erste neue Datei | 60 passed, 2 failed in 10.83s; neue Fixtures korrigiert |
+| Vollständige Suite nach Fixture-Korrektur | **406 passed in 59.43s** |
+| Finaler Stand 0.4.1, Checkout | **406 passed in 64.74s** |
+| Frisch installiertes Wheel 0.4.1 | **406 passed in 54.11s** |
+
+Die Zwischenfehler waren reproduzierbare Testaufbaufehler: Die Fixed-Rebalancing-Fixture verlor ursprünglich schon bei der Drift die kleine Position, statt erst beim jährlichen Ziel zu unterlaufen; die Quote-Fixture wurde durch Windows-Textschreiben von LF auf CRLF konvertiert. Nur diese neuen Fixtures wurden korrigiert. Alle **344 bisherigen Fälle und Dateien unverändert**, **62 neue Fälle** in `tests/test_blocker_fixes.py`. Warnungen bleiben Fehler und der bestehende Netzwerk-Guard bleibt erhalten. Seit dem finalen Quell-/Wheel-Lauf wurden ausschliesslich Dokumentation und lokale Kontrollhilfen ergänzt.
+
+Neue Pflichtabdeckung: initialer/jährlicher positiver Allokationsunterlauf in beiden Portfoliostrategien, direkter Helper und erlaubte Nullgewichte; beliebige mittlere/letzte Drawdown-Korruption; alle Summary-Zahlen, Spalten, Zeilen, Zuordnungen und Verfügbarkeitsstatus; fehlende/zusätzliche Strategien; falsches Buy-and-Hold-Asset auch bei identischer Rendite; Fixed-Rebalancing-Assets/Ziele und fehlende/zusätzliche/initiale/terminale Trade-Ereignisse auch bei Nulltransaktionen; bestehende Gewichtstoleranz; alle vier normalen Runner. CSV: zu wenige/zu viele Felder in allen vier Eingabeklassen, gequotete Kommas/Zeilenumbrüche und erhaltene benannte Zusatzspalten, RangeIndex, doppelte/unbenannte Header, fehlerhafte Quotes und Leerzeilen.
+
+### Exakte ursprüngliche Audit-Reproduktionen
+
+Die lokale ignorierte Kontrolle `.venv/blocker_fixes/reproduce_audit.py` verwendet die ursprünglichen Audit-Fixtures zusätzlich zur dauerhaften Testdatei. Sie wurde im Checkout und erneut mit dem frisch installierten Wheel ausgeführt, beide Exit 0; jeder erwartete Fehler wurde abgefangen und das Fehlen des Ausgabeordners geprüft.
+
+| Gegenbeispiel | Ergebnis nach Fix in beiden Installationen |
+|---|---|
+| EB-01: Kapital `1e-200`, A-Gewicht `1e-200`, B-Gewicht `1`, beide Portfolio-Strategien | `Positive target allocation underflowed to zero.` |
+| EB-01: ursprünglicher direkter Rebalancing-Helper | Derselbe Fehler |
+| EB-02: mittlere/letzte Drawdown-Zeile | Vollständiger returnbasierter Pfad widerspricht dem gespeicherten Verlauf |
+| EB-02: Endwert 999 / Sharpe Infinity | Summary widerspricht der gemeinsamen Kennzahlenberechnung |
+| EB-02: falscher Verfügbarkeitsstatus | Status widerspricht der erwarteten Summary |
+| EB-02: ursprünglicher unvollständiger 20/80-Export | Aktiviertes Strategie-Set unvollständig |
+| EB-02: vollständiger Run mit 20/80 unter 60/40-Config | Zielgewichte widersprechen der Konfiguration |
+| EB-03: originale `DEMO`-CSV mit Datumsverschiebung, Header 3 / Daten 4 | Feldzahlfehler vor pandas, Zeile 2, erwartet 3 / erhalten 4 |
+
+Insgesamt zehn Varianten der drei ursprünglichen Befundgruppen wurden in jeder Installation abgelehnt. Es wurden keine inkonsistenten Exportdateien veröffentlicht.
+
+### Wheel und frische Installation
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install --no-cache-dir --disable-pip-version-check --no-deps -e .
+.\.venv\Scripts\python.exe -m pip check
+.\.venv\Scripts\python.exe -m pip wheel --no-cache-dir --disable-pip-version-check --no-deps --wheel-dir .venv/blocker_fixes/wheels .
+.\.venv\Scripts\python.exe -m venv .venv/blocker_fixes/installed
+.\.venv\blocker_fixes\installed\Scripts\python.exe -m pip install --no-cache-dir --disable-pip-version-check -c requirements.lock .venv/blocker_fixes/wheels/maturarbeit_engine-0.4.1-py3-none-any.whl pytest==8.4.2
+.\.venv\blocker_fixes\installed\Scripts\python.exe -m pip check
+```
+
+Alle Befehle erfolgreich; beide `pip check` melden **No broken requirements found.** Netzwerkzugriff nur für lokale Paket-/Buildwerkzeuginstallation genehmigt, keine globalen Änderungen. Wheel **29363 Bytes**, SHA-256 **`7041c747a1b455f024980098d35486818409b71cd3c212119c5f5655fed862ef`**. Runtime-/Build-Versionen und `requirements.lock` bleiben unverändert.
+
+Die frische Umgebung hat `include-system-site-packages = false`; Version 0.4.1 und Importpfad `.venv/blocker_fixes/installed/Lib/site-packages/maturarbeit_engine/__init__.py` wurden tatsächlich geprüft. Aus dem Arbeitsverzeichnis `.venv/blocker_fixes` wurde die vollständige Suite mit dem frischen Interpreter, absoluten Pfaden zu `tests`/`pyproject.toml` und frischer Ablage `pytest-wheel-final` aufgerufen. Somit wurde das installierte Wheel geprüft. Plattform weiterhin ausschliesslich Windows / CPython 3.14.0, NumPy 2.3.5, pandas 2.3.3, pytest 8.4.2.
+
+### Vier unveränderte Demo-Regressionen
+
+Alle vier ursprünglichen Konfigurationen wurden mit `python -m maturarbeit_engine run --config ...` vor Änderungen und nach den Fixes erneut aufgerufen. Nachher je vier CLI-Runs im Checkout und im Wheel, alle Exit 0. `.venv/blocker_fixes/check_demos.py` kontrolliert jede Ausführung mit einem Socket-/DNS-Guard; die Simulationen benötigen keinen Netzwerkzugriff. Es rechnet die Verläufe, Renditen, Drawdowns, Summary-Kennzahlen, Signale und Länder-Trades unabhängig nach und prüft striktes JSON sowie Eingabe-, Ergebnis- und Quellcodehashes.
+
+| Demo | Vor Fix, Run unter `outputs/runs/` | Nach Fix, Checkout | Nach Fix, Wheel |
+|---|---|---|---|
+| Buy-and-Hold | `synthetic_buy_hold-1cfc8210e2e9491db548bb8ad02b8756` | `synthetic_buy_hold-99df6c81403b4fcb9a743bc56933803b` | `synthetic_buy_hold-526ce4999bbd4866afcd0f3e8de1a1d9` |
+| Rebalancing | `synthetic_rebalance-3989cc1b7b1d454c9029569978531aab` | `synthetic_rebalance-353393fd2c874908a18b79701ac9f61b` | `synthetic_rebalance-cc8f1b43adf542f6a48e7ac7d702b86e` |
+| Trend | `synthetic_trend-709c0ef40406487299b956d0830979f0` | `synthetic_trend-3b1a667e6c224bc490e34dd68a28bb84` | `synthetic_trend-f5de877812864a4a821344492643e512` |
+| Country-Weighting | `synthetic_country_weighting-a2503582d2324c7a83e71d6eb7a804b0` | `synthetic_country_weighting-758d9d7d0971483eb3206bb1d9c2d81b` | `synthetic_country_weighting-2130128e67b4459ab39495204ae1d36c` |
+
+Alle vorhandenen Ergebnisdateien ausser dem Manifest sind **bytegleich vor/nach Fix und zwischen Checkout/Wheel**, insbesondere jede CSV und `data_quality.json`. Endwerte unverändert **99**, **116.4284**, **96.8**, **117.667**. Die bereits dokumentierten Kontrollrechnungen aller mitausgeführten Strategien stimmen weiterhin. Nur erwartete Manifestangaben wie Version, Codehash, Run-ID, Zeit und Git-Verfügbarkeit unterscheiden sich; die installierten Quellcodehashes stimmen mit dem Checkout überein.
+
+### Abschlusskontrolle und Grenzen
+
+Diff einschliesslich neuer Dateien sowie `git diff --check` geprüft. SHA-256-Vergleich der 93 Ausgangsdateien bestätigt Änderungen ausschliesslich in den 13 freigegebenen bestehenden Dateien; neu sind nur die Regressionsdatei und `blocker-fixes.md`. Geschützte wissenschaftliche Inhalte, AGENTS.md, Entscheidungen, historische Auditdokumente, alte Tests, sämtliche Configs/Demodaten und Lock bleiben bytegleich. Das KI-Log wurde ausschliesslich angehängt; sein bisheriger Inhalt bleibt bytegleich erhalten.
+
+Keine neue fachliche Entscheidung nötig, kein Commit und kein Tag erstellt, kein v1.0-Freeze erklärt. SB-01 bis SB-07 und NB-01 bis NB-03 bleiben ausserhalb dieses Auftrags. Reale Daten, andere Plattformen, historische Wahrheit gelieferter Daten und fachliche Abnahme durch den Autor sind durch diese synthetischen technischen Prüfungen nicht bestätigt. Der Auftrag endet nach EB-01 bis EB-03.

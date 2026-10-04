@@ -12,11 +12,19 @@ def read_csv_snapshot(path: Path, kind: str):
     content = path.read_bytes()
     text = content.decode("utf-8-sig")
     try:
-        header = next(csv.reader(StringIO(text)))
+        reader = csv.reader(StringIO(text), strict=True)
+        header = next(reader)
+        if not header or any(not name.strip() for name in header):
+            raise DataValidationError(f"CSV header must contain named columns: {path.name}.")
         if len(header) != len(set(header)):
             raise DataValidationError(f"Duplicate CSV column in {path.name}.")
-        frame = pd.read_csv(StringIO(text), dtype=str, keep_default_na=False)
-    except (StopIteration, pd.errors.ParserError, pd.errors.EmptyDataError) as exc:
+        for row in reader:
+            if len(row) != len(header):
+                raise DataValidationError(
+                    f"CSV field count mismatch in {path.name} at line {reader.line_num}: "
+                    f"expected {len(header)}, got {len(row)}.")
+        frame = pd.read_csv(StringIO(text), dtype=str, keep_default_na=False, index_col=False)
+    except (StopIteration, csv.Error, pd.errors.ParserError, pd.errors.EmptyDataError) as exc:
         raise DataValidationError(f"Invalid CSV: {path.name}") from exc
     return frame, {"kind": kind, "path": str(path), "sha256": sha256(content).hexdigest()}
 

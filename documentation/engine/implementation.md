@@ -1,6 +1,6 @@
 # Engine v1 – Core, Rebalancing, SMA-Trendfolge und BIP-Ländergewichtung
 
-**Stand:** 2026-10-04, Engine 0.4.0 / weiterhin Konfigurationsschema 1.0.
+**Stand:** 2026-10-04, Engine 0.4.1 / weiterhin Konfigurationsschema 1.0. Die gezielten Sicherungen EB-01 bis EB-03 sind im letzten Abschnitt und in [blocker-fixes.md](blocker-fixes.md) dokumentiert.
 **Aufträge:** [Core](../ai-usage/prompts/2026-10-02-engine-v1-core-implementation.md), [Multi-Asset/Rebalancing](../ai-usage/prompts/2026-10-04-engine-v1-rebalancing-implementation.md), [Trendfolge](../ai-usage/prompts/2026-10-04-engine-v1-trend-implementation.md) und [BIP-Ländergewichtung](../ai-usage/prompts/2026-10-04-engine-v1-country-weighting-implementation.md).
 **Fachliche Grundlage:** Analyse 5.3–5.9, Theorie und die vom Autor verbindlich festgelegten [OD-01 bis OD-13](decisions.md).
 
@@ -350,3 +350,17 @@ Einziger Länder-Trade: A `72.6 → 56.3`, Verkauf **16.3**; B `40 → 56.3`, Ka
 Tatsächlicher finaler Run: `outputs/runs/synthetic_country_weighting-5757988362414d40afd5067a9bf4b6dd/`, sieben Dateien, 20 Portfoliozeilen, vier Summary-Zeilen, 20 Gewichtszeilen, vier Tradezeilen (zwei je Portfolio), fünf Trend-Signalzeilen und zwei GDP-Entscheidungen. Alle bisherigen Demo-CSV-Dateien/Qualitätsberichte bleiben bytegleich. Vollständige Suite **344 bestanden**, davon 242 unveränderte bisherige und 102 neue Länderfälle; unabhängige Hand-, JSON-, Hash- und Diffkontrollen siehe [testing.md](testing.md).
 
 Technische Entscheidungen durch Codex: additive Konfigurations-/Kontext-/Resultfelder, identische Versionsdubletten deduplizieren und zählen, deterministische As-of-Auswahl, gemeinsame jährliche Zustandsfolge, vollständige Resultprüfung/Provenienz und konsistente Version 0.4.0. Keine neue finanzwirtschaftliche Entscheidung war nötig; `decisions.md` und geschützte Inhalte bleiben unverändert. Fachliche Länder-Abnahme und historische Belege realer `available_from`-Angaben stehen aus. Keine realen Daten importiert, keine endgültigen Versuchswerte bestimmt, kein Commit oder Hauptversuch. Dieser Auftrag endet nach der geprüften Länder-Erweiterung.
+
+## Technische Blocker-Fixes vom 2026-10-04 (Engine 0.4.1)
+
+Der gezielte Folgeauftrag behebt ausschliesslich EB-01 bis EB-03; [blocker-fixes.md](blocker-fixes.md) enthält Ursachen, Dateiliste, Regressionen und Grenzen. Fachliche Grundlage bleibt der akzeptierte Tag `engine-country-weighting-v0.4.0` mit OD-01 bis OD-13. Die historischen Auditberichte und datierten früheren Abschnitte bleiben erhalten.
+
+`allocate_target_values()` in `src/funktionen.py` ist die gemeinsame Zielallokation am Start und bei jährlichem Rebalancing beider Portfoliostrategien. Ein positives Gewicht muss bei positivem Vermögen einen endlichen, strikt positiven Float-Wert ergeben; andernfalls Abbruch. Exakte Nullgewichte sowie die bisherigen Gewichts-/Kapitalerhaltungstoleranzen bleiben erlaubt. Gewichte werden weder geändert noch normalisiert.
+
+Die lokale Resultvalidierung prüft jetzt den vollständigen Drawdownpfad exakt mit der bestehenden `drawdown()`-Funktion. Runner und Export verlangen zusätzlich über `require_complete=True` genau die aktivierten Strategien, das konfigurierte Buy-and-Hold-Asset samt Renditereihe sowie die konfigurierte Rebalancing-Assetmenge, alle festen Ziele innerhalb der bisherigen Toleranz und exakt die gemeinsamen jährlichen Trade-Ereignisse. Lokale Strategieprüfungen können weiterhin Teilresultate prüfen. Das additive interne `StrategyResult.asset_id` kennzeichnet Buy-and-Hold eindeutig, auch bei identischen Renditen verschiedener Assets; es ändert kein CSV-Schema. Bestehende strenge Trend-/Country-Weighting-Prüfungen bleiben aktiv.
+
+Runner und Export verwenden dieselbe Zusammenführung `compute_run_metrics()` mit unverändertem `compute_metrics()`. Vor jeder Veröffentlichung prüft `validate_run_metrics()` alle Summary-Spalten und -Zeilen, Strategiezuordnung, exakte verfügbare Zahlen sowie fehlende Kennzahlen und ihren kanonischen Status. Zahlen werden über dieselbe bestehende Berechnung verglichen, ohne zweite Finanzformeln. Die Eingabe-Hashprüfung bleibt zuerst; sämtliche Vertragsprüfungen liegen vor dem Anlegen eines Ausgabe-/Staging-Verzeichnisses. Die atomische Veröffentlichung bleibt erhalten.
+
+Alle vier CSV-Eingabeklassen werden zentral vor pandas mit der CSV-Standardbibliothek auf benannte eindeutige Header und exakt passende Datensatzbreite geprüft. Fehlende/zusätzliche Felder werden mit Datei und Zeile abgelehnt. Korrekt gequotete Kommas und Zeilenumbrüche sowie benannte Zusatzspalten bleiben zulässig. Danach verwendet pandas ausdrücklich `index_col=False`; kein Abschneiden oder implizites Verschieben.
+
+Paketversion jetzt 0.4.1; Konfigurationsschema 1.0 und Abhängigkeitsbindung bleiben unverändert. Alle bisherigen fachlichen Demo-Ausgaben bleiben bytegleich. Keine SB-/NB-Bearbeitung, neue fachliche Entscheidung, Commit-Erstellung oder v1.0-Tag; ausgeführte Paket-/Testprüfungen siehe [testing.md](testing.md).

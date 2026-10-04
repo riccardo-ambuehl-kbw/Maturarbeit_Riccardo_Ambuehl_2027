@@ -2,7 +2,7 @@
 import numpy as np
 import pandas as pd
 from ..funktionen import (prozentuale_aenderung, neue_gewichtung, rebalancing, drawdown,
-                          validate_target_weights, CAPITAL_TOLERANCE)
+                          validate_target_weights, allocate_target_values)
 from .result import StrategyResult, HISTORY_COLUMNS, WEIGHTS_COLUMNS, TRADES_COLUMNS, annual_rebalance_dates
 
 
@@ -15,9 +15,7 @@ def run_annual_portfolio(context, strategy, target_at):
     prices = context.performance.loc[:, assets].copy()
     returns = prices.apply(prozentuale_aenderung).iloc[1:]
     capital = context.config.start_capital
-    positions = capital * target
-    if not np.isclose(positions.sum(), capital, rtol=CAPITAL_TOLERANCE, atol=0):
-        raise ValueError("Initial allocation must preserve capital.")
+    positions = allocate_target_values(capital, target)
     history = [[dates[0], strategy, capital, np.nan, 0.0]]
     weights, trades = [], []
     for asset in assets:

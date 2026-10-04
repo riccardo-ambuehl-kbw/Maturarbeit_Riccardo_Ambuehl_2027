@@ -8,9 +8,8 @@ from ..strategies.buy_hold import BuyAndHold
 from ..strategies.rebalance import Rebalance
 from ..strategies.trend import Trend
 from ..strategies.country_weighting import CountryWeighting
-from ..analysis.metrics import compute_metrics
+from ..analysis.metrics import compute_run_metrics
 from ..export.results import export_run
-import pandas as pd
 
 
 @dataclass(frozen=True)
@@ -40,13 +39,7 @@ def run_simulation(config: str | Path | RunConfig) -> RunOutcome:
         results.append(Trend().run(context, config.trend_params()))
     if config.country_weighting_enabled:
         results.append(CountryWeighting().run(context, config.country_params()))
-    results = validate_results(context, results)
-    summaries, statuses = [], {}
-    for result in results:
-        summary, status = compute_metrics(result, context)
-        summaries.append(summary)
-        statuses[result.strategy] = status
-    # Preserve the accepted single-strategy status shape; add an explicit map for all runs.
-    metric_status = statuses[results[0].strategy] if len(results) == 1 else statuses
-    path, manifest = export_run(context, results, pd.concat(summaries, ignore_index=True), metric_status)
+    results = validate_results(context, results, require_complete=True)
+    summary, metric_status = compute_run_metrics(results, context)
+    path, manifest = export_run(context, results, summary, metric_status)
     return RunOutcome(results[0], path, manifest, {r.strategy: r for r in results})

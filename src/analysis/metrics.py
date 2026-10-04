@@ -48,3 +48,35 @@ def compute_metrics(result, context):
     if not np.isclose(row["max_drawdown"], h.drawdown.min(), atol=1e-14, rtol=1e-12):
         raise ValueError("Maximum drawdown and history disagree.")
     return pd.DataFrame([row], columns=SUMMARY_COLUMNS), status
+
+
+def compute_run_metrics(results, context):
+    """One canonical summary/status shape for runner and export validation."""
+    summaries, statuses = [], {}
+    for result in results:
+        summary, status = compute_metrics(result, context)
+        summaries.append(summary)
+        statuses[result.strategy] = status
+    metric_status = statuses[results[0].strategy] if len(results) == 1 else statuses
+    return pd.concat(summaries, ignore_index=True), metric_status
+
+
+def validate_run_metrics(results, context, summary, metric_status):
+    """Reject inconsistent numbers and availability using the existing metric calculation."""
+    expected, expected_status = compute_run_metrics(results, context)
+    if (not isinstance(summary, pd.DataFrame) or list(summary.columns) != SUMMARY_COLUMNS
+            or len(summary) != len(expected)
+            or summary.strategy.tolist() != expected.strategy.tolist()):
+        raise ValueError("Summary must contain the exact columns and one ordered row per strategy.")
+    for column in SUMMARY_COLUMNS[1:]:
+        for actual, wanted in zip(summary[column], expected[column]):
+            if pd.isna(wanted):
+                if not pd.api.types.is_scalar(actual) or not pd.isna(actual):
+                    raise ValueError(f"Unavailable summary metric {column} must be missing.")
+            elif (isinstance(actual, (bool, np.bool_))
+                  or not isinstance(actual, (int, float, np.number))
+                  or not np.isrealobj(actual) or not np.isfinite(actual)
+                  or actual != wanted):
+                raise ValueError(f"Summary metric {column} disagrees with the computed value.")
+    if not isinstance(metric_status, dict) or metric_status != expected_status:
+        raise ValueError("Metric availability status disagrees with the computed summary.")
