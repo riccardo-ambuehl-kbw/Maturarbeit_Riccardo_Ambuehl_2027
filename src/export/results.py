@@ -67,7 +67,11 @@ def export_run(context, result, summary, metric_status):
                                        lineterminator="\n", encoding="utf-8")
         summary.to_csv(stage / "summary.csv", index=False, float_format="%.17g", na_rep="",
                        lineterminator="\n", encoding="utf-8")
-        write_json(stage / "data_quality.json", context.data_quality)
+        quality = dict(context.data_quality)
+        for r in results:
+            if r.macro_decisions is not None:
+                quality["macro"] = {**quality["macro"], "decisions": list(r.macro_decisions)}
+        write_json(stage / "data_quality.json", quality)
         names = ["portfolio_history.csv", "summary.csv", "data_quality.json"]
         for attribute in ["weights_history", "trades", "signals"]:
             tables = [getattr(r, attribute) for r in results if getattr(r, attribute) is not None]

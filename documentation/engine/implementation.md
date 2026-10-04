@@ -1,31 +1,33 @@
-# Engine v1 – Core, Rebalancing und SMA-Trendfolge
+# Engine v1 – Core, Rebalancing, SMA-Trendfolge und BIP-Ländergewichtung
 
-**Stand:** 2026-10-04, Engine 0.3.0 / weiterhin Konfigurationsschema 1.0.
-**Aufträge:** [Core](../ai-usage/prompts/2026-10-02-engine-v1-core-implementation.md), [Multi-Asset/Rebalancing](../ai-usage/prompts/2026-10-04-engine-v1-rebalancing-implementation.md) und [Trendfolge](../ai-usage/prompts/2026-10-04-engine-v1-trend-implementation.md).
+**Stand:** 2026-10-04, Engine 0.4.0 / weiterhin Konfigurationsschema 1.0.
+**Aufträge:** [Core](../ai-usage/prompts/2026-10-02-engine-v1-core-implementation.md), [Multi-Asset/Rebalancing](../ai-usage/prompts/2026-10-04-engine-v1-rebalancing-implementation.md), [Trendfolge](../ai-usage/prompts/2026-10-04-engine-v1-trend-implementation.md) und [BIP-Ländergewichtung](../ai-usage/prompts/2026-10-04-engine-v1-country-weighting-implementation.md).
 **Fachliche Grundlage:** Analyse 5.3–5.9, Theorie und die vom Autor verbindlich festgelegten [OD-01 bis OD-13](decisions.md).
 
-Der Autor hat den Core mit Tag `engine-core-v0.1.0` abgenommen (Commit `1a193094b312354c39a72bdf44ef2f6a20573011`) und Rebalancing mit Tag `engine-rebalancing-v0.2.0` (Commit `37edc79f4211c734423ca89ef3899d1cbc0b81b4`). Der saubere Arbeitsbeginn der Trend-Erweiterung auf `10d70e73826dc7e11dbe3eb5bf5770fa833e4ae6` enthält gegenüber dem letzten Tag ausschliesslich den neuen Prompt. Die technische Prüfung der Trend-Erweiterung ist getrennt von ihrer noch ausstehenden fachlichen Abnahme.
+Der Autor hat den Core mit Tag `engine-core-v0.1.0` abgenommen (Commit `1a193094b312354c39a72bdf44ef2f6a20573011`), Rebalancing mit Tag `engine-rebalancing-v0.2.0` (Commit `37edc79f4211c734423ca89ef3899d1cbc0b81b4`) und Trend mit Tag `engine-trend-v0.3.0` (Commit `c101ca558e60228d6e1807a0d192df11d3d5c49f`). Der saubere Arbeitsbeginn der Länder-Erweiterung auf `b364109325ad227ad9b519b312374202405453a4` enthält gegenüber dem Trend-Tag ausschliesslich den neuen Länder-Prompt. Technische Prüfung und noch ausstehende fachliche Abnahme der Länder-Erweiterung bleiben getrennt. Die datierten Abschnitte zu früheren Aufträgen dokumentieren deren damaligen Stand.
 
 ## Umfang und Struktur
 
-Ein einzelner lokaler Run kann Buy-and-Hold, jährliches Rebalancing und SMA-Long/Cash-Trendfolge einzeln oder gemeinsam ausführen. CSV-Dateien und JSON-Konfiguration werden validiert, alle benötigten Performance-Anlagen auf einen gemeinsamen Kalender ausgerichtet und die Strategien über denselben Kontext ausgewertet. Der zusätzliche Signal-Kontext mit Warm-up verändert diesen Performance-Kalender nicht. Es gibt keine externen Cashflows; die Total-Return-Behandlung muss bereits in `performance_value` enthalten sein.
+Ein einzelner lokaler Run kann Buy-and-Hold, jährliches Rebalancing, SMA-Long/Cash-Trendfolge und reine BIP-Ländergewichtung einzeln oder gemeinsam ausführen. CSV-Dateien und JSON-Konfiguration werden validiert, alle benötigten Performance-Anlagen auf einen gemeinsamen Kalender ausgerichtet und die Strategien über denselben Kontext ausgewertet. Signal-Warm-up und Makrodaten verändern diesen Performance-Kalender nicht. Es gibt keine externen Cashflows; die Total-Return-Behandlung muss bereits in `performance_value` enthalten sein.
 
 | Dateien | Aufgabe |
 |---|---|
 | `pyproject.toml`, `requirements.lock`, `.gitignore` | Installierbares Paket, festgeschriebene Abhängigkeiten, Ausschluss lokaler Umgebungen und Runs |
 | `src/__init__.py`, `src/__main__.py` | Engine-Version und CLI |
 | `src/funktionen.py` | Bestehende mathematische Funktionen mit den unten dokumentierten Korrekturen |
-| `src/data/{__init__,validate,normalize}.py` | CSV-Snapshots, Datenprüfung, gemeinsame Bewertungen, Risk-Free-Ausrichtung |
-| `src/engine/{__init__,config,context,result,simulation}.py` | JSON-Vertrag, SimulationContext, StrategyResult und gemeinsamer Ablauf |
-| `src/strategies/{__init__,buy_hold,rebalance,trend}.py` | Einzelanlage, jährliches Portfolio und SMA-Long/Cash |
+| `src/data/{__init__,validate,normalize,macro}.py` | CSV-Snapshots, Datenprüfung, gemeinsame Bewertungen, Risk-Free-Ausrichtung und historische GDP-Auswahl |
+| `src/engine/{__init__,config,context,result,portfolio,simulation}.py` | JSON-Vertrag, SimulationContext, StrategyResult und gemeinsame jährliche Portfolio-Zustandsfolge |
+| `src/strategies/{__init__,buy_hold,rebalance,trend,country_weighting}.py` | Einzelanlage, feste Jahresziele, SMA-Long/Cash und historische GDP-Ziele |
 | `src/analysis/{__init__,metrics}.py` | Einheitliche Zusammenfassung und Verfügbarkeitsstatus |
 | `src/export/{__init__,results}.py` | Vollständige Run-Verzeichnisse, Manifest und SHA-256 |
 | `configs/demo_buy_hold.json`, `configs/demo/*.csv` | Ausschliesslich künstliche Demo |
 | `configs/demo_rebalance.json`, `configs/rebalance_demo/*.csv` | Zweite künstliche Demo, Buy-and-Hold und 60/40 im selben Run |
 | `configs/demo_trend.json`, `configs/trend_demo/*.csv` | Dritte künstliche Demo mit getrennten Signal-/Performance-Reihen und allen drei Strategien |
+| `configs/demo_country_weighting.json`, `configs/country_weighting_demo/*.csv` | Vierte künstliche Demo mit GDP-Versionen und allen vier Strategien |
 | `tests/{conftest,test_functions,test_core}.py` | Synthetische Funktions-, Integrations- und CLI-Prüfungen |
 | `tests/test_rebalance.py` | Allgemeine Gewichte, Zustandsfolge, Jahresereignisse, Multi-Asset-/Exportregression |
 | `tests/test_trend.py` | SMA-Handrechnung, Warm-up, Signalquelle, Lag, Cash, Vergleich und Regression |
+| `tests/test_country_weighting.py` | Makrovertrag, As-of-/Revisionsfälle, gemeinsame GDP-Jahre, dynamische Ziele, Handrechnung und Regression |
 
 Die geplante physische Struktur unter `src/` bleibt erhalten. Setuptools installiert sie unter dem eindeutigen Paketnamen `maturarbeit_engine`. Es gibt keine zweite CLI-Berechnungslogik: CLI und Python rufen `engine.simulation.run_simulation()` auf.
 
@@ -66,12 +68,13 @@ CSV-Dateien verwenden UTF-8, optional mit BOM, Kommatrennung und ISO-Datumswerte
 - Markt: `date,asset_id,performance_value`.
 - Metadaten: `asset_id,name,asset_class,country,currency,provider,provider_symbol`.
 - Normalisierte risikofreie Renditen: `period_start,period_end,series_id,period_return`.
+- Makro bei aktiver Länderstrategie: `period,country,indicator,value,unit,available_from`; Einzelheiten im Länderabschnitt unten.
 
 `performance_value` bestimmt ausschliesslich Marktrenditen. Optionales `signal_value` wird bei ausdrücklich so konfigurierter Trendfolge ausschliesslich für SMAs/Signale verwendet; ohne diese Verwendung bleibt es im Qualitätsbericht unbenutzt. Pflichtwerte, doppelte Spaltennamen, doppelte Markt-Schlüssel, doppelte Metadaten-IDs und doppelte Risk-Free-Perioden pro Reihe werden geprüft. Performance-Werte müssen endlich und positiv sein. Benötigte Signalwerte müssen reale numerische, vollständige und endliche Beobachtungen sein. Alle geladenen Markt-IDs benötigen Metadaten, verwendete Anlagen müssen zur Basiswährung passen. Es erfolgt keine Auffüllung, Interpolation, FX-Konvertierung oder erneute Total-Return-Bereinigung.
 
 `align_performance()` unterstützt mehrere benötigte Anlagen: zuerst Schnittmenge tatsächlich vorhandener Bewertungen bilden, danach den gewünschten Zeitraum auswählen, erst anschliessend Renditen berechnen. Der Kontext verwendet jetzt die sortierte Vereinigung der Anlagen **aller aktivierten Strategien**; auch ein Buy-and-Hold-Asset ausserhalb der Rebalancing-Zielgewichte gehört dazu. Mindestens zwei Bewertungen müssen im gewünschten Zeitraum verbleiben. Entfernte nicht gemeinsame Termine und Beobachtungen ausserhalb des gewünschten Zeitraums werden separat berichtet. Zusätzliche unbenötigte Anlagen und Anlagen ausschliesslich deaktivierter Strategien bestimmen den Vergleichskalender nicht. Auch Anlagen mit explizitem Zielgewicht 0 benötigen Daten und Metadaten.
 
-Die Demo-Konfigurationen zeigen den vollständigen JSON-Vertrag. Pflichtfelder sind `schema_version`, `run_name`, `period` mit `start/end`, `start_capital`, `base_currency`, `periods_per_year`, `data` mit `market/assets` und `strategies`. Unterstützt werden `buy_hold` mit `enabled/asset`, `rebalance` mit `enabled/target_weights/rebalance_frequency` und `trend` mit `enabled/asset/short_window/long_window/signal_lag/signal_source`. Mindestens eine Strategie muss aktiviert sein. Vorhandene Strategieblöcke werden vollständig geprüft, auch wenn sie deaktiviert sind; ihre Anlagen werden dann nicht für den Kontext angefordert. Es gibt keine fachlichen Defaults. Unbekannte Felder/Strategieoptionen, ungültige Typen und nicht endliche Zahlen werden abgelehnt. Relative Dateipfade beziehen sich auf die Konfigurationsdatei; ein fehlendes `output_dir` bedeutet technisch `outputs/runs` im aktuellen Arbeitsverzeichnis. URLs sind keine Datenreferenzen. Bestehende Core-/Rebalancing-Konfigurationen bleiben gültig.
+Die Demo-Konfigurationen zeigen den vollständigen JSON-Vertrag. Pflichtfelder sind `schema_version`, `run_name`, `period` mit `start/end`, `start_capital`, `base_currency`, `periods_per_year`, `data` mit `market/assets` und `strategies`. Unterstützt werden `buy_hold` mit `enabled/asset`, `rebalance` mit `enabled/target_weights/rebalance_frequency`, `trend` mit `enabled/asset/short_window/long_window/signal_lag/signal_source` und `country_weighting` mit `enabled/country_assets/indicator/unit/rebalance_frequency`. Mindestens eine Strategie muss aktiviert sein. Vorhandene Strategieblöcke werden vollständig geprüft, auch wenn sie deaktiviert sind; ihre Anlagen werden dann nicht für den Kontext angefordert. Es gibt keine fachlichen Defaults. Unbekannte Felder/Strategieoptionen, ungültige Typen und nicht endliche Zahlen werden abgelehnt. Relative Dateipfade beziehen sich auf die Konfigurationsdatei; ein fehlendes `output_dir` bedeutet technisch `outputs/runs` im aktuellen Arbeitsverzeichnis. URLs sind keine Datenreferenzen. Bestehende Core-/Rebalancing-/Trend-Konfigurationen bleiben gültig.
 
 `data.risk_free` ist optional. Bei vollständigem Fehlen bleibt Sharpe nicht verfügbar. Bei einer angegebenen Datei sind Serien-ID und beide Grenzen **jeder** tatsächlichen Renditeperiode verbindlich: fehlende, verschobene oder zusätzlich überlappende Intervalle führen zum Fehler. Ausserhalb des Laufs liegende Intervalle werden gezählt und nicht verwendet. FRED-Jahreszinsumrechnung und Beschaffung gehören nicht zum Core.
 
@@ -116,7 +119,7 @@ Jeder erfolgreiche Lauf erzeugt unter `output_dir/<run_name>-<uuid>/` die Core-D
 - `data_quality.json`: Status, geladene/benötigte Anlagen, ursprüngliche und effektive Grenzen, Beobachtungszahlen, entfernte Termine, Risk-Free- und Annualisierungsprüfung, Warnungen.
 - `run_manifest.json`: Engine-/Schema-Version, Run-ID, UTC-Zeit, vollständig aufgelöste Konfiguration, gewünschte/effektive Grenzen, Währung, `m`, Eingabepfade und SHA-256, Git-Commit und Dirty-Status, Python-/Runtime-Paketversionen, Kennzahlstatus und Ergebnis-Hashes.
 
-Bei aktiviertem Rebalancing kommen `weights_history.csv` und `trades.csv` hinzu, beide ebenfalls mit SHA-256 im Manifest. Ein ereignisfreier Rebalancing-Lauf hat eine korrekt benannte Trade-Tabelle mit Kopfzeile und ohne Datenzeilen. Ein reiner Buy-and-Hold-Lauf behält genau vier Dateien; ihm werden keine Gewichts-/Trade-Zeilen erfunden. Mehrere Strategien werden in Verlauf und Summary gemeinsam exportiert, ohne ihre Zahlen miteinander zu vermischen. Sortierung: `strategy,date`, bei Gewichten/Trades zusätzlich `asset_id`, jeweils stabil. Die Summary hat eine Zeile pro Strategie in Namensreihenfolge.
+Bei aktiviertem Rebalancing oder Country-Weighting kommen `weights_history.csv` und `trades.csv` hinzu, beide ebenfalls mit SHA-256 im Manifest. Ein ereignisfreier Portfolio-Lauf hat eine korrekt benannte Trade-Tabelle mit Kopfzeile und ohne Datenzeilen. Ein reiner Buy-and-Hold-Lauf behält genau vier Dateien; ihm werden keine Gewichts-/Trade-Zeilen erfunden. Mehrere Strategien werden in Verlauf und Summary gemeinsam exportiert, ohne ihre Zahlen miteinander zu vermischen. Sortierung: `strategy,date`, bei Gewichten/Trades zusätzlich `asset_id`, jeweils stabil. Die Summary hat eine Zeile pro Strategie in Namensreihenfolge.
 
 Eine tatsächlich ausgeführte Trendstrategie ergänzt `signals.csv`, ebenfalls atomisch und mit SHA-256. Ohne Signaldaten wird diese Datei nicht erzeugt. Die Startposition ist die einzige reguläre Zahlenlücke dieser Tabelle; Warm-up-Zeilen werden nicht exportiert.
 
@@ -147,7 +150,7 @@ Die vier Dateien, Standard-JSON, alle Eingabe-/Ergebnis-/Code-Hashes und der Git
 
 ## Grenzen und Verantwortlichkeiten
 
-Noch nicht implementiert: BIP-Strategie und historische BIP-Verfügbarkeit, reale Datenadapter, FRED-Zinsumrechnung, FX, verzinstes Cash, Long/Short, Transaktionskosten, Steuern, Inflation, Batch, Web/API, Parameteroptimierung, reale Hauptversuche und Zusatzanalysen. Rebalancing unterstützt ausschliesslich `annual`; Trend ausschliesslich Lag 1 und unverzinstes Long/Cash. Die unveränderte Core-Prüfung der Annualisierung ist weiterhin auf die oben beschriebenen Kalendergitter beschränkt; es gibt keine Börsenkalender-Aufbereitung.
+Noch nicht implementiert: reale Datenadapter, gemischte Kommer-/Faktor-/eigene Marktkapitalisierungsgewichtung, FRED-Zinsumrechnung, FX, verzinstes Cash, Long/Short, Transaktionskosten, Steuern, Inflation, Batch, Web/API, Parameteroptimierung, reale Hauptversuche und Zusatzanalysen. Feste Rebalancing- und Länderstrategie unterstützen ausschliesslich `annual`; Trend ausschliesslich Lag 1 und unverzinstes Long/Cash. Die unveränderte Core-Prüfung der Annualisierung ist weiterhin auf die oben beschriebenen Kalendergitter beschränkt; es gibt keine Börsenkalender-Aufbereitung.
 
 Vom Autor vorgegeben sind Datenvertrag, mathematische Definitionen, OD-01 bis OD-13 und die Arbeitsgrenze. Codex hat Paketname, strikten JSON-Vertrag, CSV-Lesetechnik, optionale Frequenzdeklaration als Prüfhilfe, Verfügbarkeitsstatus, Hashes, Exportablauf und synthetische Tests technisch umgesetzt. Neue finanzwirtschaftliche Regeln wurden nicht beschlossen; `decisions.md` wurde nicht geändert. Endgültige Versuchswerte bleiben beim Autor. Die bestandenen synthetischen Tests ersetzen keine fachliche Abnahme oder Prüfung realer Daten. Geschützte Notebooks, Methodik, Bibliographie und Buchkapitel bleiben unverändert.
 
@@ -268,3 +271,82 @@ Trend: Gesamtrendite **−3.2 %**, annualisierte Rendite **−6.2976 %**, annual
 Die ursprünglichen Buy-and-Hold-/Rebalancing-Demos wurden erneut ausgeführt; ihre fachlichen CSVs und Qualitätsberichte sind bytegleich zu den vor der Trend-Erweiterung erzeugten Kontrollläufen. Details und sämtliche Test-/Hashnachweise stehen in [testing.md](testing.md).
 
 Technische Entscheidungen durch Codex: additive Konfigurations-/Kontextfelder, einmal vorbereitete SMA-Sicht, vollständige Resultprüfung, Wiederverwendung des optionalen Exports und Version 0.3.0. Keine neue finanzwirtschaftliche Entscheidung war nötig. Die akzeptierte Core-/Rebalancing-Abnahme bleibt erhalten; fachliche Trend-Abnahme steht aus. Keine endgültige Versuchsauswahl, kein BIP und keine weiteren ausgeschlossenen Funktionen. Dieser Auftrag endet nach Trend.
+
+## BIP-Ländergewichtung vom 2026-10-04
+
+Ausgangspunkt ist der vom Autor akzeptierte Trend-Tag `engine-trend-v0.3.0`. Engine 0.4.0 setzt ausschliesslich OD-11/12 und den dokumentierten Länderauftrag um: pro Land ein expliziter Proxy, Gewicht `GDP_country / sum(GDP_all_configured_countries)`. Keine zusätzliche Unternehmensgewichtung innerhalb des Proxys und keine Gleichsetzung mit der gemischten Kommer-ETF-Logik. Die tatsächlichen Länder, Proxies, GDP-Quelle, Einheit und Untersuchungsparameter bleiben beim Autor.
+
+### Makrovertrag und historische Versionen
+
+Lokale UTF-8-CSV-Datei mit Pflichtspalten `period,country,indicator,value,unit,available_from`. `period` ist ein vierstelliges Referenzjahr `YYYY` (0001–9999), kein Veröffentlichungsdatum. `country`, `indicator` und `unit` sind vollständige, nicht leere Kennungen. `value` ist numerisch, endlich und strikt positiv. `available_from` ist das tatsächliche vom Datenlieferanten belegte Datum `YYYY-MM-DD`, ab dem genau diese gespeicherte Version verfügbar war. Die Engine schätzt oder verschiebt dieses Datum nicht und kann seine historische Wahrheit nicht aus dem Zahlenwert beweisen.
+
+Versionen desselben `country,indicator,period,unit` dürfen unterschiedliche Veröffentlichungsdaten besitzen. Verschiedene Werte mit identischem vollständigem Schlüssel einschliesslich `available_from` führen zum Fehler, auch bei einer erst später verfügbaren Zeile. Technische Entscheidung: identische vollständige Versionen werden dedupliziert; die geladenen Zeilen, verbleibenden Versionen und identischen Dubletten werden gezählt. Die Datei wird vollständig validiert. Zusätzliche gültige Länder, Indikatoren, Einheiten oder Jahre werden bei Entscheidungen exakt herausgefiltert bzw. über die gemeinsame Jahresauswahl berücksichtigt.
+
+`data.macro` ist bei aktivierter Länderstrategie zwingend. Es wird als einmal gelesener CSV-Snapshot vorbereitet und gehasht. Ohne aktive Länderstrategie wird kein Makroinput angefordert. Makroperioden oder Veröffentlichungsdaten verändern und verlängern den Performance-Kalender nicht.
+
+### Auswahl und Allokation
+
+`data.macro.select_gdp_targets()` führt an jedem tatsächlichen Entscheidungsdatum D diese Schritte aus:
+
+1. Exakt konfigurierten Indikator, Einheit und Länder verwenden, ausschliesslich Versionen mit `available_from <= D`.
+2. Verfügbare Referenzjahre pro Land ermitteln und die Schnittmenge **aller** konfigurierten Länder bilden.
+3. Das jüngste gemeinsame Jahr auswählen. Je Land dafür die bis D zuletzt veröffentlichte Version auswählen.
+4. Aus den ausgewählten positiven GDP-Werten die Gewichte berechnen und gegen den bestehenden Long-only-/Summenvertrag prüfen.
+
+Keine gemeinsame vollständige Jahresentscheidung bedeutet Fehler des gesamten Runs. Kein Land wird entfernt, kein Jahr gemischt, kein Wert aufgefüllt und keine fehlende Kombination umgedeutet. Gewichtsermittlung verwendet eine deterministische Länderreihenfolge und `math.fsum` für die Summe; es erfolgt keine zusätzliche Gewichtsnormalisierung. Numerisch nicht darstellbare positive Gewichte oder eine überlaufende GDP-Summe werden ausdrücklich abgelehnt.
+
+Am effektiven Start wird dieselbe As-of-Auswahl ausgeführt. Das Kapital wird entsprechend investiert; die explizite Startbewertung enthält keine Rendite und keinen Trade. Ein Startdatum am Jahresende bleibt initiale Allokation. Jahresentscheidungen erfolgen anschliessend am letzten gemeinsamen Bewertungstermin eines Kalenderjahres mit bereits verdienter und noch folgender Renditeperiode. Zuerst verdienen gehaltene Positionen die Rendite bis zu D; danach werden Drift, historische GDP-Ziele und Trades bestimmt. Neue Zielpositionen verdienen erst die nächste Periode. Am letzten Untersuchungsdatum wird weder eine weitere GDP-Entscheidung noch ein neues Referenzziel oder Abschlusstrade erzeugt.
+
+### Konfiguration und gemeinsamer Kontext
+
+```json
+"country_weighting": {
+  "enabled": true,
+  "country_assets": {"COUNTRY_A": "ASSET_A", "COUNTRY_B": "ASSET_B"},
+  "indicator": "GDP_SYNTHETIC",
+  "unit": "SYNTHETIC_UNITS",
+  "rebalance_frequency": "annual"
+}
+```
+
+Alle fünf Felder sind Pflichtfelder, ohne fachliche Defaults. Mindestens zwei Länder, genau ein nicht leerer Proxy je Land, keine mehrfach verwendete Proxy-ID. Doppelte JSON-Schlüssel werden bereits vom bestehenden Parser abgelehnt. Für jeden aktivierten Länderproxy sind Metadaten und Performance erforderlich; `assets.csv.country` muss exakt zur Länderkennung passen und die Währung zur `base_currency`. Ausschliesslich `annual` ist zulässig. Auch deaktivierte Blöcke werden auf gültige Struktur geprüft, ihre Anlagen/Makrodaten werden aber nicht geladen.
+
+`RunConfig` ergänzt sortierte immutable Länder-/Asset-Paare, Indikator, Einheit, Frequenz und Makropfad. Alle aktiven Länderproxies gehören zur bestehenden Performance-Vereinigung. Buy-and-Hold, feste Rebalancing-Strategie, Trend und Länderstrategie verwenden einen gemeinsamen Kalender und RF-Vergleich. `RunOutcome.results`/`.result`, Kennzahlenformeln, Annualisierung und Drawdown bleiben unverändert.
+
+### Gemeinsame Zustandslogik und dynamische Ziele
+
+Die bisherige jährliche Zustandsfolge aus `Rebalance.run()` wurde nach `engine.portfolio.run_annual_portfolio()` verschoben. Der Helper erhält nur eine Funktion zur Zielentscheidung: Rebalancing liefert immer seine festen konfigurierten Ziele; Country-Weighting liefert die historischen GDP-Ziele. Beide nutzen unverändert `prozentuale_aenderung()`, `neue_gewichtung()`, `rebalancing()` und `drawdown()` aus `src/funktionen.py`. Die gesamte Funktionsdatei und die Buy-and-Hold-/Trend-/Kennzahlen-/Kalenderimplementierungen bleiben bytegleich zum akzeptierten Tag. Keine zweite Portfolio- oder Tradeformel wurde eingeführt.
+
+`annual_rebalance_dates()` bildet den bisherigen Ereigniskalender gemeinsam ab. `StrategyResult` ergänzt ausschliesslich optionales `macro_decisions`. Feste Ziele müssen weiterhin exakt konstant bleiben. Länderziele dürfen sich ausschliesslich an tatsächlichen jährlichen Tradeereignissen ändern. Resultprüfungen kontrollieren vollständige Gewichte, jährliche Ereignisse, Kapitalerhaltung mit bestehenden Toleranzen 1e-12, historische Ziele und genau die angewandte Provenienz. Die Strategie verändert weder Makro-, Performance-, RF- noch Signal-Kontext oder dessen Qualitätsbericht.
+
+Die bestehenden Spalten bleiben unverändert. `weights_history` verwendet `strategy=country_weighting`: am Start alle drei Gewichte gleich GDP-Ziel; ohne Ereignis `weight_before` und `weight_after` gleich dem tatsächlichen Driftgewicht und `target_weight` gleich dem zuletzt angewandten GDP-Ziel; am Ereignis neues Ziel, `weight_after` gleich diesem Ziel innerhalb bestehender numerischer Toleranz. Das Ziel bleibt danach bis zur nächsten tatsächlichen Entscheidung bestehen, auch am endgültigen Ende. `trades` enthält für jedes tatsächliche Jahresereignis alle Proxypositionen, auch Nulltransaktionen; keine initialen oder finalen Trades. Vor-/Zielsumme entspricht dem Vermögen, Transaktionssumme 0.
+
+### Provenienz und Exporte
+
+Kein zusätzlicher GDP-CSV-Output. `portfolio_history.csv`, `summary.csv`, `weights_history.csv` und `trades.csv` integrieren die Länderstrategie in die bestehenden gemeinsamen Exporte. Bei aktiver Trendstrategie kommt unverändert `signals.csv` hinzu.
+
+`data_quality.json.macro` enthält `loaded_rows`, `validated_version_rows`, `identical_duplicate_rows`, `configured_countries` sowie `decisions` für jede tatsächlich angewandte initiale oder jährliche Entscheidung. Jede Entscheidung enthält `decision_date`, `decision_type` (`initial`/`annual_rebalance`), `selected_period`, `indicator`, `unit` und eine sortierte `countries`-Liste mit `country,asset_id,value,available_from,target_weight`. Der Export ergänzt diese Liste aus dem Resultat, ohne den gemeinsamen Kontext zu verändern. Unbenutzte spätere Versionen werden nicht einzeln gelistet.
+
+Die Makrodatei steht in `run_manifest.json.input_files` mit SHA-256 der gelesenen Originalbytes. Eingabeänderungen nach dem Lesen werden vor Veröffentlichung abgefangen. Aufgelöste Konfiguration enthält vollständiges Mapping, Indikator, Einheit, Frequenz und absoluten Makropfad. Gemeinsame Ergebnis-/Quellcode-Hashes, Standard-JSON und atomischer Export gelten unverändert.
+
+### Vierte künstliche Demo und Kontrollen
+
+```powershell
+.\.venv\Scripts\python.exe -m maturarbeit_engine run --config configs/demo_country_weighting.json
+```
+
+Konfiguration und vier CSVs liegen unter `configs/country_weighting_demo/`; sämtliche Länder, GDP-Zahlen, Proxyreihen, Signale und RF-Renditen sind künstlich. Kapital 100 CHF, fünf gemeinsame Bewertungen vom 2020-01-31 bis 2021-12-31. GDP 2018: 60/40, beide verfügbar seit 2019-06-30. GDP 2019: A zunächst 52 seit 2020-06-01, Revision 50 seit 2020-12-15; B 50 seit 2020-09-01. A-Revision 5000 seit 2021-02-01 ist beim Entscheid 2020-12-30 unbekannt. GDP 2020: 80/20, erst im August/September 2021 verfügbar; am terminalen 2021-12-31 erfolgt keine weitere Allokation.
+
+| Bewertung | Ländervermögen | A-Gewicht vor Trade | Tatsächlich angewandtes Referenzziel A/B |
+|---|---:|---:|---|
+| 2020-01-31 | 100 | 0.6 | 60/40, GDP 2018 |
+| 2020-06-30 | 106 | 66/106 | weiterhin 60/40 |
+| 2020-12-30 | 112.6 | 72.6/112.6 | 50/50, GDP 2019, danach A/B je 56.3 |
+| 2021-06-30 | 112.6 | 0.45 | weiterhin 50/50 |
+| 2021-12-31 | 117.667 | 55.737/117.667 | weiterhin 50/50, kein Ereignis |
+
+Einziger Länder-Trade: A `72.6 → 56.3`, Verkauf **16.3**; B `40 → 56.3`, Kauf **16.3**. Die folgende Periode verdient mit je 56.3: A `×0.9 = 50.67`, B `×1.1 = 61.93`, zusammen 112.6. Danach A `×1.1 = 55.737`, B weiterhin 61.93; Endwert 117.667, Gesamtrendite **17.667 %**, maximaler Drawdown **0**. Feste 60/40-Strategie endet weiterhin bei 116.4284, Buy-and-Hold bei 119.79 und Trend bei 99. Wegen des explizit nicht regelmässigen Demogitters bleiben Jahresrendite, Volatilität und Sharpe für alle vier Strategien nicht verfügbar; die vier synthetischen RF-Intervalle sind korrekt ausgerichtet.
+
+Tatsächlicher finaler Run: `outputs/runs/synthetic_country_weighting-5757988362414d40afd5067a9bf4b6dd/`, sieben Dateien, 20 Portfoliozeilen, vier Summary-Zeilen, 20 Gewichtszeilen, vier Tradezeilen (zwei je Portfolio), fünf Trend-Signalzeilen und zwei GDP-Entscheidungen. Alle bisherigen Demo-CSV-Dateien/Qualitätsberichte bleiben bytegleich. Vollständige Suite **344 bestanden**, davon 242 unveränderte bisherige und 102 neue Länderfälle; unabhängige Hand-, JSON-, Hash- und Diffkontrollen siehe [testing.md](testing.md).
+
+Technische Entscheidungen durch Codex: additive Konfigurations-/Kontext-/Resultfelder, identische Versionsdubletten deduplizieren und zählen, deterministische As-of-Auswahl, gemeinsame jährliche Zustandsfolge, vollständige Resultprüfung/Provenienz und konsistente Version 0.4.0. Keine neue finanzwirtschaftliche Entscheidung war nötig; `decisions.md` und geschützte Inhalte bleiben unverändert. Fachliche Länder-Abnahme und historische Belege realer `available_from`-Angaben stehen aus. Keine realen Daten importiert, keine endgültigen Versuchswerte bestimmt, kein Commit oder Hauptversuch. Dieser Auftrag endet nach der geprüften Länder-Erweiterung.

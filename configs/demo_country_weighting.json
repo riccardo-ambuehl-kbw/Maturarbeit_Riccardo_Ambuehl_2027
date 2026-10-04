@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "run_name": "synthetic_country_weighting",
+  "period": {"start": "2020-01-31", "end": "2021-12-31"},
+  "start_capital": 100,
+  "base_currency": "CHF",
+  "periods_per_year": 12,
+  "period_frequency": null,
+  "data": {
+    "market": "country_weighting_demo/market.csv",
+    "assets": "country_weighting_demo/assets.csv",
+    "macro": "country_weighting_demo/macro.csv",
+    "risk_free": {"path": "country_weighting_demo/risk_free.csv", "series_id": "RF_SYNTHETIC"}
+  },
+  "strategies": {
+    "buy_hold": {"enabled": true, "asset": "ASSET_A"},
+    "rebalance": {"enabled": true, "target_weights": {"ASSET_A": 0.6, "ASSET_B": 0.4}, "rebalance_frequency": "annual"},
+    "trend": {"enabled": true, "asset": "ASSET_A", "short_window": 1, "long_window": 2, "signal_lag": 1, "signal_source": "signal_value"},
+    "country_weighting": {
+      "enabled": true,
+      "country_assets": {"COUNTRY_A": "ASSET_A", "COUNTRY_B": "ASSET_B"},
+      "indicator": "GDP_SYNTHETIC",
+      "unit": "SYNTHETIC_UNITS",
+      "rebalance_frequency": "annual"
+    }
+  },
+  "output_dir": "../outputs/runs"
+}

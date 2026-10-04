@@ -1,7 +1,9 @@
-# Engine v1 – ausgeführte Core-, Rebalancing- und Trend-Prüfungen
+# Engine v1 – ausgeführte Core-, Rebalancing-, Trend- und Länder-Prüfungen
 
 **Core-Prüfung:** 2026-10-03. **Plattform:** Windows, CPython 3.14.0.
 **Versionen:** Engine 0.1.0, NumPy 2.3.5, pandas 2.3.3, pytest 8.4.2; weitere Versionen siehe `requirements.lock`.
+
+**Aktueller Abschluss:** 2026-10-04, Engine 0.4.0: **344 Tests bestanden**. Die älteren Abschnitte dokumentieren die damaligen Prüfläufe; Länder-Erweiterung und aktuelle Grenzen stehen im letzten Abschnitt.
 
 ## Saubere Projektumgebung
 
@@ -252,3 +254,93 @@ Alle Manifeste und Qualitätsberichte strikt ohne NaN/Infinity gelesen. Jede Ein
 `git diff` einschliesslich neuer Quellen/Tests/Daten geprüft; `git diff --check` und Text-/Link-/JSON-Prüfungen erfolgreich. SHA-256-Abgleich aller **73** zu Beginn versionierten Dateien bestätigt unveränderte geschützte Notebooks, Methodik, Bibliographie, Buchkapitel, `decisions.md`, AGENTS.md, bestehende Tests und beide bisherigen Demo-Datensätze. AST-Vergleich gegenüber dem akzeptierten Tag bestätigt, dass von den vorhandenen Definitionen in `src/funktionen.py` ausschliesslich `trendfolge()` refaktoriert wurde. Neue Helper sind gesondert dokumentiert. Kein Commit erstellt.
 
 Keine neue fachliche Entscheidung nötig. Core-/Rebalancing-Abnahme laut Autor akzeptiert; fachliche Trend-Abnahme offen. Geprüft sind künstliche Daten auf Windows/CPython 3.14.0, keine realen Daten und keine anderen Plattformen. Endgültige SMA-Fenster/Signalreihe bleiben beim Autor. Keine BIP-, Liveadapter-, FX-, verzinste Cash-, Short-, Kosten-, Steuer-, Inflations-, Batch-, Optimierungs- oder Hauptversuchslogik ergänzt. Dieser Auftrag endet nach Trend.
+
+## Länder-Erweiterung vom 2026-10-04 (Engine 0.4.0)
+
+Akzeptierter Ausgangspunkt: `engine-trend-v0.3.0` auf `c101ca558e60228d6e1807a0d192df11d3d5c49f`. Arbeitsbeginn sauber auf `b364109325ad227ad9b519b312374202405453a4`; gegenüber dem Tag ausschliesslich der neue Länder-Prompt. Alle bisherigen Quellen, Tests und Demos entsprachen dem akzeptierten Tag. Vor Implementierung wurden 80 versionierte Datei-Hashes gesichert.
+
+### Tatsächlich ausgeführte Befehle und Ergebnisse
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q --basetemp=.venv/pytest-country-baseline
+.\.venv\Scripts\python.exe -m pytest -q --basetemp=.venv/pytest-country-refactor
+.\.venv\Scripts\python.exe -m pytest -q tests/test_country_weighting.py --basetemp=.venv/pytest-country-new
+.\.venv\Scripts\python.exe -m pip install --no-cache-dir --disable-pip-version-check --no-deps -e .
+.\.venv\Scripts\python.exe -m pip check
+.\.venv\Scripts\python.exe -m pytest -q --basetemp=.venv/pytest-country-final
+```
+
+| Lauf | Tatsächliches Ergebnis |
+|---|---|
+| Ausgangspunkt, gesamte bisherige Suite | 242 passed in 30.09s |
+| Gemeinsame Portfolio-Zustandsfolge, bisherige Suite | 242 passed in 28.32s |
+| Erste vollständige Länder-Testdatei | 99 passed in 27.19s |
+| Finale gesamte Suite nach zusätzlichen Kontrollen | **344 passed in 50.68s** |
+| Lokale Paketprüfung | **No broken requirements found.** |
+
+Final: **242 unveränderte bisherige Fälle + 102 neue Länderfälle**. Nach dem ersten Länderlauf wurde die Revisionsprüfung um einen tatsächlichen Folgeentscheid ergänzt und zusätzlich ein während des Laufs geänderter Makrosnapshot, voneinander abweichende Länder-/Proxy-Sortierung und doppelte Länder-JSON-Schlüssel geprüft. Die finale Suite wurde danach tatsächlich ausgeführt. Keine bisherigen Tests verändert oder abgeschwächt; bestehender Netzwerk-Guard und Warnungen als Fehler bleiben aktiv. Seit dem finalen Lauf wurden nur Dokumentation und lokale Kontrollhilfen ergänzt, kein Engine-Code oder Test mehr geändert.
+
+Die editierbare lokale Installation wurde von 0.3.0 auf 0.4.0 aktualisiert, Quell-/Paketversion konsistent geprüft. Der erste Versuch scheiterte am gesperrten Netzwerkzugriff für die festgeschriebenen isolierten Build-Werkzeuge (`WinError 10013`); der anschliessende genehmigte Versuch war erfolgreich. Runtime-Abhängigkeiten/Lock unverändert; keine globale Installation. Geprüfte Plattform weiterhin Windows/CPython 3.14.0 mit NumPy 2.3.5, pandas 2.3.3 und pytest 8.4.2. Die Testablagen liegen frisch unter der lokalen `.venv`.
+
+### Pflichtgruppen A–Q
+
+| Gruppe | Unabhängig geprüfter Nachweis |
+|---|---|
+| A – Makrovertrag | Alle sechs Pflichtspalten; vierstelliges Referenzjahr; vollständige Kennungen; positive endliche Werte; korrekte Datumswerte; ambige vollständige Versionsschlüssel abgelehnt. Identische Dubletten reproduzierbar dedupliziert und gezählt. |
+| B – As-of | GDP-2019-Revision 5000 veröffentlicht 2021-02-01, nach Trade 2020-12-30; Änderung auf 0.001 lässt frühere Portfolio-/Gewichts-/Tradezustände exakt identisch. |
+| C – Revisionen | Bis 2020-12-14 A=52, ab Veröffentlichungsdatum 2020-12-15 A=50, B=50; später A=5000 erst ab 2021-02-01 zulässig. Gleichheit `available_from == D` eingeschlossen. |
+| D – Gemeinsames Jahr | A besitzt bereits GDP 2020 am Jahresentscheid, B nur 2019: beide verwenden 2019; kein Mischen. |
+| E – Fehlende Länder | Fehlendes Land, disjunkte Jahre, zu späte Startverfügbarkeit und fehlende konfigurierte Indikator-/Einheitskombination lehnen gesamten Run vor Output ab. Keine Renormierung. |
+| F – Start | Effektiver Start, GDP 2018 60/40, Kapital 100 → Positionen 60/40; später verfügbare 2019-Daten ignoriert; Start am Jahresende bleibt initial und tradefrei. |
+| G – Jahresfolge | Verdiente Rendite ergibt 72.6/40 vor Trade; Ziel 50/50 ergibt 56.3/56.3; Folgeperiode 50.67/61.93 ergibt unveränderte Summe 112.6. |
+| H – Ziele | 60/40 bleibt bis zum Ereignis, dann 50/50 bis einschliesslich Ende. Mehrjährige Variante wechselt am nächsten wirklichen Jahresereignis auf GDP 2020 80/20. Korruption zwischen Ereignissen abgelehnt. Feste Rebalancing-Ziele weiterhin streng konstant. |
+| I – Ende | Terminale GDP-2020-Verfügbarkeit erzeugt weder neues Ziel noch Trade/Entscheidung. Zwei Bewertungen liefern nur initiale Entscheidung und korrekt leere Trade-Tabelle mit Kopfzeile. |
+| J – Kapital | Vor-/Zielsumme = Vermögen und Transaktionssumme 0 bei jedem der mehrjährigen Ereignisse. Nulltransaktionen werden als echtes jährliches Ereignis dokumentiert. |
+| K – Mapping | Unbekannte/fehlende Proxies, fehlende Metadaten, doppelte Proxys, falsches Land/Währung, leeres/einländriges/typfalsches Mapping abgelehnt. Verschiedene Länder-/Asset-Sortierung korrekt. |
+| L – Indikator/Einheit | Zusätzliche gültige Kombinationen und unbenötigte Länder verändern keine CSV-Ergebnisse oder Entscheidungen. Fehlende exakte Kombination abgelehnt. |
+| M – Zukunft | Spätere Revision, späterer GDP-Referenzwert und späterer Marktwert verändern keine früheren Portfolio-/Gewichts-/Tradezustände (`check_exact=True`). Zusätzlicher tatsächlicher Folgeentscheid zeigt Wirkung erst in dessen folgender Renditeperiode. |
+| N – Vergleich | Alle vier Strategien im selben Run, Summary je einmal und identische Kalender; Makro beeinflusst andere Strategien nicht. Eigenes Länderasset bestimmt die Performance-Vereinigung. Länder allein und deaktiviert geprüft; regulärer Monatsfall nutzt dieselbe RF-/Stichproben-Sharpe-/Annualisierungsformel. |
+| O – Reihenfolge | Makro-, Markt-, Metadaten-/RF-Zeilen und JSON-Länder-/Strategiereihenfolge vertauscht: alle fachlichen CSVs und Qualitätsberichte bytegleich. Umgekehrte Strategieausführung verändert weder Resultate noch gemeinsamen Kontext. |
+| P – Provenienz | Geladene Zeilen, Länder, jede angewandte Entscheidung samt Jahr/Wert/Version/Gewicht, Makro-SHA, aufgelöste Parameter, gemeinsame Output-Hashes und striktes JSON geprüft. Geänderter Makrosnapshot wird vor Export abgelehnt. |
+| Q – Regression | Alle 242 bisherigen Tests unverändert grün; alle drei bisherigen CLI-Demos erneut erfolgreich und deren sämtliche fachlichen Exporte bytegleich vor/nach Erweiterung. |
+
+Weitere Kontrollen: mindestens drei Länder mit vollständigem Nenner (60/40/100 → 30/20/50), Pflichtparameter ohne Defaults, lokale Makropfade, doppelte Länder-JSON-Schlüssel, abgelehnte numerisch nicht darstellbare GDP-Gewichte/Summen und Result-Provenienzkorruption. Die GDP-Datei wird vollständig validiert; zusätzliche gültige Zeilen ändern die konfigurierte Auswahl nicht.
+
+### Besonders wichtige historische Revisionskontrolle
+
+`test_future_changes_leave_earlier_portfolios_weights_trades_exact[later_revision]` ändert die am 2021-02-01 veröffentlichte GDP-2019-Revision von A **5000 → 0.001**. Beide Werte unterscheiden sich stark von der vor dem Trade bekannten Revision **50** vom 2020-12-15. Der Trade 2020-12-30 bleibt exakt **−16.3/+16.3**; alle früheren Zustände werden exakt verglichen. Da der kurze Demolauf keine spätere wirkliche GDP-Entscheidung hat, sind sogar sämtliche CSVs und `data_quality.json` bytegleich.
+
+`test_later_revision_applies_only_at_the_next_actual_annual_decision` verlängert bis 2022-06-30 und entfernt nur die synthetischen GDP-2020-Zeilen. Nun darf die Revision erst am wirklichen Folgeentscheid 2021-12-31 angewandt werden. Vermögen bis einschliesslich dieses Entscheiddatums ist exakt identisch; frühere Gewichte/Trades bleiben identisch. Erst die folgende Periode unterscheidet sich: `117.667 × (1 + 5000/5050)` bzw. `117.667 × (1 + 0.001/50.001)`. Damit wird sowohl historische Unverändertheit als auch die spätere zulässige Wirkung der Revision unabhängig kontrolliert.
+
+### Vier CLI-Demos und manuelle Kontrollen
+
+Nach dem finalen Code-/Teststand ausgeführt, jeweils Exit **0**:
+
+```powershell
+.\.venv\Scripts\python.exe -m maturarbeit_engine run --config configs/demo_buy_hold.json
+.\.venv\Scripts\python.exe -m maturarbeit_engine run --config configs/demo_rebalance.json
+.\.venv\Scripts\python.exe -m maturarbeit_engine run --config configs/demo_trend.json
+.\.venv\Scripts\python.exe -m maturarbeit_engine run --config configs/demo_country_weighting.json
+.\.venv\Scripts\python.exe .venv/check_country_exports.py
+```
+
+Die letzte Datei ist eine lokale ignorierte Kontrolle mit unabhängigen skalaren Handformeln, Bytevergleichen und CSV-/JSON-/Hashprüfungen. Dauerhafte Tests liegen in `tests/test_country_weighting.py`. Vor Implementierung wurden die drei bestehenden CLI-Demos als Vergleich tatsächlich ausgeführt.
+
+| Demo | Finaler Run unter `outputs/runs/` | Nachweis |
+|---|---|---|
+| Buy-and-Hold | `synthetic_buy_hold-3a715bd033a641459520a32b914c825d` | 100 → 110 → 99, vier Dateien, fachliche Exporte bytegleich zu `synthetic_buy_hold-190856cffd2c42f5836093dd68199465` |
+| Rebalancing | `synthetic_rebalance-ab87083f6af44d0797b3ab60e5d9f2c4` | 100 → 106 → 112.6 → 110.348 → 116.4284, sechs Dateien, fachliche Exporte bytegleich zu `synthetic_rebalance-43275012cb964712bf89ddafb2da1546` |
+| Trend | `synthetic_trend-f7f356f13dfe4d5a8b663548bd199c68` | Trendende 96.8, sieben Dateien, fachliche Exporte bytegleich zu `synthetic_trend-305222cac5c34450997ad8710d9aec11` |
+| Länder/Vier-Strategien-Vergleich | `synthetic_country_weighting-5757988362414d40afd5067a9bf4b6dd` | Sieben Dateien, 20 Portfoliozeilen, vier Summary-Zeilen, 20 Gewichtszeilen, vier Tradezeilen, fünf Signalzeilen, zwei GDP-Entscheidungen |
+
+Manuelle GDP-Kontrolle: Start 2020-01-31 aus gemeinsamem GDP-Jahr 2018 mit 60/40. Entscheid 2020-12-30 aus Jahr 2019, A-Revision 50 vom 2020-12-15 und B=50 vom 2020-09-01; 2021-Revision 5000 ausgeschlossen. GDP 2020 80/20 wird am terminalen 2021-12-31 nicht neu angewandt. Drift A 66/106 im Juni und 72.6/112.6 am Jahresende; danach je 56.3 investiert, Transaktionen −16.3/+16.3, Summe 0. Folgeperiode A=50.67/B=61.93, Summe 112.6, tatsächliche Gewichte 45/55 bei weiter geltendem Referenzziel 50/50. Ende A=55.737/B=61.93, Summe **117.667**, Gesamtrendite **17.667 %**, maximaler Drawdown **0**. Kein Start-/Abschluss-Trade. Buy-and-Hold **119.79**, festes Rebalancing **116.4284**, Trend **99**.
+
+Unregelmässiges Gitter mit `period_frequency=null`: Jahresrendite, Volatilität und Sharpe bleiben für alle vier Strategien korrekt leer mit bestehendem Status; vier RF-Intervalle und fünf gemeinsame Performance-Bewertungen geprüft. Der separate reguläre Monats-Test kontrolliert die unveränderte Sharpe-Definition über RF-Überschussrenditen mit `ddof=1` und Jahresfaktor 12.
+
+Alle Manifeste und Qualitätsberichte strikt ohne NaN/Infinity gelesen. Jede Eingabe-/Ergebnisdatei, alle einzelnen Quellcode-Hashes und der aggregierte Code-Hash nachgerechnet. UTC-Zeit, Engine 0.4.0, Schema 1.0, unveränderter Commit `b364109325ad227ad9b519b312374202405453a4` mit `dirty=true`, explizite Länderparameter und Makro-SHA bestätigt. Bisherige fachliche Exporte sind bytegleich, veränderte Versions-/Run-Metadaten erwartbar.
+
+### Abschluss und Grenzen
+
+Gesamten Diff einschliesslich neuer Quellen/Tests/Daten geprüft; `git diff --check`, JSON-/Text-/Linkprüfungen sowie SHA-256-Abgleich der 80 zu Beginn versionierten Dateien durchgeführt. Geschützte Notebooks, Methodik, Bibliographie, Buchkapitel, `decisions.md`, AGENTS.md, alle bisherigen Tests/Demos und `src/funktionen.py` unverändert. Dessen sämtliche 26 Funktionsdefinitionen bleiben erhalten. Buy-and-Hold, Trend, Kennzahlen und Kalenderaufbereitung sind bytegleich; nur feste Rebalancing-Zustandsfolge wurde technisch in den gemeinsamen Helper verschoben. Kein Commit erstellt.
+
+Keine neue fachliche Entscheidung nötig. Core, Rebalancing und Trend laut Autor akzeptiert; fachliche Länder-Abnahme offen. Synthetische Daten auf Windows/CPython 3.14.0 geprüft, andere Plattformen und reale Daten nicht geprüft. Die Engine setzt gelieferte Verfügbarkeitsdaten konsequent um, kann deren historische Richtigkeit aber nicht beweisen. Keine realen Quellen/Länder/Proxies oder Hauptversuchsparameter gewählt. Keine gemischte Kommer-/Faktor-/Marktkapitalisierungsstrategie, Downloads, FX, Kosten, Steuern, Inflation, Batch, Web/API oder Optimierung ergänzt. Der Auftrag endet hier nach der Länder-Erweiterung.

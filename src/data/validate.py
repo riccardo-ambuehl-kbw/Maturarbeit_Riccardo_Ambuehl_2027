@@ -78,3 +78,21 @@ def validate_risk_free(frame):
     if frame.duplicated(["period_start", "period_end", "series_id"]).any():
         raise DataValidationError("Duplicate risk-free period/series.")
     return frame.sort_values(["series_id", "period_start", "period_end"], kind="stable").reset_index(drop=True)
+
+
+def validate_macro(frame):
+    """Validate annual GDP versions; identical full-key duplicates are deduplicated."""
+    fields = ["period", "country", "indicator", "value", "unit", "available_from"]
+    require_columns(frame, fields)
+    frame = frame.copy()
+    identifiers(frame, ["country", "indicator", "unit"])
+    valid_year = frame.period.map(lambda v: isinstance(v, str) and len(v) == 4
+                                and v.isascii() and v.isdigit() and int(v) > 0)
+    if not valid_year.all():
+        raise DataValidationError("Macro period must be a four-digit reference year YYYY.")
+    frame["value"] = numeric(frame["value"], positive=True)
+    frame["available_from"] = dates(frame["available_from"])
+    keys = ["country", "indicator", "period", "unit", "available_from"]
+    if (frame.groupby(keys, dropna=False).value.nunique() > 1).any():
+        raise DataValidationError("Ambiguous macro versions: different values for the same full key.")
+    return frame.sort_values(keys, kind="stable").drop_duplicates(keys).reset_index(drop=True)

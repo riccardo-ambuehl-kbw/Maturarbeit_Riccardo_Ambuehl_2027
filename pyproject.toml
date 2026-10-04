@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "maturarbeit-engine"
-version = "0.3.0"
-description = "Local reproducible Buy-and-Hold, annual rebalancing and SMA Long/Cash engine"
+version = "0.4.0"
+description = "Local reproducible Buy-and-Hold, annual rebalancing, SMA Long/Cash and GDP country engine"
 requires-python = ">=3.11,<3.15"
 dependencies = ["numpy==2.3.5", "pandas==2.3.3"]
 

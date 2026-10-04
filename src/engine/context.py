@@ -3,7 +3,7 @@ from dataclasses import dataclass
 import pandas as pd
 from .config import RunConfig
 from ..data.normalize import read_csv_snapshot, align_performance, align_risk_free, prepare_trend_signals
-from ..data.validate import validate_assets, validate_market, validate_risk_free
+from ..data.validate import validate_assets, validate_market, validate_risk_free, validate_macro, DataValidationError
 
 
 @dataclass(frozen=True)
@@ -16,6 +16,7 @@ class SimulationContext:
     annualization_available: bool
     annualization_status: str
     trend_signals: pd.DataFrame | None = None
+    macro: pd.DataFrame | None = None
 
 
 def check_period_logic(index, frequency, periods_per_year):
@@ -38,6 +39,11 @@ def prepare_context(config: RunConfig) -> SimulationContext:
     market, market_info = read_csv_snapshot(config.market_path, "market")
     required = config.required_assets
     market = validate_market(market, assets, required, config.base_currency)
+    if config.country_weighting_enabled:
+        metadata = assets.set_index("asset_id")
+        for country, asset in config.country_assets:
+            if metadata.loc[asset, "country"] != country:
+                raise DataValidationError(f"Country mismatch for proxy {asset}: expected {country}.")
     performance, quality = align_performance(market, required, config.start, config.end)
     used_columns = {"date", "asset_id", "performance_value"}
     trend_signals = None
@@ -52,6 +58,14 @@ def prepare_context(config: RunConfig) -> SimulationContext:
     rf = None
     inputs = [market_info, asset_info, {"kind": "config", "path": str(config.config_path),
                                       "sha256": config.config_sha256}]
+    macro = None
+    if config.country_weighting_enabled:
+        macro_rows, macro_info = read_csv_snapshot(config.macro_path, "macro")
+        macro = validate_macro(macro_rows)
+        inputs.append(macro_info)
+        quality["macro"] = {"loaded_rows": len(macro_rows), "validated_version_rows": len(macro),
+                            "identical_duplicate_rows": len(macro_rows) - len(macro),
+                            "configured_countries": sorted(dict(config.country_assets))}
     if config.risk_free_path is not None:
         frame, rf_info = read_csv_snapshot(config.risk_free_path, "risk_free")
         rf, quality["risk_free"] = align_risk_free(validate_risk_free(frame), config.risk_free_series,
@@ -66,4 +80,5 @@ def prepare_context(config: RunConfig) -> SimulationContext:
                                 "period_frequency": config.period_frequency}
     if not available:
         quality["warnings"].append(f"Annual metrics unavailable: {status}. No frequency is inferred.")
-    return SimulationContext(config, performance, rf, quality, tuple(inputs), available, status, trend_signals)
+    return SimulationContext(config, performance, rf, quality, tuple(inputs), available, status,
+                             trend_signals, macro)

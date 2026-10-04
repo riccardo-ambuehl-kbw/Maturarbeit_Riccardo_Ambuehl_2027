@@ -66,6 +66,12 @@ class RunConfig:
     long_window: int | None = None
     signal_lag: int | None = None
     signal_source: str | None = None
+    country_weighting_enabled: bool = False
+    country_assets: tuple[tuple[str, str], ...] = ()
+    gdp_indicator: str | None = None
+    gdp_unit: str | None = None
+    country_rebalance_frequency: str | None = None
+    macro_path: Path | None = None
 
     @property
     def required_assets(self):
@@ -74,7 +80,13 @@ class RunConfig:
             assets.update(a for a, _ in self.target_weights)
         if self.trend_enabled:
             assets.add(self.trend_asset)
+        if self.country_weighting_enabled:
+            assets.update(asset for _, asset in self.country_assets)
         return tuple(sorted(assets))
+
+    def country_params(self):
+        return {"country_assets": dict(self.country_assets), "indicator": self.gdp_indicator,
+                "unit": self.gdp_unit, "rebalance_frequency": self.country_rebalance_frequency}
 
     def trend_params(self):
         return {"asset": self.trend_asset, "short_window": self.short_window,
@@ -91,6 +103,9 @@ class RunConfig:
                                        "rebalance_frequency": self.rebalance_frequency}
         if self.trend_asset is not None:
             strategies["trend"] = {"enabled": self.trend_enabled, **self.trend_params()}
+        if self.country_rebalance_frequency is not None:
+            strategies["country_weighting"] = {"enabled": self.country_weighting_enabled,
+                                               **self.country_params()}
         return strategies
 
     def resolved(self):
@@ -102,7 +117,8 @@ class RunConfig:
             "period_frequency": self.period_frequency,
             "data": {"market": str(self.market_path), "assets": str(self.assets_path),
                      "risk_free": None if self.risk_free_path is None else {
-                         "path": str(self.risk_free_path), "series_id": self.risk_free_series}},
+                         "path": str(self.risk_free_path), "series_id": self.risk_free_series},
+                     **({"macro": str(self.macro_path)} if self.macro_path is not None else {})},
             "strategies": self.strategies(),
             "output_dir": str(self.output_dir),
         }
@@ -152,16 +168,20 @@ def load_config(path: str | Path) -> RunConfig:
     if frequency is not None and (not isinstance(frequency, str)
                                   or frequency not in {"D", "W", "MS", "ME", "YS", "YE"}):
         raise ConfigError("Unsupported period_frequency. Use D, W, MS, ME, YS, YE or null.")
-    exact_keys(raw["strategies"], [], ["buy_hold", "rebalance", "trend"])
+    exact_keys(raw["strategies"], [], ["buy_hold", "rebalance", "trend", "country_weighting"])
     buy_enabled = rebalance_enabled = False
     trend_enabled = False
     trend_asset = short_window = long_window = signal_lag = signal_source = None
     asset = rebalance_frequency = None
     target_weights = ()
+    country_enabled = False
+    country_assets = ()
+    gdp_indicator = gdp_unit = country_frequency = None
     for name, params in raw["strategies"].items():
         required = {"buy_hold": ["enabled", "asset"],
                     "rebalance": ["enabled", "target_weights", "rebalance_frequency"],
-                    "trend": ["enabled", "asset", "short_window", "long_window", "signal_lag", "signal_source"]}[name]
+                    "trend": ["enabled", "asset", "short_window", "long_window", "signal_lag", "signal_source"],
+                    "country_weighting": ["enabled", "country_assets", "indicator", "unit", "rebalance_frequency"]}[name]
         exact_keys(params, required)
         if not isinstance(params["enabled"], bool):
             raise ConfigError("Strategy enabled must be a JSON boolean.")
@@ -184,7 +204,7 @@ def load_config(path: str | Path) -> RunConfig:
             except (ValueError, TypeError, OverflowError) as exc:
                 raise ConfigError(f"Invalid target weights: {exc}") from exc
             target_weights = tuple(sorted(validated.items()))
-        else:
+        elif name == "trend":
             trend_enabled, trend_asset = params["enabled"], params["asset"]
             if not isinstance(trend_asset, str) or not trend_asset.strip():
                 raise ConfigError("Trend requires an explicit asset_id.")
@@ -198,10 +218,29 @@ def load_config(path: str | Path) -> RunConfig:
                 raise ConfigError("Trend signal_lag must be exactly integer 1.")
             if not isinstance(signal_source, str) or signal_source not in {"signal_value", "performance_value"}:
                 raise ConfigError("Trend signal_source must explicitly select signal_value or performance_value.")
-    if not (buy_enabled or rebalance_enabled or trend_enabled):
+        else:
+            country_enabled = params["enabled"]
+            mapping = params["country_assets"]
+            if (not isinstance(mapping, dict) or len(mapping) < 2
+                    or any(not isinstance(c, str) or not c.strip() for c in mapping)
+                    or any(not isinstance(a, str) or not a.strip() for a in mapping.values())):
+                raise ConfigError("country_assets requires at least two explicit countries and asset proxies.")
+            if len(set(mapping.values())) != len(mapping):
+                raise ConfigError("Each country must have a unique asset proxy.")
+            country_assets = tuple(sorted(mapping.items()))
+            gdp_indicator, gdp_unit = params["indicator"], params["unit"]
+            if any(not isinstance(v, str) or not v.strip() for v in [gdp_indicator, gdp_unit]):
+                raise ConfigError("GDP indicator and unit must be explicit nonempty identifiers.")
+            country_frequency = params["rebalance_frequency"]
+            if country_frequency != "annual":
+                raise ConfigError("Only annual country-weighting rebalancing is supported.")
+    if not (buy_enabled or rebalance_enabled or trend_enabled or country_enabled):
         raise ConfigError("At least one supported strategy must be enabled.")
     data = raw["data"]
-    exact_keys(data, ["market", "assets"], ["risk_free"])
+    exact_keys(data, ["market", "assets"], ["risk_free", "macro"])
+    macro_path = local_path(data["macro"], path.parent) if "macro" in data else None
+    if country_enabled and macro_path is None:
+        raise ConfigError("Enabled country_weighting requires an explicit local data.macro path.")
     rf_path = rf_series = None
     if data.get("risk_free") is not None:
         exact_keys(data["risk_free"], ["path", "series_id"])
@@ -215,4 +254,5 @@ def load_config(path: str | Path) -> RunConfig:
                      local_path(data["market"], path.parent), local_path(data["assets"], path.parent),
                      rf_path, rf_series, asset, output.resolve(), path, sha256(content).hexdigest(),
                      buy_enabled, rebalance_enabled, target_weights, rebalance_frequency,
-                     trend_enabled, trend_asset, short_window, long_window, signal_lag, signal_source)
+                     trend_enabled, trend_asset, short_window, long_window, signal_lag, signal_source,
+                     country_enabled, country_assets, gdp_indicator, gdp_unit, country_frequency, macro_path)

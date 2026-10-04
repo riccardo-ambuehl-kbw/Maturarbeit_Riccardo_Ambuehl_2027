@@ -3,11 +3,17 @@ from dataclasses import dataclass
 import numpy as np
 import pandas as pd
 from ..funktionen import WEIGHT_TOLERANCE, CAPITAL_TOLERANCE
+from ..data.macro import select_gdp_targets
 
 HISTORY_COLUMNS = ["date", "strategy", "portfolio_value", "period_return", "drawdown"]
 WEIGHTS_COLUMNS = ["date", "strategy", "asset_id", "weight_before", "target_weight", "weight_after"]
 TRADES_COLUMNS = ["date", "strategy", "asset_id", "value_before", "target_value", "transaction_value"]
 SIGNALS_COLUMNS = ["date", "strategy", "asset_id", "signal", "position", "signal_value", "sma_short", "sma_long"]
+
+
+def annual_rebalance_dates(dates):
+    """Last shared valuation of a year, with an earned and a following interval."""
+    return tuple(dates[i] for i in range(1, len(dates) - 1) if dates[i].year != dates[i + 1].year)
 
 
 @dataclass(frozen=True)
@@ -17,6 +23,7 @@ class StrategyResult:
     weights_history: pd.DataFrame | None = None
     trades: pd.DataFrame | None = None
     signals: pd.DataFrame | None = None
+    macro_decisions: tuple[dict, ...] | None = None
 
     def validate(self, start_capital):
         h = self.portfolio_history
@@ -60,7 +67,7 @@ class StrategyResult:
     def _validate_allocations(self):
         w, t, h = self.weights_history, self.trades, self.portfolio_history
         if w is None and t is None:
-            if self.strategy == "rebalance":
+            if self.strategy in {"rebalance", "country_weighting"}:
                 raise ValueError("Rebalancing requires weights and trades tables.")
             return
         if w is None or t is None or list(w.columns) != WEIGHTS_COLUMNS or list(t.columns) != TRADES_COLUMNS:
@@ -82,11 +89,15 @@ class StrategyResult:
             raise ValueError("Weights must sum to 1 at every valuation.")
         target = w.loc[w.date == h.date.iloc[0]].set_index("asset_id").target_weight.sort_index()
         trade_dates = set(t.date)
+        if self.strategy == "country_weighting" and trade_dates != set(annual_rebalance_dates(h.date.tolist())):
+            raise ValueError("Country-weighting trades must follow the annual valuation calendar.")
         wealth = h.set_index("date").portfolio_value
         for date, group in w.groupby("date", sort=True):
             group = group.set_index("asset_id").sort_index()
             if not np.array_equal(group.target_weight.to_numpy(), target.to_numpy()):
-                raise ValueError("Configured target weights must remain fixed.")
+                if self.strategy != "country_weighting" or date not in trade_dates:
+                    raise ValueError("Target weights may change only at actual country-weighting rebalancings.")
+                target = group.target_weight.copy()
             expected_after = group.target_weight if date in trade_dates or date == h.date.iloc[0] else group.weight_before
             if not np.allclose(group.weight_after, expected_after, rtol=0, atol=WEIGHT_TOLERANCE):
                 raise ValueError("Weight states disagree with rebalancing events.")
@@ -118,6 +129,20 @@ def validate_results(context, results):
         result.validate(context.config.start_capital)
         if not pd.DatetimeIndex(result.portfolio_history.date).equals(context.performance.index):
             raise ValueError("Every strategy must use the complete shared valuation calendar.")
+        if result.strategy == "country_weighting":
+            events = annual_rebalance_dates(context.performance.index)
+            if context.macro is None or set(result.trades.date) != set(events):
+                raise ValueError("Country-weighting trades must match the annual shared calendar.")
+            decisions = []
+            for date in (context.performance.index[0], *events):
+                kind = "initial" if date == context.performance.index[0] else "annual_rebalance"
+                targets, decision = select_gdp_targets(context.macro, context.config.country_params(), date, kind)
+                actual = result.weights_history.loc[result.weights_history.date == date].set_index("asset_id").target_weight.sort_index()
+                if not actual.equals(targets):
+                    raise ValueError("Country target weights differ from the historical GDP decision.")
+                decisions.append(decision)
+            if result.macro_decisions != tuple(decisions):
+                raise ValueError("Macro provenance must match every applied historical GDP decision.")
         if result.strategy == "trend":
             signals = result.signals
             if not (signals.asset_id == context.config.trend_asset).all():

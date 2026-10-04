@@ -1,0 +1,3 @@
+asset_id,name,asset_class,country,currency,provider,provider_symbol
+ASSET_A,Artificial country A proxy,synthetic,COUNTRY_A,CHF,synthetic,ARTIFICIAL_A
+ASSET_B,Artificial country B proxy,synthetic,COUNTRY_B,CHF,synthetic,ARTIFICIAL_B

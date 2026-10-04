@@ -7,6 +7,7 @@ from .result import StrategyResult, validate_results
 from ..strategies.buy_hold import BuyAndHold
 from ..strategies.rebalance import Rebalance
 from ..strategies.trend import Trend
+from ..strategies.country_weighting import CountryWeighting
 from ..analysis.metrics import compute_metrics
 from ..export.results import export_run
 import pandas as pd
@@ -37,6 +38,8 @@ def run_simulation(config: str | Path | RunConfig) -> RunOutcome:
                                                 "rebalance_frequency": config.rebalance_frequency}))
     if config.trend_enabled:
         results.append(Trend().run(context, config.trend_params()))
+    if config.country_weighting_enabled:
+        results.append(CountryWeighting().run(context, config.country_params()))
     results = validate_results(context, results)
     summaries, statuses = [], {}
     for result in results:
