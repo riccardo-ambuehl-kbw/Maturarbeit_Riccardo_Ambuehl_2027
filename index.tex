@@ -1,0 +1,4005 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  ngerman,
+  a4paper,
+  DIV=11,
+  oneside]{scrreprt}
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off]{babel}
+\else
+\usepackage[bidi=default,shorthands=off]{babel}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{fontawesome5}
+\usepackage{fvextra}
+\usepackage{xurl}
+\floatplacement{figure}{H}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},breaklines=true,breakanywhere=true,fontsize=\footnotesize}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Inhaltsverzeichnis}
+\else
+  \newcommand\contentsname{Inhaltsverzeichnis}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Abbildungsverzeichnis}
+\else
+  \newcommand\listfigurename{Abbildungsverzeichnis}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Tabellenverzeichnis}
+\else
+  \newcommand\listtablename{Tabellenverzeichnis}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Abbildung}
+\else
+  \newcommand\figurename{Abbildung}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Tabelle}
+\else
+  \newcommand\tablename{Tabelle}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{Listingverzeichnis}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Langfristige Anlagestrategien anhand historischer Finanzdaten},
+  pdfauthor={Riccardo Ambühl},
+  pdflang={de},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Langfristige Anlagestrategien anhand historischer Finanzdaten}
+\author{Riccardo Ambühl}
+\date{2026-10-07}
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Inhaltsverzeichnis}
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+
+\bookmarksetup{startatroot}
+
+\chapter{Überblick}\label{uxfcberblick}
+
+\textbf{Titel:} Langfristige Anlagestrategien anhand historischer
+Finanzdaten\\
+\textbf{Autor:} Riccardo Ambühl
+
+Dieses Repository enthält ein Quarto-Book-Setup für die Maturarbeit. Die
+Arbeit ist in einzelne Kapitel aufgeteilt, Python-Experimente liegen in
+\texttt{notebooks/}, Quellen in \texttt{references.bib}, Styles in
+\texttt{styles/} und spätere Ergebnisse in \texttt{outputs/}.
+
+\section{Forschungsfrage}\label{forschungsfrage}
+
+Wie können historische Finanzdaten mithilfe eines Python-basierten
+Modells verwendet werden, um langfristige Investmentstrategien
+hinsichtlich Risiko und Rendite zu vergleichen?
+
+\section{Installationsempfehlungen}\label{installationsempfehlungen}
+
+Installiere lokal:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://quarto.org/}{Quarto}
+\item
+  \href{https://code.visualstudio.com/}{VS Code}
+\item
+  VS-Code-Erweiterungen: Quarto, Python, Jupyter
+\item
+  Python 3.11 oder neuer
+\item
+  Python-Pakete: \texttt{jupyter}, \texttt{pandas}, \texttt{matplotlib}
+\item
+  Zotero mit Better BibTeX
+\end{itemize}
+
+Beispiel für eine lokale Python-Umgebung:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{python }\OperatorTok{{-}}\NormalTok{m venv }\OperatorTok{.}\FunctionTok{venv}
+\OperatorTok{.}\NormalTok{\textbackslash{}}\OperatorTok{.}\FunctionTok{venv}\NormalTok{\textbackslash{}Scripts\textbackslash{}Activate}\OperatorTok{.}\FunctionTok{ps1}
+\NormalTok{python }\OperatorTok{{-}}\NormalTok{m pip install }\OperatorTok{{-}{-}}\NormalTok{upgrade pip}
+\NormalTok{python }\OperatorTok{{-}}\NormalTok{m pip install jupyter pandas matplotlib}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Quarto-Befehle}\label{quarto-befehle}
+
+Vorschau im Browser:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{quarto preview}
+\end{Highlighting}
+\end{Shaded}
+
+Alle Formate rendern:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{quarto render}
+\end{Highlighting}
+\end{Shaded}
+
+Nur HTML rendern:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{quarto render }\OperatorTok{{-}{-}}\NormalTok{to html}
+\end{Highlighting}
+\end{Shaded}
+
+Nur PDF rendern:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{quarto render }\OperatorTok{{-}{-}}\NormalTok{to pdf}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Zotero und Better BibTeX
+Workflow}\label{zotero-und-better-bibtex-workflow}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Quellen in Zotero sammeln.
+\item
+  Better BibTeX installieren.
+\item
+  Eine Sammlung für die Maturarbeit anlegen.
+\item
+  Die Sammlung als BibLaTeX oder BibTeX nach \texttt{references.bib}
+  exportieren.
+\item
+  Wenn möglich automatische Aktualisierung aktivieren.
+\item
+  Kurze, stabile Citation Keys verwenden, zum Beispiel
+  \texttt{markowitz1952}.
+\end{enumerate}
+
+\section{Quellen verwenden}\label{quellen-verwenden}
+
+Quellen werden in den \texttt{.qmd}-Kapiteln mit Quarto-Zitationssyntax
+eingebunden:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Die moderne Portfoliotheorie beschreibt Diversifikation systematisch }\CommentTok{[}\OtherTok{@markowitz1952}\CommentTok{]}\NormalTok{.}
+\end{Highlighting}
+\end{Shaded}
+
+Die globale Bibliographie ist in \texttt{\_quarto.yml} über
+\texttt{references.bib} eingebunden.
+
+\section{Neue Kapitel hinzufügen}\label{neue-kapitel-hinzufuxfcgen}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Neue Datei erstellen, zum Beispiel \texttt{resultate.qmd}.
+\item
+  Kapitelüberschrift mit \texttt{\#\ Resultate} beginnen.
+\item
+  Datei in \texttt{\_quarto.yml} unter \texttt{book:\ chapters:}
+  ergänzen.
+\item
+  Mit \texttt{quarto\ preview} prüfen.
+\end{enumerate}
+
+\section{Notebooks sinnvoll
+auslagern}\label{notebooks-sinnvoll-auslagern}
+
+Nutze \texttt{notebooks/} für explorative Arbeit, Zwischenschritte und
+Tests. Übertrage nur die relevanten, geprüften Ergebnisse in die
+\texttt{.qmd}-Kapitel. Dadurch bleibt das Book lesbar, während der
+Analyseprozess trotzdem nachvollziehbar bleibt.
+
+\section{Projektstruktur}\label{projektstruktur}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{.}
+\NormalTok{|{-}{-} \_quarto.yml}
+\NormalTok{|{-}{-} index.qmd}
+\NormalTok{|{-}{-} einleitung.qmd}
+\NormalTok{|{-}{-} theorie.qmd}
+\NormalTok{|{-}{-} methodik.qmd}
+\NormalTok{|{-}{-} fazit.qmd}
+\NormalTok{|{-}{-} references.bib}
+\NormalTok{|{-}{-} styles/}
+\NormalTok{|{-}{-} src/}
+\NormalTok{|{-}{-} notebooks/}
+\NormalTok{|{-}{-} data/}
+\NormalTok{|{-}{-} images/}
+\NormalTok{|{-}{-} outputs/}
+\NormalTok{\textasciigrave{}{-}{-} documentation/ai{-}usage/}
+\end{Highlighting}
+\end{Shaded}
+
+\section{KI-Nachweise}\label{ki-nachweise}
+
+Die Nutzung von KI-Tools wird unter \texttt{documentation/ai-usage/}
+dokumentiert. Dort wird festgehalten, wann KI eingesetzt wurde, wofür
+sie genutzt wurde, welche Inhalte übernommen wurden und was manuell
+geprüft werden muss.
+
+\section{Pendenzenliste}\label{pendenzenliste}
+
+\begin{itemize}
+\tightlist
+\item[$\boxtimes$]
+  \faIcon{calendar-alt} Spätestens KW 27 Disposition abgeben
+\item[$\square$]
+  \faIcon{calendar-alt} KW 27-29 Theorie
+\item[$\square$]
+  \faIcon{calendar-alt} KW 30 Daten importieren
+\item[$\square$]
+  \faIcon{calendar-alt} KW 31 Daten verarbeiten
+\item[$\square$]
+  \faIcon{calendar-alt} KW 32-38 Analyse
+
+  \begin{itemize}
+  \tightlist
+  \item[$\square$]
+    \faIcon{calendar-alt} KW 32-33 Funktionen für die Formeln erstellen
+  \item[$\square$]
+    \faIcon{calendar-alt} KW 34 Alle Funktionen bündeln und eine
+    Simulations Funktion erstellen
+  \item[$\square$]
+    \faIcon{calendar-alt} KW 35-38 Simulation verschiedener Strategien
+  \end{itemize}
+\item[$\square$]
+  \faIcon{calendar-alt} 25.09.2026 Probekapitel abgeben
+\item[$\square$]
+  \faIcon{calendar-alt} KW 39-40 Auswertung
+
+  \begin{itemize}
+  \tightlist
+  \item[$\square$]
+    \faIcon{calendar-alt} KW 39 Auswertungen bündeln
+  \item[$\square$]
+    \faIcon{calendar-alt} KW 40 Auswertungen Grafisch darstellen (SVG)
+  \end{itemize}
+\item[$\square$]
+  \faIcon{calendar-alt} KW 41 Einleitung
+\item[$\square$]
+  \faIcon{calendar-alt} KW 42 Fazit
+\item[$\square$]
+  \faIcon{calendar-alt} 19.--30.10.2026 / KW 43--44 Definitiven Titel im
+  Intranet eingeben
+\item[$\square$]
+  \faIcon{calendar-alt} KW 43-44, spätestens 30.10.2026 Erste Fassung
+\item[$\square$]
+  \faIcon{calendar-alt} KW 45 Gegenlesen
+\item[$\square$]
+  \faIcon{calendar-alt} KW 46 Überarbeitung
+\item[$\square$]
+  \faIcon{calendar-alt} KW 47 Schlusskontrolle und Abgabe vorbereiten
+
+  \begin{itemize}
+  \tightlist
+  \item[$\square$]
+    Abstract fertigstellen und elektronisch abgeben
+  \item[$\square$]
+    Titelblatt kontrollieren
+  \item[$\square$]
+    Inhaltsverzeichnis und Seitenzahlen kontrollieren
+  \item[$\square$]
+    Abbildungs- und Tabellenverzeichnis kontrollieren
+  \item[$\square$]
+    Literatur- und Quellenverzeichnis kontrollieren
+  \item[$\square$]
+    Ehrlichkeitserklärung ausfüllen, unterschreiben und als letzte Seite
+    einfügen
+  \item[$\square$]
+    PDF exportieren und vollständig kontrollieren
+  \item[$\square$]
+    Zwei gebundene Exemplare drucken lassen
+  \item[$\square$]
+    Eigenes drittes Exemplar für die Präsentation vorbereiten
+  \end{itemize}
+\item[$\square$]
+  \faIcon{calendar-alt} Mittwoch, 25.11.2026, mittags Maturitätsarbeit
+  abgeben
+
+  \begin{itemize}
+  \tightlist
+  \item[$\square$]
+    Zwei gebundene Exemplare abgeben
+  \item[$\square$]
+    Elektronische PDF-Version abgeben
+  \item[$\square$]
+    Webseite hochladen
+  \end{itemize}
+\item[$\square$]
+  \faIcon{calendar-alt} KW 2--3 2027 Präsentation erstellen
+\item[$\square$]
+  \faIcon{calendar-alt} KW 4 2027: Präsentation üben und auf Fragen
+  vorbereiten
+\item[$\square$]
+  \faIcon{calendar-alt} Samstag, 30.01.2027 Präsentation
+\end{itemize}
+
+\textbf{Optional:}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \faIcon{calendar-alt} Simulation Tool basierend auf der Simulation
+  Funktion
+\item[$\square$]
+  \faIcon{calendar-alt} Automatisiertes testen von weiteren Strategien
+  auf dem Server
+\item[$\square$]
+  \faIcon{calendar-alt} Verschiedene anschauliche Grafik Typen (SVG)
+\end{itemize}
+
+\section{Quellen}\label{quellen}
+
+\subsection{Yahoo Finance}\label{yahoo-finance}
+
+Yahoo Finance bietet historische Kursdaten für eine Vielzahl von
+Finanzinstrumenten, darunter Aktien, ETFs und Anleihen. Diese Daten
+können für die Berechnung von Renditen, Volatilität und anderen
+Kennzahlen verwendet werden.
+
+\subsection{FRED (Federal Reserve Economic
+Data)}\label{fred-federal-reserve-economic-data}
+
+FRED ist eine umfangreiche Datenbank der Federal Reserve Bank of
+St.~Louis, die wirtschaftliche und finanzielle Daten bereitstellt. Hier
+können makroökonomische Indikatoren wie das Bruttoinlandsprodukt (BIP),
+Arbeitslosenzahlen und Zinssätze abgerufen werden, die für die Analyse
+von Anlagestrategien relevant sein können.
+
+\subsection{Vanguard}\label{vanguard}
+
+Vanguard ist einer der grössten Anbieter von ETFs und bietet
+umfangreiche Informationen zu seinen Produkten, einschliesslich
+historischer Renditen, Kostenquoten und Fondsinformationen. Diese Daten
+können für die Analyse von ETF-basierten Anlagestrategien verwendet
+werden.
+
+\subsection{Fidelity Investments}\label{fidelity-investments}
+
+Fidelity ist ein internationaler Online-Anbieter im Finanzsektor, der
+neben Finanzdienstleistungen auch fundiertes Fachwissen über
+verschiedene Anlagestrategien vermittelt. Für die vorliegende Arbeit
+dient die Plattform als wertvolle Quelle, um tiefere Einblicke in die
+praktische Nutzung und Anwendung dieser Finanztheorien zu gewinnen.
+
+\subsection{Souverän investieren mit Indexfonds und ETFs (Autor: Gerd
+Kommer, ISBN:
+978-3-593-52064-3)}\label{souveruxe4n-investieren-mit-indexfonds-und-etfs-autor-gerd-kommer-isbn-978-3-593-52064-3}
+
+Ich erhoffe mir von diesem Buch das theoretische Fundament für meine
+passiven Anlagestrategien. Es soll mir dabei helfen, das breit gestreute
+Investieren mit ETFs, das 60/40-Portfolio und die BIP-Gewichtung zu
+erklären.
+
+\subsection{Der leichte Einstieg in die Welt der ETFs (Autor: Gerd
+Kommer, ISBN:
+978-3-95972-543-9)}\label{der-leichte-einstieg-in-die-welt-der-etfs-autor-gerd-kommer-isbn-978-3-95972-543-9}
+
+Ich erhoffe mir von diesem Buch ganz einfache Definitionen für die
+Grundlagen meiner Arbeit. Ich will damit Begriffe wie ``ETF'' oder die
+Reinvestition von Dividenden erklären.
+
+\subsection{Python for Data Analysis (Autor: Wes McKinney, ISBN:
+978-1-09-810403-0)}\label{python-for-data-analysis-autor-wes-mckinney-isbn-978-1-09-810403-0}
+
+Ich erhoffe mir von diesem Buch das Wissen, wie ich die historischen
+Kurse von Yahoo Finance und FRED richtig verarbeite. Es soll mir zeigen,
+wie ich die Daten filtere und anpasse.
+
+\subsection{Python for Finance (Autor: Yves Hilpisch, ISBN:
+978-1-4920-2433-0)}\label{python-for-finance-autor-yves-hilpisch-isbn-978-1-4920-2433-0}
+
+Ich erhoffe mir von diesem Buch die mathematische Erklärung für meine
+Trendfolgestrategie. Ich will daraus lernen, wie Indikatoren wie der MA
+und der RSI genau funktionieren und wie man Kennzahlen wie die Sharpe
+Ratio und den maximalen Drawdown berechnet.
+
+\textbf{Python Libraries und wie ich sie anwende:}
+
+\begin{itemize}
+\tightlist
+\item
+  yfinance (Yahoo Finance Kursdaten)
+\item
+  fredapi (Zugriff auf FRED)
+\item
+  pandas (Datenverarbeitung, zentrales Werkzeug für Zeitreihen,
+  Renditen, Resampling)
+\item
+  numpy (numerische Basis, Volatilität, kumulierte Renditen)
+\item
+  quantstats (Performance Reports: Sharpe, Drawdown, CAGR)
+\item
+  empyrical (Risiko-/Renditkennzahlen)
+\item
+  vectorbt oder backtesting.py (Backtesting)
+\item
+  pandas-ta (Technische Indikatoren)
+\item
+  matplotlib (Visualisierung)
+\item
+  plotly (interaktive Kursverläufe)
+\item
+  bt (Portfolio-Backtesting und Rebalancing)
+\end{itemize}
+
+Das ist eine Auswahl an Libraries, die ich testen möchte, jedoch nicht
+unbedingt alle schlussendlich verwenden werde. Es ist sinnvoll,
+möglichst viele geeignete Libraries zu nutzen, um den Aufwand gering zu
+halten. Das Ziel ist es, etwas Neues zu schaffen und nicht bereits
+Vorhandenes erneut zu programmieren.
+
+\bookmarksetup{startatroot}
+
+\chapter{Einleitung}\label{einleitung}
+
+\bookmarksetup{startatroot}
+
+\chapter{Theorie}\label{theorie}
+
+3.1 Grundlagen historischer Finanzdaten
+
+3.1.1 Indexfonds und ETFs
+
+Ein Index bildet die Wertentwicklung eines festgelegten Marktbereichs
+als rechnerische Kennzahl ab. Der S\&P 500 umfasst beispielsweise die
+500 grössten Unternehmen der USA. Weil sich ein marktbreiter Index auf
+zahlreiche Titel stützt, hängt seine Entwicklung nicht von einem
+einzelnen Unternehmen ab. Ein Indexfonds versucht, seinen Referenzindex
+möglichst genau nachzubilden, anstatt ihn zu
+übertreffen.\footnote{Kommer, \emph{Der leichte Einstieg in die Welt der
+  ETFs}, 2. vollständig überarbeitete und aktualisierte Neuausgabe
+  (München: FBV, FinanzBuch Verlag, 2025), 464--65.}Welche Wertpapiere
+im Index enthalten sind und wie stark sie gewichtet werden, bestimmt
+dessen Regelwerk. Es regelt ebenfalls, unter welchen Voraussetzungen
+Titel hinzukommen oder entfernt werden. Die Zusammensetzung wird
+üblicherweise in einem festen Rhythmus, etwa halb- oder vierteljährlich,
+überprüft.\footnote{Kommer, 465.}
+
+Bei einem ETF werden Fondsanteile während der Börsenzeiten an einem
+Handelsplatz gehandelt. Der Zugang kann über eine Bank oder einen Broker
+erfolgen; ausgeführt wird der Kauf an der Börse. Kommer zählt Indexfonds
+und ETFs zu den bedeutendsten Finanzinnovationen seit 1971.\footnote{Kommer,
+  58.} Für Privatanleger sind sie unter anderem interessant, weil ihr
+Aufbau vergleichsweise leicht nachvollziehbar ist, die Zusammensetzung
+offengelegt wird und die Verwaltung mit wenig eigenem Aufwand verbunden
+ist. Hinzu kommen in der Regel geringe Gebühren. Ihre Konstruktion
+beruht zudem auf Erkenntnissen der Kapitalmarktforschung.\footnote{Kommer,
+  59--60.}
+
+3.1.2 Eignung für die Untersuchung
+
+Marktbreite ETFs sind für meine Untersuchung gut geeignet, da sie ganze
+Anlageklassen mit geringem Aufwand abbilden. ETFs sind günstig, bequem
+und transparent. Für meine Untersuchung ist der Total Return besser
+geeignet als der Kursindex. Der Kursindex berücksichtigt keine
+Dividenden, die wichtig sind, um die wahre Performance nachzuweisen.
+
+3.2 Historische Finanzdaten und Zeitreihen
+
+3.2.1 Zeitreihen
+
+Historische Finanzdaten bilden die Grundlage für den Vergleich der
+Anlagestrategien. Eine finanzielle Zeitreihe entsteht, wenn der Kurs
+eines Indexfonds über einen längeren Zeitraum erfasst wird. Die
+Zeitreihe besteht also aus Beobachtungen, die einem bestimmten Datum
+zugeordnet werden. Wichtig ist dabei die Reihenfolge, denn sie zeigt die
+Veränderung von einer Beobachtung zur nächsten. Für diese Zeitreihen
+wird pandas in Python sehr wichtig sein. Wes McKinney, der Hauptautor
+von pandas, arbeitete als Analyst bei AQR Capital Management, als er mit
+der Entwicklung der Library begann. Man kann also sicher sagen, dass
+pandas darauf ausgelegt ist, mit Finanzdaten zu arbeiten.\footnote{Hilpisch,
+  \emph{Python for Finance}, 304.}
+
+3.2.2 Frequenzen
+
+Zeitreihen können ausserdem in verschiedenen Frequenzen vorliegen:
+täglich, wöchentlich, monatlich und jährlich. Diese Frequenzen werden
+für meine Arbeit relevant sein. Da meine Untersuchung langfristig
+angesetzt ist, sind kleinere Beobachtungsintervalle beziehungsweise
+kleinere ``Timeframes'', auf Deutsch Zeitrahmen, nicht von Bedeutung.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Alias & Description \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{B} & Business day frequency \\
+\texttt{C} & Custom business day frequency (experimental) \\
+\texttt{D} & Calendar day frequency \\
+\texttt{W} & Weekly frequency \\
+\texttt{M} & Month end frequency \\
+\texttt{BM} & Business month end frequency \\
+\texttt{MS} & Month start frequency \\
+\texttt{BMS} & Business month start frequency \\
+\texttt{Q} & Quarter end frequency \\
+\texttt{BQ} & Business quarter end frequency \\
+\texttt{QS} & Quarter start frequency \\
+\texttt{BQS} & Business quarter start frequency \\
+\texttt{A} & Year end frequency \\
+\texttt{BA} & Business year end frequency \\
+\texttt{AS} & Year start frequency \\
+\texttt{BAS} & Business year start frequency \\
+\texttt{H} & Hourly frequency \\
+\texttt{T} & Minutely frequency \\
+\texttt{S} & Secondly frequency \\
+\texttt{L} & Milliseconds \\
+\texttt{U} & Microseconds \\
+\end{longtable}
+}
+
+Ausführliche Liste mit Beispielfrequenzen.\footnote{Hilpisch, 191--92.}
+
+3.2.3 Resampling
+
+Wenn ein Datensatz nicht im gewünschten Zeitrahmen vorliegt, kann man
+ihn mithilfe des ``Resamplings'' umwandeln. Normalerweise geschieht das
+von einem kleineren Zeitrahmen zu einem grösseren. Das nennt man
+``Downsampling''. Es wird später vor allem wichtig sein, um die Daten in
+ein einheitliches Format zu bringen und sie vergleichen zu können.
+
+Für das ``Resampling'' gibt es in pandas eine eingebaute Funktion, die
+oben stark vereinfacht dargestellt ist. Nun folgt ein konkretes Beispiel
+für die Nutzung dieser Funktion.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Importiert die Pandas{-}Bibliothek}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Die Funktion resample\_dataframe() nimmt ein DataFrame, eine Frequenz und eine Aggregationsmethode als Eingabe und gibt ein resampletes DataFrame zurück}
+\KeywordTok{def}\NormalTok{ resample\_dataframe(df: pd.DataFrame, frequenz: }\BuiltInTok{str}\NormalTok{, aggregation: }\BuiltInTok{dict}\NormalTok{):}
+    \ControlFlowTok{return}\NormalTok{ df.resample(frequenz).agg(aggregation)}
+
+\CommentTok{\# Beispiel zur Nutzung der Funktion}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{"Datum"}\NormalTok{: [}\StringTok{"2026{-}07{-}27"}\NormalTok{, }\StringTok{"2026{-}07{-}28"}\NormalTok{, }\StringTok{"2026{-}07{-}29"}\NormalTok{, }\StringTok{"2026{-}07{-}30"}\NormalTok{, }\StringTok{"2026{-}07{-}31"}\NormalTok{, }\StringTok{"2026{-}08{-}01"}\NormalTok{, }\StringTok{"2026{-}08{-}02"}\NormalTok{, }\StringTok{"2026{-}08{-}03"}\NormalTok{, }\StringTok{"2026{-}08{-}04"}\NormalTok{, }\StringTok{"2026{-}08{-}05"}\NormalTok{, }\StringTok{"2026{-}08{-}06"}\NormalTok{, }\StringTok{"2026{-}08{-}07"}\NormalTok{, }\StringTok{"2026{-}08{-}08"}\NormalTok{, }\StringTok{"2026{-}08{-}09"}\NormalTok{],}
+    \StringTok{"Kurs"}\NormalTok{: [}\DecValTok{101}\NormalTok{, }\DecValTok{104}\NormalTok{, }\DecValTok{105}\NormalTok{, }\DecValTok{106}\NormalTok{, }\DecValTok{108}\NormalTok{, }\DecValTok{107}\NormalTok{, }\DecValTok{110}\NormalTok{, }\DecValTok{112}\NormalTok{, }\DecValTok{111}\NormalTok{, }\DecValTok{115}\NormalTok{, }\DecValTok{116}\NormalTok{, }\DecValTok{118}\NormalTok{, }\DecValTok{117}\NormalTok{, }\DecValTok{120}\NormalTok{]}
+\NormalTok{\})}
+
+\CommentTok{\# Konvertiert die Spalte "Datum" in das Datetime{-}Format, um Zeitreihenoperationen zu ermöglichen.}
+\NormalTok{df[}\StringTok{"Datum"}\NormalTok{] }\OperatorTok{=}\NormalTok{ pd.to\_datetime(df[}\StringTok{"Datum"}\NormalTok{])}
+\CommentTok{\# Setzt die Spalte "Datum" als Index des DataFrames}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ df.set\_index(}\StringTok{"Datum"}\NormalTok{)}
+
+\NormalTok{weekly }\OperatorTok{=}\NormalTok{ resample\_dataframe(}
+\NormalTok{    df,}
+    \StringTok{"W"}\NormalTok{, }\CommentTok{\# Resampling{-}Frequenz: "W" steht für wöchentlich}
+\NormalTok{    \{}\StringTok{"Kurs"}\NormalTok{: }\StringTok{"last"}\NormalTok{\} }\CommentTok{\# Aggregationsmethode: "last" bedeutet, dass der letzte Kurswert jeder Woche genommen wird}
+\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Wöchentliche Kurse:}\CharTok{\textbackslash{}n}\SpecialCharTok{\{}\NormalTok{weekly}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Wöchentliche Kurse:
+            Kurs
+Datum           
+2026-08-02   110
+2026-08-09   120
+\end{verbatim}
+
+Quelle zur Nutzung von to\_datetime().\footnote{McKinney, \emph{Python
+  for Data Analysis}, 511.}
+
+Um Vorausschauverzerrung zu vermeiden, sollte man grundsätzlich immer
+den letzten verfügbaren Wert des Intervalls verwenden.
+
+3.3 Rendite
+
+3.3.1 Einfache Rendite
+
+Hilpisch unterscheidet absolute Veränderungen und prozentuale
+Veränderungen beziehungsweise einfache Renditen.\footnote{Hilpisch,
+  \emph{Python for Finance}, 315--16.}
+
+Absolute Änderung: \[
+\Delta P_t=P_t-P_{t-1}
+\] Einfache Rendite: \[
+r_t=\frac{P_t}{P_{t-1}}-1
+\]
+
+Quelle der Formeln und der entsprechenden Pandas-Umsetzung:.\footnote{Hilpisch,
+  315--16; {„Pandas.{Series}.Pct\_change --- Pandas 3.0.5
+  Documentation``}.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Importiert die Pandas{-}Bibliothek}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Die Funktion absolute\_aenderung() berechnet die absolute Änderung der Werte in einer Pandas{-}Series}
+\KeywordTok{def}\NormalTok{ absolute\_aenderung(df: pd.Series):}
+    \CommentTok{\# df.diff() berechnet den absoluten Unterschied zum vorherigen Wert}
+    \ControlFlowTok{return}\NormalTok{ df.diff()}
+
+\CommentTok{\# Die Funktion prozentuale\_aenderung() berechnet die prozentuale Änderung der Werte in einer Pandas{-}Series}
+\KeywordTok{def}\NormalTok{ prozentuale\_aenderung(df: pd.Series):}
+    \CommentTok{\# df.pct\_change() berechnet die prozentuale Änderung zum vorherigen Wert}
+    \ControlFlowTok{return}\NormalTok{ df.pct\_change()}
+
+\CommentTok{\# Beispiel zur Nutzung der Funktionen}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.Series([}\DecValTok{100}\NormalTok{, }\DecValTok{110}\NormalTok{, }\FloatTok{126.5}\NormalTok{])}
+
+\NormalTok{aenderung\_absolut }\OperatorTok{=}\NormalTok{ absolute\_aenderung(df)}
+
+\NormalTok{aenderung\_prozentuale }\OperatorTok{=}\NormalTok{ prozentuale\_aenderung(df)}
+
+\CommentTok{\# Der erste Wert ist NaN, weil es keinen vorherigen Wert gibt}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Absolute Änderung:}\CharTok{\textbackslash{}n}\SpecialCharTok{\{}\NormalTok{aenderung\_absolut}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+
+\CommentTok{\# Die prozentuale Änderung wird als Dezimalzahl dargestellt. Für Prozent mit 100 multiplizieren}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Prozentuale Änderung:}\CharTok{\textbackslash{}n}\SpecialCharTok{\{}\NormalTok{aenderung\_prozentuale }\OperatorTok{*} \DecValTok{100}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Absolute Änderung:
+0     NaN
+1    10.0
+2    16.5
+dtype: float64
+Prozentuale Änderung:
+0     NaN
+1    10.0
+2    15.0
+dtype: float64
+\end{verbatim}
+
+3.3.2 Logarithmische Rendite und kumulierte Rendite
+
+Logarithmische Renditen lassen sich über die Zeit addieren. Durch die
+Exponentialfunktion erhält man aus ihrer Summe wieder den
+Wachstumsfaktor.\footnote{Hilpisch, \emph{Python for Finance}, 317--18.}
+
+Logarithmische Rendite: \[
+\ell_t=\ln\left(\frac{P_t}{P_{t-1}}\right)
+\] Kumulierte logarithmische Rendite und Wachstumsfaktor: \[
+L_t=\sum_{i=1}^{t}\ell_i,\qquad G_t=e^{L_t}
+\]
+
+Quelle der Formeln:.\footnote{Hilpisch, 317--18.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Importiert die Numpy{-}Bibliothek}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\CommentTok{\# Importiert die Pandas{-}Bibliothek}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Die Funktion kumulierte\_rendite() berechnet die kumulierte logarithmische Rendite}
+\KeywordTok{def}\NormalTok{ kumulierte\_rendite(preise: pd.Series):}
+    \CommentTok{\# np.log() berechnet den natürlichen Logarithmus}
+    \CommentTok{\# und shift(1) verschiebt die Serie um einen Tag zurück, um die Rendite zu berechnen}
+\NormalTok{    log\_rendite }\OperatorTok{=}\NormalTok{ np.log(preise }\OperatorTok{/}\NormalTok{ preise.shift(}\DecValTok{1}\NormalTok{))}
+    \CommentTok{\# cumsum() summiert die logarithmischen Renditen über die Zeit}
+\NormalTok{    kumulierte\_log\_rendite }\OperatorTok{=}\NormalTok{ log\_rendite.cumsum()}
+    \ControlFlowTok{return}\NormalTok{ kumulierte\_log\_rendite}
+
+\CommentTok{\# Die Funktion wachstumsfaktor() berechnet den Gesamtwachstumsfaktor aus der kumulierten logarithmischen Rendite}
+\KeywordTok{def}\NormalTok{ wachstumsfaktor(preise: pd.Series):}
+\NormalTok{    kumulierte\_log\_rendite }\OperatorTok{=}\NormalTok{ kumulierte\_rendite(preise)}
+    \CommentTok{\# np.exp() macht den Logarithmus rückgängig und zeigt den Gesamtwachstumsfaktor}
+\NormalTok{    wachstumsfaktoren }\OperatorTok{=}\NormalTok{ np.exp(kumulierte\_log\_rendite)}
+    \ControlFlowTok{return}\NormalTok{ wachstumsfaktoren}
+
+
+\CommentTok{\# Beispiel zur Nutzung der Funktionen}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.Series([}\DecValTok{100}\NormalTok{, }\DecValTok{110}\NormalTok{, }\FloatTok{126.5}\NormalTok{])}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Kumulierte logarithmische Rendite:}\CharTok{\textbackslash{}n}\SpecialCharTok{\{}\NormalTok{kumulierte\_rendite(df)}\SpecialCharTok{\}}\CharTok{\textbackslash{}n}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Wachstumsfaktor:}\CharTok{\textbackslash{}n}\SpecialCharTok{\{}\NormalTok{wachstumsfaktor(df)}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Kumulierte logarithmische Rendite:
+0         NaN
+1    0.095310
+2    0.235072
+dtype: float64
+
+Wachstumsfaktor:
+0      NaN
+1    1.100
+2    1.265
+dtype: float64
+\end{verbatim}
+
+3.3.3 Geometrische Rendite
+
+Die geometrische Rendite beschreibt das tatsächlich realisierte
+durchschnittliche Wachstum pro Periode über mehrere Zeiträume hinweg.
+Der arithmetische Durchschnitt ist der normale mathematische Mittelwert.
+Dieser wird zum Beispiel auch bei der Sharpe Ratio genutzt.\footnote{Pham,
+  Cui, und Ruthbah, \emph{The {Performance} of the 60/40 {Portfolio}},
+  50--51.} Eine Form der geometrischen Rendite ist die annualisierte
+Rendite. Dabei wird die Rendite auf ein Jahr normiert.
+
+Geometrischer Mittelwert (Formel): \[
+\operatorname{Mean}(R)
+=
+\sqrt[N]{\prod_{i=1}^{N} R_i}
+\] Dabei bezeichnet \textbf{\(\operatorname{Mean}(R)\)} den
+geometrischen Mittelwert, \textbf{\(N\)} die Anzahl der Perioden,
+\textbf{\(R_i\)} den Renditefaktor einer einzelnen Periode,
+\textbf{\(\prod\)} das Produkt aller Renditefaktoren und
+\textbf{\(\sqrt[N]{\cdot}\)} die \emph{N}-te Wurzel.\footnote{Pham, Cui,
+  und Ruthbah, 51.} Annualisierte Rendite bei m Perioden pro Jahr: \[
+r_{\mathrm{ann}}=\operatorname{Mean}(R)^m-1
+\]
+
+Die Annualisierungsformel ist die direkte Umrechnung des zuvor
+definierten geometrischen Periodenmittels auf m Perioden pro Jahr.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Importiert die Numpy{-}Bibliothek}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Die Funktion geometrisches\_mittel() berechnet das geometrische Mittel einer Liste von Werten}
+\KeywordTok{def}\NormalTok{ geometrisches\_mittel(werte: np.ndarray):}
+    \CommentTok{\# np.log() berechnet den natürlichen Logarithmus jedes Wertes,}
+    \CommentTok{\# np.mean() berechnet den Durchschnitt der Logarithmen}
+    \CommentTok{\# und np.exp() macht den Logarithmus rückgängig}
+    \ControlFlowTok{return}\NormalTok{ np.exp(np.mean(np.log(werte)))}
+
+\CommentTok{\# Beispiel zur Nutzung der Funktion}
+\NormalTok{werte }\OperatorTok{=}\NormalTok{ np.array([}\FloatTok{1.1}\NormalTok{, }\FloatTok{1.2}\NormalTok{, }\FloatTok{0.9}\NormalTok{, }\FloatTok{1.05}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Geometrisches Mittel: }\SpecialCharTok{\{}\NormalTok{geometrisches\_mittel(werte)}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Geometrisches Mittel: 1.0568210009926833
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Die Funktion annualisierte\_rendite() berechnet die annualisierte Rendite aus einer Liste von Werten und der Anzahl der Perioden pro Jahr}
+\KeywordTok{def}\NormalTok{ annualisierte\_rendite(werte: np.ndarray, perioden\_pro\_jahr: }\BuiltInTok{int}\NormalTok{):}
+    \ControlFlowTok{return}\NormalTok{ geometrisches\_mittel(werte) }\OperatorTok{**}\NormalTok{ perioden\_pro\_jahr }\OperatorTok{{-}} \DecValTok{1}
+
+\CommentTok{\# Beispiel zur Nutzung der Funktion}
+\NormalTok{werte }\OperatorTok{=}\NormalTok{ np.array([}\FloatTok{1.1}\NormalTok{, }\FloatTok{1.2}\NormalTok{, }\FloatTok{0.9}\NormalTok{, }\FloatTok{1.05}\NormalTok{])}
+\NormalTok{perioden\_pro\_jahr }\OperatorTok{=} \DecValTok{12}  \CommentTok{\# zum Beispiel monatliche Renditen}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Annualisierte Rendite: }\SpecialCharTok{\{}\NormalTok{annualisierte\_rendite(werte, perioden\_pro\_jahr)}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Annualisierte Rendite: 0.9409628324239998
+\end{verbatim}
+
+3.3.4 Nominal und real
+
+Die reale Rendite ist die inflationsbereinigte Rendite. Vor allem über
+längere Zeiträume ist es sehr wichtig, das zu berücksichtigen. Aus der
+Grafik des Bundesamts für Statistik kann man für die letzten 10 Jahre
+eine durchschnittliche Inflation von 0.8\% in der Schweiz
+ablesen.\footnote{{„Preise``}.} Das heisst, ein Investment muss jährlich
+mindestens 0.8\% erzielen, damit die Kaufkraft erhalten bleibt.
+
+3.4 Volatilität
+
+3.4.1 Bedeutung der Volatilität
+
+Zwei Anlagestrategien können die gleiche Rendite erzielen, aber
+unterschiedlich stark schwanken. Die Volatilität beschreibt die Stärke
+dieser Schwankungen. Je höher die Volatilität ist, desto höher wird das
+Schwankungsrisiko eingeschätzt. Kommer bezeichnet die Volatilität als
+das verbreitetste Risikomass der Finanzökonomie. Ausserdem erklärt er,
+dass die Begriffe Volatilität und Standardabweichung im Anlagekontext
+häufig gleichbedeutend verwendet werden.\footnote{Kommer, \emph{Souverän
+  investieren mit Indexfonds und ETFs}, 7. Auflage (Weinheim: Campus
+  Verlag, 2025), 143--44.} Da die Volatilität in die Berechnung der
+Sharpe Ratio einfliesst, beeinflusst sie auch die Beurteilung einer
+Rendite im Verhältnis zum übernommenen Risiko.
+
+3.4.2 Berechnung der Volatilität
+
+Die historische Volatilität wird anhand der Standardabweichung der
+periodischen Renditen bestimmt. Dazu wird zuerst der arithmetische
+Mittelwert der betrachteten Renditen berechnet. Anschliessend wird
+untersucht, wie stark die Rendite jeder einzelnen Periode von diesem
+Durchschnitt abweicht. Die Standardabweichung fasst diese Abweichungen
+in einer Kennzahl zusammen.\footnote{Kommer, 144.}
+
+Formel für die Standardabweichung: \[
+\sigma = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(r_i-\bar{r})^2}
+\]
+
+Die Formel entspricht der im Code verwendeten
+Stichproben-Standardabweichung mit ddof=1.\footnote{{„Pandas.{Series}.Std
+  --- Pandas 3.0.5 Documentation``}.} Kommer erläutert Bedeutung und
+Interpretation der Standardabweichung im Anlagekontext.\footnote{Kommer,
+  \emph{Souverän investieren mit Indexfonds und ETFs}, 7. Auflage
+  (Weinheim: Campus Verlag, 2025), 144.}
+
+Dabei bezeichnet \textbf{\(\sigma\)} die Standardabweichung,
+\textbf{\(n\)} die Anzahl der Renditen, \textbf{\(r_i\)} die Rendite
+einer einzelnen Periode und \textbf{\(\bar r\)} den arithmetischen
+Mittelwert aller Renditen. Die Abweichungen vom Mittelwert werden
+quadriert. Deshalb fliessen sowohl negative als auch positive
+Abweichungen in die Berechnung ein.\footnote{Kommer, 144.}
+
+Wichtig ist, dass man prozentuale Renditen und nicht absolute
+Kursänderungen verwendet. Sonst kann man verschiedene Kurse nicht
+miteinander vergleichen.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Importiert die Numpy{-}Bibliothek}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\CommentTok{\# Importiert die Pandas{-}Bibliothek}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Die Funktion standardabweichung() berechnet die Standardabweichung einer Liste von Werten}
+\KeywordTok{def}\NormalTok{ standardabweichung(werte: np.ndarray):}
+    \CommentTok{\# Werte in eine Pandas{-}Series umwandeln}
+\NormalTok{    werte }\OperatorTok{=}\NormalTok{ pd.Series(werte, dtype}\OperatorTok{=}\StringTok{"float64"}\NormalTok{)}
+
+    \CommentTok{\# Standardabweichung mithilfe der Pandas{-}Funktion .std() berechnen}
+    \ControlFlowTok{return}\NormalTok{ werte.std(ddof}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+
+
+\CommentTok{\# Beispiel zur Nutzung der Funktion}
+\NormalTok{werte }\OperatorTok{=}\NormalTok{ np.array([}\FloatTok{1.1}\NormalTok{, }\FloatTok{1.2}\NormalTok{, }\FloatTok{0.9}\NormalTok{, }\FloatTok{1.05}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Standardabweichung: }\SpecialCharTok{\{}\NormalTok{standardabweichung(werte)}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Standardabweichung: 0.12499999999999997
+\end{verbatim}
+
+3.4.3 Annualisierung
+
+Die berechnete Standardabweichung bezieht sich zunächst auf die
+verwendete Frequenz. Wählt man beispielsweise für einen Zeitraum von
+einem Monat eine Periodenlänge von einem Tag, erhält man eine tägliche
+Volatilität. Damit man verschiedene Datensätze vergleichen kann, rechnet
+man sie normalerweise auf ein Jahr hoch. Das nennt man Annualisierung.
+
+Formel zur Berechnung der annualisierten Volatilität:
+
+\[
+\sigma_{\mathrm{ann}} = \sigma_{\mathrm{Periode}}\sqrt{m}
+\]
+
+Quelle der Formel:.\footnote{Hilpisch, \emph{Python for Finance}, 694.}
+
+Dabei bezeichnet \textbf{\(m\)} die Anzahl der betrachteten Perioden pro
+Jahr. Die tägliche Standardabweichung
+\textbf{\(\sigma_{\text{Periode}}\)} wird deshalb mit der Quadratwurzel
+aus \textbf{\(m\)} multipliziert. Bei täglichen Börsendaten wird häufig
+mit 252 Handelstagen gerechnet. Daraus resultiert die annualisierte
+Volatilität \textbf{\(\sigma_{\text{ann}}\)}.\footnote{Hilpisch, 694.}
+Die Quadratwurzel-Skalierung setzt insbesondere voraus, dass die
+periodischen Renditen nicht seriell korreliert sind.\footnote{Sharpe,
+  {„The {Sharpe Ratio} ({Fall} 1994)``}.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Importiert die Numpy{-}Bibliothek}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Die Funktion annualisierte\_volatilitaet() berechnet die annualisierte Volatilität aus einer Liste von Werten und der Anzahl der Perioden pro Jahr}
+\KeywordTok{def}\NormalTok{ annualisierte\_volatilitaet(werte: np.ndarray, perioden\_pro\_jahr: }\BuiltInTok{int}\NormalTok{):}
+    \CommentTok{\# Die Standardabweichung der Werte wird mit der Quadratwurzel der Anzahl der Perioden pro Jahr multipliziert}
+\NormalTok{    annualisierte\_volatilitaet }\OperatorTok{=}\NormalTok{ standardabweichung(werte) }\OperatorTok{*}\NormalTok{ perioden\_pro\_jahr }\OperatorTok{**}\NormalTok{ (}\DecValTok{1}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
+    \ControlFlowTok{return}\NormalTok{ annualisierte\_volatilitaet}
+
+\CommentTok{\# Beispiel zur Nutzung der Funktion}
+\NormalTok{werte }\OperatorTok{=}\NormalTok{ np.array([}\FloatTok{1.1}\NormalTok{, }\FloatTok{1.2}\NormalTok{, }\FloatTok{0.9}\NormalTok{, }\FloatTok{1.05}\NormalTok{])}
+\NormalTok{perioden\_pro\_jahr }\OperatorTok{=} \DecValTok{12}  \CommentTok{\# zum Beispiel monatliche Renditen}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Annualisierte Volatilität: }\SpecialCharTok{\{}\NormalTok{annualisierte\_volatilitaet(werte, perioden\_pro\_jahr)}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Annualisierte Volatilität: 0.4330127018922192
+\end{verbatim}
+
+3.4.4 Interpretation
+
+Eine tiefe Volatilität bedeutet, dass die periodischen Renditen nahe bei
+ihrem Mittelwert liegen. Die Wertentwicklung verläuft somit
+vergleichsweise gleichmässig. Eine hohe Volatilität zeigt dagegen, dass
+es stärkere positive und negative Ausschläge gab. Eine hohe Volatilität
+bedeutet nicht automatisch, dass eine Anlage eine schlechte Rendite
+erzielt. Es deutet jedoch darauf hin, dass der Preis während dieser Zeit
+stärkere Schwankungen durchgemacht hat.\footnote{Kommer, \emph{Souverän
+  investieren mit Indexfonds und ETFs}, 7. Auflage (Weinheim: Campus
+  Verlag, 2025), 147--49.}
+
+3.4.5 Diversifikation
+
+Diversifikation kann die Volatilität eines Gesamtportfolios senken. Bei
+Marktschwankungen können sich zwei Kurse gegenseitig ausgleichen. Ein
+breit diversifiziertes Portfolio zeigt meist eine tiefere Volatilität,
+sofern die Renditen der Wertpapiere nicht untereinander
+zusammenhängen.\footnote{Kommer, 148.}
+
+Die Volatilität kennt jedoch auch Grenzen. Da sowohl positive als auch
+negative Ausschläge gemessen werden, wird nicht zwischen unerwünschten
+Verlusten und erwünschten Gewinnen unterschieden. Ausserdem sagt sie
+nichts über die Stärke der Verluste und die Länge der Verlustphase aus.
+Sie misst nur einen Risikotyp und deckt nicht das ganze Risikospektrum
+ab. Deswegen kann man die Volatilität nicht als einzigen Faktor nutzen,
+um das Gesamtrisiko zu beurteilen.\footnote{Kommer, 151.}
+
+3.4.6 Beispiel
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Importiert die Numpy{-}Bibliothek}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\CommentTok{\# Importiert die Pandas{-}Bibliothek}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\CommentTok{\# Importiert die Matplotlib{-}Bibliothek für die Visualisierung}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+
+\CommentTok{\# Monatliche Renditen der weniger volatilen Strategie}
+\NormalTok{strategie\_a }\OperatorTok{=}\NormalTok{ pd.Series([}\FloatTok{0.008}\NormalTok{, }\FloatTok{0.012}\NormalTok{, }\FloatTok{0.009}\NormalTok{, }\FloatTok{0.011}\NormalTok{, }\FloatTok{0.007}\NormalTok{, }\FloatTok{0.013}\NormalTok{, }\FloatTok{0.010}\NormalTok{, }\FloatTok{0.010}\NormalTok{, }\FloatTok{0.006}\NormalTok{, }\FloatTok{0.014}\NormalTok{, }\FloatTok{0.009}\NormalTok{, }\FloatTok{0.011}\NormalTok{])}
+
+
+\CommentTok{\# Monatliche Renditen der volatilen Strategie}
+\NormalTok{strategie\_b }\OperatorTok{=}\NormalTok{ pd.Series([}\FloatTok{0.05}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.03}\NormalTok{, }\FloatTok{0.04}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.02}\NormalTok{, }\FloatTok{0.06}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.04}\NormalTok{, }\FloatTok{0.03}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.07}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.05}\NormalTok{, }\FloatTok{0.02}\NormalTok{, }\FloatTok{0.00}\NormalTok{])}
+
+
+\CommentTok{\# Durchschnittliche Monatsrenditen berechnen}
+\NormalTok{mittelwert\_a }\OperatorTok{=}\NormalTok{ strategie\_a.mean()}
+\NormalTok{mittelwert\_b }\OperatorTok{=}\NormalTok{ strategie\_b.mean()}
+
+
+\CommentTok{\# Annualisierte Volatilitäten berechnen}
+\NormalTok{volatilitaet\_a }\OperatorTok{=}\NormalTok{ annualisierte\_volatilitaet(strategie\_a, }\DecValTok{12}\NormalTok{)}
+\NormalTok{volatilitaet\_b }\OperatorTok{=}\NormalTok{ annualisierte\_volatilitaet(strategie\_b, }\DecValTok{12}\NormalTok{)}
+
+
+\CommentTok{\# Ergebnisse ausgeben}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Strategie A"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Durchschnittliche Monatsrendite: }\SpecialCharTok{\{}\NormalTok{mittelwert\_a}\SpecialCharTok{:.2\%\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Annualisierte Volatilität: }\SpecialCharTok{\{}\NormalTok{volatilitaet\_a}\SpecialCharTok{:.2\%\}}\SpecialStringTok{"}\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{()}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Strategie B"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Durchschnittliche Monatsrendite: }\SpecialCharTok{\{}\NormalTok{mittelwert\_b}\SpecialCharTok{:.2\%\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Annualisierte Volatilität: }\SpecialCharTok{\{}\NormalTok{volatilitaet\_b}\SpecialCharTok{:.2\%\}}\SpecialStringTok{"}\NormalTok{)}
+
+
+\CommentTok{\# Monatsnummern für die Abbildung}
+\NormalTok{monate }\OperatorTok{=} \BuiltInTok{range}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{13}\NormalTok{)}
+
+
+\CommentTok{\# Renditen als Prozentwerte darstellen}
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{5}\NormalTok{))}
+
+\NormalTok{plt.plot(}
+\NormalTok{    monate,}
+\NormalTok{    strategie\_a }\OperatorTok{*} \DecValTok{100}\NormalTok{,}
+\NormalTok{    marker}\OperatorTok{=}\StringTok{"o"}\NormalTok{,}
+\NormalTok{    label}\OperatorTok{=}\StringTok{"Strategie A"}
+\NormalTok{)}
+
+\NormalTok{plt.plot(}
+\NormalTok{    monate,}
+\NormalTok{    strategie\_b }\OperatorTok{*} \DecValTok{100}\NormalTok{,}
+\NormalTok{    marker}\OperatorTok{=}\StringTok{"o"}\NormalTok{,}
+\NormalTok{    label}\OperatorTok{=}\StringTok{"Strategie B"}
+\NormalTok{)}
+
+\CommentTok{\# Linie bei null Prozent}
+\NormalTok{plt.axhline(}
+\NormalTok{    y}\OperatorTok{=}\DecValTok{0}\NormalTok{,}
+\NormalTok{    linewidth}\OperatorTok{=}\DecValTok{1}
+\NormalTok{)}
+
+\NormalTok{plt.xlabel(}\StringTok{"Monat"}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{"Monatliche Rendite in \%"}\NormalTok{)}
+\NormalTok{plt.title(}
+    \StringTok{"Ähnliche Durchschnittsrendite bei unterschiedlicher Volatilität"}
+\NormalTok{)}
+
+\NormalTok{plt.xticks(monate)}
+\NormalTok{plt.legend()}
+\NormalTok{plt.grid(alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Strategie A
+Durchschnittliche Monatsrendite: 1.00%
+Annualisierte Volatilität: 0.82%
+
+Strategie B
+Durchschnittliche Monatsrendite: 1.00%
+Annualisierte Volatilität: 14.09%
+\end{verbatim}
+
+\begin{center}
+\pandocbounded{\includegraphics[keepaspectratio]{notebooks/Theorie_files/figure-pdf/cell-9-output-2.png}}
+\end{center}
+
+Das Beispiel zeigt übertrieben, wie ein Kurs bei gleicher Rendite eine
+ganz unterschiedliche Volatilität aufweisen kann.
+
+3.5 Drawdown
+
+3.5.1 Bedeutung des Drawdowns
+
+Die Volatilität misst die allgemeine Streuung der Renditen, zeigt aber
+nicht direkt, wie tief eine Anlage während einer Verlustphase unter
+ihren bisherigen Höchststand fällt. Ein Drawdown vergleicht deshalb den
+aktuellen Vermögenswert mit dem höchsten Wert, der bis zu diesem
+Zeitpunkt erreicht wurde. An einem neuen Höchststand beträgt der
+Drawdown 0\%. Liegt der Vermögenswert unter dem bisherigen Höchststand,
+ist der Drawdown negativ.\footnote{Kommer, 151--52.}
+
+Der Maximum Drawdown ist der grösste kumulierte historische Verlust
+innerhalb des untersuchten Zeitraums. Er zeigt den schlechtesten
+beobachteten Rückgang von einem früheren Höchststand bis zum
+darauffolgenden Tiefststand.\footnote{Kommer, 151--53.}
+
+3.5.2 Berechnung
+
+Formel für den laufenden Drawdown:
+
+\[
+DD_t = \frac{V_t}{\max(V_0,\ldots,V_t)}-1
+\]
+
+Quelle der relativen Drawdown-Formel:.\footnote{Pham, Cui, und Ruthbah,
+  \emph{The {Performance} of the 60/40 {Portfolio}}, 51.}
+
+Dabei bezeichnet Vt den Vermögenswert zum Zeitpunkt t. Im Nenner steht
+der höchste Vermögenswert, der bis zu diesem Zeitpunkt beobachtet wurde.
+DDt steht für den Drawdown zum Zeitpunkt t. Der Maximum Drawdown ist der
+kleinste und somit stärkste negative Wert der gesamten
+Drawdown-Reihe.\footnote{Pham, Cui, und Ruthbah, 51.}
+
+Formel für den Maximum Drawdown:
+
+\[
+MDD = \min_t(DD_t)
+\]
+
+Quelle der Formel:.\footnote{Pham, Cui, und Ruthbah, 51.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Importiert die Pandas{-}Bibliothek}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Die Funktion drawdown() berechnet den laufenden Drawdown aus periodischen Renditen}
+\KeywordTok{def}\NormalTok{ drawdown(renditen: pd.Series):}
+    \CommentTok{\# Aus den Renditen wird zunächst mit + 1 der Wachstumsfaktor gebildet}
+    \CommentTok{\# Anschliessend werden mit .cumprod() alle Renditen nacheinander multipliziert, damit man den Zinseszinseffekt erhält}
+\NormalTok{    vermoegen }\OperatorTok{=}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\NormalTok{ renditen).cumprod()}
+    \CommentTok{\# cummax() bestimmt den bis dahin höchsten Vermögenswert}
+\NormalTok{    bisheriger\_hoechststand }\OperatorTok{=}\NormalTok{ vermoegen.cummax()}
+    \CommentTok{\# vermoegen / bisheriger\_hoechststand berechnet den Wachstumsfaktor im Verhältnis zum höchsten Vermögenswert}
+    \CommentTok{\# Durch {-} 1 erhält man den prozentualen Unterschied zum höchsten Vermögenswert als Dezimalzahl}
+    \ControlFlowTok{return}\NormalTok{ vermoegen }\OperatorTok{/}\NormalTok{ bisheriger\_hoechststand }\OperatorTok{{-}} \DecValTok{1}
+
+\CommentTok{\# Die Funktion maximum\_drawdown() gibt den tiefsten Wert der Drawdown{-}Reihe zurück}
+\KeywordTok{def}\NormalTok{ maximum\_drawdown(renditen: pd.Series):}
+    \ControlFlowTok{return}\NormalTok{ drawdown(renditen).}\BuiltInTok{min}\NormalTok{()}
+
+\CommentTok{\# Beispiel zur Nutzung der Funktionen}
+\NormalTok{beispiel\_renditen }\OperatorTok{=}\NormalTok{ pd.Series([}\FloatTok{0.10}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.05}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.20}\NormalTok{, }\FloatTok{0.08}\NormalTok{, }\FloatTok{0.15}\NormalTok{, }\FloatTok{0.04}\NormalTok{])}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Drawdown{-}Reihe:}\CharTok{\textbackslash{}n}\SpecialCharTok{\{}\NormalTok{drawdown(beispiel\_renditen)}\SpecialCharTok{\}}\CharTok{\textbackslash{}n}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Maximum Drawdown: }\SpecialCharTok{\{}\NormalTok{maximum\_drawdown(beispiel\_renditen)}\SpecialCharTok{:.2\%\}}\SpecialStringTok{"}\NormalTok{) }\CommentTok{\# Von einer Dezimalzahl zu Prozent}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Drawdown-Reihe:
+0    0.000000
+1   -0.050000
+2   -0.240000
+3   -0.179200
+4   -0.056080
+5   -0.018323
+dtype: float64
+
+Maximum Drawdown: -24.00%
+\end{verbatim}
+
+3.5.3 Erholungsdauer und Grenzen
+
+Die Erholungsdauer beschreibt die Zeit vom früheren Höchststand, bis
+dieser Wert vollständig wieder erreicht wird. Die Verlusttiefe und die
+Verlustdauer sind zwei verschiedene Eigenschaften: Ein Drawdown kann
+tief, aber kurz oder weniger tief, aber sehr lang sein.\footnote{Kommer,
+  \emph{Souverän investieren mit Indexfonds und ETFs}, 7. Auflage
+  (Weinheim: Campus Verlag, 2025), 163--64.}
+
+Für die Erholungsdauer und alle wichtigen Daten dazu nutzen wir zwei
+Funktionen aus QuantStats: .to\_drawdown\_series() und
+.drawdown\_details().\footnote{Aroussi, \emph{Ranaroussi/Quantstats}.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Importiert die QuantStats{-}Bibliothek}
+\ImportTok{import}\NormalTok{ quantstats }\ImportTok{as}\NormalTok{ qs}
+\CommentTok{\# Importiert die Pandas{-}Bibliothek}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{beispiel\_renditen }\OperatorTok{=}\NormalTok{ pd.Series(\{}
+    \StringTok{"2024{-}01{-}31"}\NormalTok{: }\FloatTok{0.10}\NormalTok{,}
+    \StringTok{"2024{-}02{-}29"}\NormalTok{: }\OperatorTok{{-}}\FloatTok{0.05}\NormalTok{,}
+    \StringTok{"2024{-}03{-}31"}\NormalTok{: }\OperatorTok{{-}}\FloatTok{0.05}\NormalTok{,}
+    \StringTok{"2024{-}04{-}30"}\NormalTok{: }\FloatTok{0.12}\NormalTok{,}
+    \StringTok{"2024{-}05{-}31"}\NormalTok{: }\FloatTok{0.03}\NormalTok{,}
+    \StringTok{"2024{-}06{-}30"}\NormalTok{: }\OperatorTok{{-}}\FloatTok{0.10}\NormalTok{,}
+    \StringTok{"2024{-}07{-}31"}\NormalTok{: }\FloatTok{0.04}\NormalTok{,}
+    \StringTok{"2024{-}08{-}31"}\NormalTok{: }\FloatTok{0.08}\NormalTok{,}
+    \StringTok{"2024{-}09{-}30"}\NormalTok{: }\OperatorTok{{-}}\FloatTok{0.06}\NormalTok{,}
+    \StringTok{"2024{-}10{-}31"}\NormalTok{: }\OperatorTok{{-}}\FloatTok{0.04}\NormalTok{,}
+    \StringTok{"2024{-}11{-}30"}\NormalTok{: }\FloatTok{0.05}\NormalTok{,}
+    \StringTok{"2024{-}12{-}31"}\NormalTok{: }\FloatTok{0.03}
+\NormalTok{\})}
+
+\NormalTok{drawdown\_reihe }\OperatorTok{=}\NormalTok{ qs.stats.to\_drawdown\_series(beispiel\_renditen)}
+\NormalTok{erholungsphasen }\OperatorTok{=}\NormalTok{ qs.stats.drawdown\_details(drawdown\_reihe)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Drawdown{-}Reihe:}\CharTok{\textbackslash{}n}\SpecialCharTok{\{}\NormalTok{drawdown\_reihe}\SpecialCharTok{\}}\CharTok{\textbackslash{}n}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Erholungsphasen:}\CharTok{\textbackslash{}n}\SpecialCharTok{\{}\NormalTok{erholungsphasen}\SpecialCharTok{\}}\CharTok{\textbackslash{}n}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Drawdown-Reihe:
+2024-01-31    0.000000
+2024-02-29   -0.050000
+2024-03-31   -0.097500
+2024-04-30    0.000000
+2024-05-31    0.000000
+2024-06-30   -0.100000
+2024-07-31   -0.064000
+2024-08-31    0.000000
+2024-09-30   -0.060000
+2024-10-31   -0.097600
+2024-11-30   -0.052480
+2024-12-31   -0.024054
+dtype: float64
+
+Erholungsphasen:
+        start      valley         end  days  max drawdown  99% max drawdown
+0  2024-02-29  2024-03-31  2024-03-31    32         -9.75              -5.0
+1  2024-06-30  2024-06-30  2024-07-31    32        -10.00              -6.4
+2  2024-09-30  2024-10-31  2024-12-31    93         -9.76              -6.0
+\end{verbatim}
+
+Der berechnete Maximum Drawdown hängt vom gewählten Zeitraum und von der
+Frequenz der Daten ab. Werden nur Jahresendwerte verwendet, können
+zwischenzeitliche Verluste übersehen und der tatsächliche Drawdown
+deutlich unterschätzt werden. Kommer empfiehlt deshalb einen langen
+Beobachtungszeitraum und weist auf die genauere Erfassung mit
+Monatsdaten hin. Der historische Maximum Drawdown beschreibt nur den
+schlimmsten Verlust in der untersuchten Stichprobe und stellt keine
+garantierte Verlustgrenze für die Zukunft dar.\footnote{Kommer,
+  \emph{Souverän investieren mit Indexfonds und ETFs}, 7. Auflage
+  (Weinheim: Campus Verlag, 2025), 152--53.}
+
+3.6 Sharpe Ratio
+
+3.6.1 Bedeutung der Sharpe Ratio
+
+Die Rendite allein zeigt nicht, mit welchen Schwankungen ein
+Anlageergebnis erreicht wurde. Für einen risikobereinigten Vergleich
+wird deshalb zunächst die risikofreie Rendite von der Anlagenrendite
+abgezogen. Die Sharpe Ratio stellt den Durchschnitt dieser
+Überschussrenditen der Volatilität gegenüber.\footnote{Kommer, 165--66.}
+
+Das Ergebnis lässt sich als historische Entschädigung für eine Einheit
+des gemessenen Schwankungsrisikos interpretieren. Unter ansonsten
+gleichen Berechnungsbedingungen weist ein höherer Wert auf ein
+vorteilhafteres Verhältnis zwischen Überschussrendite und Volatilität
+hin.\footnote{Kommer, 166.}
+
+3.6.2 Berechnung
+
+Formel für die annualisierte Sharpe Ratio:
+
+\[
+SR_{\mathrm{ann}} = \frac{\overline{r-r_f}}{\sigma(r-r_f)}\sqrt{m}
+\]
+
+Die periodische Sharpe Ratio ist bei Pham et al.~angegeben.\footnote{Pham,
+  Cui, und Ruthbah, \emph{The {Performance} of the 60/40 {Portfolio}},
+  51.} Die Annualisierung mit der Quadratwurzel der Periodenzahl setzt
+insbesondere unkorrelierte periodische Überschussrenditen
+voraus.\footnote{Sharpe, {„The {Sharpe Ratio} ({Fall} 1994)``}.}
+
+Dabei bezeichnet \textbf{\(r\)} die periodische Anlagenrendite,
+\textbf{\(r_f\)} die risikofreie Rendite derselben Periode,
+\textbf{\(\sigma(r-r_f)\)} die Standardabweichung der periodischen
+Überschussrenditen und \textbf{\(m\)} die Anzahl der Perioden pro Jahr.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Importiert die Pandas{-}Bibliothek}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\CommentTok{\# Importiert die QuantStats{-}Bibliothek}
+\ImportTok{import}\NormalTok{ quantstats }\ImportTok{as}\NormalTok{ qs}
+
+
+\CommentTok{\# Die Funktion sharpe\_ratio() berechnet die annualisierte Sharpe Ratio}
+\KeywordTok{def}\NormalTok{ sharpe\_ratio(renditen: pd.Series, risikofreie\_renditen: pd.Series, perioden\_pro\_jahr: }\BuiltInTok{int}\NormalTok{):}
+\NormalTok{    daten }\OperatorTok{=}\NormalTok{ pd.concat(}
+\NormalTok{        [renditen, risikofreie\_renditen],}
+\NormalTok{        axis}\OperatorTok{=}\DecValTok{1}
+\NormalTok{    )}
+
+\NormalTok{    daten.columns }\OperatorTok{=}\NormalTok{ [}\StringTok{"Anlage"}\NormalTok{, }\StringTok{"Risikofrei"}\NormalTok{]}
+
+    \CommentTok{\# Berechnet die periodischen Überschussrenditen}
+\NormalTok{    ueberschussrenditen }\OperatorTok{=}\NormalTok{ (}
+\NormalTok{        daten[}\StringTok{"Anlage"}\NormalTok{]}
+        \OperatorTok{{-}}\NormalTok{ daten[}\StringTok{"Risikofrei"}\NormalTok{]}
+\NormalTok{    )}
+
+    \CommentTok{\# Berechnet und annualisiert die Sharpe Ratio mit QuantStats}
+    \ControlFlowTok{return}\NormalTok{ qs.stats.sharpe(}
+\NormalTok{        ueberschussrenditen,}
+\NormalTok{        rf}\OperatorTok{=}\DecValTok{0}\NormalTok{,}
+\NormalTok{        periods}\OperatorTok{=}\NormalTok{perioden\_pro\_jahr}
+\NormalTok{    )}
+
+
+\NormalTok{anlage }\OperatorTok{=}\NormalTok{ pd.Series([}\FloatTok{0.02}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.03}\NormalTok{, }\FloatTok{0.01}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.02}\NormalTok{, }\FloatTok{0.025}\NormalTok{])}
+
+\NormalTok{risikofrei }\OperatorTok{=}\NormalTok{ pd.Series([}\FloatTok{0.002}\NormalTok{, }\FloatTok{0.002}\NormalTok{, }\FloatTok{0.002}\NormalTok{, }\FloatTok{0.002}\NormalTok{, }\FloatTok{0.002}\NormalTok{, }\FloatTok{0.002}\NormalTok{])}
+
+\NormalTok{ergebnis }\OperatorTok{=}\NormalTok{ sharpe\_ratio(}
+\NormalTok{    anlage,}
+\NormalTok{    risikofrei,}
+\NormalTok{    perioden\_pro\_jahr}\OperatorTok{=}\DecValTok{12}
+\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Annualisierte Sharpe Ratio: }\SpecialCharTok{\{}\NormalTok{ergebnis}\SpecialCharTok{:.2f\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Annualisierte Sharpe Ratio: 1.23
+\end{verbatim}
+
+3.6.3 Interpretation und Grenzen
+
+Sharpe Ratios können nur sinnvoll verglichen werden, wenn Zeitraum,
+Datenfrequenz und Berechnungsweise identisch sind. Eine Sharpe Ratio für
+einen Zeitraum darf nicht direkt mit einer Kennzahl aus einem anderen
+Zeitraum verglichen werden.\footnote{Kommer, \emph{Souverän investieren
+  mit Indexfonds und ETFs}, 7. Auflage (Weinheim: Campus Verlag, 2025),
+  166.}
+
+Neben der vollständigen Variante existiert eine vereinfachte Raw Sharpe
+Ratio, bei welcher die risikofreie Rendite nicht abgezogen wird. Beide
+Varianten dürfen nicht vermischt werden.\footnote{Kommer, 165--66.}
+Ausserdem bildet die Sharpe Ratio das Risiko nur über die Volatilität
+ab. Da die Volatilität nicht das gesamte Anlagerisiko beschreibt, werden
+Rendite und Drawdown in dieser Arbeit zusätzlich als getrennte
+Kennzahlen betrachtet.\footnote{Kommer, 166.}
+
+3.7 Diversifikation und Korrelation
+
+3.7.1 Diversifikation
+
+Bei der Diversifikation wird das Kapital nicht auf eine einzelne Anlage
+konzentriert. Eine Streuung ist sowohl innerhalb derselben Anlageklasse,
+etwa über viele verschiedene Aktien, als auch zwischen Anlageklassen wie
+Aktien und Anleihen möglich.\footnote{Kommer, 82.}
+
+Auf diese Weise lassen sich Risiken, die nur einzelne Unternehmen oder
+Branchen betreffen, erheblich verringern. Marktweite Kursschwankungen
+wirken dagegen auf viele Titel gleichzeitig und verschwinden auch in
+einem breit gestreuten Aktienportfolio nicht vollständig.\footnote{Kommer,
+  85--86.} Für die Beurteilung ist deshalb entscheidend, wie die
+Bestandteile im Gesamtportfolio zusammenwirken.\footnote{Kommer, 85.}
+
+3.7.2 Korrelation
+
+Mit der Korrelation lässt sich untersuchen, wie eng die Renditen zweier
+Anlagen linear zusammenhängen. Ihr Koeffizient reicht von -1 bis +1: Am
+positiven Grenzwert bewegen sich beide Reihen vollständig in dieselbe
+Richtung, am negativen Grenzwert genau entgegengesetzt. Ein Wert von 0
+zeigt, dass kein linearer Zusammenhang nachweisbar ist.\footnote{Kommer,
+  82--83.}
+
+Ein Portfolio kann bereits von einer Korrelation unter +1 profitieren,
+da sich die Wertveränderungen seiner Bestandteile dann nicht vollkommen
+parallel entwickeln. Eine negative Korrelation ist somit keine
+Voraussetzung. Tendenziell nimmt die risikomindernde Wirkung der
+Kombination zu, wenn der Korrelationskoeffizient sinkt.\footnote{Kommer,
+  82--83.}
+
+Formel für die Korrelation:
+
+\[
+\rho_{X,Y}=\frac{\operatorname{Cov}(X,Y)}{\sigma_X\sigma_Y}
+\] Dabei bezeichnet \textbf{\(\rho_{X,Y}\)} die Korrelation zwischen den
+Variablen \textbf{\(X\)} und \textbf{\(Y\)},
+\textbf{\(\operatorname{Cov}(X,Y)\)} ihre Kovarianz,
+\textbf{\(\sigma_X\)} die Standardabweichung von \textbf{\(X\)} und
+\textbf{\(\sigma_Y\)} die Standardabweichung von
+\textbf{\(Y\)}.\footnote{Markowitz, {„Portfolio {Selection}``}, 80.}
+Portfoliovarianz bei zwei Anlagen:
+
+\[
+\sigma_p^2=w_1^2\sigma_1^2+w_2^2\sigma_2^2+2w_1w_2\sigma_1\sigma_2\rho_{1,2}
+\] Dabei bezeichnet \textbf{\(\sigma_p^2\)} die Varianz des Portfolios,
+\textbf{\(w_1\)} und \textbf{\(w_2\)} die Gewichtungen der beiden
+Anlagen, \textbf{\(\sigma_1\)} und \textbf{\(\sigma_2\)} deren
+Standardabweichungen und \textbf{\(\rho_{1,2}\)} die Korrelation
+zwischen den Renditen der beiden Anlagen.\footnote{Markowitz, 80--81;
+  Pham, Cui, und Ruthbah, \emph{The {Performance} of the 60/40
+  {Portfolio}}, 51.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Importiert die Pandas{-}Bibliothek}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Die Funktion korrelationsmatrix() berechnet die Korrelationsmatrix der Renditen}
+\KeywordTok{def}\NormalTok{ korrelationsmatrix(renditen: pd.DataFrame):}
+    \CommentTok{\# corr() berechnet die Korrelationsmatrix}
+    \ControlFlowTok{return}\NormalTok{ renditen.corr()}
+
+\CommentTok{\# Beispiel zur Nutzung der Funktion}
+\NormalTok{renditen }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{"Aktien"}\NormalTok{: [}\FloatTok{0.04}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.03}\NormalTok{, }\FloatTok{0.02}\NormalTok{, }\FloatTok{0.05}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.03}\NormalTok{],}
+    \StringTok{"Anleihen"}\NormalTok{: [}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.00}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.01}\NormalTok{, }\FloatTok{0.02}\NormalTok{, }\FloatTok{0.00}\NormalTok{],}
+    \StringTok{"ETF"}\NormalTok{: [}\FloatTok{0.03}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.02}\NormalTok{, }\FloatTok{0.01}\NormalTok{, }\FloatTok{0.04}\NormalTok{, }\FloatTok{0.00}\NormalTok{, }\FloatTok{0.02}\NormalTok{]}
+\NormalTok{\})}
+
+\NormalTok{korrelation }\OperatorTok{=}\NormalTok{ korrelationsmatrix(renditen)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Korrelationsmatrix:}\CharTok{\textbackslash{}n}\SpecialCharTok{\{}\NormalTok{korrelation}\SpecialCharTok{\}}\CharTok{\textbackslash{}n}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Korrelationsmatrix:
+                Aktien      Anleihen       ETF
+Aktien    1.000000e+00  1.679908e-17  0.982953
+Anleihen  1.679908e-17  1.000000e+00  0.176547
+ETF       9.829533e-01  1.765470e-01  1.000000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Importiert die Pandas{-}Bibliothek}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\CommentTok{\# Importiert die Numpy{-}Bibliothek}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Die Funktion portfolio\_risiko() berechnet die Varianz und Volatilität eines Portfolios anhand der Renditen und Gewichte der einzelnen Anlagen}
+\KeywordTok{def}\NormalTok{ portfolio\_risiko(renditen, gewichte):}
+\NormalTok{    cov }\OperatorTok{=}\NormalTok{ renditen.cov()}
+\NormalTok{    varianz }\OperatorTok{=}\NormalTok{ gewichte }\OperatorTok{@}\NormalTok{ cov }\OperatorTok{@}\NormalTok{ gewichte}
+\NormalTok{    volatilitaet }\OperatorTok{=}\NormalTok{ np.sqrt(varianz)}
+    \ControlFlowTok{return}\NormalTok{ varianz, volatilitaet}
+
+\CommentTok{\# Beispiel zur Nutzung der Funktion}
+\NormalTok{renditen }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{"Aktien"}\NormalTok{: [}\FloatTok{0.04}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.03}\NormalTok{, }\FloatTok{0.02}\NormalTok{, }\FloatTok{0.05}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.03}\NormalTok{],}
+    \StringTok{"Anleihen"}\NormalTok{: [}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.00}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.01}\NormalTok{, }\FloatTok{0.02}\NormalTok{, }\FloatTok{0.00}\NormalTok{],}
+    \StringTok{"ETF"}\NormalTok{: [}\FloatTok{0.03}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.02}\NormalTok{, }\FloatTok{0.01}\NormalTok{, }\FloatTok{0.04}\NormalTok{, }\FloatTok{0.00}\NormalTok{, }\FloatTok{0.02}\NormalTok{]}
+\NormalTok{\})}
+\NormalTok{gewichte }\OperatorTok{=}\NormalTok{ pd.Series(\{}\StringTok{"Aktien"}\NormalTok{: }\FloatTok{0.20}\NormalTok{, }\StringTok{"Anleihen"}\NormalTok{: }\FloatTok{0.40}\NormalTok{, }\StringTok{"ETF"}\NormalTok{: }\FloatTok{0.20}\NormalTok{\})}
+\NormalTok{var, vol }\OperatorTok{=}\NormalTok{ portfolio\_risiko(renditen, gewichte)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Volatilität: }\SpecialCharTok{\{}\NormalTok{vol }\OperatorTok{*} \DecValTok{100}\SpecialCharTok{:.2f\}}\SpecialStringTok{\%"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Volatilität: 1.15%
+\end{verbatim}
+
+3.7.3 Veränderliche Korrelationen
+
+Der Zusammenhang zwischen zwei Renditereihen kann sich im Zeitverlauf
+verändern. In Phasen fallender Börsenkurse bewegen sich risikobehaftete
+Anlagen zeitweise ähnlicher, sodass ihre Kombination ausgerechnet
+während einer Krise weniger stabilisierend wirken kann.\footnote{Kommer,
+  \emph{Souverän investieren mit Indexfonds und ETFs}, 7. Auflage
+  (Weinheim: Campus Verlag, 2025), 84.} Historische Ländervergleiche
+zeigen ausserdem, dass Aktien und Anleihen langfristig nicht durchgehend
+negativ korrelierten und je nach untersuchtem Markt unterschiedliche
+Beziehungen aufwiesen.\footnote{Pham, Cui, und Ruthbah, \emph{The
+  {Performance} of the 60/40 {Portfolio}}, 1--7.}
+
+3.8 Asset-Allokation und Rebalancing
+
+3.8.1 Asset-Allokation
+
+Anlagen mit vergleichbaren Rendite-, Risiko- und Liquiditätsmerkmalen
+werden zu einer Assetklasse zusammengefasst. Die Asset-Allokation legt
+fest, welche dieser Klassen ein Portfolio kombiniert und welchen Anteil
+jede davon am Gesamtvermögen erhält.\footnote{Kommer, \emph{Souverän
+  investieren mit Indexfonds und ETFs}, 7. Auflage (Weinheim: Campus
+  Verlag, 2025), 169.}
+
+Die Portfoliorendite ergibt sich aus den einzelnen Renditebeiträgen, die
+jeweils mit dem zugehörigen Portfolioanteil gewichtet werden.\footnote{Pham,
+  Cui, und Ruthbah, \emph{The {Performance} of the 60/40 {Portfolio}},
+  50.}
+
+\[
+r_{p,t}=\sum_{k=1}^{N}w_{k,t}r_{k,t}
+\]
+
+Dabei bezeichnet wk,t das Gewicht und rk,t die Rendite der Anlage k zum
+Zeitpunkt t.\footnote{Pham, Cui, und Ruthbah, 50.}
+
+3.8.2 Gewichtungsdrift und Rebalancing
+
+Wenn sich die Bestandteile eines Portfolios unterschiedlich entwickeln,
+verändern sich ihre Gewichte automatisch. Eine Anlage mit einer höheren
+Rendite erhält danach einen grösseren Anteil am Gesamtportfolio. Kommer
+zeigt diese Gewichtungsdrift anhand eines Portfolios, dessen
+Zusammensetzung bereits nach einem Jahr von den festgelegten
+Zielgewichten abweicht.\footnote{Kommer, \emph{Souverän investieren mit
+  Indexfonds und ETFs}, 7. Auflage (Weinheim: Campus Verlag, 2025), 523.}
+
+\[
+w_{k,t+1}=\frac{w_{k,t}(1+r_{k,t})}{1+r_{p,t}}
+\]
+
+Dabei bezeichnet wk,t das Gewicht der Anlage k zu Beginn der Periode,
+rk,t ihre Rendite, rp,t die Rendite des Gesamtportfolios und wk,t+1 das
+daraus entstehende Gewicht am Ende der Periode.
+
+Diese Formel ist eine eigene algebraische Darstellung der
+Gewichtungsdrift, die Kommer anhand eines Zahlenbeispiels
+zeigt.\footnote{Kommer, 523--24.}
+
+Rebalancing stellt die ursprünglich festgelegten Zielgewichte wieder
+her. Sein Hauptzweck ist die Erhaltung des bewusst gewählten
+Rendite-Risiko-Profils. Es handelt sich um regelgebundenes
+Risikomanagement und nicht um eine Prognose, welche Anlage als Nächstes
+steigen wird.\footnote{Kommer, 524--25.}
+
+Beim kalenderbasierten Rebalancing wird das Portfolio zu festen
+Zeitpunkten angepasst. Beim bänderbasierten Rebalancing erfolgt die
+Anpassung erst, wenn ein Gewicht eine vorher festgelegte Abweichung
+überschreitet.\footnote{Kommer, 525--26.} Für das spätere Modell wird
+eine feste jährliche Regel verwendet, damit die Strategie eindeutig
+reproduzierbar bleibt.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Importiert die Pandas{-}Bibliothek}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+
+\CommentTok{\# Die Funktion neue\_gewichtung() berechnet die Werte und Gewichte nach den Renditen}
+\KeywordTok{def}\NormalTok{ neue\_gewichtung(}
+\NormalTok{    startwerte: pd.Series,}
+\NormalTok{    renditen: pd.Series}
+\NormalTok{):}
+    \CommentTok{\# Berechnet die neuen Werte nach der Rendite}
+\NormalTok{    neue\_werte }\OperatorTok{=}\NormalTok{ startwerte }\OperatorTok{*}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\NormalTok{ renditen)}
+    \CommentTok{\# Berechnet den Gesamtwert des Portfolios}
+\NormalTok{    gesamtwert }\OperatorTok{=}\NormalTok{ neue\_werte.}\BuiltInTok{sum}\NormalTok{()}
+    \CommentTok{\# Berechnet die neuen Gewichte}
+\NormalTok{    neue\_gewichte }\OperatorTok{=}\NormalTok{ neue\_werte }\OperatorTok{/}\NormalTok{ gesamtwert}
+
+    \ControlFlowTok{return}\NormalTok{ neue\_werte, neue\_gewichte}
+
+
+\CommentTok{\# Beispiel zur Nutzung der Funktion}
+\NormalTok{startwerte }\OperatorTok{=}\NormalTok{ pd.Series(\{}
+    \StringTok{"Aktien"}\NormalTok{: }\FloatTok{70.0}\NormalTok{,}
+    \StringTok{"Anleihen"}\NormalTok{: }\FloatTok{20.0}\NormalTok{,}
+    \StringTok{"ETF"}\NormalTok{: }\FloatTok{10.0}
+\NormalTok{\})}
+
+\NormalTok{renditen }\OperatorTok{=}\NormalTok{ pd.Series(\{}
+    \StringTok{"Aktien"}\NormalTok{: }\FloatTok{0.20}\NormalTok{,}
+    \StringTok{"Anleihen"}\NormalTok{: }\FloatTok{0.02}\NormalTok{,}
+    \StringTok{"ETF"}\NormalTok{: }\FloatTok{0.05}
+\NormalTok{\})}
+
+\NormalTok{start, rend }\OperatorTok{=}\NormalTok{ neue\_gewichtung(startwerte, renditen)}
+
+\BuiltInTok{print}\NormalTok{(pd.DataFrame(\{}
+    \StringTok{"Neuer Wert"}\NormalTok{: start,}
+    \StringTok{"Neues Gewicht"}\NormalTok{: rend}
+\NormalTok{\}))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+          Neuer Wert  Neues Gewicht
+Aktien          84.0       0.731070
+Anleihen        20.4       0.177546
+ETF             10.5       0.091384
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Importiert die Pandas{-}Bibliothek}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Die Funktion rebalancing() berechnet die notwendigen Käufe und Verkäufe}
+\KeywordTok{def}\NormalTok{ rebalancing(}
+\NormalTok{    aktuelle\_werte: pd.Series,}
+\NormalTok{    zielgewichte: pd.Series}
+\NormalTok{):}
+    \CommentTok{\# Berechnet den aktuellen Gesamtwert des Portfolios}
+\NormalTok{    gesamtwert }\OperatorTok{=}\NormalTok{ aktuelle\_werte.}\BuiltInTok{sum}\NormalTok{()}
+    \CommentTok{\# Berechnet die gewünschten Werte nach dem Rebalancing}
+\NormalTok{    zielwerte }\OperatorTok{=}\NormalTok{ gesamtwert }\OperatorTok{*}\NormalTok{ zielgewichte}
+    \CommentTok{\# Berechnet, wie viel gekauft oder verkauft werden muss}
+\NormalTok{    transaktionen }\OperatorTok{=}\NormalTok{ zielwerte }\OperatorTok{{-}}\NormalTok{ aktuelle\_werte}
+    \CommentTok{\# Berechnet die aktuellen Gewichte}
+\NormalTok{    aktuelle\_gewichte }\OperatorTok{=}\NormalTok{ aktuelle\_werte }\OperatorTok{/}\NormalTok{ gesamtwert}
+    \ControlFlowTok{return}\NormalTok{ aktuelle\_werte, aktuelle\_gewichte, zielgewichte, zielwerte, transaktionen}
+
+
+\CommentTok{\# Beispiel zur Nutzung der Funktion}
+\NormalTok{aktuelle\_werte }\OperatorTok{=}\NormalTok{ pd.Series(\{}
+    \StringTok{"Aktien"}\NormalTok{: }\FloatTok{84.0}\NormalTok{,}
+    \StringTok{"Anleihen"}\NormalTok{: }\FloatTok{20.4}\NormalTok{,}
+    \StringTok{"ETF"}\NormalTok{: }\FloatTok{10.5}
+\NormalTok{\})}
+
+\NormalTok{zielgewichte }\OperatorTok{=}\NormalTok{ pd.Series(\{}
+    \StringTok{"Aktien"}\NormalTok{: }\FloatTok{0.70}\NormalTok{,}
+    \StringTok{"Anleihen"}\NormalTok{: }\FloatTok{0.20}\NormalTok{,}
+    \StringTok{"ETF"}\NormalTok{: }\FloatTok{0.10}
+\NormalTok{\})}
+
+\NormalTok{aktuellw, aktuellg, zielg, zielw, tran }\OperatorTok{=}\NormalTok{ rebalancing(}
+\NormalTok{    aktuelle\_werte,}
+\NormalTok{    zielgewichte}
+\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(pd.DataFrame(\{}
+        \StringTok{"Aktueller Wert"}\NormalTok{: aktuellw,}
+        \StringTok{"Aktuelles Gewicht"}\NormalTok{: aktuellg,}
+        \StringTok{"Zielgewicht"}\NormalTok{: zielg,}
+        \StringTok{"Zielwert"}\NormalTok{: zielw,}
+        \StringTok{"Kauf / Verkauf"}\NormalTok{: tran}
+\NormalTok{\}))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+          Aktueller Wert  Aktuelles Gewicht  Zielgewicht  Zielwert  \
+Aktien              84.0           0.731070          0.7     80.43   
+Anleihen            20.4           0.177546          0.2     22.98   
+ETF                 10.5           0.091384          0.1     11.49   
+
+          Kauf / Verkauf  
+Aktien             -3.57  
+Anleihen            2.58  
+ETF                 0.99  
+\end{verbatim}
+
+3.9 Marktbreites Buy-and-Hold
+
+3.9.1 Funktionsweise
+
+Buy-and-Hold bedeutet, ein Portfolio langfristig zu halten und nicht
+aufgrund kurzfristiger Marktprognosen laufend zu kaufen und zu
+verkaufen. Kommer verbindet diese Strategie mit breit diversifizierten
+Indexfonds oder ETFs, festen Regeln, tiefen Kosten und einem
+langfristigen Anlagehorizont.\footnote{Kommer, 452--58.}
+
+Marktbreit bedeutet, dass nicht einzelne ausgewählte Unternehmen,
+sondern ein grosses Anlageuniversum abgebildet wird. Laufende Erträge
+wie Dividenden werden wieder investiert und gehören deshalb zur
+Gesamtrendite. Verkäufe können trotzdem für das Rebalancing oder einen
+tatsächlichen Kapitalbedarf erfolgen.\footnote{Kommer, 458.}
+
+3.9.2 Vorteile, Risiken und Benchmark
+
+Kommer nennt als wichtige Vorteile von Buy-and-Hold tiefere
+Transaktionskosten, einen geringeren Arbeitsaufwand und die Vermeidung
+möglicher Timing-Fehler durch häufiges Ein- und Aussteigen.\footnote{Kommer,
+  447 und 450.}
+
+Die Strategie verhindert jedoch keine Markteinbrüche. Ein reines
+Aktienportfolio nimmt an den Schwankungen, Drawdowns und Erholungsphasen
+des Aktienmarkts teil.\footnote{Kommer, 447 und 452-458.} Gerade weil
+Buy-and-Hold eine einfache passive Aktienstrategie darstellt, wird es in
+dieser Untersuchung als Benchmark für die komplexeren Strategien
+verwendet.
+
+\[
+V_t=V_0\prod_{i=1}^{t}(1+r_i)
+\]
+
+Dabei bezeichnet Vt den Portfoliowert zum Zeitpunkt t, V0 das
+Startkapital und ri die Rendite der Periode i. Das Produktzeichen steht
+für die fortlaufende Multiplikation aller Wachstumsfaktoren (1 + ri).
+
+Quelle der kumulierten Vermögensformel:.\footnote{Pham, Cui, und
+  Ruthbah, \emph{The {Performance} of the 60/40 {Portfolio}}, 51.} Bei
+Total-Return-Daten sind die wieder investierten Dividenden bereits in
+den periodischen Renditen enthalten.\footnote{Kommer, \emph{Souverän
+  investieren mit Indexfonds und ETFs}, 7. Auflage (Weinheim: Campus
+  Verlag, 2025), 466--67.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Importiert die Pandas{-}Bibliothek}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Die Funktion buy\_and\_hold() berechnet die Entwicklung eines einmal investierten Startkapitals}
+\KeywordTok{def}\NormalTok{ buy\_and\_hold(renditen: pd.Series, startkapital: }\BuiltInTok{float}\NormalTok{):}
+    \ControlFlowTok{return}\NormalTok{ startkapital }\OperatorTok{*}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\NormalTok{ renditen).cumprod()}
+
+\CommentTok{\# Beispiel zur Nutzung der Funktion}
+\NormalTok{monatsrenditen }\OperatorTok{=}\NormalTok{ pd.Series([}\FloatTok{0.03}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.02}\NormalTok{, }\FloatTok{0.01}\NormalTok{, }\FloatTok{0.04}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.02}\NormalTok{])}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Vermögensentwicklung:}\CharTok{\textbackslash{}n}\SpecialCharTok{\{}\NormalTok{buy\_and\_hold(monatsrenditen, }\FloatTok{100.0}\NormalTok{)}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Vermögensentwicklung:
+0    103.000000
+1    100.940000
+2    101.949400
+3    106.027376
+4    104.967102
+5    107.066444
+dtype: float64
+\end{verbatim}
+
+3.10 Das 60/40-Portfolio
+
+3.10.1 Aufbau und Ziel
+
+Das traditionelle 60/40-Portfolio besteht aus 60\% Aktien und 40\%
+festverzinslichen Anlagen wie Staatsanleihen. Der Aktienanteil soll
+langfristige Renditechancen liefern. Der Anleihenanteil soll das
+Portfolio stabilisieren und das Verlustrisiko gegenüber einem reinen
+Aktienportfolio senken.\footnote{Pham, Cui, und Ruthbah, \emph{The
+  {Performance} of the 60/40 {Portfolio}}, 4.}
+
+\[
+r_{60/40,t}=0{,}60r_{\mathrm{Aktien},t}+0{,}40r_{\mathrm{Anleihen},t}
+\]
+
+Dabei bezeichnet r60/40,t die Rendite des Gesamtportfolios zum Zeitpunkt
+t. rAktien,t und rAnleihen,t sind die Renditen der beiden Anlageklassen;
+0,60 und 0,40 sind ihre Zielgewichte.
+
+Die Formel ist der 60/40-Spezialfall der gewichteten
+Portfoliorendite.\footnote{Pham, Cui, und Ruthbah, 50.} Durch
+unterschiedliche Renditen verschieben sich die Anteile im Zeitablauf.
+Das Portfolio muss deshalb regelmässig auf die Zielgewichte von 60\% und
+40\% zurückgesetzt werden.\footnote{Kommer, \emph{Souverän investieren
+  mit Indexfonds und ETFs}, 7. Auflage (Weinheim: Campus Verlag, 2025),
+  523--26.}
+
+3.10.2 Diversifikation und Grenzen
+
+Der Diversifikationseffekt entsteht, weil Aktien und Anleihen nicht
+perfekt gleichgerichtet verlaufen. Die Korrelation zwischen beiden
+Anlageklassen ist jedoch weder konstant noch immer negativ. Sie
+unterschied sich in der langfristigen Untersuchung zwischen Ländern und
+veränderte sich über die Zeit.\footnote{Pham, Cui, und Ruthbah,
+  \emph{The {Performance} of the 60/40 {Portfolio}}, 1--7.}
+
+Im Jahr 2022 verloren Aktien und Anleihen gleichzeitig an Wert. Der
+Anleihenanteil schützt deshalb nicht in jeder einzelnen Marktphase. Über
+lange Untersuchungszeiträume stellte das CFA-Paper trotzdem geringere
+Volatilitäten und Drawdowns sowie positive reale Renditen des
+60/40-Portfolios fest, wobei sich die Ergebnisse zwischen den Ländern
+unterschieden.\footnote{Pham, Cui, und Ruthbah, 2--7.}
+
+Auch Kommers historischer Vergleich zeigt den Zielkonflikt: Das
+60/40-Portfolio erzielte eine tiefere Rendite als ein reines globales
+Aktienportfolio, hatte dafür aber eine deutlich tiefere Volatilität und
+einen geringeren Maximum Drawdown.\footnote{Kommer, \emph{Souverän
+  investieren mit Indexfonds und ETFs}, 7. Auflage (Weinheim: Campus
+  Verlag, 2025), 88.}
+
+3.11 Marktkapitalisierungs- und BIP-Gewichtung
+
+3.11.1 Marktkapitalisierungsgewichtung
+
+Bei der Marktkapitalisierungsgewichtung erhält jedes Unternehmen ein
+Gewicht entsprechend seinem Anteil am gesamten Börsenwert aller
+enthaltenen Unternehmen. Dadurch entstehen indirekt auch Ländergewichte:
+Länder mit einer grossen Marktkapitalisierung ihrer börsennotierten
+Unternehmen erhalten ein grösseres Gewicht.\footnote{Kommer, 473--74.}
+
+\[
+w_i^{MK}=\frac{MK_i}{\sum_j MK_j}
+\] Dabei bezeichnet \textbf{\(w_i^{\mathrm{MK}}\)} das
+Marktkapitalisierungsgewicht des Elements \textbf{\(i\)},
+\textbf{\(\mathrm{MK}_i\)} dessen Marktkapitalisierung und
+\textbf{\(\sum_j \mathrm{MK}_j\)} die gesamte Marktkapitalisierung aller
+berücksichtigten Elemente.
+
+Die Gleichung ist eine eigene formale Darstellung der von Kommer
+beschriebenen Gewichtung einzelner Aktien und Länder nach
+Marktkapitalisierung.\footnote{Kommer, 474.}
+
+3.11.2 BIP-Gewichtung
+
+Bei der von Kommer beschriebenen BIP-Methode werden die Länder nach
+ihrem Bruttoinlandsprodukt gewichtet. Innerhalb der einzelnen Länder
+werden die Unternehmen weiterhin nach ihrer Marktkapitalisierung
+gewichtet. Die Methode verändert somit hauptsächlich die regionale
+Zusammensetzung des Portfolios.\footnote{Kommer, 474.}
+
+\[
+w_c^{BIP}=\frac{BIP_c}{\sum_d BIP_d}
+\] Dabei bezeichnet \textbf{\(w_c^{\mathrm{BIP}}\)} das BIP-Gewicht des
+Landes \textbf{\(c\)}, \textbf{\(\mathrm{BIP}_c\)} dessen
+Bruttoinlandsprodukt und \textbf{\(\sum_d \mathrm{BIP}_d\)} das gesamte
+Bruttoinlandsprodukt aller berücksichtigten Länder.
+
+Die Gleichung ist eine eigene formale Darstellung der von Kommer
+beschriebenen Ländergewichtung nach Bruttoinlandsprodukt.\footnote{Kommer,
+  474--76.}
+
+Kommers historische Gegenüberstellung zeigt über den Gesamtzeitraum nur
+geringe Unterschiede. In einzelnen Teilperioden wechselte die besser
+abschneidende Methode. Auch Volatilität und Maximum Drawdown lagen nahe
+beieinander.\footnote{Kommer, 474--76.}
+
+Kommer bevorzugt die BIP-Gewichtung, weil sie hohe Länderanteile und
+mögliche nationale Klumpenrisiken reduzieren kann. Er hält jedoch selbst
+fest, dass dieses Risiko mit den vorhandenen historischen Daten kaum
+beweisbar ist. Die BIP-Gewichtung kann zudem komplexer sein und etwas
+höhere Transaktionskosten verursachen.\footnote{Kommer, 476--77.} Diese
+Position ist deshalb keine allgemein bewiesene Überlegenheit der
+BIP-Methode.
+
+3.12 Trendfolge mit gleitenden Durchschnitten
+
+3.12.1 Einfacher gleitender Durchschnitt
+
+Eine Trendfolgestrategie reagiert auf bereits beobachtete
+Kursbewegungen. Hilpisch zeigt dazu eine algorithmische Handelsregel mit
+zwei einfachen gleitenden Durchschnitten. Ein Simple Moving Average,
+kurz SMA, ist der arithmetische Mittelwert der letzten n
+Kursbeobachtungen.\footnote{Hilpisch, \emph{Python for Finance}, 326--28
+  und 689-692.}
+
+\[
+SMA_t^{(n)}=\frac{1}{n}\sum_{i=0}^{n-1}P_{t-i}
+\]
+
+Dabei bezeichnet SMAt(n) den einfachen gleitenden Durchschnitt zum
+Zeitpunkt t, n die Anzahl berücksichtigter Beobachtungen und Pt-i den
+Kurs, der i Perioden vor t beobachtet wurde.
+
+Quelle der Formel:.\footnote{Hilpisch, 326--28 und 689-692.}
+
+Ein kurzer SMA (n=10-20) verwendet weniger Beobachtungen und reagiert
+deshalb schneller auf neue Kursbewegungen. Ein langer SMA (n=100-200)
+verändert sich langsamer, während sich ein mittelfristiger SMA
+(n=20-100) dazwischen bewegt. Wenn sich die beiden Linien kreuzen,
+spricht man von einem Crossover.\footnote{Hilpisch, 326--28.}
+
+3.12.2 Handelssignal
+
+Hilpisch verwendet eine Long/Short-Regel: Liegt der kurze SMA über dem
+langen SMA, wird eine Long-Position gehalten. Liegt er darunter, wird
+eine Short-Position gehalten.\footnote{Hilpisch, 691--92.} Für diese
+Untersuchung wird die Regel methodisch zu Long/Cash angepasst. Bei einem
+positiven Signal ist das Modell im Markt investiert, ansonsten hält es
+Cash. Diese Anpassung ist eine eigene Entscheidung und nicht Hilpischs
+ursprüngliche Regel.
+
+\[
+s_t=\begin{cases}1,&SMA_t^{kurz}>SMA_t^{lang}\\0,&SMA_t^{kurz}\leq SMA_t^{lang}\end{cases}
+\]
+
+Dabei bezeichnet st das Handelssignal zum Zeitpunkt t: Der Wert 1
+bedeutet, dass die Strategie investiert ist, der Wert 0 steht für Cash.
+SMAtkurz und SMAtlang sind der kurze und der lange gleitende
+Durchschnitt.
+
+Grundidee nach;\footnote{Hilpisch, 691--92.} die Long/Cash-Anpassung ist
+eine eigene methodische Entscheidung.
+
+Ein am Ende der Periode t berechnetes Signal darf nicht auf die bereits
+realisierte Rendite derselben Periode angewendet werden. Die Position
+wird deshalb um eine Periode verschoben.\footnote{Hilpisch, 694.}
+
+\[
+r_{\mathrm{Strategie},t}=s_{t-1}r_{\mathrm{Markt},t}
+\]
+
+Dabei bezeichnet rStrategie,t die Strategierendite zum Zeitpunkt t, st-1
+das Signal der vorherigen Periode und rMarkt,t die aktuelle
+Marktrendite.
+
+Quelle der zeitlich verschobenen Anwendung des Signals:.\footnote{Hilpisch,
+  694.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Importiert die Numpy{-}Bibliothek}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\CommentTok{\# Importiert die Pandas{-}Bibliothek}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Die Funktion trendfolge() berechnet eine vereinfachte Long/Cash{-}Strategie}
+\KeywordTok{def}\NormalTok{ trendfolge(preise: pd.Series, kurzes\_fenster: }\BuiltInTok{int}\NormalTok{, langes\_fenster: }\BuiltInTok{int}\NormalTok{):}
+    \ControlFlowTok{if}\NormalTok{ kurzes\_fenster }\OperatorTok{\textgreater{}=}\NormalTok{ langes\_fenster:}
+        \ControlFlowTok{raise} \PreprocessorTok{ValueError}\NormalTok{(}\StringTok{"Das kurze Fenster muss kleiner als das lange Fenster sein."}\NormalTok{)}
+    
+\NormalTok{    daten }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}\StringTok{"Kurs"}\NormalTok{: preise\}).dropna().sort\_index()}
+\NormalTok{    daten[}\StringTok{"SMA kurz"}\NormalTok{] }\OperatorTok{=}\NormalTok{ daten[}\StringTok{"Kurs"}\NormalTok{].rolling(kurzes\_fenster).mean()}
+\NormalTok{    daten[}\StringTok{"SMA lang"}\NormalTok{] }\OperatorTok{=}\NormalTok{ daten[}\StringTok{"Kurs"}\NormalTok{].rolling(langes\_fenster).mean()}
+    
+    \CommentTok{\# 1 bedeutet investiert und 0 bedeutet Cash}
+\NormalTok{    daten[}\StringTok{"Signal"}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.where(daten[}\StringTok{"SMA kurz"}\NormalTok{] }\OperatorTok{\textgreater{}}\NormalTok{ daten[}\StringTok{"SMA lang"}\NormalTok{], }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\NormalTok{    daten[}\StringTok{"Marktrendite"}\NormalTok{] }\OperatorTok{=}\NormalTok{ daten[}\StringTok{"Kurs"}\NormalTok{].pct\_change()}
+    
+    \CommentTok{\# shift(1) verhindert die Nutzung eines noch nicht verfügbaren Signals}
+\NormalTok{    daten[}\StringTok{"Strategierendite"}\NormalTok{] }\OperatorTok{=}\NormalTok{ daten[}\StringTok{"Signal"}\NormalTok{].shift(}\DecValTok{1}\NormalTok{) }\OperatorTok{*}\NormalTok{ daten[}\StringTok{"Marktrendite"}\NormalTok{]}
+    \ControlFlowTok{return}\NormalTok{ daten}
+
+\CommentTok{\# Beispiel zur Nutzung der Funktion}
+\NormalTok{beispiel\_preise }\OperatorTok{=}\NormalTok{ pd.Series(}
+\NormalTok{    [}\DecValTok{100}\NormalTok{, }\DecValTok{101}\NormalTok{, }\DecValTok{103}\NormalTok{, }\DecValTok{102}\NormalTok{, }\DecValTok{105}\NormalTok{, }\DecValTok{107}\NormalTok{, }\DecValTok{104}\NormalTok{, }\DecValTok{102}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{103}\NormalTok{, }\DecValTok{106}\NormalTok{],}
+\NormalTok{    index}\OperatorTok{=}\NormalTok{pd.date\_range(}\StringTok{"2026{-}01{-}01"}\NormalTok{, periods}\OperatorTok{=}\DecValTok{11}\NormalTok{, freq}\OperatorTok{=}\StringTok{"D"}\NormalTok{)}
+\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(trendfolge(beispiel\_preise, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+            Kurs    SMA kurz  SMA lang  Signal  Marktrendite  Strategierendite
+2026-01-01   100         NaN       NaN       0           NaN               NaN
+2026-01-02   101         NaN       NaN       0      0.010000          0.000000
+2026-01-03   103  101.333333       NaN       0      0.019802          0.000000
+2026-01-04   102  102.000000       NaN       0     -0.009709         -0.000000
+2026-01-05   105  103.333333     102.2       1      0.029412          0.000000
+2026-01-06   107  104.666667     103.6       1      0.019048          0.019048
+2026-01-07   104  105.333333     104.2       1     -0.028037         -0.028037
+2026-01-08   102  104.333333     104.0       1     -0.019231         -0.019231
+2026-01-09   100  102.000000     103.6       0     -0.019608         -0.019608
+2026-01-10   103  101.666667     103.2       0      0.030000          0.000000
+2026-01-11   106  103.000000     103.0       0      0.029126          0.000000
+\end{verbatim}
+
+3.12.3 Grenzen der Trendfolge
+
+Gleitende Durchschnitte sind nachlaufende Indikatoren, weil sie nur
+vergangene Kurse verwenden. Ein Trend wird somit erst erkannt, nachdem
+die Kursbewegung bereits begonnen hat. In Seitwärtsphasen können häufige
+Kreuzungen zu Fehlsignalen und wiederholten Positionswechseln
+führen.\footnote{Hilpisch, 326--28 und 689-694.}
+
+Hilpisch zeigt, dass viele Kombinationen von kurzen und langen Fenstern
+nachträglich getestet werden können.\footnote{Hilpisch, 697.} Wird nur
+die historisch beste Kombination ausgewählt und danach mit denselben
+Daten beurteilt, besteht ein Overfitting-Risiko. Die Hauptparameter
+müssen deshalb vor dem eigentlichen Vergleich begründet und festgelegt
+werden.
+
+Der vereinfachte Beispiel-Backtest von Hilpisch lässt unter anderem
+Gebühren, Geld-Brief-Spannen (Differenz zwischen Bid und Ask) und
+weitere Marktmechanismen weg.\footnote{Hilpisch, 696.} Solche
+Vereinfachungen können eine Strategie mit häufigen Transaktionen im
+historischen Vergleich begünstigen.
+
+3.13 Aussagegrenzen historischer Vergleiche und Backtests
+
+3.13.1 Historische Stichprobe und Vergleichbarkeit
+
+Ein Backtest zeigt, wie eine genau definierte Strategie innerhalb einer
+gewählten historischen Stichprobe abgeschnitten hätte. Das Ergebnis
+garantiert nicht, dass dieselbe Beziehung auch in der Zukunft gilt. Das
+CFA-Paper zeigt beispielsweise unterschiedliche Ergebnisse des
+60/40-Portfolios je nach Land, Generation und Marktphase.\footnote{Pham,
+  Cui, und Ruthbah, \emph{The {Performance} of the 60/40 {Portfolio}},
+  1--7.} Auch beim Vergleich von Marktkapitalisierungs- und
+BIP-Gewichtung wechselte die besser abschneidende Methode zwischen den
+Teilperioden.\footnote{Kommer, \emph{Souverän investieren mit Indexfonds
+  und ETFs}, 7. Auflage (Weinheim: Campus Verlag, 2025), 474--76.}
+
+Für einen fairen Vergleich müssen alle Strategien auf derselben
+Grundlage untersucht werden. Dazu gehören ein identischer Zeitraum, eine
+einheitliche Datenfrequenz je Kennzahl, dieselbe Währung, dieselbe
+Behandlung von Dividenden und eine einheitliche nominale oder reale
+Berechnung.\footnote{Kommer, 22--23, 166 und 466-467; Hilpisch,
+  \emph{Python for Finance}, 319--21.}
+
+3.13.2 Foresight Bias
+
+Foresight Bias oder Look-ahead Bias entsteht, wenn in einem Backtest
+Informationen verwendet werden, die zum betrachteten Zeitpunkt noch
+nicht verfügbar waren. Beim Resampling kann dies geschehen, wenn ein
+Monatsendwert zeitlich am Monatsanfang eingeordnet wird. Hilpisch
+fordert deshalb eine zeitlich korrekte Beschriftung und den letzten
+verfügbaren Wert des Intervalls.\footnote{Hilpisch, \emph{Python for
+  Finance}, 319--21.}
+
+Bei der Trendfolge darf ein am Ende des Tages berechnetes Signal nicht
+auf die Rendite desselben Tages angewendet werden. Die Verschiebung des
+Signals um eine Periode verhindert, dass das Modell zukünftige
+Informationen nutzt.\footnote{Hilpisch, 694.}
+
+3.13.3 Data Snooping und Overfitting
+
+Data Snooping entsteht, wenn historische Daten bewusst oder unbewusst so
+lange durchsucht werden, bis ein gewünschtes Ergebnis erscheint. Kommer
+verbindet den Begriff unter anderem mit Backtesting with Overfitting und
+verweist auf Out-of-Sample-Tests als Gegenmassnahme.\footnote{Kommer,
+  \emph{Souverän investieren mit Indexfonds und ETFs}, 7. Auflage
+  (Weinheim: Campus Verlag, 2025), 607--8.}
+
+Ein Beispiel ist die nachträgliche Suche nach der besten Kombination
+zweier SMA-Fenster. Wenn dieselben Daten sowohl zur Auswahl der
+Parameter als auch zur Bewertung der Strategie genutzt werden, kann das
+Modell zufällige Eigenschaften der Vergangenheit statt einer stabilen
+Regel abbilden.\footnote{Hilpisch, \emph{Python for Finance}, 697.}
+
+3.13.4 Kosten, Inflation und Datenqualität
+
+Ein vereinfachter Backtest kann Transaktionsgebühren, Geld-Brief-Spannen
+und weitere Marktmechanismen auslassen. Hilpisch nennt diese Punkte
+ausdrücklich als Vereinfachungen seines Beispiels.\footnote{Hilpisch,
+  696.} Werden sie nicht berücksichtigt, können häufig handelnde
+Strategien im Vergleich zu Buy-and-Hold zu gut erscheinen.
+
+Eine Analyse ohne Inflationsbereinigung zeigt nominales
+Vermögenswachstum und nicht die Veränderung der Kaufkraft. Für
+langfristige Vergleiche können reale Renditen deshalb eine andere
+Aussage liefern als nominale Renditen.\footnote{Kommer, \emph{Souverän
+  investieren mit Indexfonds und ETFs}, 7. Auflage (Weinheim: Campus
+  Verlag, 2025), 22--23.}
+
+Auch fehlende Werte, unterschiedliche Handelstage, die zeitliche
+Ausrichtung mehrerer Reihen und die Verwendung von Kurs- statt
+Total-Return-Daten können das Ergebnis beeinflussen.\footnote{Hilpisch,
+  \emph{Python for Finance}, 307--21; Kommer, \emph{Souverän investieren
+  mit Indexfonds und ETFs}, 7. Auflage (Weinheim: Campus Verlag, 2025),
+  466--67.} Diese Annahmen müssen in der Methodik für alle Strategien
+eindeutig und gleich festgelegt werden.
+
+\bookmarksetup{startatroot}
+
+\chapter{Methodik}\label{methodik}
+
+\section{Investment Strategien}\label{investment-strategien}
+
+\subsection{Marktbreites investieren}\label{marktbreites-investieren}
+
+Mit ETFs und Index Fonds kann man in die Gesamtwirtschaft investieren
+und kann über einen langen Zeitraum meistens Rendite erzielen.
+
+\subsection{60/40 balanced Portfolio}\label{balanced-portfolio}
+
+Es wird in 60\% Aktien für Rendite und 40\% Staatsanleihen für die
+Sicherheit investiert. Pham, Cui, und Ruthbah\footnote{\emph{The
+  {Performance} of the 60/40 {Portfolio}}.}
+
+\subsection{Trendfolge-Strategie}\label{trendfolge-strategie}
+
+Hinter der Trendfolgestrategie steckt die Annahme, dass es einfacher
+ist, bereits bestehende Trends auszunutzen als frühzeitig eine
+Trendumkehr zu erkennen.~Man partizipiert dann zwar nicht von
+Tiefststand zu Höchststand (oder umgekehrt, wenn man Short geht) von
+einem Trend, läuft aber auch nicht Gefahr, die völlig falsche
+Entscheidung getroffen haben, wenn das Gegenteil von dem eintritt, was
+man angenommen hat. Admirals\footnote{{„Wie Sie mit der
+  Trendfolgestrategie bestehende Trends nutzen``}.} Um den Trend zu
+erkennen, werden technische Indikatoren wie der gleitende Durchschnitt
+(Moving Average) Probst\footnote{{„Der Gleitende Durchschnitt - so
+  bestimmen Sie die Trendrichtung``}.} oder der Relative Strength Index
+(RSI) Ratgeber\footnote{{„Relative Strength Index - so funktioniert der
+  RSI! - finanzen.ch``}.} verwendet.
+
+\subsection{BIP-Gewichtet investieren (Gerd
+Kommer)}\label{bip-gewichtet-investieren-gerd-kommer}
+
+Der Gerd-Kommer-ETF ist ein All-Cap-- und All-World-ETF, also ein ETF
+auf die „Welt-AG``, der bei der Ländergewichtung sowohl
+Markt\-kapitalisierung als auch Wirtschafts\-leistung („BIP``)
+berücksichtigt, dabei die wichtigsten fünf Faktor\-prämien („Factor
+Investing``) übergewichtet und mit über 4.000 Einzelaktien
+Ultradiversifikation bietet. Gerd Kommer\footnote{{„Investieren``}.}
+
+\section{Datenquellen}\label{datenquellen}
+
+\subsection{Yahoo Finance}\label{yahoo-finance-1}
+
+Yahoo Finance bietet historische Kursdaten für eine Vielzahl von
+Finanzinstrumenten, darunter Aktien, ETFs und Anleihen. Diese Daten
+können für die Berechnung von Renditen, Volatilität und anderen
+Kennzahlen verwendet werden. Yahoo\footnote{{„Yahoo FinanzenDeutschland
+  \textbar{} Börse live, Kurse, Nachrichten aus Wirtschafts- und
+  Finanzwelt``}.}
+
+\subsection{FRED (Federal Reserve Economic
+Data)}\label{fred-federal-reserve-economic-data-1}
+
+FRED ist eine umfangreiche Datenbank der Federal Reserve Bank of
+St.~Louis, die wirtschaftliche und finanzielle Daten bereitstellt. Hier
+können makroökonomische Indikatoren wie das Bruttoinlandsprodukt (BIP),
+Arbeitslosenzahlen und Zinssätze abgerufen werden, die für die Analyse
+von Anlagestrategien relevant sein können. Federal Reserve Bank of St.
+Louis\footnote{{„Federal {Reserve Economic Data} \textbar{} {FRED}
+  \textbar{} {St}. {Louis Fed}``}.}
+
+\subsection{Vanguard}\label{vanguard-1}
+
+Vanguard ist einer der grössten Anbieter von ETFs und bietet
+umfangreiche Informationen zu seinen Produkten, einschliesslich
+historischer Renditen, Kostenquoten und Fondsinformationen. Diese Daten
+können für die Analyse von ETF-basierten Anlagestrategien verwendet
+werden. Vanguard\footnote{{„Startseite \textbar{} Vanguard Switzerland
+  Private Anleger``}.}
+
+\section{Kennzahlen}\label{kennzahlen}
+
+\subsection{Stabilität}\label{stabilituxe4t}
+
+\textbf{Volatilität}: Die Volatilität misst die Schwankungsbreite der
+Renditen. Eine hohe Volatilität deutet auf starke Kursschwankungen hin,
+während eine niedrige Volatilität auf stabilere Renditen hindeutet.
+Buchhaltung-Einfach-Sicher\footnote{{„Volatilität Einfach Erklärt
+  \textbar{} {Definition}, {Berechnung} Und {Nutzen}``}.}
+
+\textbf{Verlustphasen}: Verlustphasen sind Zeiträume, in denen die
+Renditen negativ sind. Sie können durch verschiedene Faktoren verursacht
+werden, wie z.B. wirtschaftliche Abschwünge, geopolitische Ereignisse
+oder Unternehmenskrisen. Das Verständnis von Verlustphasen ist wichtig,
+um die Risiken einer Anlagestrategie zu bewerten und um angemessene
+Massnahmen zur Risikominderung zu ergreifen. Gegenspieler von positiven
+Phasen.
+
+\textbf{Positive Phasen}: Positive Phasen sind Zeiträume, in denen die
+Renditen positiv sind. Sie können durch wirtschaftliches Wachstum,
+technologische Innovationen oder andere günstige Faktoren verursacht
+werden. Das Verständnis von positiven Phasen ist wichtig, um die Chancen
+einer Anlagestrategie zu bewerten und um angemessene Massnahmen zur
+Maximierung der Rendite zu ergreifen. Gegenspieler von Verlustphasen.
+
+\textbf{Maximaler Drawdown}: Der maximale Drawdown misst den grössten
+prozentualen Verlust vom Höchststand bis zum Tiefststand eines
+Portfolios. Er gibt an, wie viel ein Anleger in einem ungünstigen
+Szenario verlieren könnte. Fidelity\footnote{{„Maximum {Drawdown}``}.}
+
+\textbf{Krisenfestigkeit}: Die Krisenfestigkeit eines Portfolios
+beschreibt, wie gut es in Zeiten wirtschaftlicher oder finanzieller
+Krisen performt. Ein krisenfestes Portfolio sollte in der Lage sein,
+Verluste zu minimieren und sich schneller von Rückschlägen zu erholen.
+Beispiel Krisen: Dotcom-Blase, Finanzkrise 2008, Corona-Krise
+
+\subsection{Rendite}\label{rendite}
+
+\textbf{Gesamtrendite}: Die Gesamtrendite berücksichtigt sowohl
+Kursgewinne als auch Dividendenzahlungen. Sie gibt an, wie viel Prozent
+das investierte Kapital über einen bestimmten Zeitraum gewachsen ist.
+
+\textbf{Durchschnittliche jährliche Rendite}: Diese Kennzahl berechnet
+die durchschnittliche jährliche Rendite über einen bestimmten Zeitraum,
+indem sie die Gesamtrendite auf eine jährliche Basis umrechnet.
+
+\subsection{Sharpe Ratio}\label{sharpe-ratio}
+
+Die Sharpe Ratio misst die risikobereinigte Rendite einer
+Anlagestrategie. Sie berechnet sich als Differenz zwischen der Rendite
+der Strategie und der risikofreien Rendite, dividiert durch die
+Volatilität der Strategie. Eine höhere Sharpe Ratio deutet auf eine
+bessere risikobereinigte Performance hin. Fidelity\footnote{{„Sharpe-{Ratio}``}.}
+
+\section{Bedingungen}\label{bedingungen}
+
+\begin{itemize}
+\tightlist
+\item
+  Zeitabschnitt
+\item
+  Gleiches Startkapital
+\item
+  Reinvestition der Dividenden
+\item
+  Gleiche Datenfrequenz (täglich, wöchentlich, monatlich, jährlich)
+\item
+  jährliches Rebalancing (für 60/40 Portfolio)
+\end{itemize}
+
+Nicht berücksichtigt werden: - Transaktionskosten - Steuern - Inflation
+- weitere Gebühren
+
+\bookmarksetup{startatroot}
+
+\chapter{Analyse}\label{analyse}
+
+5.1 Ausgangspunkt der Analyse
+
+Die Theorie hat bereits die Bausteine festgelegt, die das spätere Modell
+benötigt. Dazu gehören die Verarbeitung von Zeitreihen,
+Renditeberechnungen, Volatilität, Drawdown, Sharpe Ratio, Korrelation,
+Portfoliorisiko, Rebalancing, Buy-and-Hold und eine Trendfolgestrategie.
+Die Methodik verlangt ausserdem einen vergleichbaren Zeitabschnitt,
+dasselbe Startkapital, die Reinvestition der Dividenden und eine
+einheitliche Datenfrequenz. Beim 60/40-Portfolio ist ein jährliches
+Rebalancing vorgesehen.
+
+Damit besteht meine Aufgabe in der Analyse nicht darin, eine völlig neue
+Finanztheorie zu entwickeln. Ich muss die bereits beschriebenen
+Bestandteile so zusammenführen, dass sie mit realen historischen Daten
+reproduzierbar ausgeführt werden können.
+
+Dabei unterscheide ich zwei Ebenen: 1. Das allgemeine System: Es soll
+verschiedene geeignete Datensätze und Parameter verarbeiten können. 2.
+Die Untersuchung der Maturarbeit: Sie verwendet später eine feste und
+begründete Auswahl von Daten und Parametern.
+
+Diese Trennung ist wichtig, weil die spätere Benutzeroberfläche dieselbe
+Engine mit anderen Eingaben verwenden können soll. Für die
+wissenschaftliche Auswertung werden die Parameter dagegen vor dem
+Hauptlauf festgelegt und nicht nachträglich so verändert, dass ein
+günstigeres Resultat entsteht. Das entspricht auch der im Theorieteil
+behandelten Gefahr von Data Snooping und Overfitting.\footnote{Hilpisch,
+  \emph{Python for Finance}, 697; Kommer, \emph{Souverän investieren mit
+  Indexfonds und ETFs}, 7. Auflage (Weinheim: Campus Verlag, 2025),
+  607--8.}
+
+5.2 Reihenfolge der technischen Entwicklung
+
+Aus den Anforderungen ergibt sich für mich folgende Reihenfolge:
+
+\[
+\begin{array}{c}
+\boxed{\text{\Large 1. Internes Datenformat festlegen}}
+\\[0.4cm]
+\downarrow
+\\[0.4cm]
+\boxed{\text{\Large 2. Datenquellen auf dieses Format abbilden}}
+\\[0.4cm]
+\downarrow
+\\[0.4cm]
+\boxed{\text{\Large 3. Import, Normalisierung und Validierung definieren}}
+\\[0.4cm]
+\downarrow
+\\[0.4cm]
+\boxed{\text{\Large 4. Veränderbare Einstellungen des Systems festlegen}}
+\\[0.4cm]
+\downarrow
+\\[0.4cm]
+\boxed{\text{\Large 5. Einheitlichen Ergebnisvertrag festlegen}}
+\\[0.4cm]
+\downarrow
+\\[0.4cm]
+\boxed{\text{\Large 6. Leeres Grundgerüst der Engine definieren}}
+\\[0.4cm]
+\downarrow
+\\[0.4cm]
+\boxed{\text{\Large 7. Vorhandene Funktionen integrieren}}
+\end{array}
+\]
+
+Die Reihenfolge ist bewusst so gewählt. Würde ich zuerst die
+Simulationsfunktion programmieren und erst danach entscheiden, welche
+Eingaben und Ausgaben sie besitzen soll, würden Datenformat, Strategien
+und Benutzeroberfläche unnötig voneinander abhängig.
+
+Die konkrete Reihenfolge ist meine eigene Designentscheidung. Die
+Quellen liefern die Grundlagen dafür, welche Datenstrukturen und
+Finanzinformationen benötigt werden; sie schreiben nicht diese exakte
+Softwarearchitektur vor.
+
+5.3 Entwicklung eines einheitlichen Datenformats
+
+5.3.1 Warum überhaupt ein eigenes internes Format?
+
+Die später verwendeten Daten können aus unterschiedlichen Quellen
+stammen. Yahoo Finance liefert Marktzeitreihen anders als FRED eine
+Zinsreihe oder eine Makrodatenbank jährliche BIP-Werte. Würde jede
+Strategie direkt mit dem Format einer bestimmten Quelle arbeiten, müsste
+sich auch die Strategie ändern, sobald der Anbieter gewechselt wird.
+
+Deshalb erhält das Modell einen anbieterunabhängigen Datenvertrag. Ein
+Importmodul ist dafür verantwortlich, Quelldaten in diesen Vertrag zu
+übersetzen. Die eigentliche Strategie sieht danach nur noch
+standardisierte Daten.
+
+Wes McKinney beschreibt Datenanalyse als Abfolge von Einlesen,
+Bereinigen, Kombinieren, Normalisieren, Umformen und anschliessender
+Berechnung. Er behandelt dabei sowohl tabellarische Daten als auch
+Zeitreihen und zeigt, dass pandas gerade für solche strukturierten Daten
+entwickelt wurde.\footnote{McKinney, \emph{Python for Data Analysis}.}
+Diese Grundidee passt zu meiner Untersuchung: Die Quelle darf
+unterschiedlich sein, die Berechnung soll danach aber auf einer
+einheitlichen Struktur stattfinden.
+
+Die Entscheidung, dafür einen eigenen Datenvertrag zu definieren, ist
+meine technische Schlussfolgerung aus diesem Bedarf.
+
+5.3.2 Warum CSV als Austauschformat?
+
+Für den Austausch zwischen Import, Kontrolle und späterer
+Benutzeroberfläche verwende ich in der ersten Version CSV-Dateien.
+McKinney behandelt in Kapitel 6 das Einlesen tabellarischer Textdaten
+und verwendet pandas.read\_csv() als eines der zentralen Werkzeuge für
+solche Daten.\footnote{McKinney.}
+
+CSV ist für mein Projekt nicht deshalb ausgewählt, weil es allen anderen
+Formaten technisch überlegen wäre. Die Gründe sind praktischer:
+
+\begin{itemize}
+\tightlist
+\item
+  Die Datei kann direkt mit einem Texteditor, Tabellenprogramm oder
+  Python geöffnet werden.
+\item
+  Beim Entwickeln kann ich leicht kontrollieren, ob ein Adapter
+  tatsächlich die erwarteten Spalten erzeugt.
+\item
+  Eine spätere Weboberfläche kann eine CSV-Datei einfach als
+  Benutzereingabe akzeptieren.
+\item
+  pandas kann das Format ohne zusätzliche Spezialbibliothek einlesen.
+\end{itemize}
+
+CSV besitzt gleichzeitig Grenzen. Datentypen und die Bedeutung einer
+Spalte werden nicht ausreichend durch die Datei selbst erklärt. Darum
+genügt eine CSV allein nicht: Das System benötigt zusätzlich einen klar
+definierten Datenvertrag und Metadaten.
+
+Für die interne Berechnung bleibt die Datei nicht als Textstruktur
+bestehen. Nach dem Einlesen wird sie in pandas-Objekte überführt.
+
+5.3.3 Warum ein Long-Format?
+
+Für die Marktzeitreihen verwende ich als Austauschformat eine lange
+Tabelle. Eine Beobachtung besteht aus einem Datum, einer Anlagenkennung
+und einem Wert.
+
+McKinney beschreibt im Abschnitt ``Pivoting `Long' to `Wide' Format''
+ausdrücklich, dass mehrere Zeitreihen häufig in einem sogenannten long
+beziehungsweise stacked format gespeichert werden. In diesem Format
+stellt jede einzelne Beobachtung eine eigene Zeile dar. Er zeigt danach
+mit DataFrame.pivot(), wie dieselben Daten für Berechnungen in eine
+breite Tabelle mit einer Spalte pro Zeitreihe umgeformt werden
+können.\footnote{McKinney.}
+
+Diese Beschreibung passt direkt zu meinem Problem. Für ein allgemeines
+Eingabeformat ist Long praktisch, weil eine neue Anlage zusätzliche
+Zeilen erzeugt, ohne dass sich die Grundstruktur der Tabelle ändert. Für
+bestimmte Berechnungen ist dagegen eine breite Darstellung komfortabler.
+Deshalb lege ich nicht fest, dass jede Stufe des Systems Long sein muss:
+
+\[
+\begin{array}{c}
+\text{\large \textbf{Austausch / Speicherung:}}
+\\[4pt]
+\boxed{\texttt{date \;|\; asset\_id \;|\; performance\_value}}
+\\[10pt]
+\downarrow
+\\[-2pt]
+\text{\texttt{pandas pivot()}}
+\\[10pt]
+\downarrow
+\\[-2pt]
+\text{\large \textbf{Interne Berechnung:}}
+\\[4pt]
+\boxed{\texttt{date \;|\; ASSET\_A \;|\; ASSET\_B \;|\; ASSET\_C \;|\; \ldots}}
+\end{array}
+\]
+
+McKinney liefert die nachvollziehbare Grundlage dafür, dass Long ein
+gebräuchliches Format für mehrere Zeitreihen ist und sich mit pandas
+eindeutig in Wide umformen lässt. Meine Entscheidung ist, Long deshalb
+als äussere Schnittstelle und Wide dort zu verwenden, wo die Berechnung
+davon profitiert.
+
+5.3.4 Marktzeitreihen: minimaler Datenvertrag
+
+Für eine Marktzeitreihe definiere ich zunächst drei Pflichtfelder:
+
+\[
+\begin{array}{|l|l|}
+\hline
+\textbf{Feld} & \textbf{Bedeutung} \\
+\hline
+\texttt{date} & \text{Datum der Beobachtung} \\
+\hline
+\texttt{asset\_id} & \text{interne, anbieterunabhängige Kennung der Anlage} \\
+\hline
+\texttt{performance\_value} & \text{Wertreihe, aus der die Performance berechnet werden darf} \\
+\hline
+\end{array}
+\]
+
+Optional kann eine vierte Spalte vorhanden sein:
+
+\[
+\begin{array}{|l|l|}
+\hline
+\textbf{Feld} & \textbf{Bedeutung} \\
+\hline
+\texttt{signal\_value} & \text{separate Wertreihe für technische Handelssignale} \\
+\hline
+\end{array}
+\]
+
+Beispiel:
+
+\[
+\begin{array}{|c|c|c|c|}
+\hline
+\textbf{date} & \textbf{asset\_id} & \textbf{performance\_value} & \textbf{signal\_value} \\
+\hline
+2020\text{-}01\text{-}02 & \texttt{EQ\_DEMO} & 100.0 & 50.25 \\
+\hline
+2020\text{-}01\text{-}03 & \texttt{EQ\_DEMO} & 102.0 & 51.00 \\
+\hline
+2020\text{-}01\text{-}02 & \texttt{BD\_DEMO} & 100.0 & 104.80 \\
+\hline
+2020\text{-}01\text{-}03 & \texttt{BD\_DEMO} & 100.5 & 104.90 \\
+\hline
+\end{array}
+\]
+
+asset\_id ist bewusst nicht dasselbe wie ein Yahoo-Ticker. Der Ticker
+gehört zur Quelle; asset\_id gehört zum Modell. Dadurch könnte dieselbe
+logische Anlage später aus einer anderen Quelle importiert werden, ohne
+dass alle Strategiekonfigurationen angepasst werden müssen.
+
+Auch performance\_value ist absichtlich kein Anbieterbegriff wie Adj
+Close. Der Importadapter muss dokumentieren, welche Quellenspalte auf
+dieses Feld abgebildet wurde.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ io }\ImportTok{import}\NormalTok{ StringIO}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{beispiel\_csv }\OperatorTok{=} \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{.join([}
+    \StringTok{"date,asset\_id,performance\_value"}\NormalTok{,}
+    \StringTok{"2020{-}01{-}02,EQ\_DEMO,100.0"}\NormalTok{,}
+    \StringTok{"2020{-}01{-}03,EQ\_DEMO,102.0"}\NormalTok{,}
+    \StringTok{"2020{-}01{-}06,EQ\_DEMO,101.0"}\NormalTok{,}
+    \StringTok{"2020{-}01{-}02,BD\_DEMO,100.0"}\NormalTok{,}
+    \StringTok{"2020{-}01{-}03,BD\_DEMO,100.5"}\NormalTok{,}
+    \StringTok{"2020{-}01{-}06,BD\_DEMO,101.0"}\NormalTok{,}
+\NormalTok{])}
+
+\NormalTok{markt\_long }\OperatorTok{=}\NormalTok{ pd.read\_csv(StringIO(beispiel\_csv))}
+\NormalTok{markt\_long[}\StringTok{"date"}\NormalTok{] }\OperatorTok{=}\NormalTok{ pd.to\_datetime(markt\_long[}\StringTok{"date"}\NormalTok{])}
+\NormalTok{markt\_long}
+\end{Highlighting}
+\end{Shaded}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+& date & asset\_id & performance\_value \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & 2020-01-02 & EQ\_DEMO & 100.0 \\
+1 & 2020-01-03 & EQ\_DEMO & 102.0 \\
+2 & 2020-01-06 & EQ\_DEMO & 101.0 \\
+3 & 2020-01-02 & BD\_DEMO & 100.0 \\
+4 & 2020-01-03 & BD\_DEMO & 100.5 \\
+5 & 2020-01-06 & BD\_DEMO & 101.0 \\
+\end{longtable}
+}
+
+Für die spätere Portfolioberechnung kann dieselbe Tabelle eindeutig
+umgeformt werden. Dadurch muss die externe Datei nicht bereits für jede
+konkrete mathematische Funktion optimiert sein.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{markt\_wide }\OperatorTok{=}\NormalTok{ (}
+\NormalTok{    markt\_long}
+\NormalTok{    .pivot(index}\OperatorTok{=}\StringTok{"date"}\NormalTok{, columns}\OperatorTok{=}\StringTok{"asset\_id"}\NormalTok{, values}\OperatorTok{=}\StringTok{"performance\_value"}\NormalTok{)}
+\NormalTok{    .sort\_index()}
+\NormalTok{    .reset\_index()}
+\NormalTok{)}
+    
+\NormalTok{markt\_wide.columns.name }\OperatorTok{=} \VariableTok{None}
+\NormalTok{markt\_wide}
+\end{Highlighting}
+\end{Shaded}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+& date & BD\_DEMO & EQ\_DEMO \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & 2020-01-02 & 100.0 & 100.0 \\
+1 & 2020-01-03 & 100.5 & 102.0 \\
+2 & 2020-01-06 & 101.0 & 101.0 \\
+\end{longtable}
+}
+
+5.3.5 Was bedeutet performance\_value?
+
+Die Spalte performance\_value ist die Wertreihe, aus der das Modell
+später die tatsächliche Wertentwicklung einer Anlage berechnet. Dabei
+soll nicht einfach irgendein verfügbarer Kurs übernommen werden. Für
+meine Untersuchung ist entscheidend, dass die gewählte Reihe zur
+festgelegten Behandlung der Dividenden passt.
+
+Im Theorieteil wurde bereits festgelegt, dass für den langfristigen
+Vergleich eine Gesamtrendite beziehungsweise ein Total Return geeigneter
+ist als eine reine Kursbetrachtung. Ein Total Return berücksichtigt
+neben Kursveränderungen auch laufende Erträge wie Dividenden.\footnote{Kommer,
+  \emph{Souverän investieren mit Indexfonds und ETFs}, 7. Auflage
+  (Weinheim: Campus Verlag, 2025), 466--67.} Da in meiner Methodik die
+Reinvestition der Dividenden vorgesehen ist, muss die verwendete
+Performance-Reihe diese Annahme abbilden.
+
+performance\_value bezeichnet deshalb bewusst keinen bestimmten
+Anbieterbegriff. Je nach Datenquelle kann dahinter zum Beispiel ein
+Total-Return-Index oder eine entsprechend bereinigte Wertreihe stehen.
+Der jeweilige Import muss dokumentieren, welche ursprüngliche Reihe
+verwendet wurde.
+
+Dadurch bleibt die Berechnung unabhängig von der Quelle. Die Engine
+erhält immer dieselbe Spalte, während die Umwandlung davor sicherstellt,
+dass ihre Bedeutung vergleichbar ist.
+
+5.3.6 Wozu dient signal\_value?
+
+Für Buy-and-Hold oder ein Rebalancing-Portfolio genügt grundsätzlich die
+Performance-Reihe. Bei einer technischen Strategie wie der Trendfolge
+kommt jedoch eine zweite Aufgabe hinzu: Aus einer Kursreihe wird ein
+Handelssignal berechnet.
+
+Hilpisch verwendet für seine SMA-Strategie zwei gleitende Durchschnitte
+und leitet daraus eine Long- beziehungsweise Short-Position
+ab.\footnote{Hilpisch, \emph{Python for Finance}, 691--92.} Für meine
+Untersuchung wurde diese Regel bereits im Theorieteil zu Long/Cash
+angepasst. Ausserdem wird das Signal um eine Periode verschoben, damit
+keine bereits bekannte Rendite derselben Periode verwendet
+wird.\footnote{Hilpisch, 694.}
+
+Damit das allgemeine System später nicht voraussetzen muss, dass
+Performance-Berechnung und Signal immer auf exakt derselben Reihe
+beruhen, kann zusätzlich signal\_value angegeben werden. Fehlt diese
+Spalte, darf die Strategie performance\_value nur dann verwenden, wenn
+dies in der Konfiguration ausdrücklich erlaubt ist.
+
+Für die erste Untersuchung kann sich später herausstellen, dass beide
+Felder auf dieselbe Reihe zeigen. Die Trennung bleibt trotzdem sinnvoll,
+weil sie die Datenstruktur nicht auf diese eine Untersuchung beschränkt.
+
+5.3.7 Metadaten und zusätzliche Datentypen
+
+Die Marktdatei enthält absichtlich nur die Werte, die sich über die Zeit
+verändern. Weitere Informationen zu einer Anlage werden separat
+gespeichert. Dazu gehören beispielsweise Name, Anlageklasse, Währung,
+Land und ursprüngliche Datenquelle.
+
+Für diese Informationen ist eine Datei assets.csv vorgesehen:
+
+{[}
+
+\begin{array}{c|c}
+\textbf{Feld} & \textbf{Bedeutung} \\
+\hline
+\texttt{asset\_id} & \text{Interne, anbieterunabhängige Kennung der Anlage} \\
+\texttt{name} & \text{Name der Anlage} \\
+\texttt{asset\_class} & \text{Anlageklasse, z.\,B. Aktien oder Anleihen} \\
+\texttt{country} & \text{Zugeordnetes Land bzw. Markt} \\
+\texttt{currency} & \text{Währung der Anlage} \\
+\texttt{provider} & \text{Datenanbieter} \\
+\texttt{provider\_symbol} & \text{Symbol bzw. Kennung beim Datenanbieter}
+\end{array}
+
+{]}
+
+Die interne Kennung asset\_id verbindet die Metadaten mit den
+Marktwerten. Dadurch kann zum Beispiel US\_EQUITY im Modell gleich
+bleiben, auch wenn die Daten später von einem anderen Anbieter bezogen
+werden.
+
+Nicht alle benötigten Daten sind Marktpreise. Für die Sharpe Ratio wird
+eine risikofreie Rendite benötigt. Sie muss in derselben Periodenlogik
+wie die untersuchte Rendite verwendet werden.\footnote{Kommer,
+  \emph{Souverän investieren mit Indexfonds und ETFs}, 7. Auflage
+  (Weinheim: Campus Verlag, 2025), 165--66.} Dafür ist eine getrennte
+Datei vorgesehen:
+
+{[}
+
+\begin{array}{c|c}
+\textbf{Feld} & \textbf{Bedeutung} \\
+\hline
+\texttt{date} & \text{Datum der Beobachtung} \\
+\texttt{series\_id} & \text{Kennung der risikofreien Zinsreihe} \\
+\texttt{value} & \text{Beobachteter Zinssatz} \\
+\texttt{unit} & \text{Einheit des Wertes}
+\end{array}
+
+{]}
+
+Auch Makrodaten wie das BIP unterscheiden sich von täglichen
+Marktzeitreihen. Sie werden deshalb separat gespeichert:
+
+{[}
+
+\begin{array}{c|c}
+\textbf{Feld} & \textbf{Bedeutung} \\
+\hline
+\texttt{period} & \text{Zeitraum der Beobachtung} \\
+\texttt{country} & \text{Land, auf das sich der Wert bezieht} \\
+\texttt{indicator} & \text{Makroökonomischer Indikator} \\
+\texttt{value} & \text{Beobachteter Wert} \\
+\texttt{unit} & \text{Einheit des Wertes} \\
+\texttt{available\_from} & \text{Zeitpunkt, ab dem die Information verfügbar war}
+\end{array}
+
+{]}
+
+Das zusätzliche Feld available\_from soll verhindern, dass ein
+historischer Backtest einen Jahreswert bereits verwendet, bevor dieser
+damals verfügbar gewesen wäre. Die genaue Regel dafür wird später bei
+der BIP-Strategie festgelegt. Sie folgt dem gleichen Grundprinzip wie
+die im Theorieteil behandelte Vermeidung von Look-ahead Bias.\footnote{Hilpisch,
+  \emph{Python for Finance}, 319--21.}
+
+5.4 Datenquellen und Umwandlung
+
+5.4.1 Trennung zwischen Datenquelle und Modell
+
+Nachdem das interne Format festgelegt ist, kann untersucht werden, wie
+verschiedene Anbieter darauf abgebildet werden. Die Datenquelle soll
+dabei nicht direkt von einer Strategie aufgerufen werden. Stattdessen
+übernimmt ein Importmodul die Umwandlung.
+
+{[}
+
+\begin{array}{c}
+\boxed{\text{Datenquelle}} \\[6pt]
+\downarrow \\[6pt]
+\boxed{\text{Import und Umwandlung}} \\[6pt]
+\downarrow \\[6pt]
+\boxed{\text{Einheitliches Datenformat}} \\[6pt]
+\downarrow \\[6pt]
+\boxed{\text{Simulation}}
+\end{array}
+
+{]}
+
+Dadurch bleibt die eigentliche Berechnung gleich, auch wenn später eine
+andere Datenquelle verwendet wird. Für meine Untersuchung sind Yahoo
+Finance und FRED bereits in der Methodik als mögliche Quellen
+vorgesehen.\footnote{Yahoo, {„Yahoo FinanzenDeutschland \textbar{} Börse
+  live, Kurse, Nachrichten aus Wirtschafts- und Finanzwelt``}; Federal
+  Reserve Bank of St. Louis, {„Federal {Reserve Economic Data}
+  \textbar{} {FRED} \textbar{} {St}. {Louis Fed}``}.} Weitere Quellen
+können später ergänzt werden, solange sie auf dasselbe interne Format
+abgebildet werden können.
+
+5.4.2 Marktdaten
+
+Für Marktzeitreihen soll ein erster Adapter historische Daten eines
+Anbieters laden und daraus die benötigten Felder erzeugen. Bei Yahoo
+Finance beziehungsweise einer Python-Schnittstelle wie yfinance muss der
+Adapter insbesondere festhalten:
+
+\begin{itemize}
+\tightlist
+\item
+  welches Wertpapier geladen wurde,
+\item
+  welcher Zeitraum verwendet wurde,
+\item
+  welche Datenfrequenz angefordert wurde,
+\item
+  welche ursprüngliche Spalte zu performance\_value wird,
+\item
+  welche Reihe für signal\_value verwendet wird,
+\item
+  und wie Dividenden beziehungsweise Splits in den Quelldaten behandelt
+  werden.
+\end{itemize}
+
+Die technische Umbenennung einer Spalte reicht damit nicht aus. Zuerst
+muss geklärt sein, was die ursprüngliche Reihe tatsächlich bedeutet. Für
+konkrete Parameter einer später verwendeten API soll bei der
+Implementierung zusätzlich deren direkte technische Dokumentation
+verwendet werden.
+
+5.4.3 Zins- und Makrodaten
+
+FRED eignet sich als mögliche Quelle für Zinsreihen und andere
+wirtschaftliche Daten. Für eine risikofreie Reihe ist besonders wichtig,
+die Einheit der Quelle zu übernehmen. Ein als jährlicher Prozentsatz
+veröffentlichter Zinssatz darf nicht unverändert von einer täglichen
+Rendite abgezogen werden. Die Umrechnung muss deshalb erst erfolgen,
+nachdem Frequenz und Einheit bekannt sind.
+
+Für die spätere BIP-Gewichtung wird zusätzlich eine Quelle mit
+historischen Länderwerten benötigt. Diese Daten werden zunächst in das
+allgemeine Makroformat überführt. Welche konkrete Datenbank, welche
+Länder und welche Veröffentlichungsverzögerung in der Hauptuntersuchung
+verwendet werden, wird erst bei der endgültigen Versuchskonfiguration
+festgelegt.
+
+Damit bleibt an dieser Stelle noch offen, welche konkrete Serie später
+verwendet wird. Festgelegt ist nur, welche Informationen das Modell
+benötigt.
+
+5.4.4 Import eigener CSV-Dateien
+
+Damit das System auch ausserhalb meiner später ausgewählten Anbieter
+verwendet werden kann, soll zusätzlich ein allgemeiner CSV-Import
+möglich sein. Dabei kann eine fremde Datei über eine kleine Zuordnung
+auf das interne Format abgebildet werden.
+
+Beispiel einer Quelldatei:
+
+{[}
+
+\begin{array}{c|c|c}
+\textbf{Date} & \textbf{Ticker} & \textbf{TR} \\
+\hline
+\texttt{2020-01-02} & \texttt{ABC} & 100.0
+\end{array}
+
+{]}
+
+Dazu könnte folgende Zuordnung gehören:
+
+{[}
+
+\begin{aligned}
+\texttt{Date}   &\;\longrightarrow\; \texttt{date} \\
+\texttt{Ticker} &\;\longrightarrow\; \texttt{provider\_symbol} \\
+\texttt{TR}     &\;\longrightarrow\; \texttt{performance\_value}
+\end{aligned}
+
+{]}
+
+Der Import kann damit unterschiedliche Spaltennamen vereinheitlichen. Er
+kann jedoch nicht automatisch beurteilen, ob die Werte fachlich für eine
+bestimmte Untersuchung geeignet sind. Diese Prüfung bleibt Teil der
+Datenwahl und Dokumentation.
+
+5.5 Datenaufbereitung und Qualitätskontrolle
+
+5.5.1 Rohdaten und verarbeitete Daten
+
+Die ursprünglich geladenen Rohdaten und die später tatsächlich
+verwendeten Daten werden getrennt gespeichert:
+
+{[}
+
+\begin{array}{l}
+\texttt{data/} \\
+\quad \texttt{├── raw/} \\
+\quad \texttt{└── processed/}
+\end{array}
+
+{]}
+
+Diese Trennung erleichtert die Nachvollziehbarkeit. Wenn sich eine Regel
+bei der Aufbereitung ändert, kann sie erneut auf denselben Rohdaten
+ausgeführt werden. Die Originaldatei muss dafür nicht manuell verändert
+werden.
+
+McKinney unterscheidet beim Arbeiten mit Daten ebenfalls zwischen
+Einlesen, Bereinigen, Umformen und anschliessender Analyse.\footnote{McKinney,
+  \emph{Python for Data Analysis}, Kap. 6--8.} Die konkrete
+Ordnerstruktur ist an mein Projekt angepasst.
+
+5.5.2 Validierung vor der Simulation
+
+Bevor ein Datensatz in die Simulation gelangt, soll er automatisch
+geprüft werden. Dabei sind mindestens folgende Punkte relevant:
+
+\begin{itemize}
+\tightlist
+\item
+  die benötigten Spalten sind vorhanden,
+\item
+  Datumswerte können korrekt eingelesen werden,
+\item
+  Wertspalten sind numerisch,
+\item
+  asset\_id ist vorhanden,
+\item
+  die Kombination aus Datum und Anlage kommt nicht doppelt vor,
+\item
+  fehlende oder unendliche Werte werden erkannt,
+\item
+  der verfügbare Zeitraum wird für jede Anlage bestimmt.
+\end{itemize}
+
+Fehlende Werte sind bei realen Datensätzen grundsätzlich möglich und
+werden von pandas ausdrücklich als eigener Bestandteil der
+Datenaufbereitung behandelt.\footnote{McKinney, Kap. 7.} Für meine
+Simulation sollen solche Stellen deshalb sichtbar gemacht und nicht
+unbemerkt weiterverarbeitet werden.
+
+Das Ergebnis der Prüfung wird zusätzlich in einem kleinen Datenbericht
+gespeichert. So lässt sich später nachvollziehen, ob eine Simulation mit
+vollständigen Daten oder mit Warnungen durchgeführt wurde.
+
+5.5.3 Umgang mit fehlenden Marktwerten
+
+Fehlende Marktwerte werden in der ersten Version nicht automatisch
+linear interpoliert. Eine solche Interpolation würde einen Wert
+erzeugen, der in der ursprünglichen Datenquelle nicht beobachtet wurde.
+Dadurch könnten auch künstliche Renditen oder Signale entstehen.
+
+Nicht jede fehlende Kalenderbeobachtung ist allerdings ein Datenfehler.
+An Wochenenden oder Feiertagen findet beispielsweise kein regulärer
+Handel statt. Deshalb soll die Prüfung zwischen einem fehlenden
+Handelstag und einer tatsächlichen Lücke in der vorhandenen Reihe
+unterscheiden können.
+
+Wenn mehrere Anlagen gemeinsam verwendet werden, muss zudem festgelegt
+werden, wie unterschiedliche Handelstage ausgerichtet werden. Die genaue
+Regel wird mit den später ausgewählten Datensätzen getestet. Wichtig ist
+bereits jetzt, dass kein Wert ohne dokumentierte Regel ergänzt wird.
+
+5.5.4 Datenfrequenz und Resampling
+
+Die Theorie hat bereits gezeigt, dass Finanzzeitreihen in
+unterschiedlichen Frequenzen vorliegen können. Für das Downsampling
+einer Wertreihe wird der letzte verfügbare Wert eines abgeschlossenen
+Intervalls verwendet. Die zeitlich korrekte Zuordnung ist wichtig, damit
+keine zukünftige Information in eine frühere Periode gelangt.\footnote{Hilpisch,
+  \emph{Python for Finance}, 319--21.}
+
+Dabei muss zwischen Kurs- beziehungsweise Wertreihen und bereits
+berechneten Renditen unterschieden werden. Wird beispielsweise aus
+Tageswerten eine Monatsreihe erzeugt, kann der letzte Wert des Monats
+verwendet werden. Mehrere Tagesrenditen eines Monats dürfen dagegen
+nicht einfach durch die letzte Tagesrendite ersetzt werden; sie müssen
+über ihre Wachstumsfaktoren miteinander verknüpft werden.
+
+Das vorhandene resample\_dataframe() bildet damit einen Teil der
+späteren Verarbeitung ab. Bei der Integration muss geprüft werden, für
+welche Datentypen die jeweilige Aggregationsregel zulässig ist.
+
+5.6 Veränderbare Einstellungen des Systems
+
+5.6.1 Allgemeine Einstellungen
+
+Das Modell soll nicht nur für einen einzigen fest eingebauten Versuch
+funktionieren. Deshalb werden veränderbare Einstellungen ausserhalb der
+Berechnungsfunktionen gespeichert.
+
+Zu den allgemeinen Einstellungen gehören zunächst:
+
+{[}
+
+\begin{array}{l}
+\textbf{Startdatum} \\
+\textbf{Enddatum} \\
+\textbf{Startkapital} \\
+\textbf{Basiswährung} \\
+\textbf{Datenfrequenz} \\
+\textbf{Regel für fehlende Daten}
+\end{array}
+
+{]}
+
+Diese Möglichkeiten des Systems sind noch nicht mit den späteren Werten
+meiner Untersuchung gleichzusetzen. Das Modell kann beispielsweise
+grundsätzlich verschiedene Zeiträume verarbeiten; für die Maturarbeit
+wird später trotzdem ein bestimmter Zeitraum festgelegt und begründet.
+
+5.6.2 Strategieabhängige Einstellungen
+
+Auch die Strategien benötigen unterschiedliche Parameter.
+
+Buy-and-Hold
+
+{[}
+
+\begin{array}{l}
+\textbf{Verwendete Anlage} \\
+\textbf{Startgewicht}
+\end{array}
+
+{]}
+
+Rebalancing-Portfolio
+
+{[}
+
+\begin{array}{l}
+\textbf{Verwendete Anlagen} \\
+\textbf{Zielgewichte} \\
+\textbf{Rebalancing-Rhythmus}
+\end{array}
+
+{]}
+
+Damit muss die Engine technisch nicht auf genau 60/40 begrenzt sein. Die
+Maturarbeit kann später trotzdem 60 \% Aktien und 40 \% Anleihen als
+feste Versuchskonfiguration verwenden.
+
+Trendfolge
+
+{[}
+
+\begin{array}{l}
+\textbf{Verwendete Anlage} \\
+\textbf{Kurzes SMA-Fenster} \\
+\textbf{Langes SMA-Fenster} \\
+\textbf{Long/Cash-Regel} \\
+\textbf{Signalverzögerung} \\
+\textbf{Behandlung der Cash-Phasen}
+\end{array}
+
+{]}
+
+Die Signalverzögerung ist fachlich bereits durch die Vermeidung von
+Look-ahead Bias vorgegeben.\footnote{Hilpisch, 694.} Die konkreten
+SMA-Fenster werden dagegen später vor dem Hauptversuch begründet
+festgelegt, damit die historisch beste Kombination nicht einfach
+nachträglich ausgewählt wird.\footnote{Hilpisch, 697.}
+
+5.6.3 Konfigurationsdatei
+
+Für die erste Version sollen diese Einstellungen in einer JSON-Datei
+gespeichert werden. Im Gegensatz zu den historischen Finanzdaten sind
+die Einstellungen nicht einfach tabellarisch aufgebaut, sondern
+teilweise verschachtelt. So enthält eine Strategie beispielsweise eigene
+Parameter und beim Rebalancing wiederum mehrere Zielgewichte. JSON
+eignet sich für solche hierarchischen Strukturen besser als CSV.
+Zusätzlich kann Python JSON direkt einlesen und das Format lässt sich
+später auch von einer Weboberfläche einfach erzeugen.
+
+Ein vereinfachtes Beispiel sieht so aus:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ json}
+
+\NormalTok{beispiel\_config }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{"period"}\NormalTok{: \{}
+        \StringTok{"start"}\NormalTok{: }\StringTok{"2020{-}01{-}01"}\NormalTok{,}
+        \StringTok{"end"}\NormalTok{: }\StringTok{"2020{-}12{-}31"}
+\NormalTok{    \},}
+    \StringTok{"start\_capital"}\NormalTok{: }\DecValTok{100000}\NormalTok{,}
+    \StringTok{"base\_currency"}\NormalTok{: }\StringTok{"USD"}\NormalTok{,}
+    \StringTok{"strategies"}\NormalTok{: \{}
+        \StringTok{"buy\_hold"}\NormalTok{: \{}
+            \StringTok{"enabled"}\NormalTok{: }\VariableTok{True}\NormalTok{,}
+            \StringTok{"asset"}\NormalTok{: }\StringTok{"EQ\_DEMO"}
+\NormalTok{        \},}
+        \StringTok{"rebalance"}\NormalTok{: \{}
+            \StringTok{"enabled"}\NormalTok{: }\VariableTok{True}\NormalTok{,}
+            \StringTok{"target\_weights"}\NormalTok{: \{}
+                \StringTok{"EQ\_DEMO"}\NormalTok{: }\FloatTok{0.60}\NormalTok{,}
+                \StringTok{"BD\_DEMO"}\NormalTok{: }\FloatTok{0.40}
+\NormalTok{            \},}
+            \StringTok{"rebalance\_frequency"}\NormalTok{: }\StringTok{"annual"}
+\NormalTok{        \},}
+        \StringTok{"trend"}\NormalTok{: \{}
+            \StringTok{"enabled"}\NormalTok{: }\VariableTok{True}\NormalTok{,}
+            \StringTok{"asset"}\NormalTok{: }\StringTok{"EQ\_DEMO"}\NormalTok{,}
+            \StringTok{"short\_window"}\NormalTok{: }\DecValTok{20}\NormalTok{,}
+            \StringTok{"long\_window"}\NormalTok{: }\DecValTok{100}\NormalTok{,}
+            \StringTok{"signal\_lag"}\NormalTok{: }\DecValTok{1}
+\NormalTok{        \}}
+\NormalTok{    \}}
+\NormalTok{\}}
+
+\BuiltInTok{print}\NormalTok{(json.dumps(beispiel\_config, indent}\OperatorTok{=}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+{
+  "period": {
+    "start": "2020-01-01",
+    "end": "2020-12-31"
+  },
+  "start_capital": 100000,
+  "base_currency": "USD",
+  "strategies": {
+    "buy_hold": {
+      "enabled": true,
+      "asset": "EQ_DEMO"
+    },
+    "rebalance": {
+      "enabled": true,
+      "target_weights": {
+        "EQ_DEMO": 0.6,
+        "BD_DEMO": 0.4
+      },
+      "rebalance_frequency": "annual"
+    },
+    "trend": {
+      "enabled": true,
+      "asset": "EQ_DEMO",
+      "short_window": 20,
+      "long_window": 100,
+      "signal_lag": 1
+    }
+  }
+}
+\end{verbatim}
+
+Die Zahlen in diesem Beispiel dienen nur dazu, die Struktur zu zeigen.
+Sie sind noch keine endgültigen Parameter der Maturarbeit.
+
+Der Vorteil der Konfigurationsdatei besteht darin, dass die
+Berechnungslogik nicht geändert werden muss, wenn später ein anderer
+Zeitraum oder ein anderer Parameter getestet wird. Eine grafische
+Oberfläche müsste später im Wesentlichen dieselben Werte erfassen und an
+die Engine übergeben.
+
+5.7 Einheitliches Ergebnisformat
+
+5.7.1 Gemeinsamer Output aller Strategien
+
+Damit die Strategien später direkt verglichen werden können, sollen sie
+einen gemeinsamen Grundoutput liefern. Für jede Strategie wird deshalb
+eine vollständige Zeitreihe gespeichert:
+
+{[}
+
+\begin{array}{l}
+\texttt{portfolio\_history.csv} \\[6pt]
+\textbf{date} \\
+\textbf{strategy} \\
+\textbf{portfolio\_value} \\
+\textbf{period\_return} \\
+\textbf{drawdown}
+\end{array}
+
+{]}
+
+Aus diesen Daten lassen sich anschliessend die bereits im Theorieteil
+definierten Kennzahlen berechnen. Dazu gehören unter anderem
+Gesamtrendite, annualisierte Rendite, Volatilität, Sharpe Ratio und
+Maximum Drawdown.
+
+Die Zeitreihe bleibt zusätzlich erhalten, weil ein einzelner Endwert
+nicht zeigt, wie eine Strategie während des Untersuchungszeitraums
+verlaufen ist. Gerade Drawdowns und unterschiedliche Marktphasen sollen
+später Teil der Analyse werden.\footnote{Kommer, \emph{Souverän
+  investieren mit Indexfonds und ETFs}, 7. Auflage (Weinheim: Campus
+  Verlag, 2025), 143--66.}
+
+5.7.2 Strategieabhängige Resultate
+
+Neben dem gemeinsamen Grundoutput werden zusätzliche Informationen
+gespeichert, wenn sie für eine Strategie relevant sind.
+
+Für ein Rebalancing-Portfolio:
+
+{[}
+
+\begin{array}{l}
+\texttt{weights\_history.csv} \\[6pt]
+\texttt{date} \;|\; \texttt{strategy} \;|\; \texttt{asset\_id} \;|\; \texttt{weight\_before} \;|\; \texttt{target\_weight} \;|\; \texttt{weight\_after}
+\end{array}
+
+{]}
+
+{[}
+
+\begin{array}{l}
+\texttt{trades.csv} \\[6pt]
+\texttt{date} \;|\; \texttt{strategy} \;|\; \texttt{asset\_id} \;|\; \texttt{value\_before} \;|\; \texttt{target\_value} \;|\; \texttt{transaction\_value}
+\end{array}
+
+{]}
+
+Für die Trendfolge:
+
+{[}
+
+\begin{array}{l}
+\texttt{signals.csv} \\[6pt]
+\texttt{date} \;|\; \texttt{strategy} \;|\; \texttt{asset\_id} \;|\; \texttt{signal} \;|\; \texttt{position} \;|\; \texttt{signal\_value} \;|\; \texttt{sma\_short} \;|\; \texttt{sma\_long}
+\end{array}
+
+{]}
+
+Diese zusätzlichen Daten helfen später bei der Interpretation. Wenn eine
+Strategie in einer bestimmten Phase besonders gut oder schlecht
+abschneidet, kann überprüft werden, welche Gewichtung oder welches
+Signal zu diesem Zeitpunkt vorlag.
+
+5.7.3 Zusammenfassung und Run-Manifest
+
+Für einen schnellen Vergleich wird zusätzlich eine Zusammenfassung
+erzeugt. Sie enthält beispielsweise:
+
+{[}
+
+\begin{array}{l}
+\texttt{strategy} \\
+\texttt{start\_value} \\
+\texttt{end\_value} \\
+\texttt{total\_return} \\
+\texttt{annualized\_return} \\
+\texttt{annualized\_volatility} \\
+\texttt{sharpe\_ratio} \\
+\texttt{max\_drawdown}
+\end{array}
+
+{]}
+
+Zusätzlich soll jeder Simulationslauf ein run\_manifest.json erhalten.
+Darin werden die tatsächlich verwendete Konfiguration, der Datenstand,
+der Zeitpunkt des Laufs und später auch die verwendete Git-Version
+gespeichert.
+
+Damit lässt sich ein Ergebnis auf die Kombination aus Daten, Parametern
+und Code zurückführen. Das ist besonders wichtig, wenn später mehrere
+Varianten des Modells getestet werden.
+
+5.8 Grundgerüst der Simulationsengine
+
+5.8.1 Aufteilung der Aufgaben
+
+Die zentrale Simulationsfunktion soll nicht alle Berechnungen selbst
+enthalten. Stattdessen werden die Aufgaben getrennt:
+
+{[}
+
+\begin{array}{rcl}
+\texttt{data} & \longrightarrow & \text{Daten einlesen, vereinheitlichen und prüfen} \\[6pt]
+\texttt{strategies} & \longrightarrow & \text{Regeln einer Anlagestrategie anwenden} \\[6pt]
+\texttt{analysis} & \longrightarrow & \text{Gemeinsame Kennzahlen berechnen} \\[6pt]
+\texttt{export} & \longrightarrow & \text{Resultate speichern}
+\end{array}
+
+{]}
+
+Dadurch muss beispielsweise eine neue Datenquelle nicht wissen, wie die
+Sharpe Ratio berechnet wird, und eine neue Strategie muss nicht selbst
+CSV-Dateien laden.
+
+Diese Trennung folgt vor allem aus dem Aufbau meines eigenen Systems.
+Hilpisch zeigt ebenfalls, dass wiederverwendbarer Python-Code aus
+interaktiven Beispielen in Funktionen und Module ausgelagert werden
+kann.\footnote{Hilpisch, \emph{Python for Finance}.}
+
+5.8.2 Vorgesehene Projektstruktur
+
+{[}
+
+\begin{array}{l}
+\texttt{src/} \\
+\texttt{├── funktionen.py} \\
+\texttt{├── data/} \\
+\quad \texttt{├── normalize.py} \\
+\quad \texttt{├── validate.py} \\
+\quad \texttt{└── adapters/} \\
+\texttt{├── engine/} \\
+\quad \texttt{├── config.py} \\
+\quad \texttt{├── context.py} \\
+\quad \texttt{├── result.py} \\
+\quad \texttt{└── simulation.py} \\
+\texttt{├── strategies/} \\
+\quad \texttt{├── buy\_hold.py} \\
+\quad \texttt{├── rebalance.py} \\
+\quad \texttt{├── trend.py} \\
+\quad \texttt{└── country\_weighting.py} \\
+\texttt{├── analysis/} \\
+\quad \texttt{└── metrics.py} \\
+\texttt{└── export/} \\
+\quad \texttt{└── results.py}
+\end{array}
+
+{]}
+
+Die bereits vorhandene funktionen.py bleibt zunächst bestehen. Sie
+enthält die mathematischen Bestandteile, die im Theorieteil entwickelt
+wurden. Erst bei der eigentlichen Integration wird entschieden, ob
+einzelne Funktionen einen Wrapper benötigen oder sinnvoll in ein anderes
+Modul verschoben werden.
+
+5.8.3 Gemeinsame Schnittstelle der Strategien
+
+Damit die Engine unterschiedliche Strategien gleich behandeln kann,
+sollen sie dieselbe äussere Schnittstelle erhalten.
+
+Vereinfacht könnte eine Strategie später so aufgerufen werden:
+
+result = strategy.run(context, params)
+
+context enthält die für den Lauf vorbereiteten Markt-, Zins- und
+Makrodaten sowie Zeitraum und Startkapital. params enthält nur die
+Einstellungen der jeweiligen Strategie.
+
+Das Ergebnis wird in einer gemeinsamen Struktur zurückgegeben. Die
+Vermögensentwicklung ist dabei Pflicht; Gewichtungen, Transaktionen oder
+Signale sind nur vorhanden, wenn die jeweilige Strategie sie benötigt.
+
+Damit kann die spätere Auswertung alle Strategien über denselben
+Grundaufbau vergleichen.
+
+5.8.4 Ablauf eines Simulationslaufs
+
+Ein vollständiger Lauf soll später in folgender Reihenfolge erfolgen:
+
+{[}
+
+\begin{array}{c}
+\boxed{\text{Konfiguration laden}} \\[6pt]
+\downarrow \\[6pt]
+\boxed{\text{Daten laden und prüfen}} \\[6pt]
+\downarrow \\[6pt]
+\boxed{\text{Gewünschten Zeitraum vorbereiten}} \\[6pt]
+\downarrow \\[6pt]
+\boxed{\text{Aktivierte Strategien auswählen}} \\[6pt]
+\downarrow \\[6pt]
+\boxed{\text{Strategien ausführen}} \\[6pt]
+\downarrow \\[6pt]
+\boxed{\text{Gemeinsame Kennzahlen berechnen}} \\[6pt]
+\downarrow \\[6pt]
+\boxed{\text{Resultate und Manifest speichern}}
+\end{array}
+
+{]}
+
+Während einer Simulation sollen keine neuen Marktdaten automatisch aus
+dem Internet geladen werden. Dadurch bleibt klar, mit welchem Datenstand
+ein bestimmtes Resultat entstanden ist.
+
+5.9 Vorbereitung der technischen Implementierung
+
+5.9.1 Verwendung der bestehenden Funktionen
+
+Die Funktionen aus dem Theorieteil sollen nicht durch ein zweites,
+unabhängiges Berechnungssystem ersetzt werden. Sie bilden die Grundlage
+der späteren Engine.
+
+{[}
+
+\begin{array}{l|l}
+\textbf{Vorhandene Funktion} & \textbf{Geplante Verwendung} \\
+\hline
+\texttt{resample\_dataframe()} & \text{Datenfrequenz anpassen} \\
+\texttt{prozentuale\_aenderung()} & \text{Periodische Renditen} \\
+\texttt{kumulierte\_rendite()} \,/\, \texttt{wachstumsfaktor()} & \text{Kumulierte Entwicklung} \\
+\texttt{geometrisches\_mittel()} \,/\, \texttt{annualisierte\_rendite()} & \text{Langfristige Rendite} \\
+\texttt{standardabweichung()} \,/\, \texttt{annualisierte\_volatilitaet()} & \text{Volatilität} \\
+\texttt{drawdown()} \,/\, \texttt{maximum\_drawdown()} & \text{Verlustphasen} \\
+\texttt{sharpe\_ratio()} & \text{Risikobereinigte Rendite} \\
+\texttt{korrelationsmatrix()} \,/\, \texttt{portfolio\_risiko()} & \text{Portfolioanalyse} \\
+\texttt{neue\_gewichtung()} \,/\, \texttt{rebalancing()} & \text{Rebalancing} \\
+\texttt{buy\_and\_hold()} & \text{Passive Benchmark} \\
+\texttt{trendfolge()} & \text{SMA-Strategie}
+\end{array}
+
+{]}
+
+Vor der Integration muss geprüft werden, welche Datentypen diese
+Funktionen erwarten und welche Resultate sie zurückgeben. Falls für die
+neue Struktur zusätzliche Hilfsfunktionen fehlen, können sie ergänzt
+werden. Die bereits im Theorieteil festgelegten mathematischen
+Definitionen sollen dabei nicht still verändert werden.
+
+5.9.2 Übergabe an Codex
+
+Bis zu diesem Punkt sind Datenformat, Verarbeitung, Einstellungen,
+Ergebnisstruktur und der grundsätzliche Ablauf des Systems beschrieben.
+Die eigentliche technische Zusammenführung dieser Vorgaben mit den
+vorhandenen Funktionen erfolgt im nächsten Schritt mit Unterstützung von
+Codex.
+
+Codex soll dabei nicht selbst festlegen, welche finanzwirtschaftliche
+Methode verwendet wird. Vorgegeben werden:
+
+\begin{itemize}
+\tightlist
+\item
+  der Datenvertrag,
+\item
+  die Konfigurationsstruktur,
+\item
+  das Ergebnisformat,
+\item
+  die geplante Aufteilung des Systems,
+\item
+  die vorhandenen Funktionen aus funktionen.py,
+\item
+  sowie die bereits geschriebenen theoretischen Definitionen.
+\end{itemize}
+
+Der technische Auftrag besteht anschliessend darin, diese Teile zu einem
+lauffähigen System zusammenzuführen und Tests mit künstlichen Daten zu
+erstellen. Falls eine vorhandene Funktion angepasst werden muss, soll
+die Änderung sichtbar dokumentiert werden.
+
+5.9.3 Stand vor der Implementierung
+
+Vor dem eigentlichen Bau des Systems sind damit die wichtigsten
+Schnittstellen festgelegt. Noch nicht endgültig bestimmt sind bewusst
+die konkreten Wertpapiere, der Untersuchungszeitraum, die risikofreie
+Serie und die strategieabhängigen Hauptparameter. Diese Entscheidungen
+werden nach der technischen Integration festgelegt und begründet, bevor
+der eigentliche Hauptversuch durchgeführt wird.
+
+Damit endet die Planung des allgemeinen Systems. Der nächste Schritt ist
+die Umsetzung und Prüfung der Engine.
+
+5.10 Festlegung der Untersuchungsdaten und Parameter
+
+5.10.1 Von der Engine zur eigentlichen Untersuchung
+
+Die bisher beschriebenen Bestandteile wurden zu einer allgemeinen
+Backtesting-Engine zusammengeführt. Der für die Untersuchung vorgesehene
+Stand ist Version 1.0.0 mit dem Git-Tag engine-v1.0. Die zugehörigen
+technischen Prüfungen sind in der Entwicklungsdokumentation
+festgehalten. Damit kann ich die Berechnung von der Auswahl der
+konkreten Untersuchungsdaten trennen: Die Engine legt fest, wie ein Lauf
+durchgeführt wird. Im folgenden Abschnitt lege ich fest, welche Daten
+und Einstellungen ich für meine Arbeit verwenden möchte.
+
+Die Forschungsfrage lautet: «Wie können historische Finanzdaten mithilfe
+eines Python-basierten Modells verwendet werden, um langfristige
+Investmentstrategien hinsichtlich Risiko und Rendite zu vergleichen?»
+Die Untersuchung soll deshalb nicht nur einen möglichst hohen Endwert
+finden. Sie soll zeigen, welche Unterschiede ein nachvollziehbarer
+Vergleich sichtbar macht und wo seine Grenzen liegen. Die
+Risikobetrachtung besteht dabei nicht aus einer einzigen Zahl. Kommer
+erläutert, dass verschiedene Risikokennzahlen unterschiedliche Aspekte
+erfassen. Für meine Arbeit verwende ich die bereits eingeführten Grössen
+Volatilität, Sharpe Ratio und maximaler Drawdown neben der
+Rendite.\footnote{Kommer, \emph{Souverän investieren mit Indexfonds und
+  ETFs}, 7. Auflage (Weinheim: Campus Verlag, 2025), Abschn. 2.2.}
+
+Ich lege die Hauptparameter vor der Auswertung fest. Andernfalls könnte
+ich so lange andere Zeiträume oder SMA-Fenster ausprobieren, bis eine
+gewünschte Strategie besonders gut abschneidet. Diese Gefahr wurde im
+Theorieteil als Data Snooping beziehungsweise Overfitting
+behandelt.\footnote{Kommer, \emph{Souverän investieren mit Indexfonds
+  und ETFs}, 7. Auflage (Weinheim: Campus Verlag, 2025), Glossar «Data
+  Snooping»; Hilpisch, \emph{Python for Finance}, Kap. 15,
+  «Optimization».} Die folgenden Festlegungen sind meine eigenen
+Untersuchungsentscheidungen. Die Quellen begründen die verwendeten
+Konzepte, schreiben aber nicht genau diese Ticker, Zeiträume oder
+Parameter vor.
+
+5.10.2 Auswahl der Wertreihen
+
+Für die praktische Umsetzung verwende ich historische ETF-Reihen statt
+einzelner ausgewählter Unternehmen. Dadurch untersuche ich breit
+angelegte Markt- beziehungsweise Länderpositionen. Die ETFs sind dabei
+Stellvertreter für die jeweiligen Anlagebereiche. Ein ETF ist nicht
+dasselbe wie ein kostenfreier theoretischer Index. Diese Unterscheidung
+bleibt bei der Interpretation wichtig.
+
+Für den globalen Aktienanteil wähle ich die US-Börsenlinie mit dem
+Symbol VT. Vanguard beschreibt sie als weltweit ausgerichteten
+Aktienfonds, der entwickelte Märkte und Schwellenländer abdeckt. Die
+Anteilsklasse besteht seit Juni 2008.\footnote{\textbf{vanguardVTProdukt2026?}}
+Für den Anleihenanteil verwende ich IEF. Dieser ETF bezieht sich auf
+US-Staatsanleihen mit Restlaufzeiten zwischen sieben und zehn
+Jahren.\footnote{\textbf{isharesIEFProdukt2026?}} Das passt zur in der
+Methodik vorgesehenen Staatsanleihenkomponente. Es bedeutet jedoch
+nicht, dass dieser Anteil risikofrei ist; insbesondere bleiben
+Kursänderungen durch Zinsbewegungen Bestandteil seiner beobachteten
+Wertentwicklung.
+
+Für die Ländergewichtung beschränke ich mich auf sieben klar benannte
+Länder. Die Auswahl umfasst die USA, Kanada, Japan, das Vereinigte
+Königreich, Deutschland, Frankreich und Italien. Sie ist eine begrenzte
+Fallstudie, keine vollständige Abbildung der Weltwirtschaft. Die
+Datenprüfung muss die geplante historische Abdeckung bestätigen. Eine
+Produktseite allein beweist noch nicht, dass der konkrete Download
+vollständig und richtig ist.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Interne Kennung
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Yahoo-Symbol
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verwendung
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Produktnachweis
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\emph{\texttt{WORLD\_EQ}} & \emph{\texttt{VT}} & Weltweiter Aktienanteil
+& \footnote{\textbf{vanguardVTProdukt2026?}} \\
+\emph{\texttt{US\_TREASURY\_7\_10}} & \emph{\texttt{IEF}} &
+US-Staatsanleihen, 7--10 Jahre & \footnote{\textbf{isharesIEFProdukt2026?}} \\
+\emph{\texttt{US\_EQ}} & \emph{\texttt{VTI}} & US-Aktienproxy und
+längere US-Zusatzuntersuchung & \footnote{\textbf{vanguardVTIProdukt2026?}} \\
+\emph{\texttt{CA\_EQ}} & \emph{\texttt{EWC}} & Kanada & \footnote{\textbf{isharesEWCProdukt2026?}} \\
+\emph{\texttt{JP\_EQ}} & \emph{\texttt{EWJ}} & Japan & \footnote{\textbf{isharesEWJProdukt2026?}} \\
+\emph{\texttt{GB\_EQ}} & \emph{\texttt{EWU}} & Vereinigtes Königreich &
+\footnote{\textbf{isharesEWUProdukt2026?}} \\
+\emph{\texttt{DE\_EQ}} & \emph{\texttt{EWG}} & Deutschland &
+\footnote{\textbf{isharesEWGProdukt2026?}} \\
+\emph{\texttt{FR\_EQ}} & \emph{\texttt{EWQ}} & Frankreich &
+\footnote{\textbf{isharesEWQProdukt2026?}} \\
+\emph{\texttt{IT\_EQ}} & \emph{\texttt{EWI}} & Italien & \footnote{\textbf{isharesEWIProdukt2026?}} \\
+\end{longtable}
+}
+
+Ich verwende jeweils die US-notierte Linie und prüfe deren USD-Notierung
+in den Metadaten. Die internen Kennungen unterscheiden die Rolle im
+Modell von der Anbieterkennung. Die Länderfonds können unterschiedliche
+Indexabgrenzungen und Begrenzungsregeln besitzen. Deshalb behaupte ich
+nicht, dass alle Proxies sämtliche Unternehmen ihres Landes vollständig
+oder nach genau derselben Indexmethode abbilden. Historische Produkt-
+und Benchmarkänderungen werden im Datennachweis berücksichtigt.
+
+5.10.3 Untersuchungsblöcke und Vergleichbarkeit
+
+Der Hauptvergleich umfasst den Zeitraum Januar 2010 bis Dezember 2025.
+Die anfängliche Bewertung erfolgt zum Monatsende Dezember 2009; danach
+werden 192 Monatsrenditen ausgewertet. Das Ende 2025 schliesst das noch
+laufende Jahr 2026 aus. Der Beginn ermöglicht eine längere gemeinsame
+Untersuchung nach der Auflegung von VT und einen vorgelagerten
+SMA-Anlauf. Dieser Zeitraum ist eine begründete Auswahl, nicht der
+Nachweis, dass andere Zeiträume dieselben Resultate liefern würden.
+
+Im Hauptlauf werden vier Strategien auf derselben vorbereiteten
+Zeitachse ausgeführt: Buy-and-Hold mit VT, ein jährlich auf 60 \% VT und
+40 \% IEF zurückgesetztes Portfolio, die Long/Cash-Trendfolge mit VT
+sowie die BIP-Gewichtung der sieben Länderproxies. Damit werden
+verschiedene Anlagekonzepte verglichen. Insbesondere besitzt die
+BIP-Strategie ein anderes Aktienuniversum als VT. Ein Unterschied
+zwischen beiden kann daher nicht allein der Gewichtungsmethode
+zugeschrieben werden.
+
+Für eine gezieltere Betrachtung ergänze ich einen zweiten Lauf: Die
+BIP-Strategie wird mit einem jährlich gleichgewichteten Portfolio aus
+genau denselben sieben Länder-ETFs verglichen. Jedes Land erhält dort
+das Zielgewicht 1/7. Das entspricht einer zusätzlichen Konfiguration der
+bestehenden Rebalancing-Strategie und keiner neuen Engine-Strategie. Bei
+diesem Vergleich bleiben die Bausteine gleich, während sich die
+Gewichtungsregel unterscheidet. Die Gleichgewichtung ist allerdings
+keine Marktkapitalisierungsgewichtung. Der Zusatzlauf beantwortet
+deshalb die Frage «BIP oder gleiche Ländergewichte?», nicht «BIP oder
+Marktkapitalisierung?».
+
+Die Literatur zeigt bereits, dass die Bewertung einer Gewichtungsmethode
+vom betrachteten Zeitraum abhängen kann. Kommers Gegenüberstellung der
+Ländergewichtungen liefert damit eine Grundlage für einen vorsichtigen
+Vergleich, nicht die Vorhersage unseres eigenen Resultats.\footnote{Kommer,
+  \emph{Souverän investieren mit Indexfonds und ETFs}, 7. Auflage
+  (Weinheim: Campus Verlag, 2025), Abschn. 9.4.}
+
+Als längere Ergänzung untersuche ich zudem Buy-and-Hold, 60/40 und
+Trendfolge mit VTI beziehungsweise VTI/IEF von Januar 2003 bis Dezember
+2025. Ausgangswert ist das Monatsende Dezember 2002. Dieser Block
+umfasst 276 Monatsrenditen und geht weiter zurück als der globale
+Hauptlauf. Er ist eine eigene US-Stichprobe. Ich verlängere VT nicht
+rückwirkend durch eine andere Reihe und füge die beiden
+Untersuchungsblöcke nicht zu einer scheinbar durchgehenden
+Weltmarktgeschichte zusammen.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Lauf
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Zeitraum der Renditen
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Vergleich
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Funktion in der Arbeit
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{H1} & 2010--2025 & VT Buy-and-Hold; VT/IEF 60/40; VT Trend 3/12;
+sieben Länder BIP-gewichtet & Hauptvergleich verschiedener Konzepte \\
+\textbf{K1} & 2010--2025 & Gleiche sieben Länder: BIP versus jährliche
+Gleichgewichtung & Gewichtungsvergleich bei identischen Bausteinen \\
+\textbf{Z1} & 2003--2025 & VTI Buy-and-Hold; VTI/IEF 60/40; VTI Trend
+3/12 & Längerer regionaler Zusatzvergleich \\
+\textbf{S1 / S2} & 2010--2025 & VT Trend 2/12 beziehungsweise 6/12 &
+Vorab festgelegte Sensitivität der Trendregel \\
+\end{longtable}
+}
+
+Diese fünf Läufe sind der geplante Umfang. Die Sensitivitätsläufe
+ersetzen den Hauptparameter nicht nachträglich. Auch ungünstige oder
+widersprüchliche Resultate werden dargestellt. Die Läufe sind
+historische Vergleiche, keine ausserhalb der Stichprobe durchgeführte
+Prognoseprüfung.
+
+5.10.4 Monatsfrequenz, Startkapital und Währung
+
+Die Hauptauswertung verwendet Monatswerte. Das hält den Umfang
+überschaubar und passt zum langfristigen Vergleich. Gleichzeitig ist
+diese Frequenz eine Einschränkung: Bewegungen innerhalb eines Monats
+werden nicht vollständig sichtbar. Der ausgewiesene maximale Drawdown
+bezeichnet deshalb den stärksten Rückgang zwischen den verwendeten
+Monatsbewertungen, nicht den grössten zwischenzeitlichen Tages- oder
+Intradayverlust.
+
+Die Rohdaten werden trotzdem täglich beschafft. Aus ihnen wird für jedes
+Monatsende die letzte tatsächlich vorhandene gemeinsame
+Handelstagsbewertung ausgewählt. Die Monatsreihe erhält das rechte
+Kalender-Monatsendlabel. Hilpisch beschreibt dieses Vorgehen beim
+Downsampling und warnt davor, den letzten Wert eines Intervalls nach
+links an dessen Anfang zu beschriften.\footnote{Hilpisch, \emph{Python
+  for Finance}, Kap. 8, «Resampling» und «Avoiding Foresight Bias».}
+
+Für die Nachvollziehbarkeit speichere ich zusätzlich das tatsächliche
+Quelldatum jeder Monatsbewertung. Das Monatslabel ist eine
+Periodenbezeichnung, keine Behauptung eines Börsenhandels am Wochenende.
+Es wird kein Kurs zwischen zwei Tagen interpoliert und kein fehlender
+Monat aufgefüllt. Die Verarbeitung muss prüfen, dass am ausgewählten
+Monatsende alle benötigten Reihen tatsächlich dieselbe Schlussbewertung
+besitzen. Unvollständige Monate werden vor der Untersuchung geklärt und
+nicht still entfernt.
+
+Die Engine verlangt für ihre Jahreskennzahlen eine nachgewiesene
+Periodenlogik. Für diese vorbereiteten Monatsdaten werden
+period\_frequency=``ME'' und periods\_per\_year=12 gesetzt. Diese
+Festlegung betrifft zwölf Monatsintervalle pro Jahr und keine
+vermeintlich täglich handelbare Reihe. Die tatsächlichen Quelltage
+bleiben im Aufbereitungsprotokoll sichtbar.
+
+Jeder Lauf startet mit 100'000 USD und enthält keine weiteren
+Einzahlungen oder Entnahmen. Der Betrag macht die Ergebnisse
+anschaulich; bei den hier verwendeten proportionalen Portfolios ohne
+feste Handelskosten beeinflusst er nicht die prozentuale
+Strategierendite. Alle Ergebnisse werden nominal in USD betrachtet. Es
+findet weder eine Inflationsbereinigung noch eine Umrechnung in
+Schweizer Franken statt. USD-Notierung allein bedeutet zudem keine
+Absicherung der im Fonds enthaltenen Fremdwährungsrisiken. Die
+Untersuchung stellt somit nicht die persönliche Nettorendite eines
+Schweizer Anlegers dar.
+
+5.10.5 Dividenden, Kosten und Performance-Reihe
+
+Für die Performance benötige ich eine Reihe, die Ausschüttungen
+berücksichtigt. Ein reiner Kursindex genügt nicht, um den Gesamtertrag
+einer Aktienanlage darzustellen.\footnote{Kommer, \emph{Souverän
+  investieren mit Indexfonds und ETFs}, 7. Auflage (Weinheim: Campus
+  Verlag, 2025), Abschnitt zu Wertpapierindizes.} Als Ausgangspunkt
+verwende ich die Spalte Adj Close von Yahoo Finance. Yahoo beschreibt
+diese als um Splits und Dividenden bereinigten Schlusskurs.\footnote{\textbf{yahooAdjustedClose2026?}}
+
+Die umbenannte Spalte performance\_value wird deshalb als Anbieter-Proxy
+für eine ausschüttungsbereinigte Entwicklung verwendet. Sie wird nicht
+ohne Kontrolle als exakt identische Kopie einer offiziellen
+Fonds-Total-Return-Reihe bezeichnet. Bei der Datenabnahme werden
+Ausschüttungs- und Splitereignisse sowie verfügbare Jahresrenditen des
+Anbieters stichprobenweise verglichen. Marktpreisrendite und NAV-Rendite
+dürfen dabei nicht verwechselt werden. Dividenden werden nicht ein
+zweites Mal auf die bereits bereinigte Reihe addiert.
+
+Bei tatsächlichen ETF-Reihen können bereits fondsinterne Kosten in der
+beobachteten Entwicklung enthalten sein. iShares erläutert dies
+beispielsweise bei seinen Performanceangaben.\footnote{\textbf{isharesIEFProdukt2026?}}
+Die bisherige Methodik ist deshalb zu präzisieren: Zusätzliche
+Transaktionskosten, persönliche Steuern und weitere separat modellierte
+Gebühren werden nicht berechnet. Bereits in der ETF-Reihe enthaltene
+Kosten oder Quellensteuereffekte werden nicht rückgängig gemacht. Diese
+Abgrenzung vermeidet die unzutreffende Behauptung einer vollständig
+kosten- und steuerfreien Indexsimulation.
+
+\bookmarksetup{startatroot}
+
+\chapter{Fazit}\label{fazit}
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{part}{Anhang}
+\appendix
+
+\chapter{Dokumentation der
+KI-Nutzung}\label{dokumentation-der-ki-nutzung}
+
+Dieses Kapitel dokumentiert transparent, wie Codex bei der Erstellung
+der Maturarbeit eingesetzt wurde. Die ausführlichen Arbeitsnachweise
+werden projektintern im KI-Nutzungslog geführt. Hier wird der für die
+Buchversion relevante aktuelle Stand zusammengefasst.
+
+Die KI-Nutzungsdokumentation wurde von Codex formuliert und fortgeführt.
+In den jeweiligen Prompts wurde Codex ausdrücklich gebeten, die
+ausgeführten Arbeiten und die Art der KI-Nutzung direkt zu
+dokumentieren. Der Autor hat diese Dokumentation gelesen und inhaltlich
+überprüft, sie jedoch nicht selbst geschrieben.
+
+\section{Grundsätze}\label{grundsuxe4tze}
+
+Codex wurde vor allem für technische Einrichtung, Strukturierung,
+Übertragung bereits vorhandener Inhalte und sprachliche Unterstützung
+eingesetzt. KI-Ausgaben ersetzen keine fachliche Prüfung. Fachliche
+Aussagen, Quellenqualität, mathematische Korrektheit und die
+Interpretation der Resultate müssen vom Autor kontrolliert und
+verantwortet werden.
+
+Bei sprachlichen Korrekturen durfte Codex Rechtschreibung, Grammatik und
+Satzbau verbessern, den Inhalt und den persönlichen Schreibton jedoch
+grundsätzlich nicht verändern. Bei Überarbeitungen zur besseren
+Lesbarkeit durften Formulierungen und Satzstrukturen vereinfacht werden.
+Wichtige Fachbegriffe sollten dabei möglichst erhalten bleiben.
+
+\section{Bisherige Einsätze}\label{bisherige-einsuxe4tze}
+
+\subsection{Technische Einrichtung des
+Projekts}\label{technische-einrichtung-des-projekts}
+
+Am 11. Mai 2026 wurde Codex für die initiale technische Einrichtung des
+Quarto-Book-Projekts verwendet. Dazu gehörten die Projektstruktur,
+Kapitelgerüste, Bibliografie-Einbindung, Styles, Beispielnotebooks und
+die Dokumentation der KI-Nutzung. Diese Unterstützung betraf das
+technische Grundgerüst und nicht die endgültige fachliche Argumentation.
+
+\subsection{Planung der Maturarbeit}\label{planung-der-maturarbeit}
+
+Am 6. August 2026 übertrug und strukturierte Codex den bereits in der
+README vorhandenen Zeitplan in der Todo-Anwendung. Die Planung wurde
+anschliessend manuell geprüft.
+
+\subsection{Übertragung der
+Überblick-Inhalte}\label{uxfcbertragung-der-uxfcberblick-inhalte}
+
+Am 7. August 2026 übertrug Codex alle bereits vorhandenen Inhalte aus
+\texttt{README.md} in die Überblick-Seite des Quarto-Books. Codex
+verfasste dabei weder die Daten noch die fachlichen Texte und ergänzte
+keine neuen fachlichen Inhalte. Zusätzlich wurde ein wiederverwendbarer
+Ablauf für spätere Aktualisierungen dokumentiert.
+
+\subsection{Korrektur des Titels des
+Theoriekapitels}\label{korrektur-des-titels-des-theoriekapitels}
+
+Am 8. August 2026 untersuchte und korrigierte Codex die fehlerhafte
+Anzeige des Titels von Kapitel 3. Dafür wurden die Quarto-Konfiguration
+und der YAML-Frontmatter des Jupyter Notebooks angepasst. Der Fachtext,
+die Berechnungen und die Quellen des Theoriekapitels wurden nicht
+verändert.
+
+\subsection{Ordnung der
+Python-Dateien}\label{ordnung-der-python-dateien}
+
+Am 8. August 2026 wurde Codex verwendet, um die lose Datei
+\texttt{funktionen.py} sinnvoll im Repository einzuordnen. Sie wurde als
+wiederverwendbarer Analysecode nach \texttt{src/funktionen.py}
+verschoben. Der bereits vorhandene Funktionscode wurde bei dieser
+organisatorischen Änderung nicht fachlich neu verfasst.
+
+\subsection{Bündelung der
+Analysefunktionen}\label{buxfcndelung-der-analysefunktionen}
+
+Am 8. August 2026 übertrug Codex die nach \texttt{maximum\_drawdown()}
+folgenden eigenen Funktionen aus dem Theoriekapitel in
+\texttt{src/funktionen.py}. Beispielaufrufe und erklärende
+Notebook-Kommentare wurden nicht übernommen. Ziel war eine einheitliche
+Funktionssammlung für die spätere Analyse und den Vergleich der
+Anlagestrategien. Die Vollständigkeit sowie grundlegende
+Funktionsaufrufe wurden technisch geprüft.
+
+\subsection{Rechtschreibung, Grammatik und
+Satzbau}\label{rechtschreibung-grammatik-und-satzbau}
+
+Codex wurde für die sprachliche Korrektur der Texte im Projekt
+eingesetzt. Dabei wurden Rechtschreibung, Grammatik und Satzbau
+kontrolliert. Inhalt, fachliche Aussagen und persönlicher Schreibton
+durften grundsätzlich nicht verändert werden. Starke sprachliche
+Eingriffe waren ausdrücklich nicht erlaubt. Die endgültige Kontrolle
+bleibt beim Autor.
+
+\subsection{Verbesserung der
+Lesbarkeit}\label{verbesserung-der-lesbarkeit}
+
+Codex wurde ausserdem verwendet, um Formulierungen in den Texten des
+Repositorys allgemein verständlicher zu gestalten. Die Überarbeitung
+orientierte sich an der Wiener Sachtextformel, dem Flesch-Index und dem
+Gunning-Fog-Index. Komplexe Sätze und Formulierungen wurden vereinfacht,
+wichtige Fachbegriffe jedoch möglichst beibehalten, damit Präzision und
+Professionalität erhalten bleiben. Die fachlichen Aussagen wurden nicht
+von Codex entwickelt.
+
+\subsection{Erstellung der
+KI-Nutzungsdokumentation}\label{erstellung-der-ki-nutzungsdokumentation}
+
+Codex wurde in den jeweiligen Prompts ausdrücklich angewiesen, den
+eigenen Einsatz und die ausgeführten Arbeiten zu dokumentieren. Codex
+formulierte und aktualisierte deshalb das projektinterne KI-Nutzungslog,
+dieses Kapitel der Buchversion und die wiederverwendbaren
+Arbeitsanweisungen. Der Autor überprüfte die Dokumentation, schrieb sie
+jedoch nicht selbst. Die Formulierungen der KI-Dokumentation stammen
+somit von Codex; der Autor erteilte die Aufträge, kontrollierte die
+Ergebnisse und übernahm die geprüfte Fassung.
+
+\subsection{Einheitliche Formatierung}\label{einheitliche-formatierung}
+
+Codex wurde mehrfach verwendet, um Dateien und Inhalte im gesamten
+Repository einheitlich, übersichtlich und technisch korrekt zu
+formatieren. Dies betraf unter anderem HTML-, Markdown-, QMD-, Quarto-
+und Python-Strukturen sowie Überschriften, Listen, Tabellen, Codeblöcke,
+Abstände und die Darstellung der Buchversion. Ziel war eine konsistente
+und gut lesbare Gestaltung. Die Formatierung durfte fachliche Aussagen
+und den persönlichen Schreibton nicht verändern. Die endgültige
+Darstellung und die Einhaltung der formalen Vorgaben müssen vom Autor
+kontrolliert werden.
+
+\subsection{Einbindung des KI-Nachweises in die
+Buchversion}\label{einbindung-des-ki-nachweises-in-die-buchversion}
+
+Am 8. August 2026 wurde Codex verwendet, um den bisherigen
+KI-Nutzungsnachweis als Anhang in das Quarto-Book einzubinden. Der
+Inhalt dieses Kapitels ist eine für die Arbeit aufbereitete
+Zusammenfassung des bestehenden KI-Nutzungslogs. Zusätzlich wurde ein
+wiederverwendbarer Ablauf eingerichtet, mit dem zukünftige Logeinträge
+in diese Buchversion übertragen werden können.
+
+\section{Manuelle Verantwortung}\label{manuelle-verantwortung}
+
+Der Autor muss sämtliche übernommenen Änderungen kontrollieren. Dazu
+gehören insbesondere die unveränderte fachliche Bedeutung, die korrekte
+Wiedergabe der Quellen, die mathematische Richtigkeit, die
+Nachvollziehbarkeit des Codes und der Erhalt des persönlichen
+Schreibtons. Die Verantwortung für die endgültige Fassung der Arbeit
+bleibt beim Autor.
+
+\protect\phantomsection\label{refs}
+\begin{CSLReferences}{1}{1}
+\bibitem[\citeproctext]{ref-admiralsWieSieMit2026}
+Admirals. {„Wie Sie mit der Trendfolgestrategie bestehende Trends
+nutzen``}. Admirals, 4. Juni 2026.
+\url{https://admiralmarkets.com/de/wissen/articles/forex-strategy/trendfolgestrategie}.
+
+\bibitem[\citeproctext]{ref-aroussiRanaroussiQuantstats2026}
+Aroussi, Ran. \emph{Ranaroussi/Quantstats}. 1. Mai 2019, released 5.
+August 2026. \url{https://github.com/ranaroussi/quantstats}.
+
+\bibitem[\citeproctext]{ref-buchhaltung-einfach-sicherVolatilitatEinfachErklart2026}
+Buchhaltung-Einfach-Sicher. {„Volatilität Einfach Erklärt \textbar{}
+{Definition}, {Berechnung} Und {Nutzen}``}. Volatilität einfach erklärt
+\textbar{} Definition, Berechnung und Nutzen, 7. Juni 2026.
+\url{https://www.buchhaltung-einfach-sicher.de/finanzen/volatilitaet}.
+
+\bibitem[\citeproctext]{ref-federalreservebankofst.louisFederalReserveEconomic2026}
+Federal Reserve Bank of St. Louis. {„Federal {Reserve Economic Data}
+\textbar{} {FRED} \textbar{} {St}. {Louis Fed}``}. Federal Reserve
+Economic Data \textbar{} FRED \textbar{} St. Louis Fed, 7. Juni 2026.
+\url{https://fred.stlouisfed.org/}.
+
+\bibitem[\citeproctext]{ref-fidelityMaximumDrawdown2026}
+Fidelity. {„Maximum {Drawdown}``}. FIL Limited 2026, 7. Juni 2026.
+\url{https://www.fidelity.de/wissen/tipps-and-strategien/risiko-kennziffern/maximum-drawdown/}.
+
+\bibitem[\citeproctext]{ref-fidelitySharpeRatio2026}
+---------. {„Sharpe-{Ratio}``}. Sharpe-Ratio; FIL Limited 2026, 7. Juni
+2026.
+\url{https://www.fidelity.de/wissen/tipps-and-strategien/risiko-kennziffern/sharpe-ratio/}.
+
+\bibitem[\citeproctext]{ref-gerdkommerInvestieren2026}
+Gerd Kommer. {„Investieren``}. Gerd Kommer, 4. Juni 2026.
+\url{https://gerd-kommer.de/investieren/}.
+
+\bibitem[\citeproctext]{ref-hilpischPythonFinanceMastering2019}
+Hilpisch, Yves. \emph{Python for Finance: Mastering Data-Driven
+Finance}. Second edition. Beijing Boston Farnham Sebastopol Tokyo:
+O'Reilly, 2019.
+
+\bibitem[\citeproctext]{ref-kommerLeichteEinstiegWelt2025}
+Kommer, Gerd. \emph{Der leichte Einstieg in die Welt der ETFs:
+unkompliziert vorsorgen -- ein Starterbuch für Finanzanfänger}. 2.
+vollständig überarbeitete und aktualisierte Neuausgabe. München: FBV,
+FinanzBuch Verlag, 2025.
+
+\bibitem[\citeproctext]{ref-kommerSouveraenInvestierenMit2025}
+---------. \emph{Souverän investieren mit Indexfonds und ETFs: Ein
+Investmentbuch für fortgeschrittene Privatanleger}. 7. Auflage.
+Weinheim: Campus Verlag, 2025.
+
+\bibitem[\citeproctext]{ref-markowitzPortfolioSelection1952}
+Markowitz, Harry. {„Portfolio {Selection}``}. \emph{The Journal of
+Finance} 7, Nr. 1 (1952): 77--91.
+\url{https://doi.org/10.1111/j.1540-6261.1952.tb01525.x}.
+
+\bibitem[\citeproctext]{ref-mckinneyPythonDataAnalysis2022}
+McKinney, Wes. \emph{Python for Data Analysis: Data Wrangling with
+Pandas, {NumPy}, and {Jupyter}}. Third edition. Beijing Boston Farnham
+Sebastopol Tokyo: O'Reilly, 2022.
+
+\bibitem[\citeproctext]{ref-PandasSeriespct_changePandas305}
+{„Pandas.{Series}.Pct\_change --- Pandas 3.0.5 Documentation``}.
+Zugegriffen 4. August 2026.
+\url{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.pct_change.html\#pandas.Series.pct_change}.
+
+\bibitem[\citeproctext]{ref-PandasSeriesstdPandas305}
+{„Pandas.{Series}.Std --- Pandas 3.0.5 Documentation``}. Zugegriffen 7.
+August 2026.
+\url{https://pandas.pydata.org/docs/reference/api/pandas.Series.std.html}.
+
+\bibitem[\citeproctext]{ref-phamPerformance60402025}
+Pham, Nga, Bei Cui, und Ummul Ruthbah. \emph{The {Performance} of the
+60/40 {Portfolio}: {A Historical Perspective}}. 18. Februar 2025.
+\url{https://doi.org/10.56227/25.1.12}.
+
+\bibitem[\citeproctext]{ref-Preise}
+{„Preise``}. Zugegriffen 4. August 2026.
+\url{https://www.bfs.admin.ch/content/bfs/de/home/statistiken/preise.html}.
+
+\bibitem[\citeproctext]{ref-probstGleitendeDurchschnittBestimmen2025}
+Probst, Wendelin. {„Der Gleitende Durchschnitt - so bestimmen Sie die
+Trendrichtung``}. Online Broker LYNX, 21. November 2025.
+\url{https://www.lynxbroker.de/boerse/trading/technische-analyse/technische-indikatoren/der-moving-average-so-bestimmen-sie-die-richtung-des-trends/}.
+
+\bibitem[\citeproctext]{ref-ratgeberRelativeStrengthIndex2022}
+Ratgeber, Redaktion. {„Relative Strength Index - so funktioniert der
+RSI! - finanzen.ch``}. Ratgeber: Wissenswertes rund um die Geldanlage
+\textbar{} finanzen.ch, 26. Oktober 2022.
+\url{https://www.finanzen.ch/ratgeber/relative-strength-index/}.
+
+\bibitem[\citeproctext]{ref-sharpeSharpeRatioFall2021}
+Sharpe, William F. {„The {Sharpe Ratio} ({Fall} 1994)``}. In
+\emph{Streetwise}, 169--78. Princeton University Press, 2021.
+\url{https://www.degruyterbrill.com/document/doi/10.1515/9781400829408-022/html?lang=en}.
+
+\bibitem[\citeproctext]{ref-vanguardStartseiteVanguardSwitzerland2026}
+Vanguard. {„Startseite \textbar{} Vanguard Switzerland Private
+Anleger``}. Startseite \textbar{} Vanguard Switzerland Private Anleger,
+7. Juni 2026. \url{https://www.ch.vanguard/de/private-anleger}.
+
+\bibitem[\citeproctext]{ref-yahooYahooFinanzenDeutschlandBoerse2026}
+Yahoo. {„Yahoo FinanzenDeutschland \textbar{} Börse live, Kurse,
+Nachrichten aus Wirtschafts- und Finanzwelt``}. Yahoo Finance, 7. Juni
+2026. \url{https://de.finance.yahoo.com/}.
+
+\end{CSLReferences}
+
+
+
+
+\end{document}
