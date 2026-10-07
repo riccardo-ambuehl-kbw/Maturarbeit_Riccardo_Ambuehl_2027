@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)  (format=lualatex 2026.9.22)  7 OCT 2026 04:44
+This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)  (format=lualatex 2026.10.7)  8 OCT 2026 00:52
  restricted system commands enabled.
 **index.tex
 (./index.tex
@@ -617,7 +617,7 @@ Package graphics Info: Driver file: luatex.def on input line 106.
 \cslhangindent=\skip80
 \csllabelwidth=\skip81
 (c:/Users/modic/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2026/09/09 v26.12 The multilingual framework for LuaLaTeX, pdfLaTeX and XeLaTeX
+Package: babel 2026/09/27 v26.13 The multilingual framework for LuaLaTeX, pdfLaTeX and XeLaTeX
 (c:/Users/modic/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/luababel.def
 \bbl@readstream=\read3
 \l@dumylang=\language2
@@ -633,13 +633,13 @@ Package babel Info: Non-standard hyphenation setup on input line 118.
 \bbl@pattcodes=\catcodetable16
 )
 \babel@savecnt=\count333
-LaTeX Encoding Info:    Redeclaring text command \ij (encoding OT1) on input line 2095.
-LaTeX Encoding Info:    Redeclaring text command \IJ (encoding OT1) on input line 2097.
-LaTeX Encoding Info:    Redeclaring text command \ij (encoding T1) on input line 2099.
-LaTeX Encoding Info:    Redeclaring text command \IJ (encoding T1) on input line 2100.
-LaTeX Encoding Info:    Ignoring declaration for text command \ij (encoding ?) on input line 2101.
-LaTeX Encoding Info:    Ignoring declaration for text command \IJ (encoding ?) on input line 2103.
-LaTeX Encoding Info:    Ignoring declaration for text command \SS (encoding ?) on input line 2128.
+LaTeX Encoding Info:    Redeclaring text command \ij (encoding OT1) on input line 2110.
+LaTeX Encoding Info:    Redeclaring text command \IJ (encoding OT1) on input line 2112.
+LaTeX Encoding Info:    Redeclaring text command \ij (encoding T1) on input line 2114.
+LaTeX Encoding Info:    Redeclaring text command \IJ (encoding T1) on input line 2115.
+LaTeX Encoding Info:    Ignoring declaration for text command \ij (encoding ?) on input line 2116.
+LaTeX Encoding Info:    Ignoring declaration for text command \IJ (encoding ?) on input line 2118.
+LaTeX Encoding Info:    Ignoring declaration for text command \SS (encoding ?) on input line 2143.
 \U@D=\dimen196
 \l@unhyphenated=\language10
 (c:/Users/modic/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/luababel.def
@@ -661,10 +661,11 @@ Removing  `luaotfload.harf.finalize_hlist' from `hpack_filter'.
 Inserting `Babel.pre_otfload_h' in `hpack_filter'.
 Inserting `luaotfload.node_processor' in `hpack_filter'.
 Inserting `luaotfload.harf.finalize_hlist' in `hpack_filter'.
+Inserting `Babel.reset_lines' in `post_linebreak_filter'.
 \bbl@attr@dir=\attribute5
 ) (c:/Users/modic/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/locale/invalid/babel-ngerman.tex)
 Package babel Info: Importing font and identification data for 'ngerman'
-(babel)             from babel-de.ini. Reported on input line 4459.
+(babel)             from babel-de.ini. Reported on input line 4478.
 (c:/Users/modic/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel-german/ngerman.ldf
 Language: ngerman 
 (c:/Users/modic/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel-german/babel-german.def (c:/Users/modic/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/hyph-utf8/loadhyph/loadhyph-de-1996.tex UTF-8 German hyphenation patterns (reformed orthography) (c:/Users/modic/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/hyph-utf8/patterns/tex/hyph-de-1996.tex German Hyphenation Patterns (Reformed Orthography, 2006) `dehyphn-x' 2024-02-28 (WL)))))) (c:/Users/modic/AppData/Roaming/TinyTeX/texmf-dist/tex/lualatex/selnolig/selnolig.sty
@@ -1273,12 +1274,12 @@ l.2893 \texttt
             {Date}   &\;\longrightarrow\; \texttt{date} \\
 
 Here is how much of LuaTeX's memory you used:
- 31960 strings out of 475607
+ 31965 strings out of 475604
  195328,1648299 words of node,token memory allocated
  46027 words of node memory still in use:
    64 hlist, 2 vlist, 9 rule, 241 disc, 13 local_par, 13 dir, 12 math, 422 glue, 131 kern, 22 penalty, 16 margin_kern, 1656 glyph, 9992 attribute, 69 glue_spec, 3371 attribute_list, 1 if_stack, 1 user_defined nodes
    avail lists: 1:8,2:17242,3:1059,4:770,5:632,6:126,7:7042,8:42,9:1209,10:43,11:738,12:1
- 54161 multiletter control sequences out of 65536+600000
- 80 fonts using 21377975 bytes
+ 54169 multiletter control sequences out of 65536+600000
+ 80 fonts using 21377823 bytes
  108i,11n,114p,11226b,1122s stack positions out of 10000i,1000n,20000p,200000b,200000s
 !  ==> Fatal error occurred, no output PDF file produced!
