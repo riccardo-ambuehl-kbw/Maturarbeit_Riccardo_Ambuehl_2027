@@ -14,3 +14,10 @@ __pycache__/
 build/
 .pytest_cache/
 outputs/runs/
+
+# Local Study-v1 environment, approved data and freeze archive
+/.venv-study/
+/data/study_v1/raw/
+/data/study_v1/processed/
+/data/study_v1/archive/
+/data/study_v1/.processed-candidate-*/

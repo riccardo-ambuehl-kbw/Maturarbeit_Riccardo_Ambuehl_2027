@@ -1,0 +1,7 @@
+# Preserve hashed Study-v1 files across checkouts with core.autocrlf=true.
+/scripts/study_v1/*.py text eol=lf
+/scripts/study_v1/weo_release_register.csv text eol=lf
+/configs/study_v1/*.json text eol=lf
+/tests/study_v1/*.py text eol=lf
+/documentation/study-v1-*.md text eol=lf
+/documentation/ai-usage/prompts/2026-10-10-study-v1-*.md text eol=lf

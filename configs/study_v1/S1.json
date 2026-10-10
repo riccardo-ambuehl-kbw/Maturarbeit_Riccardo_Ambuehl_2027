@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "run_name": "S1",
+  "period": {"start": "2009-12-31", "end": "2025-12-31"},
+  "start_capital": 100000,
+  "base_currency": "USD",
+  "periods_per_year": 12,
+  "period_frequency": "ME",
+  "data": {
+    "market": "../../data/study_v1/archive/study-freeze-v1/processed/main_market.csv",
+    "assets": "../../data/study_v1/archive/study-freeze-v1/processed/assets.csv",
+    "risk_free": {
+      "path": "../../data/study_v1/archive/study-freeze-v1/processed/rf_main.csv",
+      "series_id": "DGS3MO_LAGGED_ACT365_APPROX"
+    }
+  },
+  "strategies": {
+    "trend": {
+      "enabled": true, "asset": "WORLD_EQ",
+      "short_window": 2, "long_window": 12,
+      "signal_lag": 1, "signal_source": "performance_value"
+    }
+  },
+  "output_dir": "../../outputs/runs"
+}

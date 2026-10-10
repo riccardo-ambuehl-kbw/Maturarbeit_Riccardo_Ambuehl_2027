@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "run_name": "H1",
+  "period": {"start": "2009-12-31", "end": "2025-12-31"},
+  "start_capital": 100000,
+  "base_currency": "USD",
+  "periods_per_year": 12,
+  "period_frequency": "ME",
+  "data": {
+    "market": "../../data/study_v1/archive/study-freeze-v1/processed/main_market.csv",
+    "assets": "../../data/study_v1/archive/study-freeze-v1/processed/assets.csv",
+    "risk_free": {
+      "path": "../../data/study_v1/archive/study-freeze-v1/processed/rf_main.csv",
+      "series_id": "DGS3MO_LAGGED_ACT365_APPROX"
+    },
+    "macro": "../../data/study_v1/archive/study-freeze-v1/processed/macro_g7.csv"
+  },
+  "strategies": {
+    "buy_hold": {"enabled": true, "asset": "WORLD_EQ"},
+    "rebalance": {
+      "enabled": true,
+      "target_weights": {"WORLD_EQ": 0.60, "US_TREASURY_7_10": 0.40},
+      "rebalance_frequency": "annual"
+    },
+    "trend": {
+      "enabled": true, "asset": "WORLD_EQ",
+      "short_window": 3, "long_window": 12,
+      "signal_lag": 1, "signal_source": "performance_value"
+    },
+    "country_weighting": {
+      "enabled": true,
+      "country_assets": {"USA": "US_EQ", "CAN": "CA_EQ", "JPN": "JP_EQ", "GBR": "GB_EQ", "DEU": "DE_EQ", "FRA": "FR_EQ", "ITA": "IT_EQ"},
+      "indicator": "NGDPD", "unit": "USD_billions",
+      "rebalance_frequency": "annual"
+    }
+  },
+  "output_dir": "../../outputs/runs"
+}
