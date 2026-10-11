@@ -259,7 +259,7 @@
 
 \title{Langfristige Anlagestrategien anhand historischer Finanzdaten}
 \author{Riccardo Ambühl}
-\date{2026-10-08}
+\date{2026-10-11}
 \begin{document}
 \maketitle
 
@@ -3883,6 +3883,845 @@ wird. Der globale und der US-Block werden getrennt beurteilt. Für die
 BIP-Gewichtung wird ausdrücklich zwischen dem Konzeptvergleich mit VT
 und dem kontrollierten Vergleich innerhalb derselben sieben Länder
 unterschieden.
+
+5.11 Datenbeschaffung, Aufbereitung und Durchführung
+
+5.11.1 Beschaffung und unveränderte Ablage
+
+Marktreihen werden über die bereits im Projekt vorgesehene Bibliothek
+yfinance bezogen. Der Aufruf legt Tagesfrequenz, Anfangs- und Enddatum
+sowie die Adjustierungsoptionen ausdrücklich fest. auto\_adjust=False
+hält Close und Adj Close getrennt; repair=False verhindert die
+zusätzlich angebotene automatische Reparatur. Ausschüttungs- und
+Splitspalten werden mitgespeichert.\footnote{\textbf{aroussiYfinanceHistory2026?}}
+Der gespeicherte Rohstand ist ein unveränderter Bibliotheksexport, nicht
+die Behauptung eines archivierten ursprünglichen HTTP-Antwortpakets.
+
+Für VT und die sechs nichtamerikanischen Länder-ETFs wird der Zeitraum
+vom 1. Januar 2009 bis zum 31. Dezember 2025 angefordert. Dadurch stehen
+für die Hauptuntersuchung genügend Monatsbeobachtungen für den
+SMA-Vorlauf zur Verfügung, bevor die eigentliche Auswertung 2010
+beginnt. Für VTI und IEF beginnt der Download bereits am 1. Januar 2002.
+VTI benötigt die Beobachtungen aus dem Jahr 2002 für den SMA-Vorlauf,
+während IEF ab Mitte 2002 verfügbar ist und somit für die Startbewertung
+Ende Dezember 2002 berücksichtigt werden kann. Die eigentliche längere
+US-Untersuchung beginnt anschliessend im Jahr 2003. DGS3MO wird
+entsprechend für 2002 bis 2025 separat gespeichert, damit auch für die
+erste Renditeperiode des US-Zusatzlaufs eine passende risikofreie Reihe
+vorbereitet werden kann. Die WEO-Dateien bleiben im originalen
+Downloadformat; ein Öffnen und erneutes Speichern in Excel ist nicht
+Teil des Rohdatenarchivs.
+
+Zu jedem Download werden Quelle, Parameter, Abrufzeit in UTC,
+tatsächliche Zeilenabdeckung und SHA-256 gespeichert. Frühere Downloads
+werden nicht überschrieben. Die Rohdaten liegen getrennt von
+bearbeiteten Dateien und Ergebnisdateien. Vor einer öffentlichen
+Weitergabe wird die Zulässigkeit der jeweiligen Datenweiterverwendung
+geprüft.
+
+Für die BIP-Daten wurden die 16 WEO-Herbstausgaben von 2009 bis 2024
+heruntergeladen und unverändert in getrennten Ausgabeordnern abgelegt.
+Zu jeder Datei wurden die Downloadseite, der Abrufzeitpunkt und der
+Originaldateiname dokumentiert. Die anschliessende Eingangsprüfung
+bestätigte, dass in allen Ausgaben die benötigten BIP-Reihen der sieben
+untersuchten Länder sowie Angaben zur Abgrenzung von historischen Werten
+und Schätzungen vorhanden sind. Die Formatunterschiede und
+Besonderheiten der historischen Jahresauswahl wurden für die weitere
+Datenaufbereitung festgehalten.
+
+5.11.2 Normalisierung und Datenkontrolle
+
+Die Datenaufbereitung arbeitet ausschliesslich auf dem gespeicherten
+Rohstand. Sie prüft Datumswerte, numerische Werte, Duplikate, Metadaten,
+Währung und Monatsabdeckung. Aus den täglichen Marktbeobachtungen
+entsteht die festgelegte Monatsreihe. Ein zusätzlicher Herkunftsnachweis
+erhält die tatsächlichen Handelstage zu den Monatslabels. Leere Monate,
+unterschiedliche letzte Monatshandelstage oder unplausible Abstände
+werden nicht durch stilles Füllen verborgen.
+
+Der Zinsadapter erstellt normalisierte RF-Perioden. Der WEO-Adapter
+unterscheidet Datenversion, Bezugsjahr und Verfügbarkeit und
+dokumentiert jeden Ausschluss von Schätzungen oder Prognosen. Für die
+Länder- und Metadatenkennungen werden dieselben ISO-Ländercodes
+verwendet. Fehlerhafte Eingaben führen vor dem Hauptlauf zu einem
+nachvollziehbaren Abbruch.
+
+Die normalisierten Dateien erhalten erneut Hashes. Zu diesem Zeitpunkt
+werden der Datenstand und die fünf vorgesehenen Versuchskonfigurationen
+endgültig festgehalten. Erst nach dieser Abnahme wird die Engine mit
+realen Untersuchungsdaten gestartet.
+
+5.11.3 Ausführung und Run-Nachweis
+
+Am 10. Oktober 2026 habe ich die fünf festgelegten Untersuchungen H1,
+K1, Z1, S1 und S2 nacheinander über PowerShell ausgeführt. Verwendet
+wurden Engine 1.0.0 und der zuvor versiegelte Git-Stand
+\texttt{1954bfb}. Alle fünf Run-Manifeste nennen diesen Commit und
+melden einen unveränderten Arbeitsstand. Die verwendete
+Ausführungsumgebung enthielt Python 3.14.0, NumPy 2.3.5 und pandas
+2.3.3.
+
+Ein Aufruf bestand aus dem Start der Engine mit der jeweiligen
+Konfigurationsdatei, beispielsweise \texttt{configs/study\_v1/H1.json}.
+Diese Dateien verweisen auf die archivierten Datenkopien, nicht auf
+veränderliche Arbeitsdateien. Es wurden keine neuen Parameter gesucht
+und keine weiteren Strategien hinzugefügt.
+
+Tabelle: Tatsächlich ausgeführte Untersuchungen
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Lauf
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Renditezeitraum
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Vergleich
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Bewertungen / Perioden
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{H1} & 2010--2025 & VT Buy-and-Hold; VT/IEF 60/40; VT-Trend 3/12;
+BIP-G7 & 193 / 192 \\
+\textbf{K1} & 2010--2025 & BIP-G7 gegenüber gleichen Ländergewichten &
+193 / 192 \\
+\textbf{Z1} & 2003--2025 & VTI Buy-and-Hold; VTI/IEF 60/40; VTI-Trend
+3/12 & 277 / 276 \\
+\textbf{S1} & 2010--2025 & VT-Trend 2/12 & 193 / 192 \\
+\textbf{S2} & 2010--2025 & VT-Trend 6/12 & 193 / 192 \\
+\end{longtable}
+}
+
+Quelle: die fünf run\_manifest.json-Dateien. Eine Anfangsbewertung
+erzeugt noch keine Rendite. Deshalb gibt es jeweils eine Bewertung mehr
+als Renditeperioden.
+
+Für jeden Lauf entstand ein eigener Ordner unter outputs/runs/.
+portfolio\_history.csv enthält den monatlichen Vermögensverlauf,
+summary.csv die zusammengefassten Kennzahlen. Je nach Strategie kommen
+Gewichte, Umschichtungen und Signale hinzu. Das Run-Manifest verbindet
+diese Ergebnisse mit den verwendeten Eingaben, der Konfiguration und den
+Prüfsummen. Die vollständigen Run-Kennungen und Zeitstempel bleiben in
+den technischen Nachweisen erhalten, statt den Fliesstext mit langen
+Identifikationsnummern zu belasten.
+
+Die fünf Läufe erzeugten elf Strategie-Zeitreihen. Die BIP-Strategie ist
+dabei sowohl in H1 als auch in K1 enthalten; ihre beiden Verläufe sind
+zahlenmässig identisch. Bei Z1 werden sechs VTI-Monatswerte aus Januar
+bis Juni 2002 als nicht gemeinsam mit IEF ausgewiesen. Sie bleiben für
+die separate Signalhistorie erhalten. Der eigentliche
+Untersuchungszeitraum ab Ende Dezember 2002 wurde dadurch nicht
+verkürzt.
+
+Anschliessend erfolgte eine zusätzliche KI-gestützte Gegenrechnung aus
+den eingefrorenen Eingaben und den Ergebnisdateien. Dabei wurden unter
+anderem Portfoliowerte, Renditen, Risikokennzahlen, Signalverzögerungen
+und jährliche Umschichtungen geprüft. Innerhalb dieses dokumentierten
+Prüfumfangs wurden keine rechnerischen Abweichungen gefunden. Die fünf
+Ergebnisordner bleiben unverändert erhalten. Die folgenden Tabellen und
+Grafiken werden daraus abgeleitet; für ihre Darstellung werden keine
+neuen Hauptläufe ausgeführt.
+
+Anschliessend erfolgte eine zusätzliche KI-gestützte Gegenrechnung aus
+den eingefrorenen Eingaben und den Ergebnisdateien. Dabei wurden unter
+anderem Portfoliowerte, Renditen, Risikokennzahlen, Signalverzögerungen
+und jährliche Umschichtungen geprüft. Innerhalb dieses dokumentierten
+Prüfumfangs wurden keine rechnerischen Abweichungen gefunden. Die fünf
+Ergebnisordner bleiben unverändert erhalten. Die folgenden Tabellen und
+Grafiken werden daraus abgeleitet; für ihre Darstellung werden keine
+neuen Hauptläufe ausgeführt.
+
+5.12 Darstellung der Ergebnisse
+
+Alle Portfolios starten mit 100'000 USD. Die Werte sind nominal, also
+nicht um Inflation bereinigt. Die Tabellen unterscheiden zwischen dem
+Endvermögen, der gesamten Rendite über den Untersuchungszeitraum und der
+annualisierten Rendite. Letztere beschreibt die gleichmässige jährliche
+Wachstumsrate, die rechnerisch zum gleichen Endvermögen führen würde.
+Sie bedeutet nicht, dass die Strategie in jedem einzelnen Jahr diesen
+Ertrag erzielt hat.
+
+Daneben werden die annualisierte Volatilität, die Sharpe Ratio und der
+maximale Drawdown ausgewiesen. «p.~a.» bedeutet «pro Jahr». Beim
+Drawdown steht das Minuszeichen für einen Rückgang vom bisherigen
+Höchststand. Ein Wert näher bei null bedeutet einen kleineren grössten
+Rückgang. Sämtliche Drawdowns beruhen auf den Monatsbewertungen;
+Verluste innerhalb eines Monats können damit übersehen werden. Die
+Zahlen in den Tabellen sind gerundet, die Berechnungen beruhen auf den
+ungerundeten Ergebnissen.
+
+Zur Herkunft der Abbildungen: Die sieben Grafiken in 5.12 werden aus den
+fünf bereits durchgeführten und geprüften Backtests H1, K1, Z1, S1 und
+S2 erzeugt. Die dazugehörigen Ergebnisdateien liegen unverändert und
+unkomprimiert im Repository unter
+results/study\_v1/\textless Run-ID\textgreater/. Aus
+portfolio\_history.csv und summary.csv entstehen mit Matplotlib die
+Diagramme. Das Notebook kontrolliert zunächst die originalen
+Run-Manifeste anhand festgehaltener SHA-256-Werte und überprüft die im
+Manifest hinterlegten Hashes der Ergebnisdateien. Es werden weder neue
+Marktwerte geladen noch Backtests ausgeführt.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Code für die sieben Abbildungen in Kapitel 5.12.}
+\CommentTok{\# Reproduzierbarkeit: die Original{-}Ergebnisdateien werden ausschliesslich gelesen.}
+\CommentTok{\# Voraussetzungen: matplotlib, Standardbibliothek; keine Backtesting{-}Engine nötig.}
+\ImportTok{import}\NormalTok{ os}
+\ImportTok{import}\NormalTok{ csv}
+\ImportTok{import}\NormalTok{ io}
+\ImportTok{import}\NormalTok{ json}
+\ImportTok{import}\NormalTok{ hashlib}
+\ImportTok{from}\NormalTok{ datetime }\ImportTok{import}\NormalTok{ datetime}
+\ImportTok{from}\NormalTok{ pathlib }\ImportTok{import}\NormalTok{ Path}
+
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ matplotlib.dates }\ImportTok{as}\NormalTok{ mdates}
+\ImportTok{from}\NormalTok{ matplotlib.ticker }\ImportTok{import}\NormalTok{ FuncFormatter, MultipleLocator}
+
+\KeywordTok{def}\NormalTok{ find\_project\_root():}
+    \CommentTok{"""Projekt{-}Checkout finden (dev enthält kein pyproject.toml)."""}
+\NormalTok{    current }\OperatorTok{=}\NormalTok{ Path.cwd().resolve()}
+    \ControlFlowTok{for}\NormalTok{ candidate }\KeywordTok{in}\NormalTok{ (current, }\OperatorTok{*}\NormalTok{current.parents):}
+        \ControlFlowTok{if}\NormalTok{ (candidate }\OperatorTok{/} \StringTok{"\_quarto.yml"}\NormalTok{).is\_file() }\KeywordTok{and}\NormalTok{ (candidate }\OperatorTok{/} \StringTok{"notebooks"}\NormalTok{).is\_dir():}
+            \ControlFlowTok{return}\NormalTok{ candidate}
+    \ControlFlowTok{raise} \PreprocessorTok{FileNotFoundError}\NormalTok{(}
+        \StringTok{"Projektordner mit \_quarto.yml und notebooks/ nicht gefunden. "}
+        \StringTok{"Öffne das Notebook im Maturarbeit{-}Repository."}
+\NormalTok{    )}
+
+
+\NormalTok{PROJECT\_ROOT }\OperatorTok{=}\NormalTok{ find\_project\_root()}
+\NormalTok{RUNS\_ROOT }\OperatorTok{=}\NormalTok{ Path(os.environ.get(}
+    \StringTok{"MATURARBEIT\_RESULTS\_DIR"}\NormalTok{,}
+    \BuiltInTok{str}\NormalTok{(PROJECT\_ROOT }\OperatorTok{/} \StringTok{"results"} \OperatorTok{/} \StringTok{"study\_v1"}\NormalTok{),}
+\NormalTok{)).expanduser().resolve()}
+\CommentTok{\# SHA{-}256 der originalen, unveränderten run\_manifest.json{-}Dateien aus dem geprüften Ergebnis{-}ZIP.}
+\NormalTok{EXPECTED\_MANIFEST\_SHA256 }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{"H1"}\NormalTok{: }\StringTok{"c0cd1dd283e22576d82e421f19b46a381e955a464475a60235621f556db8507f"}\NormalTok{,}
+    \StringTok{"K1"}\NormalTok{: }\StringTok{"0b9e51f886b2025b2791f13b92b85f78e3b1dde2d3338d79f7a9093cb3a00c4f"}\NormalTok{,}
+    \StringTok{"Z1"}\NormalTok{: }\StringTok{"85556911f348c920dcc8a0336dc64d557176825a853f951b9d62b0fb0aafed7e"}\NormalTok{,}
+    \StringTok{"S1"}\NormalTok{: }\StringTok{"0c9f752ab5c59ab07571f100bcb9c7bc450b23550a85dbb28db883cfa7f58b31"}\NormalTok{,}
+    \StringTok{"S2"}\NormalTok{: }\StringTok{"c5a609a9be4fb849d716e56c2242769a80841002bc775920fa6eb473ee92f7b4"}\NormalTok{,}
+\NormalTok{\}}
+\NormalTok{EXPECTED\_STUDY\_COMMIT }\OperatorTok{=} \StringTok{"1954bfbcb257b51e7f9174aa824cb35e437de752"}
+\NormalTok{RUN\_IDS }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{"H1"}\NormalTok{: }\StringTok{"H1{-}387087d670fb4d2f936b33b6de4dc325"}\NormalTok{,}
+    \StringTok{"K1"}\NormalTok{: }\StringTok{"K1{-}97b544e202734d18a34eb1b43d6c7773"}\NormalTok{,}
+    \StringTok{"Z1"}\NormalTok{: }\StringTok{"Z1{-}5f2ed8566bbe49a99ea212b1df5c64d5"}\NormalTok{,}
+    \StringTok{"S1"}\NormalTok{: }\StringTok{"S1{-}853eadea14754d40afaf2ab363b4cd21"}\NormalTok{,}
+    \StringTok{"S2"}\NormalTok{: }\StringTok{"S2{-}f4acf98483d54b3c8de3fbef77e311fb"}\NormalTok{,}
+\NormalTok{\}}
+\NormalTok{NAMES\_H1 }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{"buy\_hold"}\NormalTok{: }\StringTok{"Buy{-}and{-}Hold (VT)"}\NormalTok{,}
+    \StringTok{"rebalance"}\NormalTok{: }\StringTok{"60/40 (VT/IEF)"}\NormalTok{,}
+    \StringTok{"trend"}\NormalTok{: }\StringTok{"Trend (VT, 3/12)"}\NormalTok{,}
+    \StringTok{"country\_weighting"}\NormalTok{: }\StringTok{"BIP{-}Gewichtung (G7)"}\NormalTok{,}
+\NormalTok{\}}
+\NormalTok{NAMES\_Z1 }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{"buy\_hold"}\NormalTok{: }\StringTok{"Buy{-}and{-}Hold (VTI)"}\NormalTok{,}
+    \StringTok{"rebalance"}\NormalTok{: }\StringTok{"60/40 (VTI/IEF)"}\NormalTok{,}
+    \StringTok{"trend"}\NormalTok{: }\StringTok{"Trend (VTI, 3/12)"}\NormalTok{,}
+\NormalTok{\}}
+\NormalTok{LINE\_STYLES }\OperatorTok{=}\NormalTok{ [}\StringTok{"{-}"}\NormalTok{, }\StringTok{"{-}{-}"}\NormalTok{, }\StringTok{"{-}."}\NormalTok{, }\StringTok{":"}\NormalTok{]}
+
+
+\KeywordTok{def}\NormalTok{ load\_frozen\_runs(results\_root):}
+    \CommentTok{"""Nur originale CSV{-}Ergebnisse lesen und die Prüfketten kontrollieren."""}
+    \ControlFlowTok{if} \KeywordTok{not}\NormalTok{ results\_root.is\_dir():}
+        \ControlFlowTok{raise} \PreprocessorTok{FileNotFoundError}\NormalTok{(}\SpecialStringTok{f"Ergebnisordner fehlt: }\SpecialCharTok{\{}\NormalTok{results\_root}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+
+\NormalTok{    loaded }\OperatorTok{=}\NormalTok{ \{\}}
+    \ControlFlowTok{for}\NormalTok{ name, run\_id }\KeywordTok{in}\NormalTok{ RUN\_IDS.items():}
+\NormalTok{        run\_dir }\OperatorTok{=}\NormalTok{ results\_root }\OperatorTok{/}\NormalTok{ run\_id}
+        \ControlFlowTok{if} \KeywordTok{not}\NormalTok{ run\_dir.is\_dir():}
+            \ControlFlowTok{raise} \PreprocessorTok{FileNotFoundError}\NormalTok{(}\SpecialStringTok{f"Der ursprüngliche Run{-}Ordner fehlt: }\SpecialCharTok{\{}\NormalTok{run\_dir}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+
+\NormalTok{        manifest\_bytes }\OperatorTok{=}\NormalTok{ (run\_dir }\OperatorTok{/} \StringTok{"run\_manifest.json"}\NormalTok{).read\_bytes()}
+\NormalTok{        manifest\_hash }\OperatorTok{=}\NormalTok{ hashlib.sha256(manifest\_bytes).hexdigest()}
+        \ControlFlowTok{if}\NormalTok{ manifest\_hash }\OperatorTok{!=}\NormalTok{ EXPECTED\_MANIFEST\_SHA256[name]:}
+            \ControlFlowTok{raise} \PreprocessorTok{ValueError}\NormalTok{(}\SpecialStringTok{f"Original{-}Run{-}Manifest stimmt nicht überein: }\SpecialCharTok{\{}\NormalTok{name}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\NormalTok{        manifest }\OperatorTok{=}\NormalTok{ json.loads(manifest\_bytes)}
+        \ControlFlowTok{if}\NormalTok{ (manifest.get(}\StringTok{"run\_name"}\NormalTok{) }\OperatorTok{!=}\NormalTok{ name}
+                \KeywordTok{or}\NormalTok{ manifest.get(}\StringTok{"run\_id"}\NormalTok{) }\OperatorTok{!=}\NormalTok{ run\_id}
+                \KeywordTok{or}\NormalTok{ manifest.get(}\StringTok{"engine\_version"}\NormalTok{) }\OperatorTok{!=} \StringTok{"1.0.0"}
+                \KeywordTok{or}\NormalTok{ manifest.get(}\StringTok{"code"}\NormalTok{, \{\}).get(}\StringTok{"git"}\NormalTok{, \{\}).get(}\StringTok{"commit"}\NormalTok{) }\OperatorTok{!=}\NormalTok{ EXPECTED\_STUDY\_COMMIT}
+                \KeywordTok{or}\NormalTok{ manifest.get(}\StringTok{"code"}\NormalTok{, \{\}).get(}\StringTok{"git"}\NormalTok{, \{\}).get(}\StringTok{"dirty"}\NormalTok{) }\KeywordTok{is} \KeywordTok{not} \VariableTok{False}\NormalTok{):}
+            \ControlFlowTok{raise} \PreprocessorTok{ValueError}\NormalTok{(}\SpecialStringTok{f"Unpassender Studienlauf: }\SpecialCharTok{\{}\NormalTok{name}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+
+        \ControlFlowTok{for}\NormalTok{ result }\KeywordTok{in}\NormalTok{ manifest[}\StringTok{"results"}\NormalTok{]:}
+\NormalTok{            filename }\OperatorTok{=}\NormalTok{ result[}\StringTok{"path"}\NormalTok{]}
+            \ControlFlowTok{if} \KeywordTok{not} \BuiltInTok{isinstance}\NormalTok{(filename, }\BuiltInTok{str}\NormalTok{) }\KeywordTok{or}\NormalTok{ Path(filename).name }\OperatorTok{!=}\NormalTok{ filename:}
+                \ControlFlowTok{raise} \PreprocessorTok{ValueError}\NormalTok{(}\SpecialStringTok{f"Unzulässiger Ergebnisdateiname in }\SpecialCharTok{\{}\NormalTok{name}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\NormalTok{            result\_path }\OperatorTok{=}\NormalTok{ run\_dir }\OperatorTok{/}\NormalTok{ filename}
+\NormalTok{            actual }\OperatorTok{=}\NormalTok{ hashlib.sha256(result\_path.read\_bytes()).hexdigest()}
+            \ControlFlowTok{if}\NormalTok{ actual }\OperatorTok{!=}\NormalTok{ result[}\StringTok{"sha256"}\NormalTok{]:}
+                \ControlFlowTok{raise} \PreprocessorTok{ValueError}\NormalTok{(}\SpecialStringTok{f"Ergebnisdatei wurde verändert: }\SpecialCharTok{\{}\NormalTok{result\_path}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+
+\NormalTok{        tables }\OperatorTok{=}\NormalTok{ \{\}}
+        \ControlFlowTok{for}\NormalTok{ filename }\KeywordTok{in}\NormalTok{ (}\StringTok{"portfolio\_history.csv"}\NormalTok{, }\StringTok{"summary.csv"}\NormalTok{):}
+\NormalTok{            tables[filename] }\OperatorTok{=} \BuiltInTok{list}\NormalTok{(csv.DictReader(}
+\NormalTok{                io.StringIO((run\_dir }\OperatorTok{/}\NormalTok{ filename).read\_bytes().decode(}\StringTok{"utf{-}8{-}sig"}\NormalTok{))}
+\NormalTok{            ))}
+\NormalTok{        loaded[name] }\OperatorTok{=}\NormalTok{ tables}
+    \ControlFlowTok{return}\NormalTok{ loaded}
+
+
+\NormalTok{RUNS }\OperatorTok{=}\NormalTok{ load\_frozen\_runs(RUNS\_ROOT)}
+
+
+\KeywordTok{def}\NormalTok{ get\_history(run, strategy):}
+    \CommentTok{"""Original{-}Verlauf einer ausdrücklich benannten Strategie (keine Neubewertung)."""}
+\NormalTok{    rows }\OperatorTok{=}\NormalTok{ [row }\ControlFlowTok{for}\NormalTok{ row }\KeywordTok{in}\NormalTok{ RUNS[run][}\StringTok{"portfolio\_history.csv"}\NormalTok{]}
+            \ControlFlowTok{if}\NormalTok{ row[}\StringTok{"strategy"}\NormalTok{] }\OperatorTok{==}\NormalTok{ strategy]}
+    \ControlFlowTok{if} \KeywordTok{not}\NormalTok{ rows:}
+        \ControlFlowTok{raise} \PreprocessorTok{ValueError}\NormalTok{(}\SpecialStringTok{f"Strategie }\SpecialCharTok{\{}\NormalTok{strategy}\SpecialCharTok{!r\}}\SpecialStringTok{ fehlt in }\SpecialCharTok{\{}\NormalTok{run}\SpecialCharTok{\}}\SpecialStringTok{."}\NormalTok{)}
+    \ControlFlowTok{return} \BuiltInTok{sorted}\NormalTok{(rows, key}\OperatorTok{=}\KeywordTok{lambda}\NormalTok{ row: row[}\StringTok{"date"}\NormalTok{])}
+
+
+\KeywordTok{def}\NormalTok{ prepare\_axes(title, ylabel):}
+\NormalTok{    fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots(figsize}\OperatorTok{=}\NormalTok{(}\FloatTok{9.4}\NormalTok{, }\FloatTok{5.3}\NormalTok{))}
+\NormalTok{    ax.set\_title(title, fontsize}\OperatorTok{=}\DecValTok{13}\NormalTok{, loc}\OperatorTok{=}\StringTok{"left"}\NormalTok{, pad}\OperatorTok{=}\DecValTok{14}\NormalTok{)}
+\NormalTok{    ax.set\_xlabel(}\StringTok{"Jahr"}\NormalTok{, fontsize}\OperatorTok{=}\DecValTok{11}\NormalTok{)}
+\NormalTok{    ax.set\_ylabel(ylabel, fontsize}\OperatorTok{=}\DecValTok{11}\NormalTok{)}
+\NormalTok{    ax.grid(}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.24}\NormalTok{, linewidth}\OperatorTok{=}\FloatTok{0.6}\NormalTok{)}
+\NormalTok{    ax.spines[}\StringTok{"top"}\NormalTok{].set\_visible(}\VariableTok{False}\NormalTok{)}
+\NormalTok{    ax.spines[}\StringTok{"right"}\NormalTok{].set\_visible(}\VariableTok{False}\NormalTok{)}
+    \ControlFlowTok{return}\NormalTok{ fig, ax}
+
+
+\KeywordTok{def}\NormalTok{ number\_format(value, position}\OperatorTok{=}\VariableTok{None}\NormalTok{):}
+    \ControlFlowTok{return} \SpecialStringTok{f"}\SpecialCharTok{\{}\NormalTok{value}\SpecialCharTok{:,.0f\}}\SpecialStringTok{"}\NormalTok{.replace(}\StringTok{","}\NormalTok{, }\StringTok{"’"}\NormalTok{)}
+
+
+\KeywordTok{def}\NormalTok{ plot\_run\_lines(run, labels, title, drawdown}\OperatorTok{=}\VariableTok{False}\NormalTok{):}
+    \CommentTok{"""Berechnete Portfoliowerte/Drawdowns auf der Original{-}Monatsachse."""}
+\NormalTok{    ylabel }\OperatorTok{=} \StringTok{"Rückgang vom bisherigen Höchststand (\%)"} \ControlFlowTok{if}\NormalTok{ drawdown }\ControlFlowTok{else} \StringTok{"Vermögen (1’000 USD)"}
+\NormalTok{    fig, ax }\OperatorTok{=}\NormalTok{ prepare\_axes(title, ylabel)}
+\NormalTok{    first\_date, last\_date }\OperatorTok{=} \VariableTok{None}\NormalTok{, }\VariableTok{None}
+    \ControlFlowTok{for}\NormalTok{ i, (strategy, label) }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{(labels.items()):}
+\NormalTok{        rows }\OperatorTok{=}\NormalTok{ get\_history(run, strategy)}
+\NormalTok{        dates }\OperatorTok{=}\NormalTok{ [datetime.fromisoformat(row[}\StringTok{"date"}\NormalTok{]) }\ControlFlowTok{for}\NormalTok{ row }\KeywordTok{in}\NormalTok{ rows]}
+\NormalTok{        values }\OperatorTok{=}\NormalTok{ [(}\BuiltInTok{float}\NormalTok{(row[}\StringTok{"drawdown"}\NormalTok{]) }\OperatorTok{*} \DecValTok{100} \ControlFlowTok{if}\NormalTok{ drawdown}
+                   \ControlFlowTok{else} \BuiltInTok{float}\NormalTok{(row[}\StringTok{"portfolio\_value"}\NormalTok{]) }\OperatorTok{/} \DecValTok{1000}\NormalTok{) }\ControlFlowTok{for}\NormalTok{ row }\KeywordTok{in}\NormalTok{ rows]}
+\NormalTok{        ax.plot(dates, values, label}\OperatorTok{=}\NormalTok{label, linestyle}\OperatorTok{=}\NormalTok{LINE\_STYLES[i], linewidth}\OperatorTok{=}\FloatTok{1.8}\NormalTok{)}
+        \ControlFlowTok{if}\NormalTok{ first\_date }\KeywordTok{is} \VariableTok{None}\NormalTok{:}
+\NormalTok{            first\_date, last\_date }\OperatorTok{=}\NormalTok{ dates[}\DecValTok{0}\NormalTok{], dates[}\OperatorTok{{-}}\DecValTok{1}\NormalTok{]}
+        \ControlFlowTok{elif}\NormalTok{ (first\_date, last\_date) }\OperatorTok{!=}\NormalTok{ (dates[}\DecValTok{0}\NormalTok{], dates[}\OperatorTok{{-}}\DecValTok{1}\NormalTok{]):}
+            \ControlFlowTok{raise} \PreprocessorTok{ValueError}\NormalTok{(}\SpecialStringTok{f"Unterschiedliche Zeitachsen in }\SpecialCharTok{\{}\NormalTok{run}\SpecialCharTok{\}}\SpecialStringTok{."}\NormalTok{)}
+\NormalTok{    ax.set\_xlim(first\_date, last\_date)}
+\NormalTok{    ax.xaxis.set\_major\_locator(mdates.YearLocator(}\DecValTok{2}\NormalTok{))}
+\NormalTok{    ax.xaxis.set\_major\_formatter(mdates.DateFormatter(}\StringTok{"\%Y"}\NormalTok{))}
+\NormalTok{    ax.yaxis.set\_major\_formatter(FuncFormatter(number\_format))}
+    \ControlFlowTok{if}\NormalTok{ drawdown:}
+\NormalTok{        ax.set\_ylim(top}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\NormalTok{        ax.yaxis.set\_major\_locator(MultipleLocator(}\DecValTok{10} \ControlFlowTok{if}\NormalTok{ run }\OperatorTok{==} \StringTok{"Z1"} \ControlFlowTok{else} \DecValTok{5}\NormalTok{))}
+\NormalTok{        ax.legend(loc}\OperatorTok{=}\StringTok{"upper center"}\NormalTok{, bbox\_to\_anchor}\OperatorTok{=}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.19}\NormalTok{),}
+\NormalTok{                  ncol}\OperatorTok{=}\DecValTok{2}\NormalTok{, fontsize}\OperatorTok{=}\DecValTok{9}\NormalTok{, frameon}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
+    \ControlFlowTok{else}\NormalTok{:}
+\NormalTok{        ax.set\_ylim(bottom}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+\NormalTok{        ax.legend(loc}\OperatorTok{=}\StringTok{"upper left"}\NormalTok{, fontsize}\OperatorTok{=}\DecValTok{9}\NormalTok{, framealpha}\OperatorTok{=}\FloatTok{0.9}\NormalTok{)}
+\NormalTok{    fig.tight\_layout()}
+\NormalTok{    plt.show()}
+\NormalTok{    plt.close(fig)}
+
+
+\KeywordTok{def}\NormalTok{ plot\_risk\_return():}
+    \CommentTok{"""Annualisierte Kennzahlen kommen direkt aus H1/summary.csv."""}
+\NormalTok{    fig, ax }\OperatorTok{=}\NormalTok{ prepare\_axes(}
+        \StringTok{"H1 · Annualisierte Rendite und Volatilität"}\NormalTok{, }\StringTok{"Geometrische Rendite p. a. (\%)"}
+\NormalTok{    )}
+\NormalTok{    ax.set\_xlabel(}\StringTok{"Volatilität p. a. (\%)"}\NormalTok{)}
+\NormalTok{    summary }\OperatorTok{=}\NormalTok{ \{row[}\StringTok{"strategy"}\NormalTok{]: row }\ControlFlowTok{for}\NormalTok{ row }\KeywordTok{in}\NormalTok{ RUNS[}\StringTok{"H1"}\NormalTok{][}\StringTok{"summary.csv"}\NormalTok{]\}}
+\NormalTok{    offsets }\OperatorTok{=}\NormalTok{ \{}
+        \StringTok{"buy\_hold"}\NormalTok{: (}\OperatorTok{{-}}\DecValTok{147}\NormalTok{, }\OperatorTok{{-}}\DecValTok{18}\NormalTok{), }\StringTok{"rebalance"}\NormalTok{: (}\DecValTok{14}\NormalTok{, }\DecValTok{0}\NormalTok{),}
+        \StringTok{"trend"}\NormalTok{: (}\DecValTok{14}\NormalTok{, }\DecValTok{0}\NormalTok{), }\StringTok{"country\_weighting"}\NormalTok{: (}\DecValTok{8}\NormalTok{, }\DecValTok{24}\NormalTok{),}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ strategy, label }\KeywordTok{in}\NormalTok{ NAMES\_H1.items():}
+\NormalTok{        row }\OperatorTok{=}\NormalTok{ summary[strategy]}
+\NormalTok{        x }\OperatorTok{=} \BuiltInTok{float}\NormalTok{(row[}\StringTok{"annualized\_volatility"}\NormalTok{]) }\OperatorTok{*} \DecValTok{100}
+\NormalTok{        y }\OperatorTok{=} \BuiltInTok{float}\NormalTok{(row[}\StringTok{"annualized\_return"}\NormalTok{]) }\OperatorTok{*} \DecValTok{100}
+\NormalTok{        ax.scatter([x], [y], s}\OperatorTok{=}\DecValTok{55}\NormalTok{)}
+\NormalTok{        ax.annotate(label, xy}\OperatorTok{=}\NormalTok{(x, y), xytext}\OperatorTok{=}\NormalTok{offsets[strategy],}
+\NormalTok{                    textcoords}\OperatorTok{=}\StringTok{"offset points"}\NormalTok{, fontsize}\OperatorTok{=}\DecValTok{10}\NormalTok{,}
+\NormalTok{                    arrowprops}\OperatorTok{=}\NormalTok{\{}\StringTok{"arrowstyle"}\NormalTok{: }\StringTok{"{-}"}\NormalTok{, }\StringTok{"linewidth"}\NormalTok{: }\FloatTok{0.7}\NormalTok{\})}
+\NormalTok{    ax.set\_xlim(}\FloatTok{7.7}\NormalTok{, }\FloatTok{18.2}\NormalTok{)}
+\NormalTok{    ax.set\_ylim(}\FloatTok{5.2}\NormalTok{, }\FloatTok{11.5}\NormalTok{)}
+\NormalTok{    fig.tight\_layout()}
+\NormalTok{    plt.show()}
+\NormalTok{    plt.close(fig)}
+
+
+\KeywordTok{def}\NormalTok{ plot\_sma\_comparison():}
+    \CommentTok{"""Vergleicht nur die drei vorab festgelegten Sensitivitätsläufe."""}
+\NormalTok{    fig, ax }\OperatorTok{=}\NormalTok{ prepare\_axes(}\StringTok{"SMA{-}Vergleich · VT{-}Trendfolge 2010–2025"}\NormalTok{, }\StringTok{"Vermögen (1’000 USD)"}\NormalTok{)}
+\NormalTok{    options }\OperatorTok{=}\NormalTok{ [(}\StringTok{"S1"}\NormalTok{, }\StringTok{"SMA 2/12 (S1)"}\NormalTok{), (}\StringTok{"H1"}\NormalTok{, }\StringTok{"SMA 3/12 (Hauptvariante)"}\NormalTok{),}
+\NormalTok{               (}\StringTok{"S2"}\NormalTok{, }\StringTok{"SMA 6/12 (S2)"}\NormalTok{)]}
+    \ControlFlowTok{for}\NormalTok{ i, (run, label) }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{(options):}
+\NormalTok{        rows }\OperatorTok{=}\NormalTok{ get\_history(run, }\StringTok{"trend"}\NormalTok{)}
+\NormalTok{        dates }\OperatorTok{=}\NormalTok{ [datetime.fromisoformat(row[}\StringTok{"date"}\NormalTok{]) }\ControlFlowTok{for}\NormalTok{ row }\KeywordTok{in}\NormalTok{ rows]}
+\NormalTok{        vals }\OperatorTok{=}\NormalTok{ [}\BuiltInTok{float}\NormalTok{(row[}\StringTok{"portfolio\_value"}\NormalTok{]) }\OperatorTok{/} \DecValTok{1000} \ControlFlowTok{for}\NormalTok{ row }\KeywordTok{in}\NormalTok{ rows]}
+\NormalTok{        ax.plot(dates, vals, label}\OperatorTok{=}\NormalTok{label, linestyle}\OperatorTok{=}\NormalTok{LINE\_STYLES[i], linewidth}\OperatorTok{=}\FloatTok{1.8}\NormalTok{)}
+\NormalTok{    ax.set\_xlim(dates[}\DecValTok{0}\NormalTok{], dates[}\OperatorTok{{-}}\DecValTok{1}\NormalTok{])}
+\NormalTok{    ax.set\_ylim(bottom}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+\NormalTok{    ax.xaxis.set\_major\_locator(mdates.YearLocator(}\DecValTok{2}\NormalTok{))}
+\NormalTok{    ax.xaxis.set\_major\_formatter(mdates.DateFormatter(}\StringTok{"\%Y"}\NormalTok{))}
+\NormalTok{    ax.yaxis.set\_major\_formatter(FuncFormatter(number\_format))}
+\NormalTok{    ax.legend(loc}\OperatorTok{=}\StringTok{"upper left"}\NormalTok{, fontsize}\OperatorTok{=}\DecValTok{9}\NormalTok{, framealpha}\OperatorTok{=}\FloatTok{0.9}\NormalTok{)}
+\NormalTok{    fig.tight\_layout()}
+\NormalTok{    plt.show()}
+\NormalTok{    plt.close(fig)}
+\end{Highlighting}
+\end{Shaded}
+
+5.12.1 Hauptuntersuchung: globaler Vergleich 2010--2025
+
+Tabelle: Ergebnisse des Hauptlaufs H1
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Strategie
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Endvermögen (USD)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Gesamtrendite
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Rendite p.~a.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Volatilität p.~a.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Sharpe
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Max. Drawdown
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Buy-and-Hold (VT)} & 466'061 & 366,06 \% & 10,10 \% & 14,77 \% &
+0,632 & -25,51 \% \\
+\textbf{60/40 (VT/IEF)} & 311'991 & 211,99 \% & 7,37 \% & 8,93 \% &
+0,685 & -21,57 \% \\
+\textbf{Trendfolge (VT, 3/12)} & 262'911 & 162,91 \% & 6,23 \% & 11,85
+\% & 0,452 & -29,69 \% \\
+\textbf{BIP-Gewichtung (G7)} & 469'842 & 369,84 \% & 10,15 \% & 14,98 \%
+& 0,629 & -26,39 \% \\
+\end{longtable}
+}
+
+Quelle: H1, summary.csv. BIP-G7 verwendet andere Aktienbausteine als VT
+und ist hier als eigenes Anlagekonzept zu verstehen.
+
+Buy-and-Hold und BIP-G7 erreichen mit rund 466'000 beziehungsweise
+470'000 USD die höchsten Endvermögen. Der Abstand beträgt rund 3'781 USD
+über 16 Jahre. Die annualisierten Renditen liegen entsprechend nahe
+beieinander. Das 60/40-Portfolio und die Trendfolge bleiben beim
+Endvermögen deutlich darunter.
+
+Bei den Risikokennzahlen ergibt sich eine andere Reihenfolge. Das
+60/40-Portfolio weist mit 8,93 \% die niedrigste Volatilität und mit
+0,685 die höchste Sharpe Ratio auf. Auch sein maximaler Drawdown ist mit
+−21,57 \% der kleinste im Hauptvergleich. Die Trendfolge schwankt zwar
+weniger als VT Buy-and-Hold, hat aber mit −29,69 \% den grössten
+maximalen Drawdown. Weniger durchschnittliche Schwankung und ein
+kleinerer schlimmster Rückgang sind in diesen Ergebnissen also nicht
+dasselbe.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Quelle der Daten: jeweiliger eingefrorener Run, siehe Text direkt unter der Grafik.}
+\NormalTok{plot\_run\_lines(}\StringTok{"H1"}\NormalTok{, NAMES\_H1, }\StringTok{"H1 · Vermögensentwicklung 2010–2025"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{notebooks/Analyse_files/figure-pdf/fig-h1-vermoegen-output-1.png}}
+
+}
+
+\caption{\label{fig-h1-vermoegen}Vermögensentwicklung der vier
+H1-Strategien}
+
+\end{figure}%
+
+Quelle: Eigene Darstellung aus H1, portfolio\_history.csv. Gleicher
+Startwert von 100'000 USD; die BIP-G7-Linie umfasst ein anderes
+Anlageuniversum als VT.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Quelle der Daten: jeweiliger eingefrorener Run, siehe Text direkt unter der Grafik.}
+\NormalTok{plot\_run\_lines(}\StringTok{"H1"}\NormalTok{, NAMES\_H1, }\StringTok{"H1 · Drawdown{-}Verläufe 2010–2025"}\NormalTok{, drawdown}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{notebooks/Analyse_files/figure-pdf/fig-h1-drawdown-output-1.png}}
+
+}
+
+\caption{\label{fig-h1-drawdown}Drawdown-Verläufe der vier
+H1-Strategien}
+
+\end{figure}%
+
+Quelle: Eigene Darstellung aus H1, portfolio\_history.csv. Jeder Verlauf
+bezieht sich auf seinen eigenen bisherigen Höchststand; Grundlage sind
+Monatsbewertungen.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Quelle der Daten: jeweiliger eingefrorener Run, siehe Text direkt unter der Grafik.}
+\NormalTok{plot\_risk\_return()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{notebooks/Analyse_files/figure-pdf/fig-h1-rendite-risiko-output-1.png}}
+
+}
+
+\caption{\label{fig-h1-rendite-risiko}Rendite und Volatilität im
+Hauptlauf}
+
+\end{figure}%
+
+Quelle: Eigene Darstellung aus H1, summary.csv. Weiter oben bedeutet
+mehr geometrische Jahresrendite, weiter rechts mehr Volatilität. Die
+Grafik bildet keine zusätzlichen Risikodimensionen ab.
+
+5.12.2 Kontrollvergleich: BIP- und Gleichgewichtung der G7
+
+Tabelle: Ergebnisse des Kontrolllaufs K1
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Strategie
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Endvermögen (USD)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Gesamtrendite
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Rendite p.~a.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Volatilität p.~a.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Sharpe
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Max. Drawdown
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{BIP-Gewichtung (G7)} & 469'842 & 369,84 \% & 10,15 \% & 14,98 \%
+& 0,629 & -26,39 \% \\
+\textbf{Gleichgewichtung (je 1/7)} & 323'348 & 223,35 \% & 7,61 \% &
+16,31 \% & 0,446 & -27,09 \% \\
+\end{longtable}
+}
+
+Quelle: K1, summary.csv. Beide Portfolios verwenden dieselben sieben
+Länder-ETFs und jährliche Umschichtungen. Die feste Vergleichsgewichtung
+beträgt je Land 1/7.
+
+Die BIP-Gewichtung endet rund 146'494 USD über der Gleichgewichtung.
+Gleichzeitig sind ihre Volatilität und ihr maximaler Drawdown etwas
+niedriger; die Sharpe Ratio ist höher. Anders als beim Vergleich mit VT
+bleiben hier die Länder-ETFs gleich. Der Unterschied lässt sich deshalb
+gezielter mit den beiden Gewichtungsregeln vergleichen. Eine
+Marktkapitalisierungsgewichtung wurde in K1 nicht untersucht.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Quelle der Daten: jeweiliger eingefrorener Run, siehe Text direkt unter der Grafik.}
+\NormalTok{plot\_run\_lines(}\StringTok{"K1"}\NormalTok{, \{}\StringTok{"country\_weighting"}\NormalTok{: }\StringTok{"BIP{-}Gewichtung (G7)"}\NormalTok{, }\StringTok{"rebalance"}\NormalTok{: }\StringTok{"Gleichgewichtung (je 1/7)"}\NormalTok{\}, }\StringTok{"K1 · Gleiche Länder{-}ETFs, unterschiedliche Gewichte"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{notebooks/Analyse_files/figure-pdf/fig-k1-vermoegen-output-1.png}}
+
+}
+
+\caption{\label{fig-k1-vermoegen}Vermögensentwicklung im
+G7-Kontrollvergleich}
+
+\end{figure}%
+
+Quelle: Eigene Darstellung aus K1, portfolio\_history.csv. Gleiche
+Länder-ETFs, gleicher Zeitraum und gleicher Startwert; unterschiedliche
+Zielgewichtung.
+
+5.12.3 Zusatzuntersuchung: US-Markt 2003--2025
+
+Tabelle: Ergebnisse des US-Zusatzlaufs Z1
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Strategie
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Endvermögen (USD)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Gesamtrendite
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Rendite p.~a.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Volatilität p.~a.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Sharpe
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Max. Drawdown
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Buy-and-Hold (VTI)} & 1'224'167 & 1124,17 \% & 11,51 \% & 14,93
+\% & 0,693 & -50,84 \% \\
+\textbf{60/40 (VTI/IEF)} & 689'367 & 589,37 \% & 8,76 \% & 8,98 \% &
+0,792 & -26,79 \% \\
+\textbf{Trendfolge (VTI, 3/12)} & 733'370 & 633,37 \% & 9,05 \% & 11,12
+\% & 0,684 & -22,14 \% \\
+\end{longtable}
+}
+
+Quelle: Z1, summary.csv. Der Zeitraum umfasst 23 Jahre und ist nicht
+direkt mit dem 16-jährigen Hauptlauf gleichzusetzen.
+
+Buy-and-Hold erreicht auch hier das höchste Endvermögen: Aus 100'000 USD
+werden rund 1,22 Millionen USD. Der maximale Rückgang beträgt jedoch
+−50,84 \%. Das bedeutet, dass der Portfoliowert zwischen einem früheren
+Höchststand und einem späteren Tiefpunkt innerhalb der monatlichen
+Betrachtung mehr als halbiert wurde. Es bedeutet nicht, dass das
+Portfolio am Ende die Hälfte seines Startkapitals verloren hat.
+
+Die Trendfolge liegt beim Endvermögen etwas über dem 60/40-Portfolio und
+weist mit −22,14 \% den kleinsten maximalen Drawdown dieses Vergleichs
+auf. Das 60/40-Portfolio hat dagegen erneut die niedrigste Volatilität
+und die höchste Sharpe Ratio. Schon diese drei Kennzahlen zeigen,
+weshalb eine einzige Rangliste der «besten» Strategie nicht ausreicht.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Quelle der Daten: jeweiliger eingefrorener Run, siehe Text direkt unter der Grafik.}
+\NormalTok{plot\_run\_lines(}\StringTok{"Z1"}\NormalTok{, NAMES\_Z1, }\StringTok{"Z1 · US{-}Vermögensentwicklung 2003–2025"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{notebooks/Analyse_files/figure-pdf/fig-z1-vermoegen-output-1.png}}
+
+}
+
+\caption{\label{fig-z1-vermoegen}Vermögensentwicklung im längeren
+US-Lauf}
+
+\end{figure}%
+
+Quelle: Eigene Darstellung aus Z1, portfolio\_history.csv.
+Startbewertung Ende Dezember 2002, Renditeperioden Januar 2003 bis
+Dezember 2025.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Quelle der Daten: jeweiliger eingefrorener Run, siehe Text direkt unter der Grafik.}
+\NormalTok{plot\_run\_lines(}\StringTok{"Z1"}\NormalTok{, NAMES\_Z1, }\StringTok{"Z1 · US{-}Drawdown{-}Verläufe 2003–2025"}\NormalTok{, drawdown}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{notebooks/Analyse_files/figure-pdf/fig-z1-drawdown-output-1.png}}
+
+}
+
+\caption{\label{fig-z1-drawdown}Drawdown-Verläufe im längeren US-Lauf}
+
+\end{figure}%
+
+Quelle: Eigene Darstellung aus Z1, portfolio\_history.csv. Gezeigt
+werden monatlich beobachtete Rückgänge vom jeweils eigenen bisherigen
+Höchststand.
+
+5.12.4 Sensitivitätsvergleich der SMA-Fenster
+
+Tabelle: Die drei vorab festgelegten VT-Trendvarianten, 2010--2025
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Strategie
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Endvermögen (USD)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Gesamtrendite
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Rendite p.~a.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Volatilität p.~a.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Sharpe
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Max. Drawdown
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{VT SMA 2/12} & 261'863 & 161,86 \% & 6,20 \% & 11,28 \% & 0,466
+& -22,15 \% \\
+\textbf{VT SMA 3/12} & 262'911 & 162,91 \% & 6,23 \% & 11,85 \% & 0,452
+& -29,69 \% \\
+\textbf{VT SMA 6/12} & 338'011 & 238,01 \% & 7,91 \% & 12,79 \% & 0,550
+& -22,15 \% \\
+\end{longtable}
+}
+
+Quelle: S1, H1 und S2, jeweils summary.csv. 3/12 bleibt die festgelegte
+Hauptvariante.
+
+Die Variante 6/12 erreicht das höchste Endvermögen der drei Trendregeln.
+Die Varianten 2/12 und 3/12 liegen bei der Rendite nahe beieinander,
+unterscheiden sich aber deutlich beim maximalen Drawdown. Der identisch
+gerundete Drawdown von 2/12 und 6/12 bedeutet wiederum nicht, dass ihre
+gesamten Verläufe gleich sind.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Quelle der Daten: jeweiliger eingefrorener Run, siehe Text direkt unter der Grafik.}
+\NormalTok{plot\_sma\_comparison()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{notebooks/Analyse_files/figure-pdf/fig-sma-vermoegen-output-1.png}}
+
+}
+
+\caption{\label{fig-sma-vermoegen}Vermögensentwicklung der drei
+VT-Trendvarianten}
+
+\end{figure}%
+
+Quelle: Eigene Darstellung aus S1, H1 und S2, jeweils
+\texttt{portfolio\_history.csv}. 3/12 bleibt die Hauptvariante; 2/12 und
+6/12 sind die vorab festgelegten Sensitivitätsläufe.
+
+5.12.5 Zeitliche Teilbetrachtung des Hauptlaufs
+
+Zusätzlich betrachte ich die bereits vorgesehenen Abschnitte 2010--2017
+und 2018--2025. Beide umfassen 96 Monatsrenditen. Dafür werden die
+vorhandenen Verläufe an der Jahresgrenze Ende 2017 aufgeteilt. Die
+Portfolios werden dort nicht neu gestartet und die Gewichte oder Signale
+nicht neu festgelegt. Die Teilkennzahlen sind zusätzliche Berechnungen
+aus den bestehenden H1-Ergebnisdateien, keine neuen Backtests.
+
+Tabelle: Vergleich zweier gleich langer Abschnitte von H1
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Strategie
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Rendite p.~a. 2010--2017
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Rendite p.~a. 2018--2025
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Sharpe 2010--2017
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Sharpe 2018--2025
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Buy-and-Hold (VT)} & 9,52 \% & 10,68 \% & 0,723 & 0,555 \\
+\textbf{60/40 (VT/IEF)} & 7,74 \% & 7,00 \% & 1,038 & 0,452 \\
+\textbf{Trendfolge (VT, 3/12)} & 4,57 \% & 7,91 \% & 0,444 & 0,459 \\
+\textbf{BIP-Gewichtung (G7)} & 9,45 \% & 10,86 \% & 0,719 & 0,555 \\
+\end{longtable}
+}
+
+Quelle: zusätzliche deskriptive Berechnung aus H1,
+portfolio\_history.csv, und der zugehörigen eingefrorenen RF-Reihe.
+Rendite p.~a. aus den jeweiligen Vermögensverhältnissen; Sharpe nach
+derselben Definition wie im Hauptlauf.
+
+Buy-and-Hold und BIP-G7 liegen auch in beiden Teilzeiträumen nahe
+beieinander. Beim 60/40-Portfolio fällt auf, dass die Sharpe Ratio im
+ersten Abschnitt deutlich höher ist als im zweiten. Seine annualisierte
+Volatilität steigt dabei von 7,27 \% auf 10,37 \%. Der günstige Wert
+über die gesamte Untersuchung beschreibt also nicht jede Teilperiode
+gleich gut.
 
 \bookmarksetup{startatroot}
 

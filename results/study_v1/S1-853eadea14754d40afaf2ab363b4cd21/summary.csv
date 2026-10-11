@@ -1,0 +1,2 @@
+strategy,start_value,end_value,total_return,annualized_return,annualized_volatility,sharpe_ratio,max_drawdown
+trend,100000,261863.41612139414,1.6186341612139414,0.062012618242078821,0.11283831692702494,0.46587373977171509,-0.22152485942816869
