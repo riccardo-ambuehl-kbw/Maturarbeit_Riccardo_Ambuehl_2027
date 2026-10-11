@@ -112,19 +112,19 @@ Die Nutzung von KI-Tools wird unter `documentation/ai-usage/` dokumentiert. Dort
 ## Pendenzenliste
 
 - [x] :date: Spätestens KW 27 Disposition abgeben
-- [ ] :date: KW 27-29 Theorie
-- [ ] :date: KW 30 Daten importieren
-- [ ] :date: KW 31 Daten verarbeiten
-- [ ] :date: KW 32-38 Analyse
-    - [ ] :date: KW 32-33 Funktionen für die Formeln erstellen
-    - [ ] :date: KW 34 Alle Funktionen bündeln und eine Simulations Funktion erstellen
-    - [ ] :date: KW 35-38 Simulation verschiedener Strategien
-- [ ] :date: 25.09.2026 Probekapitel abgeben
-- [ ] :date: KW 39-40 Auswertung
-    - [ ] :date: KW 39 Auswertungen bündeln
-    - [ ] :date: KW 40 Auswertungen Grafisch darstellen (SVG)
-- [ ] :date: KW 41 Einleitung
-- [ ] :date: KW 42 Fazit
+- [x] :date: KW 27-29 Theorie
+- [x] :date: KW 30 Daten importieren
+- [x] :date: KW 31 Daten verarbeiten
+- [x] :date: KW 32-38 Analyse
+    - [x] :date: KW 32-33 Funktionen für die Formeln erstellen
+    - [x] :date: KW 34 Alle Funktionen bündeln und eine Simulations Funktion erstellen
+    - [x] :date: KW 35-38 Simulation verschiedener Strategien
+- [x] :date: 25.09.2026 Probekapitel abgeben
+- [x] :date: KW 39-40 Auswertung
+    - [x] :date: KW 39 Auswertungen bündeln
+    - [x] :date: KW 40 Auswertungen Grafisch darstellen (SVG)
+- [x] :date: KW 41 Einleitung
+- [x] :date: KW 42 Fazit
 - [ ] :date: 19.–30.10.2026 / KW 43–44 Definitiven Titel im Intranet eingeben
 - [ ] :date: KW 43-44, spätestens 30.10.2026 Erste Fassung
 - [ ] :date: KW 45 Gegenlesen
@@ -151,7 +151,7 @@ Die Nutzung von KI-Tools wird unter `documentation/ai-usage/` dokumentiert. Dort
 
 - [ ] :date: Simulation Tool basierend auf der Simulation Funktion
 - [ ] :date: Automatisiertes testen von weiteren Strategien auf dem Server
-- [ ] :date: Verschiedene anschauliche Grafik Typen (SVG)
+- [x] :date: Verschiedene anschauliche Grafik Typen (SVG)
 
 ## Quellen
 

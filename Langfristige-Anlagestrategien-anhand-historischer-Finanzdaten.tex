@@ -658,6 +658,129 @@ Vorhandenes erneut zu programmieren.
 
 \chapter{Einleitung}\label{einleitung}
 
+Ausgangspunkt und Motivation
+
+Wer langfristig Geld anlegt, möchte wissen, wie sich das Vermögen über
+die Jahre entwickeln könnte. Dabei liegt es nahe, zuerst auf die
+mögliche Rendite zu schauen. Doch was sagt ein hoher Endwert aus, wenn
+das Vermögen zwischenzeitlich stark eingebrochen ist? Zwei
+Anlagestrategien könnten am Ende denselben Gewinn erzielen und sich auf
+dem Weg dorthin trotzdem deutlich unterscheiden. Deshalb interessiert
+mich nicht nur, wie viel eine Strategie erwirtschaftet, sondern auch,
+welche Schwankungen und Verluste damit verbunden sind. Kommer erläutert,
+dass Anlagerisiko verschiedene Seiten hat und nicht durch eine einzige
+Kennzahl vollständig beschrieben werden kann.\footnote{Kommer,
+  \emph{Souverän investieren mit Indexfonds und ETFs}, 7. Auflage
+  (Weinheim: Campus Verlag, 2025), Abschn. 2.2.}
+
+Dazu kommt die Frage, nach welchen Regeln investiert werden soll. Soll
+eine einmal gewählte Anlage einfach gehalten werden? Ist es sinnvoll,
+Aktien mit Anleihen zu kombinieren und ihre Anteile regelmässig
+anzupassen? Oder können Regeln zum Ein- und Aussteigen dabei helfen,
+längere Rückgänge zu begrenzen? Solche Überlegungen lassen sich
+theoretisch beschreiben. Mich interessiert aber, wie sie sich mit
+historischen Daten konkret untersuchen lassen.
+
+An diesem Thema reizt mich besonders die Verbindung von Finanzen und
+Informatik. Ich möchte Anlageideen nicht nur gegenüberstellen, sondern
+ihre Regeln so genau verstehen, dass sie in einem Programm umgesetzt
+werden können. Damit wird die technische Entwicklung selbst zu einem
+Teil der Untersuchung: Aus einer allgemeinen Idee muss ein eindeutiger
+Ablauf entstehen, dessen Berechnungen sich überprüfen lassen.
+
+Forschungsfrage und Zielsetzung
+
+Aus diesen Überlegungen ergibt sich die Forschungsfrage:
+
+Wie können historische Finanzdaten mithilfe eines Python-basierten
+Modells verwendet werden, um langfristige Investmentstrategien
+hinsichtlich Risiko und Rendite zu vergleichen?
+
+Die Arbeit verfolgt damit zwei zusammenhängende Ziele. Einerseits soll
+ein Python-Modell entstehen, das historische Daten verarbeitet und
+festgelegte Anlageregeln darauf anwendet. Andererseits soll dieses
+Modell einen Vergleich ermöglichen, bei dem neben der Rendite auch
+Schwankungen und zwischenzeitliche Verluste sichtbar werden. Ein
+einzelner Endwert genügt dafür nicht. Ich möchte auch nachvollziehen
+können, wann eine Strategie investiert war und wie sich die
+Zusammensetzung eines Portfolios verändert hat.
+
+Als Vergleichsgrössen verwende ich die Rendite, die Volatilität als Mass
+für die Schwankungen und den maximalen Drawdown als grössten
+beobachteten Rückgang vom bisherigen Höchststand. Die Sharpe Ratio
+ergänzt diese Betrachtung, indem sie die Rendite gegenüber einer
+risikofreien Vergleichsanlage ins Verhältnis zur Schwankung dieser
+Mehrrendite setzt. Die genaue Bedeutung und Berechnung dieser Grössen
+wird im Theorieteil erläutert.
+
+Das Modell soll nicht nur für einen einzigen Datensatz funktionieren.
+Datenaufbereitung, Berechnung und Darstellung werden deshalb getrennt
+aufgebaut. So sollen später auch andere geeignete Daten und
+Einstellungen verwendet werden können. Für die eigentliche Untersuchung
+werden dagegen feste Bedingungen gewählt, damit die Vergleiche
+nachvollziehbar bleiben.
+
+Untersuchungsrahmen und Vorgehen
+
+Im Mittelpunkt stehen vier Anlagekonzepte. Bei Buy-and-Hold bleibt die
+gewählte Aktienanlage über den Untersuchungszeitraum bestehen. Das
+60/40-Portfolio kombiniert Aktien und Staatsanleihen und stellt ihre
+vorgesehene Verteilung jährlich wieder her. Die Trendfolge verwendet
+gleitende Durchschnitte, also Durchschnittswerte über zurückliegende
+Beobachtungen, um zwischen einer Aktienanlage und Cash zu wechseln. Bei
+der BIP-Gewichtung richtet sich die Verteilung auf ausgewählte Länder
+nach deren Wirtschaftsleistung, dem Bruttoinlandsprodukt.
+
+Als Datengrundlage dienen historische ETF-Reihen. Diese
+börsengehandelten Fonds vertreten in der Untersuchung bestimmte
+Aktienmärkte oder den Staatsanleihenanteil. Der Hauptvergleich umfasst
+die Jahre 2010 bis 2025 und bezieht eine weltweite Aktienanlage ein. Die
+Bewertung erfolgt monatlich. Eine zusätzliche Untersuchung des
+US-Marktes beginnt bereits 2003 und endet ebenfalls 2025. Für die
+Ländergewichtung werden sieben Länder betrachtet. Ein gesonderter
+Vergleich mit denselben Länderfonds und gleichen Länderanteilen soll den
+Einfluss der Gewichtungsregel gezielter untersuchen. Ergänzende
+Varianten der Trendregel dienen dazu, die Empfindlichkeit gegenüber
+ihren Einstellungen zu betrachten.
+
+Die rückblickende Anwendung festgelegter Anlageregeln wird als Backtest
+bezeichnet. Dabei ist mir wichtig, die Regeln vor der Ergebnisauswertung
+festzuhalten. Es wäre wenig aussagekräftig, so lange andere
+Einstellungen auszuprobieren, bis eine gewünschte Strategie besonders
+gut aussieht. Hilpisch beschreibt diese Gefahr als Überanpassung: Eine
+auf bestimmten historischen Daten erfolgreiche Einstellung muss auf
+anderen Daten nicht ebenso gut funktionieren.\footnote{Hilpisch,
+  \emph{Python for Finance}, Kap. 15, «Optimization».}
+
+Deshalb gehört zur Untersuchung auch die Kontrolle der Daten und ihrer
+zeitlichen Zuordnung. Beispielsweise darf eine historische Entscheidung
+nicht auf BIP-Angaben beruhen, die erst später veröffentlicht wurden.
+Die verwendeten Daten, Einstellungen und Ergebnisse werden dokumentiert,
+damit einzelne Berechnungen überprüft und die Untersuchung mit demselben
+Stand wiederholt werden können.
+
+Der Vergleich bleibt auf die ausgewählten Märkte, Zeiträume und
+Modellannahmen beschränkt. Er soll keine persönliche Kaufempfehlung und
+keine Vorhersage künftiger Renditen liefern. Die Auswahl der Daten und
+die Vereinfachungen des Modells werden deshalb als Teil des
+Untersuchungsdesigns begründet.
+
+Aufbau der Arbeit
+
+Der Theorieteil führt zunächst die Finanzdaten, Kennzahlen und
+Anlagestrategien ein. Python-Beispiele verbinden die mathematischen
+Grundlagen mit ihrer praktischen Anwendung. Das Methodikkapitel
+beschreibt die grundlegenden Vergleichsbedingungen.
+
+Im Analysekapitel folgt der Weg zum gemeinsamen Modell: vom Datenformat
+und den benötigten Funktionen über die Auswahl und Aufbereitung der
+Untersuchungsdaten bis zur Durchführung der Backtests. Anschliessend
+werden die Ergebnisse dargestellt und interpretiert. Im Fazit werden die
+Erkenntnisse zur Forschungsfrage zusammengeführt und die Grenzen sowie
+mögliche Weiterführungen der Arbeit eingeordnet. So führt die
+Untersuchung von den Anlageideen über ihre technische Umsetzung zu einem
+begründeten Vergleich von Rendite und Risiko.
+
 \bookmarksetup{startatroot}
 
 \chapter{Theorie}\label{theorie}
@@ -2386,31 +2509,31 @@ Aus den Anforderungen ergibt sich für mich folgende Reihenfolge:
 
 \[
 \begin{array}{c}
-\boxed{\text{\Large 1. Internes Datenformat festlegen}}
+\boxed{\text{1. Internes Datenformat festlegen}}
 \\[0.4cm]
 \downarrow
 \\[0.4cm]
-\boxed{\text{\Large 2. Datenquellen auf dieses Format abbilden}}
+\boxed{\text{2. Datenquellen auf dieses Format abbilden}}
 \\[0.4cm]
 \downarrow
 \\[0.4cm]
-\boxed{\text{\Large 3. Import, Normalisierung und Validierung definieren}}
+\boxed{\text{3. Import, Normalisierung und Validierung definieren}}
 \\[0.4cm]
 \downarrow
 \\[0.4cm]
-\boxed{\text{\Large 4. Veränderbare Einstellungen des Systems festlegen}}
+\boxed{\text{4. Veränderbare Einstellungen des Systems festlegen}}
 \\[0.4cm]
 \downarrow
 \\[0.4cm]
-\boxed{\text{\Large 5. Einheitlichen Ergebnisvertrag festlegen}}
+\boxed{\text{5. Einheitlichen Ergebnisvertrag festlegen}}
 \\[0.4cm]
 \downarrow
 \\[0.4cm]
-\boxed{\text{\Large 6. Leeres Grundgerüst der Engine definieren}}
+\boxed{\text{6. Leeres Grundgerüst der Engine definieren}}
 \\[0.4cm]
 \downarrow
 \\[0.4cm]
-\boxed{\text{\Large 7. Vorhandene Funktionen integrieren}}
+\boxed{\text{7. Vorhandene Funktionen integrieren}}
 \end{array}
 \]
 
@@ -2507,19 +2630,19 @@ Deshalb lege ich nicht fest, dass jede Stufe des Systems Long sein muss:
 
 \[
 \begin{array}{c}
-\text{\large \textbf{Austausch / Speicherung:}}
+\mathbf{\text{Austausch / Speicherung:}}
 \\[4pt]
-\boxed{\texttt{date \;|\; asset\_id \;|\; performance\_value}}
+\boxed{\texttt{date} \;|\; \texttt{asset\_id} \;|\; \texttt{performance\_value}}
 \\[10pt]
 \downarrow
 \\[-2pt]
-\text{\texttt{pandas pivot()}}
+\texttt{pandas pivot()}
 \\[10pt]
 \downarrow
 \\[-2pt]
-\text{\large \textbf{Interne Berechnung:}}
+\mathbf{\text{Interne Berechnung:}}
 \\[4pt]
-\boxed{\texttt{date \;|\; ASSET\_A \;|\; ASSET\_B \;|\; ASSET\_C \;|\; \ldots}}
+\boxed{\texttt{date} \;|\; \texttt{ASSET\_A} \;|\; \texttt{ASSET\_B} \;|\; \texttt{ASSET\_C} \;|\; \ldots}
 \end{array}
 \]
 
@@ -2717,21 +2840,19 @@ Land und ursprüngliche Datenquelle.
 
 Für diese Informationen ist eine Datei assets.csv vorgesehen:
 
-{[}
-
+\[
 \begin{array}{c|c}
 \textbf{Feld} & \textbf{Bedeutung} \\
 \hline
 \texttt{asset\_id} & \text{Interne, anbieterunabhängige Kennung der Anlage} \\
 \texttt{name} & \text{Name der Anlage} \\
-\texttt{asset\_class} & \text{Anlageklasse, z.\,B. Aktien oder Anleihen} \\
+\texttt{asset\_class} & \text{Anlageklasse, z. B. Aktien oder Anleihen} \\
 \texttt{country} & \text{Zugeordnetes Land bzw. Markt} \\
 \texttt{currency} & \text{Währung der Anlage} \\
 \texttt{provider} & \text{Datenanbieter} \\
 \texttt{provider\_symbol} & \text{Symbol bzw. Kennung beim Datenanbieter}
 \end{array}
-
-{]}
+\]
 
 Die interne Kennung asset\_id verbindet die Metadaten mit den
 Marktwerten. Dadurch kann zum Beispiel US\_EQUITY im Modell gleich
@@ -2745,8 +2866,7 @@ wie die untersuchte Rendite verwendet werden.\footnote{Kommer,
   (Weinheim: Campus Verlag, 2025), 165--66.} Dafür ist eine getrennte
 Datei vorgesehen:
 
-{[}
-
+\[
 \begin{array}{c|c}
 \textbf{Feld} & \textbf{Bedeutung} \\
 \hline
@@ -2755,14 +2875,12 @@ Datei vorgesehen:
 \texttt{value} & \text{Beobachteter Zinssatz} \\
 \texttt{unit} & \text{Einheit des Wertes}
 \end{array}
-
-{]}
+\]
 
 Auch Makrodaten wie das BIP unterscheiden sich von täglichen
 Marktzeitreihen. Sie werden deshalb separat gespeichert:
 
-{[}
-
+\[
 \begin{array}{c|c}
 \textbf{Feld} & \textbf{Bedeutung} \\
 \hline
@@ -2773,8 +2891,7 @@ Marktzeitreihen. Sie werden deshalb separat gespeichert:
 \texttt{unit} & \text{Einheit des Wertes} \\
 \texttt{available\_from} & \text{Zeitpunkt, ab dem die Information verfügbar war}
 \end{array}
-
-{]}
+\]
 
 Das zusätzliche Feld available\_from soll verhindern, dass ein
 historischer Backtest einen Jahreswert bereits verwendet, bevor dieser
@@ -2792,8 +2909,7 @@ verschiedene Anbieter darauf abgebildet werden. Die Datenquelle soll
 dabei nicht direkt von einer Strategie aufgerufen werden. Stattdessen
 übernimmt ein Importmodul die Umwandlung.
 
-{[}
-
+\[
 \begin{array}{c}
 \boxed{\text{Datenquelle}} \\[6pt]
 \downarrow \\[6pt]
@@ -2803,8 +2919,7 @@ dabei nicht direkt von einer Strategie aufgerufen werden. Stattdessen
 \downarrow \\[6pt]
 \boxed{\text{Simulation}}
 \end{array}
-
-{]}
+\]
 
 Dadurch bleibt die eigentliche Berechnung gleich, auch wenn später eine
 andere Datenquelle verwendet wird. Für meine Untersuchung sind Yahoo
@@ -2875,27 +2990,23 @@ auf das interne Format abgebildet werden.
 
 Beispiel einer Quelldatei:
 
-{[}
-
+\[
 \begin{array}{c|c|c}
 \textbf{Date} & \textbf{Ticker} & \textbf{TR} \\
 \hline
 \texttt{2020-01-02} & \texttt{ABC} & 100.0
 \end{array}
-
-{]}
+\]
 
 Dazu könnte folgende Zuordnung gehören:
 
-{[}
-
+\[
 \begin{aligned}
 \texttt{Date}   &\;\longrightarrow\; \texttt{date} \\
 \texttt{Ticker} &\;\longrightarrow\; \texttt{provider\_symbol} \\
 \texttt{TR}     &\;\longrightarrow\; \texttt{performance\_value}
 \end{aligned}
-
-{]}
+\]
 
 Der Import kann damit unterschiedliche Spaltennamen vereinheitlichen. Er
 kann jedoch nicht automatisch beurteilen, ob die Werte fachlich für eine
@@ -2909,15 +3020,13 @@ Datenwahl und Dokumentation.
 Die ursprünglich geladenen Rohdaten und die später tatsächlich
 verwendeten Daten werden getrennt gespeichert:
 
-{[}
-
+\[
 \begin{array}{l}
 \texttt{data/} \\
-\quad \texttt{├── raw/} \\
-\quad \texttt{└── processed/}
+\quad \texttt{|-- raw/} \\
+\quad \texttt{`-- processed/}
 \end{array}
-
-{]}
+\]
 
 Diese Trennung erleichtert die Nachvollziehbarkeit. Wenn sich eine Regel
 bei der Aufbereitung ändert, kann sie erneut auf denselben Rohdaten
@@ -3010,8 +3119,7 @@ Berechnungsfunktionen gespeichert.
 
 Zu den allgemeinen Einstellungen gehören zunächst:
 
-{[}
-
+\[
 \begin{array}{l}
 \textbf{Startdatum} \\
 \textbf{Enddatum} \\
@@ -3020,8 +3128,7 @@ Zu den allgemeinen Einstellungen gehören zunächst:
 \textbf{Datenfrequenz} \\
 \textbf{Regel für fehlende Daten}
 \end{array}
-
-{]}
+\]
 
 Diese Möglichkeiten des Systems sind noch nicht mit den späteren Werten
 meiner Untersuchung gleichzusetzen. Das Modell kann beispielsweise
@@ -3034,26 +3141,22 @@ Auch die Strategien benötigen unterschiedliche Parameter.
 
 Buy-and-Hold
 
-{[}
-
+\[
 \begin{array}{l}
 \textbf{Verwendete Anlage} \\
 \textbf{Startgewicht}
 \end{array}
-
-{]}
+\]
 
 Rebalancing-Portfolio
 
-{[}
-
+\[
 \begin{array}{l}
 \textbf{Verwendete Anlagen} \\
 \textbf{Zielgewichte} \\
 \textbf{Rebalancing-Rhythmus}
 \end{array}
-
-{]}
+\]
 
 Damit muss die Engine technisch nicht auf genau 60/40 begrenzt sein. Die
 Maturarbeit kann später trotzdem 60 \% Aktien und 40 \% Anleihen als
@@ -3061,8 +3164,7 @@ feste Versuchskonfiguration verwenden.
 
 Trendfolge
 
-{[}
-
+\[
 \begin{array}{l}
 \textbf{Verwendete Anlage} \\
 \textbf{Kurzes SMA-Fenster} \\
@@ -3071,8 +3173,7 @@ Trendfolge
 \textbf{Signalverzögerung} \\
 \textbf{Behandlung der Cash-Phasen}
 \end{array}
-
-{]}
+\]
 
 Die Signalverzögerung ist fachlich bereits durch die Vermeidung von
 Look-ahead Bias vorgegeben.\footnote{Hilpisch, 694.} Die konkreten
@@ -3180,8 +3281,7 @@ Damit die Strategien später direkt verglichen werden können, sollen sie
 einen gemeinsamen Grundoutput liefern. Für jede Strategie wird deshalb
 eine vollständige Zeitreihe gespeichert:
 
-{[}
-
+\[
 \begin{array}{l}
 \texttt{portfolio\_history.csv} \\[6pt]
 \textbf{date} \\
@@ -3190,8 +3290,7 @@ eine vollständige Zeitreihe gespeichert:
 \textbf{period\_return} \\
 \textbf{drawdown}
 \end{array}
-
-{]}
+\]
 
 Aus diesen Daten lassen sich anschliessend die bereits im Theorieteil
 definierten Kennzahlen berechnen. Dazu gehören unter anderem
@@ -3212,34 +3311,28 @@ gespeichert, wenn sie für eine Strategie relevant sind.
 
 Für ein Rebalancing-Portfolio:
 
-{[}
-
+\[
 \begin{array}{l}
 \texttt{weights\_history.csv} \\[6pt]
 \texttt{date} \;|\; \texttt{strategy} \;|\; \texttt{asset\_id} \;|\; \texttt{weight\_before} \;|\; \texttt{target\_weight} \;|\; \texttt{weight\_after}
 \end{array}
+\]
 
-{]}
-
-{[}
-
+\[
 \begin{array}{l}
 \texttt{trades.csv} \\[6pt]
 \texttt{date} \;|\; \texttt{strategy} \;|\; \texttt{asset\_id} \;|\; \texttt{value\_before} \;|\; \texttt{target\_value} \;|\; \texttt{transaction\_value}
 \end{array}
-
-{]}
+\]
 
 Für die Trendfolge:
 
-{[}
-
+\[
 \begin{array}{l}
 \texttt{signals.csv} \\[6pt]
 \texttt{date} \;|\; \texttt{strategy} \;|\; \texttt{asset\_id} \;|\; \texttt{signal} \;|\; \texttt{position} \;|\; \texttt{signal\_value} \;|\; \texttt{sma\_short} \;|\; \texttt{sma\_long}
 \end{array}
-
-{]}
+\]
 
 Diese zusätzlichen Daten helfen später bei der Interpretation. Wenn eine
 Strategie in einer bestimmten Phase besonders gut oder schlecht
@@ -3251,8 +3344,7 @@ Signal zu diesem Zeitpunkt vorlag.
 Für einen schnellen Vergleich wird zusätzlich eine Zusammenfassung
 erzeugt. Sie enthält beispielsweise:
 
-{[}
-
+\[
 \begin{array}{l}
 \texttt{strategy} \\
 \texttt{start\_value} \\
@@ -3263,8 +3355,7 @@ erzeugt. Sie enthält beispielsweise:
 \texttt{sharpe\_ratio} \\
 \texttt{max\_drawdown}
 \end{array}
-
-{]}
+\]
 
 Zusätzlich soll jeder Simulationslauf ein run\_manifest.json erhalten.
 Darin werden die tatsächlich verwendete Konfiguration, der Datenstand,
@@ -3282,16 +3373,14 @@ Varianten des Modells getestet werden.
 Die zentrale Simulationsfunktion soll nicht alle Berechnungen selbst
 enthalten. Stattdessen werden die Aufgaben getrennt:
 
-{[}
-
+\[
 \begin{array}{rcl}
 \texttt{data} & \longrightarrow & \text{Daten einlesen, vereinheitlichen und prüfen} \\[6pt]
 \texttt{strategies} & \longrightarrow & \text{Regeln einer Anlagestrategie anwenden} \\[6pt]
 \texttt{analysis} & \longrightarrow & \text{Gemeinsame Kennzahlen berechnen} \\[6pt]
 \texttt{export} & \longrightarrow & \text{Resultate speichern}
 \end{array}
-
-{]}
+\]
 
 Dadurch muss beispielsweise eine neue Datenquelle nicht wissen, wie die
 Sharpe Ratio berechnet wird, und eine neue Strategie muss nicht selbst
@@ -3304,32 +3393,30 @@ kann.\footnote{Hilpisch, \emph{Python for Finance}.}
 
 5.8.2 Vorgesehene Projektstruktur
 
-{[}
-
+\[
 \begin{array}{l}
 \texttt{src/} \\
-\texttt{├── funktionen.py} \\
-\texttt{├── data/} \\
-\quad \texttt{├── normalize.py} \\
-\quad \texttt{├── validate.py} \\
-\quad \texttt{└── adapters/} \\
-\texttt{├── engine/} \\
-\quad \texttt{├── config.py} \\
-\quad \texttt{├── context.py} \\
-\quad \texttt{├── result.py} \\
-\quad \texttt{└── simulation.py} \\
-\texttt{├── strategies/} \\
-\quad \texttt{├── buy\_hold.py} \\
-\quad \texttt{├── rebalance.py} \\
-\quad \texttt{├── trend.py} \\
-\quad \texttt{└── country\_weighting.py} \\
-\texttt{├── analysis/} \\
-\quad \texttt{└── metrics.py} \\
-\texttt{└── export/} \\
-\quad \texttt{└── results.py}
+\texttt{|-- funktionen.py} \\
+\texttt{|-- data/} \\
+\quad \texttt{|-- normalize.py} \\
+\quad \texttt{|-- validate.py} \\
+\quad \texttt{`-- adapters/} \\
+\texttt{|-- engine/} \\
+\quad \texttt{|-- config.py} \\
+\quad \texttt{|-- context.py} \\
+\quad \texttt{|-- result.py} \\
+\quad \texttt{`-- simulation.py} \\
+\texttt{|-- strategies/} \\
+\quad \texttt{|-- buy\_hold.py} \\
+\quad \texttt{|-- rebalance.py} \\
+\quad \texttt{|-- trend.py} \\
+\quad \texttt{`-- country\_weighting.py} \\
+\texttt{|-- analysis/} \\
+\quad \texttt{`-- metrics.py} \\
+\texttt{`-- export/} \\
+\quad \texttt{`-- results.py}
 \end{array}
-
-{]}
+\]
 
 Die bereits vorhandene funktionen.py bleibt zunächst bestehen. Sie
 enthält die mathematischen Bestandteile, die im Theorieteil entwickelt
@@ -3361,8 +3448,7 @@ Grundaufbau vergleichen.
 
 Ein vollständiger Lauf soll später in folgender Reihenfolge erfolgen:
 
-{[}
-
+\[
 \begin{array}{c}
 \boxed{\text{Konfiguration laden}} \\[6pt]
 \downarrow \\[6pt]
@@ -3378,8 +3464,7 @@ Ein vollständiger Lauf soll später in folgender Reihenfolge erfolgen:
 \downarrow \\[6pt]
 \boxed{\text{Resultate und Manifest speichern}}
 \end{array}
-
-{]}
+\]
 
 Während einer Simulation sollen keine neuen Marktdaten automatisch aus
 dem Internet geladen werden. Dadurch bleibt klar, mit welchem Datenstand
@@ -3393,8 +3478,7 @@ Die Funktionen aus dem Theorieteil sollen nicht durch ein zweites,
 unabhängiges Berechnungssystem ersetzt werden. Sie bilden die Grundlage
 der späteren Engine.
 
-{[}
-
+\[
 \begin{array}{l|l}
 \textbf{Vorhandene Funktion} & \textbf{Geplante Verwendung} \\
 \hline
@@ -3410,8 +3494,7 @@ der späteren Engine.
 \texttt{buy\_and\_hold()} & \text{Passive Benchmark} \\
 \texttt{trendfolge()} & \text{SMA-Strategie}
 \end{array}
-
-{]}
+\]
 
 Vor der Integration muss geprüft werden, welche Datentypen diese
 Funktionen erwarten und welche Resultate sie zurückgeben. Falls für die
@@ -3893,9 +3976,10 @@ yfinance bezogen. Der Aufruf legt Tagesfrequenz, Anfangs- und Enddatum
 sowie die Adjustierungsoptionen ausdrücklich fest. auto\_adjust=False
 hält Close und Adj Close getrennt; repair=False verhindert die
 zusätzlich angebotene automatische Reparatur. Ausschüttungs- und
-Splitspalten werden mitgespeichert.\footnote{\textbf{aroussiYfinanceHistory2026?}}
-Der gespeicherte Rohstand ist ein unveränderter Bibliotheksexport, nicht
-die Behauptung eines archivierten ursprünglichen HTTP-Antwortpakets.
+Splitspalten werden mitgespeichert.\footnote{{„{PriceHistory} Class ---
+  Yfinance``}.} Der gespeicherte Rohstand ist ein unveränderter
+Bibliotheksexport, nicht die Behauptung eines archivierten
+ursprünglichen HTTP-Antwortpakets.
 
 Für VT und die sechs nichtamerikanischen Länder-ETFs wird der Zeitraum
 vom 1. Januar 2009 bis zum 31. Dezember 2025 angefordert. Dadurch stehen
@@ -3955,15 +4039,14 @@ realen Untersuchungsdaten gestartet.
 
 Am 10. Oktober 2026 habe ich die fünf festgelegten Untersuchungen H1,
 K1, Z1, S1 und S2 nacheinander über PowerShell ausgeführt. Verwendet
-wurden Engine 1.0.0 und der zuvor versiegelte Git-Stand
-\texttt{1954bfb}. Alle fünf Run-Manifeste nennen diesen Commit und
-melden einen unveränderten Arbeitsstand. Die verwendete
-Ausführungsumgebung enthielt Python 3.14.0, NumPy 2.3.5 und pandas
-2.3.3.
+wurden Engine 1.0.0 und der zuvor versiegelte Git-Stand 1954bfb. Alle
+fünf Run-Manifeste nennen diesen Commit und melden einen unveränderten
+Arbeitsstand. Die verwendete Ausführungsumgebung enthielt Python 3.14.0,
+NumPy 2.3.5 und pandas 2.3.3.
 
 Ein Aufruf bestand aus dem Start der Engine mit der jeweiligen
-Konfigurationsdatei, beispielsweise \texttt{configs/study\_v1/H1.json}.
-Diese Dateien verweisen auf die archivierten Datenkopien, nicht auf
+Konfigurationsdatei, beispielsweise configs/study\_v1/H1.json. Diese
+Dateien verweisen auf die archivierten Datenkopien, nicht auf
 veränderliche Arbeitsdateien. Es wurden keine neuen Parameter gesucht
 und keine weiteren Strategien hinzugefügt.
 
@@ -4723,9 +4806,473 @@ Volatilität steigt dabei von 7,27 \% auf 10,37 \%. Der günstige Wert
 über die gesamte Untersuchung beschreibt also nicht jede Teilperiode
 gleich gut.
 
+5.13 Vergleich und Interpretation
+
+Die Ergebnisdarstellung zeigt zunächst, welche Werte entstanden sind.
+Für die Interpretation interessiert mich nun, wie diese Unterschiede
+zustande kommen und wie weit ich sie verallgemeinern darf. Dabei stütze
+ich mich auf die gespeicherten Verläufe, Gewichte und Signale. Einzelne
+Jahresbeispiele erläutern die Funktionsweise; sie ersetzen nicht den
+Vergleich über den vollständigen Zeitraum.
+
+5.13.1 Rendite und Risiko gemeinsam beurteilen
+
+Im Hauptlauf hätte eine ausschliessliche Betrachtung des Endvermögens
+für BIP-G7 oder VT Buy-and-Hold gesprochen. Sobald ich die Schwankungen
+und Rückgänge einbeziehe, wird das Bild weniger eindeutig. Das
+60/40-Portfolio gibt einen Teil des Ertrags auf, erreicht aber bei allen
+drei ausgewiesenen Risikokennzahlen ein günstigeres Ergebnis als die
+anderen H1-Strategien.
+
+Die Sharpe Ratio berücksichtigt dabei nicht nur die Portfoliorendite,
+sondern deren Abstand zur gewählten risikofreien Vergleichsreihe und die
+Schwankung dieser monatlichen Überschussrenditen. Ihre Werte stammen aus
+der festgelegten Engine-Definition. Sie werden nicht einfach berechnet,
+indem die geometrische Jahresrendite aus der Tabelle durch die
+Volatilität geteilt wird.
+
+Die Trendfolge zeigt besonders deutlich, warum ich mehrere
+Risikokennzahlen benötige. Sie hat im Hauptlauf eine niedrigere
+Volatilität als Buy-and-Hold, aber einen grösseren maximalen Drawdown.
+Cash-Monate ohne Wertveränderung können die Schwankungskennzahl senken,
+während bereits entstandene Verluste bestehen bleiben. «Schwankt
+weniger» bedeutet deshalb nicht automatisch «schützt besser vor dem
+grössten Verlust».
+
+5.13.2 Was das 60/40-Portfolio in dieser Untersuchung verändert
+
+Das 60/40-Portfolio besteht nicht nur aus Aktien, sondern zu 40 \% aus
+dem Staatsanleihen-ETF IEF. Am Jahresende wird die ursprüngliche
+Verteilung wiederhergestellt. So verhindert die Regel, dass die besser
+gelaufene Anlage den Anteil der anderen über die Jahre immer weiter
+verdrängt.
+
+Der erste Jahresendtermin aus H1 zeigt den Ablauf konkret. Ende 2010
+liegen vor der Umschichtung rund 67'849,53 USD in VT und 43'743,87 USD
+in IEF. Der Aktienanteil beträgt damit etwa 60,80 \% statt der
+vorgesehenen 60 \%. Die Engine verkauft rechnerisch 893,49 USD des
+Aktienanteils und verschiebt diesen Betrag in den Anleihenanteil. Das
+Gesamtvermögen bleibt dabei gleich. Geändert wird nur, mit welchen
+Positionen die nächste Periode beginnt. Diese Angaben stammen aus
+weights\_history.csv und trades.csv des Hauptlaufs.
+
+Gegenüber reinem Aktien-Buy-and-Hold erreicht dieses Portfolio in H1 und
+Z1 weniger Endvermögen, aber eine deutlich niedrigere Volatilität.
+Trotzdem ist es nicht verlustfrei. Im Kalenderjahr 2022 verliert die
+H1-Variante beispielsweise 16,86 \%, gegenüber 18,00 \% bei VT
+Buy-and-Hold. Die Jahreswerte wurden aus den bestehenden
+Vermögensverläufen berechnet.
+
+Dabei darf ich die niedrigere Schwankung nicht allein dem jährlichen
+Rebalancing zuschreiben. Gegenüber Buy-and-Hold verändert sich
+gleichzeitig die Zusammensetzung des Portfolios, weil IEF hinzukommt.
+Ein identisches 60/40-Portfolio ohne Umschichtungen wurde nicht als
+eigener Kontrolllauf untersucht. Die Ergebnisse beziehen sich somit auf
+das gesamte Konzept «60/40 mit jährlichem Rebalancing», nicht auf den
+isolierten Nutzen des Rebalancings.
+
+5.13.3 Warum die Trendfolge nicht jeden Rückgang vermeidet
+
+Die Trendregel reagiert auf die bereits beobachtete Entwicklung. Sie
+weiss nicht im Voraus, ob ein Rückgang weitergeht oder ob sich der Markt
+schnell erholt. Besonders verständlich wird das an den H1-Signalen im
+Frühjahr und Sommer 2020.
+
+Tabelle: Signal und tatsächlich gehaltene Position der H1-Trendfolge im
+Jahr 2020
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Monat 2020
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+VT-Rendite
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Gehaltene Position
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Neues Signal am Monatsende
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Trendrendite
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Februar} & -7,22 \% & Long & Long & -7,22 \% \\
+\textbf{März} & -14,76 \% & Long & Cash & -14,76 \% \\
+\textbf{April} & 10,37 \% & Cash & Cash & 0,00 \% \\
+\textbf{Mai} & 5,21 \% & Cash & Cash & 0,00 \% \\
+\textbf{Juni} & 3,07 \% & Cash & Cash & 0,00 \% \\
+\textbf{Juli} & 5,29 \% & Cash & Long & 0,00 \% \\
+\textbf{August} & 6,01 \% & Long & Long & 6,01 \% \\
+\end{longtable}
+}
+
+Quelle: H1, signals.csv und portfolio\_history.csv. «Gehaltene Position»
+bezeichnet die Anlage während der gerade abgelaufenen Monatsperiode; das
+neue Signal gilt für die folgende Periode. Die VT-Rendite stammt aus dem
+Buy-and-Hold-Verlauf desselben Laufs.
+
+Im März fällt VT in der Monatsbetrachtung um 14,76 \%. Die
+Trendstrategie ist während dieses Monats noch investiert und übernimmt
+den Verlust. Erst das am Monatsende entstandene Cash-Signal verändert
+die nächste Position. Als VT im April wieder um 10,37 \% steigt, liegt
+die Strategie bereits in Cash und nimmt diesen Anstieg nicht mit. Auch
+in Mai, Juni und Juli bleibt sie ausserhalb des Marktes. Das neue
+Long-Signal von Ende Juli wirkt erst im August.
+
+Daran lässt sich der Preis der verzögerten Reaktion erkennen: Die Regel
+kann aussteigen, nachdem ein Teil des Verlusts bereits entstanden ist,
+und anschliessend einen Teil der Erholung verpassen. Im gesamten Jahr
+2020 erzielt VT Buy-and-Hold deshalb 16,59 \%, während die H1-Trendfolge
+7,48 \% verliert. Im Jahr 2022 ist die Gegenüberstellung dagegen
+günstiger für Trend: Sie verliert 5,47 \%, Buy-and-Hold 18,00 \%. Das
+sind Beschreibungen der gespeicherten Verläufe, keine allgemeine
+Erklärung der wirtschaftlichen Ursachen dieser Jahre.
+
+Der grösste Drawdown der H1-Trendfolge entsteht nicht 2020 oder 2022,
+sondern zwischen April 2011 und Mai 2012. Der damalige Portfoliowert
+fällt von rund 106'683 auf 75'009 USD. Nach Verlusten bis September 2011
+bleibt die Strategie mehrere Monate in Cash. Als sie ab April 2012
+wieder investiert ist, folgen erneut negative Monate. Das verdeutlicht,
+dass ein Drawdown auch über mehrere getrennte Investitions- und
+Cash-Phasen anwachsen kann.
+
+Im längeren US-Lauf zeigt sich eine andere Seite derselben Regel. Dort
+liegt die Trendstrategie von Februar 2008 bis mindestens Juni 2009 in
+Cash. Sie ist damit während eines grossen Teils des in Z1 beobachteten
+Rückgangs von Oktober 2007 bis Februar 2009 nicht investiert. Ihr
+maximaler Drawdown über den gesamten US-Lauf beträgt 22,14 \% statt
+50,84 \% bei Buy-and-Hold. Dass der grösste Rückgang kleiner ist,
+bedeutet aber auch hier nicht, dass die Trendfolge das höchste
+Endvermögen oder die höchste Sharpe Ratio erreicht.
+
+5.13.4 Was hinter dem Unterschied der Ländergewichtungen steht
+
+Beim Vergleich BIP-G7 gegen VT beträgt der Endwertunterschied nur rund
+3'781 USD. Daraus kann ich keine isolierte Überlegenheit der BIP-Regel
+ableiten: VT bildet einen globalen Markt ab, während unser BIP-Portfolio
+auf sieben Länder begrenzt ist. Zudem unterscheiden sich die verwendeten
+Länderfonds in ihrer Indexkonstruktion.
+
+Aussagekräftiger für die Gewichtungsfrage ist K1. Dort bleiben die
+sieben Fonds gleich und die BIP-Regel wird mit jährlich gleichen
+Ländergewichten verglichen. Die Gewichtungsdateien zeigen einen
+deutlichen Unterschied beim US-Anteil.
+
+Tabelle: Ausgewählte Zielgewichte des BIP-Portfolios und der Kontrolle
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Land
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+BIP-Ziel Ende 2009
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+BIP-Ziel Ende 2024
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Gleichgewichtetes Ziel
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{USA} & 44,59 \% & 58,55 \% & 14,29 \% \\
+\textbf{Kanada} & 4,63 \% & 4,53 \% & 14,29 \% \\
+\textbf{Japan} & 15,16 \% & 8,91 \% & 14,29 \% \\
+\textbf{Vereinigtes Königreich} & 8,28 \% & 7,14 \% & 14,29 \% \\
+\textbf{Deutschland} & 11,34 \% & 9,56 \% & 14,29 \% \\
+\textbf{Frankreich} & 8,85 \% & 6,45 \% & 14,29 \% \\
+\textbf{Italien} & 7,14 \% & 4,86 \% & 14,29 \% \\
+\end{longtable}
+}
+
+Quelle: K1, data\_quality.json und weights\_history.csv. Gezeigt werden
+Zielgewichte nach der Anfangsallokation beziehungsweise dem Entscheid
+Ende 2024, nicht durchschnittliche Anteile über den gesamten Zeitraum.
+Gerundete Spalten können geringfügig von 100 \% abweichen.
+
+Die USA erhalten im BIP-Portfolio anfangs 44,59 \% und beim letzten
+wirksamen Entscheid 58,55 \%. In der gleichgewichteten Variante werden
+sie an jedem Jahresende dagegen auf 14,29 \% zurückgesetzt. Eine
+zusätzliche Berechnung aus den eingefrorenen Monatswerten ergibt für den
+US-Proxy VTI von 2010 bis 2025 eine annualisierte Wertentwicklung von
+13,78 \%. Bei den sechs übrigen Länderproxies liegen die entsprechenden
+Werte zwischen 5,28 \% und 6,81 \%. Diese Berechnung beschreibt die
+enthaltenen Fonds über denselben Zeitraum; sie ist kein zusätzlicher
+Hauptlauf.
+
+Die stärkere Gewichtung des in dieser Stichprobe besser gelaufenen
+US-Proxys macht den Vorsprung des BIP-Portfolios gegenüber der
+Gleichgewichtung nachvollziehbar. Damit ist aber noch nicht der gesamte
+Mehrertrag rechnerisch auf einzelne Länder zerlegt. Die Gewichte
+verändern sich, und auch die jährlichen Umschichtungen und die
+Reihenfolge der Renditen wirken auf das Ergebnis. Ich behandle den
+US-Anteil deshalb als wichtigen Erklärungsansatz und nicht als
+vollständig nachgewiesene alleinige Ursache.
+
+Aus K1 folgt insbesondere nicht, dass Länder mit höherem BIP künftig
+automatisch höhere Aktienrenditen erzielen. Das BIP legt hier die
+Anteile fest; es ist keine Prognose der späteren Renditen. Ebenso bleibt
+der Vergleich auf G7-BIP gegen G7-Gleichgewichtung beschränkt.
+
+5.13.5 Zeitraum und Parameter beeinflussen das Urteil
+
+Die beiden H1-Teilzeiträume zeigen, dass selbst innerhalb derselben
+Untersuchung nicht jede Regel durchgehend gleich gut abschneidet. Die
+60/40-Sharpe liegt in 2010--2017 bei 1,038, in 2018--2025 dagegen bei
+0,452. Zugleich verbessert sich die annualisierte Trendrendite von 4,57
+\% auf 7,91 \%. Solche Unterschiede würden in einem einzelnen Endwert
+untergehen.
+
+H1 und Z1 darf ich jedoch nicht als reinen Test des Zeitraums behandeln.
+Z1 beginnt früher und verwendet mit VTI einen anderen Aktienmarkt als H1
+mit VT. Wenn sich die Einordnung der Trendstrategie zwischen beiden
+Läufen verändert, kann ich deshalb nicht eindeutig zwischen Markt- und
+Zeitraumwirkung unterscheiden. Z1 ergänzt die Hauptuntersuchung durch
+eine längere US-Stichprobe; er verlängert nicht nachträglich den
+globalen Datensatz.
+
+Auch die Wahl des kurzen SMA-Fensters hat einen sichtbaren Einfluss.
+Besonders interessant ist, dass 2/12 und 6/12 beide 153 Long-Monate und
+39 Cash-Monate besitzen. Trotzdem enden sie bei rund 262'000
+beziehungsweise 338'000 USD. Es kommt also nicht nur darauf an, wie
+lange eine Strategie investiert ist, sondern auch darauf, in welchen
+Monaten sie investiert ist.
+
+Tabelle: Investitionsdauer und Positionswechsel der VT-Trendvarianten
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lrrr@{}}
+\toprule\noalign{}
+Variante & Long-Monate & Cash-Monate & Positionswechsel \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{2/12} & 153 & 39 & 18 \\
+\textbf{3/12} & 156 & 36 & 12 \\
+\textbf{6/12} & 153 & 39 & 12 \\
+\end{longtable}
+}
+
+Quelle: S1, H1 und S2, signals.csv. Gezählt werden die 192 tatsächlich
+verdienten Monatspositionen. Positionswechsel sind Wechsel zwischen zwei
+aufeinanderfolgenden Monatspositionen, ohne die anfängliche Allokation.
+
+6/12 schneidet hier günstiger ab als die festgelegte Hauptvariante. Ich
+ersetze diese trotzdem nicht nachträglich. Die Zusatzläufe sollen gerade
+zeigen, wie empfindlich das Ergebnis auf die Parameter reagiert.
+Hilpisch beschreibt, dass eine auf den betrachteten Daten besonders
+erfolgreiche Parameterkombination nicht automatisch auf anderen Daten
+oder in der Praxis ebenso gut funktionieren muss.\footnote{Hilpisch,
+  \emph{Python for Finance}, Kap. 15, «Optimization».} Die drei
+Varianten sind deshalb eine begrenzte Sensitivitätsprüfung, keine Suche
+nach einem allgemein optimalen SMA.
+
+5.13.6 Grenzen der Auswertung
+
+Die Tests und Gegenrechnungen zeigen, dass die berechneten Ergebnisse zu
+den festgehaltenen Eingaben und Regeln passen. Sie beweisen nicht, dass
+jede historische Anpassung der Yahoo-Reihen unabhängig rekonstruiert
+wurde oder dass ein heutiger Hash den ursprünglichen
+Veröffentlichungszeitpunkt einer WEO-Datei beweist. Diese Grenzen der
+Datenherkunft bleiben auch nach einem technisch erfolgreichen Lauf
+bestehen.
+
+Hinzu kommen die Modellannahmen. Explizite Transaktionskosten,
+persönliche Steuern und Inflation wurden nicht simuliert. Bereits in den
+ETF-Wertreihen enthaltene Fondskosten und mögliche steuerliche Effekte
+auf Fondsebene wurden dadurch nicht entfernt. Die Ergebnisse sind
+deshalb weder vollständig kostenfreie Indexrenditen noch persönliche
+Nettorenditen eines bestimmten Anlegers.
+
+Die monatliche Beobachtung vereinfacht den Vergleich, blendet aber
+Bewegungen innerhalb des Monats aus. Der ausgewiesene maximale Drawdown
+ist der grösste Rückgang zwischen den beobachteten Monatswerten und kann
+kleiner sein als ein mit Tagesdaten gemessener Rückgang. Auch die
+angenommene Ausführung zu Schlussbewertungen ist idealisiert. Das
+Cash-Modell verzichtet auf eine Verzinsung, während die RF-Reihe nur
+eine Vergleichsnäherung für die Sharpe Ratio liefert.
+
+Alle Ergebnisse werden in USD ausgewiesen. Daraus folgt weder eine
+Währungsabsicherung der ausländischen Anlagen noch das gleiche Ergebnis
+für eine Betrachtung in CHF. Schliesslich wurden nur ausgewählte
+historische Zeiträume und Regeln untersucht. Es gibt hier keinen
+statistischen Signifikanztest, der beispielsweise den kleinen Abstand
+zwischen VT und BIP-G7 als allgemein verlässlich nachweisen würde.
+
+5.13.7 Einordnung für die Beantwortung der Forschungsfrage
+
+Für die weitere Beurteilung halte ich deshalb keine einzelne
+«Siegerstrategie» fest. Die Untersuchung zeigt vielmehr, dass sich die
+Rangfolge mit der betrachteten Kennzahl, dem Datensatz und teilweise
+bereits mit einer kleinen Parameteränderung verschiebt. Die
+gespeicherten Gewichte und Signale helfen dabei, solche Unterschiede
+konkret nachzuvollziehen, statt nur fertige Kennzahlen
+gegenüberzustellen.
+
+Damit liegt die Grundlage für Kapitel 6 vor: Dort führe ich die
+Beobachtungen zur Forschungsfrage zusammen und beurteile, was das
+Python-Modell für den historischen Vergleich langfristiger
+Anlagestrategien leistet. Die allgemeine Antwort und die abschliessende
+Reflexion über die Arbeit folgen im Fazit; sie sollen über die hier
+beschriebenen Daten nicht hinausgehen.
+
 \bookmarksetup{startatroot}
 
 \chapter{Fazit}\label{fazit}
+
+Beantwortung der Forschungsfrage
+
+Die Forschungsfrage dieser Arbeit lautet: «Wie können historische
+Finanzdaten mithilfe eines Python-basierten Modells verwendet werden, um
+langfristige Investmentstrategien hinsichtlich Risiko und Rendite zu
+vergleichen?»
+
+Die Untersuchung zeigt, dass ein solcher Vergleich möglich ist, wenn aus
+den Quelldaten eine einheitliche Grundlage entsteht und die Anlageregeln
+vor der Auswertung eindeutig festgelegt werden. Das entwickelte Modell
+berechnet nicht nur ein Endvermögen. Es macht auch sichtbar, welche
+Schwankungen und zwischenzeitlichen Verluste auf dem Weg dorthin
+aufgetreten sind. Anhand der gespeicherten Gewichte und Signale lässt
+sich anschliessend nachvollziehen, welche Entscheidungen zu den
+jeweiligen Verläufen beigetragen haben.
+
+Entscheidend ist dabei nicht Python allein, sondern der gesamte Ablauf
+aus Datenaufbereitung, Berechnung und Kontrolle. Dazu gehört
+beispielsweise, für historische BIP-Gewichtungen nur die damals
+verfügbaren Datenstände zu verwenden. Die dokumentierten Eingaben,
+Einstellungen und Ergebnisse ermöglichen es, die Untersuchung mit
+demselben Stand zu wiederholen und einzelne Schritte zu überprüfen.
+Damit wurde das Ziel erreicht, ein nachvollziehbares Werkzeug für den
+historischen Rendite-Risiko-Vergleich zu erstellen und praktisch
+anzuwenden. Das Modell ist jedoch kein Verfahren zur Vorhersage
+künftiger Renditen.
+
+Zentrale Erkenntnisse aus dem Vergleich
+
+Aus den Ergebnissen in Abschnitt 5.12 und ihrer Interpretation in
+Abschnitt 5.13 ergibt sich keine Strategie, die bei allen betrachteten
+Kriterien überlegen ist. Das ist für mich die wichtigste inhaltliche
+Erkenntnis: Eine höhere Rendite bedeutet nicht automatisch, dass eine
+Strategie insgesamt überzeugender abschneidet.
+
+Buy-and-Hold mit dem breiten Aktien-ETF erzielte sowohl im globalen
+Hauptvergleich als auch im längeren US-Vergleich mehr Endvermögen als
+das jeweilige 60/40-Portfolio und die Trendfolge mit den festgelegten
+Hauptparametern. Dieser Ertrag ging jedoch mit stärkeren Schwankungen
+als beim 60/40-Portfolio einher. Besonders deutlich zeigt sich das im
+US-Lauf: Trotz des höchsten Endvermögens fiel das Buy-and-Hold-Portfolio
+zwischenzeitlich um rund 51 \% vom vorherigen Höchststand. Ein Blick auf
+den Endwert allein würde diese zwischenzeitlichen Verluste ausblenden.
+
+Das jährlich angepasste 60/40-Portfolio erreichte in beiden
+Untersuchungsblöcken die höchste Sharpe Ratio und eine niedrigere
+Volatilität als reines Aktien-Buy-and-Hold. Bezogen auf diese Kriterien
+war es damit der günstigere Kompromiss, allerdings bei geringerem Ertrag
+und weiterhin möglichen Verlusten. Das Ergebnis gilt für die Kombination
+aus Aktien, Staatsanleihen und jährlichem Rebalancing. Welchen Anteil
+das Rebalancing allein daran hatte, wurde nicht gesondert untersucht.
+
+Bei der Trendfolge fällt das Urteil weniger einheitlich aus. Im globalen
+Hauptlauf erzielte sie weniger Rendite und einen grösseren maximalen
+Drawdown als Buy-and-Hold. Im längeren US-Lauf war ihr grösster Rückgang
+dagegen mit rund 22 \% deutlich kleiner. Eine Regel zum Ein- und
+Aussteigen bietet somit in den untersuchten Daten keinen durchgehend
+besseren Verlustschutz. Die ergänzenden SMA-Varianten zeigen ausserdem,
+dass bereits andere Fensterlängen das Ergebnis deutlich verändern
+können. Da sich zwischen dem globalen und dem US-Lauf sowohl Markt als
+auch Zeitraum ändern, lässt sich deren jeweiliger Einfluss nicht
+getrennt bestimmen.
+
+Die BIP-Gewichtung lag im Hauptlauf beim Endvermögen knapp vor dem
+Welt-ETF. Dieser Vergleich allein belegt aber keinen Vorteil der
+Gewichtungsregel, weil unterschiedliche Märkte und Fonds enthalten sind.
+Aussagekräftiger ist der Kontrolllauf mit denselben sieben Länder-ETFs:
+Dort erreichte die BIP-Variante mehr Rendite bei etwas geringerer
+Volatilität als die Gleichgewichtung. Ihr deutlich höherer US-Anteil und
+die starke Entwicklung des US-Fonds machen den Unterschied
+nachvollziehbar. Daraus folgt weder, dass eine grosse Volkswirtschaft
+automatisch hohe Aktienrenditen liefert, noch dass BIP-Gewichtung
+allgemein besser als Marktkapitalisierungsgewichtung ist. Letztere wurde
+im Kontrolllauf nicht untersucht.
+
+Für die Beurteilung langfristiger Strategien reicht es deshalb nicht,
+nur nach dem höchsten historischen Ertrag zu fragen. Ebenso wichtig ist,
+welche Rückgänge eine Strategie mit sich bringt und nach welchem
+Risikomass sie beurteilt wird. In dieser Untersuchung führen diese
+unterschiedlichen Blickwinkel zu unterschiedlichen Rangfolgen.
+
+Grenzen der Schlussfolgerungen
+
+Die Ergebnisse gelten für die ausgewählten Fonds, Zeiträume und Regeln.
+Auch die bestandenen Tests und Gegenrechnungen machen daraus keinen
+Beweis für eine künftige Überlegenheit. Sie zeigen innerhalb ihres
+Prüfumfangs, dass die Berechnungen zu den festgehaltenen Eingaben
+passen. Ob die ursprünglichen Finanzdaten vollständig richtig sind und
+wie gut die vereinfachten Annahmen die Wirklichkeit abbilden, ist davon
+zu unterscheiden.
+
+Für die Einordnung sind besonders die in Abschnitt 5.13.6 beschriebenen
+Vereinfachungen wichtig. Transaktionskosten, persönliche Steuern und
+Inflation wurden nicht zusätzlich berechnet; in den ETF-Reihen
+enthaltene Fondskosten sind dagegen weiterhin Teil der Ergebnisse. Die
+Trendstrategie erhält in Cash keine Verzinsung, und die risikofreie
+Vergleichsrendite für die Sharpe Ratio beruht auf einer Näherung. Zudem
+erfasst die monatliche Betrachtung keine vollständigen Verlustbewegungen
+innerhalb eines Monats. Die ausgewiesenen Ergebnisse sind daher keine
+persönlichen Nettorenditen und keine vollständige Darstellung aller
+Anlagerisiken.
+
+Gerade kleine Abstände, wie zwischen dem Welt-ETF und dem BIP-Portfolio,
+sollten deshalb nicht überbewertet werden. Es wurde nicht statistisch
+nachgewiesen, dass solche Unterschiede über die betrachtete Stichprobe
+hinaus verlässlich bestehen.
+
+Rückblick auf die Arbeit und Ausblick
+
+Für mich liegt der Beitrag der Arbeit in der Verbindung von
+Finanztheorie und Informatik. Aus den einzelnen theoretischen Bausteinen
+entstand ein System, mit dem sich konkrete Anlageideen untersuchen
+lassen. Dabei war nicht nur das Zusammenführen der Formeln wichtig.
+Ebenso entscheidend waren eindeutige Daten, zeitlich passende
+Entscheidungen und Kontrollen, die Fehler sichtbar machen.
+
+Bei der technischen Umsetzung und bei den Prüfungen kam KI-Unterstützung
+zum Einsatz, wie in den Arbeitsnachweisen dokumentiert. Die Berechnungen
+wurden anhand der festgelegten Regeln und der verwendeten Daten
+überprüft. Dadurch konnte ich sicherstellen, dass die Ergebnisse
+innerhalb des geprüften Umfangs nachvollziehbar und rechnerisch korrekt
+sind. Die Verantwortung für die Auswahl der Untersuchungsmethoden und
+die Interpretation der Ergebnisse liegt weiterhin bei mir. Dabei muss
+ich besonders darauf achten, dass meine Schlussfolgerungen durch die
+tatsächlichen Ergebnisse gedeckt sind und nicht über den untersuchten
+Zeitraum hinaus verallgemeinert werden.
+
+Eine Weiterführung könnte gezielter einzelne Einflüsse untersuchen, etwa
+durch den Vergleich desselben 60/40-Portfolios mit und ohne jährliche
+Umschichtung. Auch Transaktionskosten oder verzinste Cash-Phasen wären
+sinnvolle Ergänzungen. Eine spätere Weboberfläche könnte das vorhandene
+Modell leichter zugänglich machen; für die hier durchgeführte
+Untersuchung ist sie nicht erforderlich.
+
+Insgesamt liefert die Arbeit damit keine allgemeine Kaufempfehlung,
+sondern eine überprüfbare Grundlage für den Vergleich historischer
+Anlagestrategien. Ihr Nutzen liegt darin, nicht nur zu zeigen, welche
+Strategie mehr verdient hat, sondern auch, welche Risiken und Annahmen
+hinter diesem Ergebnis stehen.
 
 \cleardoublepage
 \phantomsection
@@ -4870,6 +5417,29 @@ Inhalt dieses Kapitels ist eine für die Arbeit aufbereitete
 Zusammenfassung des bestehenden KI-Nutzungslogs. Zusätzlich wurde ein
 wiederverwendbarer Ablauf eingerichtet, mit dem zukünftige Logeinträge
 in diese Buchversion übertragen werden können.
+
+\subsection{Behebung eines
+Quarto-Renderfehlers}\label{behebung-eines-quarto-renderfehlers}
+
+Am 11. Oktober 2026 untersuchte Codex den Abbruch von
+\texttt{quarto\ render} mit der LaTeX-Meldung
+\texttt{\textbackslash{}begin\{aligned\}\ allowed\ only\ in\ math\ mode}.
+Ursache waren 20 Markdown-Zellen im Analyse-Notebook, deren Formelblöcke
+mit \texttt{\textbackslash{}{[}} und \texttt{\textbackslash{}{]}}
+begrenzt waren. Pandoc behandelte diese Klammern als Text und die
+dazwischenliegenden LaTeX-Umgebungen als rohe LaTeX-Blöcke statt als
+Mathematik. Codex ersetzte die Begrenzungen durch die von Quarto
+vorgesehene Schreibweise \texttt{\$\$}.
+
+Beim anschliessenden Test wurden auch fehlende Baumzeichen in zwei
+Verzeichnisdarstellungen und drei Warnungen bei der Formelkonvertierung
+für Word festgestellt. Codex ersetzte die Baumzeichen durch
+ASCII-Zeichen und passte die LaTeX-Formatierung der betroffenen
+Ablaufdarstellungen und einer Tabelle für den Word-Export an. Fachliche
+Aussagen, Berechnungen und Quellen wurden dabei nicht verändert.
+Ursache, Änderungen und technische Prüfungen wurden von Codex im
+projektinternen KI-Nutzungslog dokumentiert; die endgültige Kontrolle
+der Darstellung bleibt beim Autor.
 
 \section{Manuelle Verantwortung}\label{manuelle-verantwortung}
 
@@ -5020,6 +5590,10 @@ Pham, Nga, Bei Cui, und Ummul Ruthbah. \emph{The {Performance} of the
 \bibitem[\citeproctext]{ref-Preise}
 {„Preise``}. Zugegriffen 4. August 2026.
 \url{https://www.bfs.admin.ch/content/bfs/de/home/statistiken/preise.html}.
+
+\bibitem[\citeproctext]{ref-PriceHistoryClassYfinance}
+{„{PriceHistory} Class --- Yfinance``}. 11. Oktober 2026.
+\url{https://ranaroussi.github.io/yfinance/reference/yfinance.price_history.html}.
 
 \bibitem[\citeproctext]{ref-probstGleitendeDurchschnittBestimmen2025}
 Probst, Wendelin. {„Der Gleitende Durchschnitt - so bestimmen Sie die

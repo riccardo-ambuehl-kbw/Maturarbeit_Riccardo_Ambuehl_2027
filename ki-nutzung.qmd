@@ -56,6 +56,12 @@ Codex wurde mehrfach verwendet, um Dateien und Inhalte im gesamten Repository ei
 
 Am 8. August 2026 wurde Codex verwendet, um den bisherigen KI-Nutzungsnachweis als Anhang in das Quarto-Book einzubinden. Der Inhalt dieses Kapitels ist eine für die Arbeit aufbereitete Zusammenfassung des bestehenden KI-Nutzungslogs. Zusätzlich wurde ein wiederverwendbarer Ablauf eingerichtet, mit dem zukünftige Logeinträge in diese Buchversion übertragen werden können.
 
+### Behebung eines Quarto-Renderfehlers
+
+Am 11. Oktober 2026 untersuchte Codex den Abbruch von `quarto render` mit der LaTeX-Meldung `\begin{aligned} allowed only in math mode`. Ursache waren 20 Markdown-Zellen im Analyse-Notebook, deren Formelblöcke mit `\[` und `\]` begrenzt waren. Pandoc behandelte diese Klammern als Text und die dazwischenliegenden LaTeX-Umgebungen als rohe LaTeX-Blöcke statt als Mathematik. Codex ersetzte die Begrenzungen durch die von Quarto vorgesehene Schreibweise `$$`.
+
+Beim anschliessenden Test wurden auch fehlende Baumzeichen in zwei Verzeichnisdarstellungen und drei Warnungen bei der Formelkonvertierung für Word festgestellt. Codex ersetzte die Baumzeichen durch ASCII-Zeichen und passte die LaTeX-Formatierung der betroffenen Ablaufdarstellungen und einer Tabelle für den Word-Export an. Fachliche Aussagen, Berechnungen und Quellen wurden dabei nicht verändert. Ursache, Änderungen und technische Prüfungen wurden von Codex im projektinternen KI-Nutzungslog dokumentiert; die endgültige Kontrolle der Darstellung bleibt beim Autor.
+
 ## Manuelle Verantwortung
 
 Der Autor muss sämtliche übernommenen Änderungen kontrollieren. Dazu gehören insbesondere die unveränderte fachliche Bedeutung, die korrekte Wiedergabe der Quellen, die mathematische Richtigkeit, die Nachvollziehbarkeit des Codes und der Erhalt des persönlichen Schreibtons. Die Verantwortung für die endgültige Fassung der Arbeit bleibt beim Autor.
