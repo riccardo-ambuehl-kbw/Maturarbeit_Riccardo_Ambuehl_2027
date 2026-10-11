@@ -8,13 +8,15 @@ book:
   date: today
   chapters:
     - index.qmd
-    - einleitung.qmd
+    - href: notebooks/Einleitung.ipynb
+      text: Einleitung
     - href: notebooks/Theorie.ipynb
       text: Theorie
     - methodik.qmd
     - href: notebooks/Analyse.ipynb
       text: Analyse
-    - fazit.qmd
+    - href: notebooks/Fazit.ipynb
+      text: Fazit
   appendices:
     - ki-nutzung.qmd
   page-footer:
