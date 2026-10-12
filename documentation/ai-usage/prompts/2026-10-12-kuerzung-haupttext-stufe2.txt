@@ -1,0 +1,171 @@
+# AUFTRAG: Abschliessende wissenschaftlich kontrollierte Kürzung – Stufe 2
+
+## Ziel
+
+Die erste Kürzungsstufe ist abgeschlossen. Der Haupttext umfasst aktuell 8’948 Wörter einschliesslich Überblick.
+
+Reduziere den Haupttext durch gezielte, wissenschaftlich sichere Straffungen möglichst auf **7’700–7’850 Wörter**, um die schulische Obergrenze von 8’000 Wörtern mit einer kleinen Reserve einzuhalten.
+
+Die vorherige Arbeit hat bereits technische Dokumentation in die Anhänge ausgelagert und 46 Massnahmen umgesetzt. Wiederhole diese Schritte nicht und führe keine pauschale Neufassung durch.
+
+**Qualität hat Vorrang vor der Zielzahl.** Wenn die noch benötigte Kürzung nicht ohne relevante Informationsverluste möglich ist, stoppe mit einer höheren Wortzahl und dokumentiere die verbleibende Lücke.
+
+## Ausgangsstand
+
+Repository: `riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027`
+
+Branch: `dev`
+
+Referenzcommit: `ab9ac731284f8217ae367996b3276c0aa2231d51`.
+
+Prüfe tatsächlichen HEAD, Git-Status und Projektregeln.
+
+Lies insbesondere:
+
+- `documentation/kuerzung-haupttext-stufe1-2026-10-12.md`
+- `documentation/kuerzungsplan-haupttext-2026-10-12.md`
+- `documentation/gesamtgegenlesen-phase2-2026-10-12.md`
+- Alle sechs Hauptkapitel und die bereits bestehenden Anhänge.
+
+## Arbeitsweise
+
+Erstelle zunächst intern eine konkrete Gegenüberstellung der noch vorhandenen Wiederholungen und unnötig ausführlichen Formulierungen.
+
+Arbeite anschliessend ausschliesslich an klar begründbaren Kürzungsstellen.
+
+Bevorzuge:
+
+1. Doppelte Erklärungen zwischen Theorie, Methodik und Analyse.
+2. Mehrfache Erläuterungen von Ergebnissen, die bereits in Tabellen stehen.
+3. Wiederholte Einschränkungen, die an anderer Stelle vollständig erläutert werden.
+4. Überlange Übergänge, Einleitungen und Zusammenfassungen.
+5. Präzise sprachliche Verdichtungen, die die ursprüngliche Aussage vollständig bewahren.
+
+Keine neuen wissenschaftlichen Aussagen formulieren.
+
+## Schwerpunkt Theorie
+
+Aktuell rund 2’985 Wörter.
+
+Untersuche besonders die übrigen Erläuterungen zu Diversifikation, Volatilität, Drawdown, Sharpe Ratio und Trendfolge.
+
+Wiederholte Interpretationen dürfen zusammengeführt oder durch kurze Verweise ersetzt werden.
+
+Erhalte jedoch alle notwendigen Definitionen, Formeln, Variablenerklärungen und Einschränkungen.
+
+**Die Indexfonds- und ETF-Ergänzungen aus T01 bleiben weiterhin gesperrt**, weil sie gezielt auf Lehrerfeedback zurückgehen.
+
+Keine Reduktion der wissenschaftlichen Präzision zugunsten kürzerer Formulierungen.
+
+## Schwerpunkt Analyse
+
+Aktuell rund 3’448 Wörter.
+
+Prüfe insbesondere die Abgrenzung zwischen:
+
+- Methodik und Analyse der Untersuchungsparameter.
+- Ergebnistabellen und deren beschreibendem Begleittext.
+- Ergebnisbeschreibung und anschliessender Interpretation.
+- Bereits erläuterten methodischen Grenzen und wiederholten Hinweisen.
+
+Die Analyse soll weiterhin eigenständig und verständlich zeigen, weshalb bestimmte Daten und Parameter verwendet wurden, welche Ergebnisse entstanden sind und was daraus geschlossen werden kann.
+
+Erhalte alle H1-/K1-/Z1-/S1-/S2-Vergleiche, ihre jeweiligen Grenzen, die relevanten Risikokennzahlen und die Erklärungen der beobachteten Mechanismen.
+
+Die Unterschiede zwischen Anlageuniversum, Untersuchungszeitraum, Gewichtung und Parameterauswahl dürfen nicht verwischt werden.
+
+Keine wichtigen Ergebnisse, Tabellen, Diagramme oder Argumente in technische Anhänge auslagern.
+
+## Übrige Kapitel
+
+Einleitung und Methodik nur dann weiter kürzen, wenn dort eindeutig redundante Erläuterungen vorhanden sind.
+
+Die Methodik muss ohne Lektüre der Anhänge verständlich bleiben.
+
+Im Fazit dürfen allenfalls noch kurze Wiederholungen ausserhalb der geschützten Passagen entfernt werden.
+
+**F02 (Kernerkenntnisse) und F04 (persönlicher Rückblick und Ausblick) bleiben vollständig geschützt.** Ihre Formulierungen dürfen nicht verändert werden.
+
+## Wissenschaftliche Sperren
+
+Nicht verändern:
+
+- Forschungsfrage
+- Zentrale Finanzdefinitionen
+- Formeln und Variablenerklärungen
+- Lehrerfeedback-Ergänzungen
+- Tabellen, Abbildungen und Zahlen
+- Strategieregeln und Parameter
+- Quellenbelege und Literaturverzeichnis
+- Vorabfestlegung der Untersuchung
+- Signalverzögerung, BIP-Verfügbarkeit und RF-Berechnung
+- Wesentliche methodische Grenzen
+- Persönliche Schlussfolgerungen
+- Python-Code und gespeicherte Outputs
+- Eingefrorene Studienresultate
+
+Führe keine Fachkorrekturen aus dem Phase-2-Gegenlesebericht durch. Bekannte Fehler dürfen nicht durch Streichung der betroffenen Aussagen scheinbar behoben werden.
+
+Keine Backtests, Engine-Tests oder Datenbeschaffung.
+
+## Qualitätskontrolle
+
+Für jede tatsächlich gekürzte Passage:
+
+Vergleiche den alten und neuen Text und kontrolliere, ob sämtliche eigenständigen fachlichen Aussagen, Einschränkungen und Begründungen weiterhin vorhanden sind.
+
+Achte besonders auf Aussagen, die nach dem Kürzen zu allgemein, zu absolut oder kausal missverständlich werden könnten.
+
+Führe eine dokumentierte Vorher-nachher-Wortzählung mit derselben Methode wie bisher durch.
+
+Verändere keine Texte nur deshalb, weil sie theoretisch noch etwas kürzer formuliert werden könnten. Der persönliche, natürliche Schreibstil soll erhalten bleiben.
+
+Kontrolliere sämtliche relevanten Kapitel- und Anhangsverweise.
+
+## Technische Abnahme
+
+Prüfe insbesondere:
+
+- Alle 28 Codezellen unverändert.
+- Alle gespeicherten Outputs und acht PNGs erhalten.
+- Sämtliche Formeln, Tabellen und relevanten Quellenbelege erhalten.
+- Keine Veränderungen der ursprünglichen Studienresultate.
+- Gültige Notebook-Struktur und eindeutige Zell-IDs.
+- Keine unbeabsichtigten Änderungen an der Anhangsstruktur.
+- HTML, PDF und DOCX erfolgreich gerendert.
+
+Führe sämtliche Renderprüfungen ausschliesslich in einer separaten externen Projektkopie durch. Notebook-Codeausführung und Cache-Nutzung deaktivieren.
+
+Die ursprünglichen `_book`-, `_freeze`- und `.quarto`-Dateien dürfen nicht verändert werden.
+
+## Abschlussbericht
+
+Erstelle:
+
+`documentation/kuerzung-haupttext-stufe2-2026-10-12.md`
+
+Dokumentiere:
+
+- Tatsächliche Ausgangs- und Endwortzahlen je Kapitel.
+- Jede wesentlich veränderte Textstelle mit Zell-ID.
+- Vorher-nachher-Inhalt und Begründung.
+- Tatsächliche Nettoersparnis je Bereich.
+- Nachweis, dass die wissenschaftlichen Aussagen erhalten wurden.
+- Verbleibende Wortzahl bis zur Obergrenze von 8’000.
+- Integritätsprüfung.
+- HTML-/PDF-/DOCX-Prüfergebnisse.
+- Weiterhin offene Fachbefunde.
+
+Ergänze den Einsatz im KI-Log sowie im KI-Anhang und speichere die vollständige Promptkopie entsprechend den bestehenden Regeln.
+
+Dokumentiere die KI-gestützte sprachliche Verdichtung ausdrücklich als solche. Keine persönliche Autorenfreigabe behaupten.
+
+## Abschlussregeln
+
+Keine eigenmächtigen zusätzlichen Auslagerungen. Keine wissenschaftlichen Neuberechnungen. Keine pauschale stilistische Neufassung. Kein Commit, Push, Merge, Reset oder Clean.
+
+Wenn 7’700–7’850 Wörter sicher erreichbar sind, setze die notwendigen Kürzungen um.
+
+Falls nicht, stoppe mit der wissenschaftlich vertretbaren Fassung, auch wenn sie noch über 8’000 Wörtern liegt.
+
+**STOPP zur Autorenkontrolle.**
