@@ -68,6 +68,14 @@ Am 12. Oktober 2026 übertrug Codex das erste Kapitel «Überblick» aus `index.
 
 Die bisherige QMD-Datei wurde unverändert unter `archive/index.qmd` aufbewahrt. Codex aktualisierte den Kapiteleintrag in `_quarto.yml` und die Arbeitsanweisung für spätere Übertragungen aus der README. Zusätzlich wurde der veraltete Methodik-Verweis in der Buchkonfiguration auf das bereits vorhandene Notebook umgestellt. Die unveränderte Übernahme wurde durch einen Rückvergleich mit der ursprünglichen Datei geprüft; die Verantwortung für die endgültige Fassung bleibt beim Autor. Codex verfasste den Nachweis dieses Einsatzes im KI-Nutzungslog und in diesem Anhang.
 
+### Umgliederung des Theoriekapitels nach Lehrerfeedback
+
+Am 12. Oktober 2026 gliederte Codex das bereits korrigierte Theoriekapitel auf Wunsch des Autors in die Bereiche «Portfolio», «Berechnungen und Daten» und «Methodische Grenzen». Der Lehrer hatte Rückmeldungen zur Nachvollziehbarkeit der Indexnachbildung, zur ETF-Bezeichnung, zur MDD-Formel und zur Sharpe-Zeichenerklärung gegeben und die drei Bereiche als optionale Gliederung vorgeschlagen. Der Autor entschied, die Korrekturstellen zu übernehmen und diese Umgliederung mit KI-Unterstützung ausführen zu lassen. Autorenkontrolle ausstehend.
+
+ChatGPT lieferte zuvor die ergänzende Erklärung der praktischen Indexnachbildung, die ausgeschriebene ETF-Bezeichnung, die präzisierte Darstellung des MDD-Zeitbereichs und die vervollständigte Sharpe-Zeichenerklärung. Dies war inhaltliche Erklärungsarbeit und Formulierungsunterstützung; dabei wurde kein neues Finanzmodell entwickelt. Der Autor hatte diese Ergänzungen vor der Umgliederung in das Notebook eingearbeitet. Codex beansprucht keine Autorschaft an diesen Formulierungen.
+
+Codex verschob die bestehenden Themenblöcke samt Formeln, Quellen, Codezellen und gespeicherten Ausgaben und passte die betroffenen Überschriften an. Die Struktur- und Integritätsprüfung bezog sich auf den tatsächlichen korrigierten lokalen Ausgangsstand. Die Darstellungsprüfung erfolgte in einer temporären Projektkopie ohne Codeausführung. Theorie-Beispiele und Echtdaten-Backtests wurden nicht erneut ausgeführt; die gespeicherten Ausgaben sind kein Nachweis einer neuen Ausführung. Der Auftrag, die Alt-neu-Zuordnung, die ausgeführten Prüfungen und offene Punkte werden im projektinternen Änderungsbericht und KI-Nutzungslog dokumentiert. Eine neue fachliche Validierung des gesamten Kapitels war nicht Teil dieses Einsatzes.
+
 ## Manuelle Verantwortung
 
 Der Autor muss sämtliche übernommenen Änderungen kontrollieren. Dazu gehören insbesondere die unveränderte fachliche Bedeutung, die korrekte Wiedergabe der Quellen, die mathematische Richtigkeit, die Nachvollziehbarkeit des Codes und der Erhalt des persönlichen Schreibtons. Die Verantwortung für die endgültige Fassung der Arbeit bleibt beim Autor.
