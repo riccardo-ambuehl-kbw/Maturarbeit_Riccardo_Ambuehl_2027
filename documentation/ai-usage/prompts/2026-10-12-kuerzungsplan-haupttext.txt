@@ -1,0 +1,185 @@
+# AUFTRAG: Wissenschaftlich sicheren Kürzungsplan für die Maturarbeit erstellen
+
+## Ziel
+
+Die Maturarbeit «Langfristige Anlagestrategien anhand historischer Finanzdaten» umfasst nach der ersten Auslagerung noch ungefähr 12’742 Wörter einschliesslich Überblick beziehungsweise 11’886 Wörter ohne Überblick.
+
+Die Schulvorgabe beträgt 6’000–8’000 Wörter reiner Haupttext.
+
+Der Betreuungslehrer hat ausdrücklich bestätigt, dass technische Dokumentation, Beschreibungen der Datenaufbereitung und Testberichte in den Anhang ausgelagert werden dürfen. Der Anhang zählt nicht zum Umfang.
+
+Die erste Auslagerung in die Anhänge A–C ist bereits abgeschlossen.
+
+**Erstelle jetzt einen präzisen, wissenschaftlich begründeten Kürzungsplan mit einem Zielumfang von ungefähr 7’700 Wörtern einschliesslich Überblick.**
+
+In diesem Auftrag noch keine Fachtexte verändern. Es geht zuerst um einen ausführbaren Plan, nicht um die Umsetzung.
+
+## Ausgangslage
+
+Repository: `riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027`
+
+Branch: `dev`
+
+Bekannter Ausgangscommit: `32965a78543c641ff2bf3755c1987678843c829d`.
+
+Prüfe den tatsächlichen Arbeitsstand und vorhandene Projektanweisungen.
+
+Lies alle sechs Hauptkapitel, die drei technischen Anhänge, den KI-Anhang und folgende Berichte:
+
+- `documentation/auslagerung-technische-anhaenge-2026-10-12.md`
+- `documentation/gesamtgegenlesen-phase2-2026-10-12.md`
+
+Berücksichtige die bereits dokumentierte Antwort der Betreuungsperson.
+
+## Grundprinzip
+
+Die wissenschaftliche Qualität und Nachvollziehbarkeit haben Vorrang vor dem Erreichen einer bestimmten Wortzahl.
+
+Kein wissenschaftlich notwendiger Inhalt darf allein deshalb entfernt werden, weil er lang ist.
+
+Die Untersuchung muss auch ohne Lektüre der technischen Anhänge verständlich und überprüfbar bleiben.
+
+Behalte insbesondere die Forschungsfrage, Untersuchungsmethode, Daten- und Strategiewahl, relevanten Parameter, Annahmen, Ergebnisse, Interpretation, Grenzen und Schlussfolgerungen.
+
+Formeln, Daten, Tabellen, Abbildungen, Quellenbelege und Ergebnisse sind zu schützen.
+
+## Systematische Kürzungsanalyse
+
+Prüfe jeden Hauptabschnitt und identifiziere vier Arten von Einsparpotenzial.
+
+**Typ A – Technische Auslagerung**
+
+Identifiziere technische Beschreibungen, Projektanleitungen und Testdetails, die aufgrund der Lehrerfreigabe zusätzlich in einen bereits bestehenden technischen Anhang übernommen werden könnten.
+
+Prüfe insbesondere das derzeitige Überblickskapitel. Es enthält viele technische Hinweise zu Quarto, Zotero, Installation und Repository-Struktur.
+
+Empfiehl, ob diese Inhalte in die technische Dokumentation beziehungsweise README gehören. Kapitel 1 sollte möglichst als kurze wissenschaftliche Überblicksseite erhalten bleiben.
+
+Keine methodischen Begründungen oder Ergebnisinterpretationen als angeblich technische Dokumentation auslagern.
+
+**Typ B – Zusammenführung**
+
+Identifiziere kurze, zusammengehörige Abschnitte, die ohne Informationsverlust zu einem übergeordneten Abschnitt verbunden werden können.
+
+Prüfe insbesondere die derzeitigen Abschnitte 5.2–5.9. Nach der Auslagerung enthalten diese vor allem kurze Zusammenfassungen mit Anhangsverweisen.
+
+Beachte die Konsequenzen für Kapitelnummern und Querverweise.
+
+**Typ C – Wiederholungen**
+
+Prüfe systematisch, welche Informationen an mehreren Stellen gleich oder nahezu gleich erklärt werden.
+
+Unterscheide dabei zwischen unnötiger Wiederholung und einer didaktisch notwendigen kurzen Rückerinnerung.
+
+Nutze insbesondere die Zusammenhänge zwischen Theorie, Methodik, Analyse und Fazit.
+
+Schlage vor, wo eine vollständige Erklärung stehen bleiben soll und wo ein kurzer Verweis genügt.
+
+**Typ D – Präzise sprachliche Verdichtung**
+
+Identifiziere unnötig ausführliche Absätze, die ohne Verlust ihrer wesentlichen fachlichen Aussagen verkürzt werden können.
+
+Lange Sätze nicht bloss oberflächlich umformulieren. Entscheidend ist die tatsächliche Reduktion der Wortzahl.
+
+Der persönliche, natürliche und sachliche Schreibstil des Autors muss erhalten bleiben. Keine generischen KI-Formulierungen und keine Veränderung wissenschaftlicher Aussagen.
+
+## Kapitelbezogene Schwerpunkte
+
+### Kapitel 1 – Überblick
+
+Prüfe die umfangreichen technischen Anleitungen, Quellenübersichten und Pendenzen.
+
+Ziel: eine kurze, wissenschaftlich passende Einführung in die Buchstruktur, ohne die bestehende Kapitelnummerierung unnötig zu verändern.
+
+### Kapitel 2 – Einleitung
+
+Nur vorsichtige Straffung. Motivation, Forschungsfrage, Zielsetzung und Abgrenzung müssen erhalten bleiben.
+
+### Kapitel 3 – Theorie
+
+Derzeit ungefähr 3’670 Wörter.
+
+Prüfe, welche Grundlagen für die nachfolgende Untersuchung wirklich benötigt werden und wo Definitionen oder Beispiele mehrfach oder unnötig ausführlich erklärt werden.
+
+Mathematische Korrektheit und Vollständigkeit der relevanten Variablenerklärungen müssen erhalten bleiben.
+
+Berücksichtige die bereits umgesetzten Lehrerhinweise zur Gliederung und zu den Finanzbegriffen.
+
+### Kapitel 4 – Methodik
+
+Nur moderat kürzen, vor allem Wiederholungen mit der Analyse.
+
+Die methodische Eigenständigkeit des Kapitels muss erhalten bleiben.
+
+### Kapitel 5 – Analyse
+
+Derzeit ungefähr 5’399 Wörter.
+
+Prüfe besonders:
+
+- Die noch vorhandenen technischen Kurzabschnitte 5.2–5.9.
+- Wiederholungen und ausführliche Verfahrensdetails in 5.10.
+- Die bereits stark gekürzte Durchführung in 5.11.
+- Wiederholte Ergebnisbeschreibungen in 5.12 und 5.13.
+- Mehrfache Erklärungen von identischen Risiken und methodischen Grenzen.
+
+Die Untersuchungsergebnisse dürfen nicht gekürzt werden, indem wesentliche Kennzahlen, Grafiken, Vergleichsbedingungen oder Schlussfolgerungen verloren gehen.
+
+### Kapitel 6 – Fazit
+
+Reduziere gegebenenfalls wiederholte Ergebnisbeschreibungen, ohne die Antwort auf die Forschungsfrage oder die persönliche Reflexion zu schwächen.
+
+## Priorisierung
+
+Teile die Kürzungsvorschläge ein in:
+
+**SICHER:** Eindeutige Dopplungen, veraltete technische Arbeitsanleitungen oder unnötige Wiederholungen ohne inhaltlichen Verlust.
+
+**GUT VERTRETBAR:** Sachlich äquivalente Zusammenfassungen oder die Verlagerung klar technischer Inhalte.
+
+**AUTORENENTSCHEIDUNG:** Kürzungen, bei denen wissenschaftliche Tiefe, Argumentationsgewichtung oder persönliche Aussagen beeinflusst werden könnten.
+
+**NICHT EMPFOHLEN:** Inhaltlich notwendige Passagen, deren Entfernung die wissenschaftliche Aussagekraft vermindern würde.
+
+Keine künstlichen Einsparungen durch Verschieben von wissenschaftlich zentralen Inhalten in den Anhang.
+
+## Verbindlicher Bericht
+
+Erstelle:
+
+`documentation/kuerzungsplan-haupttext-2026-10-12.md`
+
+Der Bericht soll enthalten:
+
+1. Ausgangsumfang je Hauptkapitel.
+2. Konkretes, realistisch begründetes Kürzungspotenzial je Hauptkapitel.
+3. Für jede wesentliche Massnahme: Abschnitt, möglichst Notebook-Zell-ID, heutiger Inhalt, vorgeschlagene Massnahme und Begründung.
+4. Bei Textverdichtungen: beispielhafte neue Formulierung, die den ursprünglichen Informationsgehalt erhält.
+5. Bei Auslagerungen: exakte Zielstelle im Anhang und die im Haupttext verbleibende Zusammenfassung.
+6. Bei Wiederholungen: die Stelle, an der die Information erhalten bleiben soll.
+7. Erwartete Wortersparnis je Massnahme ohne doppelte Anrechnung.
+8. Gesamterwartung nach Umsetzung.
+9. Risiken und notwendige Autorenentscheidungen.
+10. Empfohlene Reihenfolge für einen späteren automatisierten Codex-Korrekturlauf.
+
+Unterscheide bereits sichere Einsparungen von rein geschätzten Kürzungsmöglichkeiten.
+
+Nutze dieselbe Wortzählmethode wie im Bericht zur technischen Auslagerung. Berechne keine Scheingenauigkeit bei noch nicht formulierten Textfassungen.
+
+Falls 7’700 Wörter ohne Verlust wesentlicher wissenschaftlicher Aussagen nicht realistisch erscheinen, benenne diesen Zielkonflikt ausdrücklich.
+
+## Schutzregeln
+
+- Keine Notebook-Inhalte verändern.
+- Keine Anhänge umschreiben.
+- Keine Codezellen ausführen.
+- Keine Studienresultate oder Engine-Dateien verändern.
+- Keine Fachkorrekturen aus dem Gegenlesebericht durchführen.
+- Keine Quellen oder Formeln verändern.
+- Kein Commit, Push, Merge, Reset oder Clean.
+
+Erlaubte Änderungen ausschliesslich für den Kürzungsplan, die vollständige Promptkopie und die sachliche Dokumentation dieses KI-Einsatzes gemäss bestehenden Projektregeln.
+
+Am Ende den tatsächlichen Git-Diff kontrollieren.
+
+STOPP zur gemeinsamen Prüfung und Freigabe des Kürzungsplans.
