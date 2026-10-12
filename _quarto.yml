@@ -23,6 +23,12 @@ book:
       text: Fazit
     - bibliography.qmd
   appendices:
+    - href: notebooks/Anhang_Technische_Engine.ipynb
+      text: Technische Entwicklung und Aufbau der Python-Engine
+    - href: notebooks/Anhang_Datenaufbereitung.ipynb
+      text: Datenbeschaffung, Datenformate und Aufbereitung
+    - href: notebooks/Anhang_Tests_Validierung.ipynb
+      text: Tests, Validierung und technische Nachweise
     - ki-nutzung.qmd
   page-footer:
     left: "Riccardo Ambühl"
@@ -86,6 +92,8 @@ format:
         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},breaklines=true,breakanywhere=true,fontsize=\footnotesize}
         \DefineVerbatimEnvironment{verbatim}{Verbatim}{breaklines=true,breakanywhere=true,fontsize=\footnotesize}
   docx:
+    crossref:
+      appendix-title: Anhang
     reference-doc: styles/reference.docx
     toc: true
     number-sections: true
