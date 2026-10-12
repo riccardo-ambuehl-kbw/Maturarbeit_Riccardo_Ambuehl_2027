@@ -89,3 +89,12 @@ Dieser Einsatz betraf keine fachliche Verfassung, sprachliche Überarbeitung, Ne
 ## Manuelle Verantwortung
 
 Der Autor muss sämtliche übernommenen Änderungen kontrollieren. Dazu gehören insbesondere die unveränderte fachliche Bedeutung, die korrekte Wiedergabe der Quellen, die mathematische Richtigkeit, die Nachvollziehbarkeit des Codes und der Erhalt des persönlichen Schreibtons. Die Verantwortung für die endgültige Fassung der Arbeit bleibt beim Autor.
+
+
+## Wissenschaftliches und technisches Gegenlesen
+
+Am 12. Oktober 2026 las Codex alle sechs Notebooks und diesen KI-Anhang vollständig und prüfte Formeln, Code, gespeicherte Ausgaben, die fünf Ergebnisordner, ausgewählte zugängliche Originalpublikationen, Quellenangaben und Schulvorgaben. Kleine unabhängige Gegenrechnungen und statische Codeprüfungen erfolgten getrennt vom Originalcode; Notebooks und echte Backtests wurden nicht ausgeführt.
+
+Der Bericht `documentation/gesamtgegenlesen-phase2-2026-10-12.md` enthält 16 bestätigte Befunde, eine mangels zugänglicher Originaleingaben nicht vollständig verifizierbare Datenprüfung und Vorschläge für einen späteren Korrekturlauf. Aus den Exporten berechenbare Hauptkennzahlen waren konsistent; dies bestätigt nicht sämtliche Eingangsdaten oder echten Sharpe-Werte. Dokumentationslücken zu früherer KI-Programmierung und ausstehende Autorenentscheidungen sind ausdrücklich benannt.
+
+Codex verfasste den Bericht, diesen Nachtrag und den neuen Logeintrag; der vollständige Auftrag wurde unverändert archiviert. Fachtexte, Formeln, Code, gespeicherte Notebook-Ausgaben und Studienergebnisse blieben unverändert. Kein Fehler wurde in diesem Lauf fachlich korrigiert. Autorenkontrolle und Freigabe des Berichts sowie späterer Änderungen stehen aus.
