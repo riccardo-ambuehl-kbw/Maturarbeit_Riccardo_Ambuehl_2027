@@ -10,12 +10,13 @@
 
 ## Bedeutung
 
-Bei diesem Auftrag ist `README.md` die Quelle und `index.qmd` die Überblick-Seite des Quarto-Books.
+Bei diesem Auftrag ist `README.md` die Quelle und `index.ipynb` die Überblick-Seite des Quarto-Books. Die frühere QMD-Fassung liegt unverändert unter `archive/index.qmd`.
 
-1. Alle Inhalte aus `README.md` in `index.qmd` übernehmen.
-2. Die Hauptüberschrift der Zielseite als `# Überblick` beibehalten; die Hauptüberschrift `# Maturarbeit` aus der README nicht zusätzlich einfügen.
+1. Alle Inhalte aus `README.md` in die Markdown-Zellen von `index.ipynb` übernehmen. Codebeispiele bleiben als Markdown-Codeblöcke erhalten und werden nicht als ausführbare Notebook-Zellen übernommen.
+2. Den Titel `Überblick` in der ersten Raw-Zelle als Quarto-YAML-Frontmatter beibehalten; die Hauptüberschrift `# Maturarbeit` aus der README nicht zusätzlich einfügen. Die Abschnittsüberschriften wie in den übrigen Notebooks als HTML-Überschriften mit den Nummern `1.1`, `1.2` usw. beziehungsweise `1.x.1`, `1.x.2` usw. setzen.
+   Die zweite Raw-Zelle mit `raw_mimetype: text/html` und `<h1>1 Überblick</h1>` ebenfalls beibehalten. Sie stellt den Kapiteltitel auf der HTML-Startseite dar. PDF und Word erzeugen den Kapiteltitel aus der ersten Titelzelle; eine zusätzliche Markdown-Hauptüberschrift würde dort ein zweites Kapitel erzeugen.
 3. Den vorhandenen Text nicht fachlich umschreiben, erweitern oder als KI-generierten Inhalt ausgeben. Nur die für Quarto nötige Formatierung anpassen.
-4. Nach der Übernahme prüfen, ob alle Überschriften, Absätze, Listen, Links und Codeblöcke der README in `index.qmd` enthalten sind.
+4. Nach der Übernahme prüfen, ob alle Überschriften, Absätze, Listen, Links und Codeblöcke der README in `index.ipynb` enthalten sind. Die zusätzliche Nummerierung und die Titelzelle dürfen die übrigen Inhalte nicht verändern.
 5. Den Vorgang mit Datum im KI-Nutzungslog unter `documentation/ai-usage/ai-usage-log.md` dokumentieren. Dabei ausdrücklich festhalten, dass Codex die Inhalte nicht verfasst, sondern nur aus der README in die Buchversion übertragen hat.
 6. Wenn sich Quell- und Zieltext widersprechen oder unklar ist, welche Version gelten soll, vor einer inhaltlichen Änderung nachfragen.
 

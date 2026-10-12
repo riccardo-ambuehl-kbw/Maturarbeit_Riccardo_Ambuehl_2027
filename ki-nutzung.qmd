@@ -62,6 +62,12 @@ Am 11. Oktober 2026 untersuchte Codex den Abbruch von `quarto render` mit der La
 
 Beim anschliessenden Test wurden auch fehlende Baumzeichen in zwei Verzeichnisdarstellungen und drei Warnungen bei der Formelkonvertierung für Word festgestellt. Codex ersetzte die Baumzeichen durch ASCII-Zeichen und passte die LaTeX-Formatierung der betroffenen Ablaufdarstellungen und einer Tabelle für den Word-Export an. Fachliche Aussagen, Berechnungen und Quellen wurden dabei nicht verändert. Ursache, Änderungen und technische Prüfungen wurden von Codex im projektinternen KI-Nutzungslog dokumentiert; die endgültige Kontrolle der Darstellung bleibt beim Autor.
 
+### Umwandlung des ersten Kapitels in ein Notebook
+
+Am 12. Oktober 2026 übertrug Codex das erste Kapitel «Überblick» aus `index.qmd` in `index.ipynb`. Der vorhandene Inhalt wurde vollständig übernommen. Wie in den übrigen Notebooks wurde der Titel als Quarto-YAML-Frontmatter in einer Raw-Zelle gesetzt; die elf Abschnittsüberschriften und acht Unterüberschriften erhielten die Nummern `1.1` bis `1.11` beziehungsweise `1.11.1` bis `1.11.8`. Absätze, Listen, Links und Codebeispiele wurden nicht umgeschrieben. Die Codebeispiele blieben in Markdown-Zellen und wurden nicht ausgeführt.
+
+Die bisherige QMD-Datei wurde unverändert unter `archive/index.qmd` aufbewahrt. Codex aktualisierte den Kapiteleintrag in `_quarto.yml` und die Arbeitsanweisung für spätere Übertragungen aus der README. Zusätzlich wurde der veraltete Methodik-Verweis in der Buchkonfiguration auf das bereits vorhandene Notebook umgestellt. Die unveränderte Übernahme wurde durch einen Rückvergleich mit der ursprünglichen Datei geprüft; die Verantwortung für die endgültige Fassung bleibt beim Autor. Codex verfasste den Nachweis dieses Einsatzes im KI-Nutzungslog und in diesem Anhang.
+
 ## Manuelle Verantwortung
 
 Der Autor muss sämtliche übernommenen Änderungen kontrollieren. Dazu gehören insbesondere die unveränderte fachliche Bedeutung, die korrekte Wiedergabe der Quellen, die mathematische Richtigkeit, die Nachvollziehbarkeit des Codes und der Erhalt des persönlichen Schreibtons. Die Verantwortung für die endgültige Fassung der Arbeit bleibt beim Autor.

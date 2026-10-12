@@ -7,12 +7,14 @@ book:
   author: "Riccardo Ambühl"
   date: today
   chapters:
-    - index.qmd
+    - href: index.ipynb
+      text: Überblick
     - href: notebooks/Einleitung.ipynb
       text: Einleitung
     - href: notebooks/Theorie.ipynb
       text: Theorie
-    - methodik.qmd
+    - href: notebooks/Methodik.ipynb
+      text: Methodik
     - href: notebooks/Analyse.ipynb
       text: Analyse
     - href: notebooks/Fazit.ipynb
