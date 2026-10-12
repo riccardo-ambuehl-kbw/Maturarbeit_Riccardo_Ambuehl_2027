@@ -1,6 +1,8 @@
 project:
   type: book
   output-dir: _book
+  post-render:
+    - python filters/docx-layout.py
 
 book:
   title: "Langfristige Anlagestrategien anhand historischer Finanzdaten"
@@ -19,6 +21,7 @@ book:
       text: Analyse
     - href: notebooks/Fazit.ipynb
       text: Fazit
+    - bibliography.qmd
   appendices:
     - ki-nutzung.qmd
   page-footer:
@@ -30,6 +33,7 @@ bibliography: references.bib
 csl: styles/chicago-shortened-notes-bibliography-17th-edition.csl
 filters:
   - filters/date-icon.lua
+  - filters/book-format.lua
 
 number-sections: true
 toc: true
@@ -58,12 +62,19 @@ format:
     documentclass: scrreprt
     classoption:
       - oneside
+      - numbers=noenddot
     papersize: a4
+    fontsize: 11pt
+    linestretch: 1.2
     geometry:
       - margin=2.5cm
     colorlinks: true
     fig-width: 6.5
     fig-height: 4.2
+    include-before-body:
+      text: |
+        \clearpage
+        \pagenumbering{roman}
     include-in-header:
       text: |
         \usepackage{booktabs}
@@ -73,6 +84,8 @@ format:
         \usepackage{xurl}
         \floatplacement{figure}{H}
         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},breaklines=true,breakanywhere=true,fontsize=\footnotesize}
+        \DefineVerbatimEnvironment{verbatim}{Verbatim}{breaklines=true,breakanywhere=true,fontsize=\footnotesize}
   docx:
+    reference-doc: styles/reference.docx
     toc: true
     number-sections: true

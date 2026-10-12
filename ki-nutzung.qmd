@@ -76,6 +76,16 @@ ChatGPT lieferte zuvor die ergänzende Erklärung der praktischen Indexnachbildu
 
 Codex verschob die bestehenden Themenblöcke samt Formeln, Quellen, Codezellen und gespeicherten Ausgaben und passte die betroffenen Überschriften an. Die Struktur- und Integritätsprüfung bezog sich auf den tatsächlichen korrigierten lokalen Ausgangsstand. Die Darstellungsprüfung erfolgte in einer temporären Projektkopie ohne Codeausführung. Theorie-Beispiele und Echtdaten-Backtests wurden nicht erneut ausgeführt; die gespeicherten Ausgaben sind kein Nachweis einer neuen Ausführung. Der Auftrag, die Alt-neu-Zuordnung, die ausgeführten Prüfungen und offene Punkte werden im projektinternen Änderungsbericht und KI-Nutzungslog dokumentiert. Eine neue fachliche Validierung des gesamten Kapitels war nicht Teil dieses Einsatzes.
 
+### Formale Gestaltung des gesamten Buchs
+
+Am 12. Oktober 2026 überarbeitete Codex ausschliesslich die Formatierung und prüfte die technische Darstellung des Quarto-Buchs. Die sechs Notebook-Dateien blieben vollständig unverändert. Ein gemeinsamer Renderfilter macht die bereits nummerierten HTML-Zwischenüberschriften auch in PDF und Word zu echten Überschriften, ohne ihre Nummern zu verdoppeln. Die bestehenden Markdown-Überschriften im Theoriekapitel und die besondere Titelkonstruktion des Überblicks bleiben erhalten.
+
+Codex ergänzte gemeinsame HTML-Stile, PDF-Einstellungen für Schrift, Zeilenabstand, Seitenzählung und Code-Umbrüche sowie eine Word-Formatvorlage mit A4-Seiten, Blocksatz, Überschriften- und Codeformaten. Ein Word-Ausgabehelfer richtet die Titelseite, das römisch nummerierte Inhaltsverzeichnis, die arabischen Textseiten und die Fusszeilen ein. Vier breite Ergebnistabellen erhalten nur im PDF eine kleinere Schrift und geringere Spaltenabstände. Das vorhandene Literaturverzeichnis wurde als eigener unnummerierter Teil vor den KI-Anhang gesetzt; Bibliografie und Zitierstil wurden nicht geändert.
+
+HTML, PDF und DOCX wurden nacheinander in einer separaten temporären Projektkopie ohne Codeausführung, Cache-Nutzung oder Paketinstallation gerendert. Codex kontrollierte Datei-Hashes, Notebook-Struktur, Überschriften, Tabellen, Formeln, gespeicherte Bilder, interne Links und tatsächliche Darstellungen. Für die Word-Sichtprüfung wurde das vorhandene Microsoft Word verwendet, da LibreOffice fehlt. Der vollständige Auftrag, die geänderten Dateien, Prüfergebnisse und verbleibenden Layout-Hinweise stehen im projektinternen Bericht `documentation/formatierung-gesamtbuch-2026-10-12.md` und im KI-Nutzungslog.
+
+Dieser Einsatz betraf keine fachliche Verfassung, sprachliche Überarbeitung, Neuberechnung oder fachliche Gesamtprüfung der Maturarbeit. Die bekannte mögliche Abweichung zwischen geänderten Portfolio-Gewichten und gespeicherter Volatilitätsausgabe wurde lediglich als Folgepunkt festgehalten. Codex formulierte den Bericht, den Logeintrag und diese Zusammenfassung. Autorenkontrolle ausstehend.
+
 ## Manuelle Verantwortung
 
 Der Autor muss sämtliche übernommenen Änderungen kontrollieren. Dazu gehören insbesondere die unveränderte fachliche Bedeutung, die korrekte Wiedergabe der Quellen, die mathematische Richtigkeit, die Nachvollziehbarkeit des Codes und der Erhalt des persönlichen Schreibtons. Die Verantwortung für die endgültige Fassung der Arbeit bleibt beim Autor.

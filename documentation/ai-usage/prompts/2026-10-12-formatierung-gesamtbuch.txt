@@ -1,0 +1,308 @@
+# AUFTRAG: Einheitliche und professionelle Formatierung der gesamten Maturarbeit
+
+## 1. Ziel
+
+Überarbeite die **Darstellung und Formatierung der gesamten Maturarbeit** im bestehenden Quarto-Projekt. Ziel ist ein einheitlich gestaltetes, professionell wirkendes und technisch korrekt gerendertes Buch, das sowohl als HTML als auch als PDF und DOCX gut lesbar ist.
+
+**Dieser Auftrag ist ausschliesslich eine formale Überarbeitung. Keine fachliche, sprachliche oder mathematische Neufassung.**
+
+Die inhaltliche Prüfung erfolgt später in einem separaten Auftrag. Arbeite selbstständig, aber konservativ. Verändere nur, was die Darstellung tatsächlich verbessert oder einen nachweisbaren Formatierungsfehler behebt.
+
+## 2. Repository und Vorbereitung
+
+Repository: `riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027`
+
+Arbeitsbranch: `dev`, im normalen Schreib-Repository, nicht im separaten Engine-Worktree.
+
+Der zuletzt bekannte Referenzcommit ist `99ea85b415c58b70a0997d6f1b700babecbd0817`. Verwende den tatsächlichen aktuellen lokalen Stand als Grundlage und setze nicht auf einen älteren Commit zurück.
+
+Prüfe zuerst:
+
+- Repository-Wurzel, aktuellen Branch, HEAD und `git status`.
+- Vorhandene lokale Änderungen und projektbezogene Anweisungen, insbesondere `AGENTS.md`, falls vorhanden.
+- `_quarto.yml`, `styles/custom.scss`, `styles/styles.css` und `filters/date-icon.lua`.
+- Sämtliche in `_quarto.yml` eingebundenen Kapitel sowie `ki-nutzung.qmd`.
+- Die bestehenden Dokumentationsregeln unter `documentation/ai-usage/`.
+- Soweit zugänglich die formalen Schulvorgaben unter `documents/`, insbesondere den Leitfaden und die Maturarbeitsvorgaben.
+
+Konkrete Schulvorgaben haben Vorrang vor rein ästhetischen Entscheidungen. Wenn eine Vorgabe nicht überprüft werden kann, vermerke dies im Bericht und erfinde keine Anforderung.
+
+Sichere vor Änderungen den Ausgangsstand und erfasse dessen relevante Datei-Hashes. Vorhandene lokale Änderungen dürfen nicht verloren gehen.
+
+Kein automatischer Pull, Checkout, Reset, Clean oder Merge.
+
+## 3. Bearbeitungsumfang
+
+Prüfe das vollständige Quarto-Buch:
+
+- `index.ipynb` – Überblick
+- `notebooks/Einleitung.ipynb`
+- `notebooks/Theorie.ipynb`
+- `notebooks/Methodik.ipynb`
+- `notebooks/Analyse.ipynb`
+- `notebooks/Fazit.ipynb`
+- `ki-nutzung.qmd` – KI-Dokumentation
+- Darstellung des Literaturverzeichnisses und der Quellenverweise
+
+Berücksichtige die gemeinsamen Stil- und Konfigurationsdateien.
+
+Die Formatierung soll buchweit einheitlich sein. Versuche deshalb zuerst, Probleme durch gemeinsame Styles oder Quarto-Einstellungen zu lösen. Ändere einzelne Notebook-Zellen nur, wenn die globale Formatierung nicht genügt oder die Darstellung technisch falsch ist.
+
+**Keine umfangreiche Neugestaltung des Projekts.** Der bisherige seriöse, zurückhaltende Stil soll erhalten bleiben.
+
+## 4. Konkrete Formatierungsprüfung
+
+### 4.1 Überschriften und Kapitelstruktur
+
+Kontrolliere die vollständige Überschriftenhierarchie:
+
+- Einheitliche optische Grösse, Gewichtung und Abstände gleicher Überschriftenebenen.
+- Korrekte Kapitel- und Abschnittsnummerierung.
+- Keine doppelten Kapitelüberschriften oder Nummern.
+- Keine falsch verschachtelten Überschriften.
+- Einheitliche Darstellung im Inhaltsverzeichnis und in der HTML-Navigation.
+- Saubere Abstände zwischen Kapiteln, Überschriften und nachfolgenden Absätzen.
+
+**Wichtig:** Die Kapitel verwenden derzeit unterschiedliche technische Überschriftenformate. Das Theoriekapitel nutzt native Markdown-Überschriften mit automatischer Quarto-Nummerierung, andere Kapitel teilweise HTML-Überschriften mit bereits enthaltenen Nummern.
+
+Vereinheitliche primär die **sichtbare Darstellung**, nicht blind die Quellsyntax. Eine automatische Umwandlung darf weder doppelte Nummerierungen noch beschädigte Anker verursachen.
+
+`index.ipynb` besitzt eine besondere Titelkonstruktion mit YAML-Raw-Zelle und zusätzlichem HTML-Titel für die Überblick-Seite. Erhalte die funktionsfähige Titelanzeige in HTML, PDF und DOCX. Beachte dazu `documentation/readme-ueberblick-sync.md`.
+
+### 4.2 Fliesstext und allgemeine Typografie
+
+Prüfe:
+
+- Einheitliche Schriftfamilien und Schriftgrössen innerhalb der jeweiligen Ausgabeformate.
+- Angenehme Zeilenabstände und Textbreiten.
+- Einheitliche Absatzabstände und Abstände nach Überschriften.
+- Korrekte Darstellung von Hervorhebungen, Zitaten, Inline-Code und Aufzählungen.
+- Keine ungewollten übergrossen Leerflächen.
+- Keine überlappenden Texte, abgeschnittenen Absätze oder unnötigen Seitenumbrüche.
+- Gut lesbare lange Fachbegriffe, Dateinamen und URLs.
+
+Die Gestaltung soll wissenschaftlich, schlicht und gut lesbar bleiben. Keine dekorativen Elemente ohne funktionalen Nutzen.
+
+### 4.3 Tabellen
+
+Kontrolliere alle Tabellen in sämtlichen Kapiteln:
+
+- Einheitliche Gestaltung von Tabellenüberschriften und Rahmen.
+- Gute Lesbarkeit und ausreichende Zellabstände.
+- Sinnvolle Spaltenbreiten.
+- Optisch saubere Ausrichtung von Zahlen und Text.
+- Keine abgeschnittenen Spalten oder über den Seitenrand laufenden Tabellen.
+- Sinnvolle Seitenumbrüche bei mehrseitigen Tabellen.
+- Einheitliche Darstellung von Tabellenbeschriftungen und vorhandenen Quellenhinweisen.
+
+Falls eine Tabelle im PDF zu breit ist, wähle eine möglichst kleine, lokale Formatierungsanpassung.
+
+**Tabellenwerte, Zahlen, Einheiten, Reihenfolgen und Quellen dürfen nicht verändert werden.** Fehlende inhaltliche Angaben nicht selbst ergänzen.
+
+### 4.4 Mathematische Formeln
+
+Überprüfe die Darstellung aller mathematischen Ausdrücke:
+
+- Korrekte Darstellung von Brüchen, Summen, Indizes, Exponenten und Sonderzeichen.
+- Einheitliche Abstände vor und nach Formeln.
+- Keine abgeschnittenen oder überlappenden Gleichungen.
+- Korrekte Ausrichtung mehrzeiliger Formeln.
+- Lesbare Formeln im PDF sowie möglichst korrekte Darstellung in HTML und DOCX.
+- Verständliche Positionierung vorhandener Variablenerklärungen.
+
+Die kürzlich korrigierte Maximum-Drawdown-Formel und die Sharpe-Ratio-Tabelle müssen weiterhin korrekt dargestellt werden.
+
+**Mathematische Definitionen und Formelinhalte dürfen nicht verändert werden.** Falls eine Formel fachlich fragwürdig erscheint, dokumentiere die Auffälligkeit für Phase 2, anstatt sie in diesem Auftrag zu korrigieren.
+
+### 4.5 Python-Code und Notebook-Ausgaben
+
+Prüfe sämtliche Codeblöcke und gespeicherten Ausgaben hinsichtlich Darstellung:
+
+- Einheitliche Code-Schrift und Hintergrundgestaltung.
+- Lesbare Einrückungen.
+- Geeigneter Zeilenumbruch beziehungsweise horizontales Scrollen.
+- Keine abgeschnittenen Codezeilen im PDF.
+- Einheitliche Darstellung der Quarto-Code-Folding-Elemente im HTML.
+- Saubere Abstände zwischen Code, Ausgaben und erklärendem Text.
+
+Verändere **keine Python-Anweisungen, Kommentare, Funktionssignaturen oder Berechnungen**. Führe keine Codezellen erneut aus.
+
+Alle bestehenden Zell-IDs, Codequellen, gespeicherten Outputs und Ausführungszähler müssen unverändert erhalten bleiben.
+
+Ein bereits bekannter möglicher Konsistenzpunkt ist die gespeicherte Volatilitätsausgabe im Theoriekapitel nach einer kürzlichen Gewichtsänderung. Sollte dieser noch bestehen, erfasse ihn lediglich als fachlichen Folgepunkt. Nicht im Rahmen der Formatierung nachrechnen oder Ausgaben manuell ersetzen.
+
+### 4.6 Abbildungen und Diagramme
+
+Prüfe:
+
+- Einheitliche Einbindung und Ausrichtung.
+- Geeignete Grössen in HTML und PDF.
+- Erkennbare Achsenbeschriftungen und Legenden.
+- Keine abgeschnittenen Diagramme oder Bildbeschriftungen.
+- Konsistente Abstände und vorhandene Quellenhinweise.
+- Keine Bilder, die durch Seitenumbrüche unverständlich getrennt werden.
+
+Bestehende Diagramme dürfen nicht neu berechnet, inhaltlich verändert oder durch andere Abbildungen ersetzt werden.
+
+Falls die Lesbarkeit einer Abbildung mit reinen Layoutmitteln nicht ausreichend verbessert werden kann, halte dies im Bericht fest.
+
+### 4.7 Quellen, Literaturverzeichnis und Anhang
+
+Prüfe die sichtbare Darstellung der Quellenverweise und des Literaturverzeichnisses.
+
+Die bestehende Zitierweise, die CSL-Datei und die bibliografischen Inhalte bleiben unverändert. Keine Quellen ergänzen, ersetzen oder stillschweigend korrigieren.
+
+Kontrolliere auch den KI-Anhang hinsichtlich Darstellung und korrekter Einbindung.
+
+Prüfe, ob Verzeichnisse, Anhang, Seitenzahlen, Kopf-/Fussbereiche und Navigation einheitlich funktionieren.
+
+## 5. Absolute inhaltliche Grenzen
+
+Folgende Änderungen sind ausdrücklich nicht erlaubt:
+
+- Fachtexte umschreiben, kürzen oder erweitern.
+- Rechtschreibung, Grammatik oder wissenschaftliche Aussagen überarbeiten.
+- Ergebnisse, Tabellenwerte, Kennzahlen oder Interpretation verändern.
+- Formeln oder Python-Code fachlich korrigieren.
+- Quellen, Citation Keys, zitierte Seiten oder Bibliografieeinträge ändern.
+- Codezellen ausführen oder gespeicherte Ausgaben neu generieren.
+- Rohdaten, Engine, Versuchskonfigurationen oder Ergebnisse der Untersuchung verändern.
+- Abbildungen aufgrund neuer Berechnungen ersetzen.
+- Bestehende Archive, Freeze-Dateien oder alte Arbeitsnachweise ändern.
+
+Reine Formatierungsanpassungen sind erlaubt, wenn die sichtbaren fachlichen Informationen vollständig erhalten bleiben.
+
+Vermeide unnötige Änderungen am JSON-Format der `.ipynb`-Dateien. Insbesondere keine notebookweite Serialisierung, die grosse Diffs erzeugt, obwohl nur kleine Anpassungen nötig sind.
+
+Wenn eine Änderung gleichzeitig die Darstellung und die fachliche Bedeutung betreffen könnte, **nicht automatisch durchführen**, sondern als offenen Punkt melden.
+
+## 6. Vorgehensweise
+
+Arbeite in folgender Reihenfolge:
+
+1. Erstelle eine Bestandsaufnahme der Formatierung und identifiziere konkrete Probleme.
+2. Ordne die Probleme nach Wirkung und Risiko.
+3. Beginne mit gemeinsamen Stilvorlagen und Quarto-Einstellungen.
+4. Nimm danach gezielte lokale Formatierungsänderungen vor, soweit sie nötig sind.
+5. Prüfe nach Änderungen, ob die unterschiedlichen Kapitel weiterhin korrekt dargestellt werden.
+6. Kontrolliere systematisch, dass keine fachlichen Inhalte verloren gegangen sind.
+7. Führe Render- und Darstellungsprüfungen durch.
+8. Dokumentiere das Ergebnis und alle offenen Punkte.
+
+Verwende keine pauschalen globalen Änderungen, wenn diese andere Kapitel beschädigen könnten.
+
+Setze eindeutig sichere Formatierungsverbesserungen selbstständig um. Bei schwerwiegenden Zielkonflikten oder hohem Risiko für die Integrität der Arbeit nicht improvisieren, sondern die betreffende Änderung auslassen und dokumentieren.
+
+## 7. Technische Abnahme
+
+Führe nachvollziehbare Prüfungen durch.
+
+### 7.1 Integritätskontrolle
+
+Vergleiche den Stand vor und nach der Bearbeitung.
+
+Prüfe insbesondere:
+
+- Anzahl und Identität aller Codezellen.
+- Unveränderte Python-Quellen.
+- Unveränderte gespeicherte Outputs, Metadaten und Execution Counts.
+- Erhalt von Formeln, Quellenverweisen und Tabelleninhalten.
+- Erhalt eingebetteter Bilder und Attachments.
+- Gültigkeit der Notebook-JSON-Struktur.
+- Erhalt der bestehenden Kapitel und Abschnitte.
+- Keine versehentlichen Änderungen an Untersuchungsdaten, Engine oder Ergebnisdateien.
+
+Belege die Prüfungen im Bericht. Behaupte keine vollständige Integrität, wenn sie nicht tatsächlich überprüft wurde.
+
+### 7.2 Renderprüfung
+
+Rendere das vollständige Buch in einer **temporären, vom Arbeitsrepository getrennten Projektkopie**, damit vorhandene Caches, eingefrorene Ausgaben und `_book`-Dateien nicht verändert werden.
+
+Prüfe nacheinander:
+
+- HTML
+- PDF
+- DOCX
+
+Verwende Quarto ohne Codeausführung und möglichst ohne Cache-Nutzung, beispielsweise mit `--no-execute --no-cache`.
+
+Installiere keine zusätzlichen Pakete und führe keine automatischen LaTeX-Installationen durch. Falls ein Ausgabeformat wegen fehlender lokaler Werkzeuge nicht geprüft werden kann, dokumentiere die genaue Ursache.
+
+Kontrolliere die gerenderten Ergebnisse nicht nur anhand der Exit-Codes. Untersuche auch die tatsächliche Darstellung, insbesondere:
+
+- Titelseite und Inhaltsverzeichnis.
+- Alle Kapitelanfänge.
+- Tabellen und Abbildungen.
+- Mathematische Formeln.
+- Lange Codeblöcke.
+- Seitenumbrüche im PDF.
+- Quellenverweise und Literaturverzeichnis.
+- KI-Anhang.
+- Interne Links und Verweise.
+
+Notiere verbleibende Warnungen und unterscheide echte Layoutfehler von harmlosen technischen Meldungen.
+
+Keine problematischen Warnungen pauschal unterdrücken, nur damit der Renderlauf erfolgreich erscheint.
+
+## 8. Abschlussbericht
+
+Erstelle:
+
+`documentation/formatierung-gesamtbuch-2026-10-12.md`
+
+Der Bericht muss enthalten:
+
+1. Ausgangscommit, Branch und Ausgangszustand.
+2. Überblick über die gefundenen Formatierungsprobleme.
+3. Liste der tatsächlich geänderten Dateien.
+4. Für jede wesentliche Änderung: Problem, Massnahme und Begründung.
+5. Welche Änderungen global über Styles vorgenommen wurden und welche einzelne Kapitel betreffen.
+6. Ergebnisse der Integritätsprüfungen.
+7. Ergebnisse der HTML-, PDF- und DOCX-Renderprüfungen.
+8. Verbleibende Formatierungsprobleme und ihre Bedeutung.
+9. Separat beobachtete fachliche oder technische Auffälligkeiten, die wegen des begrenzten Auftrags nicht korrigiert wurden.
+10. Zusammenfassung der Git-Änderungen.
+
+Verwende eindeutige Statusangaben: `PASS`, `FAIL`, `NICHT GEPRÜFT` oder `OFFEN`.
+
+Führe abschliessend `git diff --check` und `git status` aus und liefere eine verständliche Zusammenfassung.
+
+## 9. KI-Dokumentation
+
+Ergänze die bestehende KI-Dokumentation entsprechend den Projektregeln:
+
+- `documentation/ai-usage/ai-usage-log.md`
+- `ki-nutzung.qmd`
+
+Bewahre den vollständigen ausgeführten Prompt unter `documentation/ai-usage/prompts/` auf.
+
+Dokumentiere ausdrücklich, dass dieser Codex-Einsatz die Formatierung und technische Darstellungsprüfung betraf, nicht die fachliche Verfassung oder Prüfung der Maturarbeit.
+
+Halte fest, welche Dateien, Styles und Formatierungen Codex tatsächlich verändert hat und welche Kontrollen erfolgt sind.
+
+Beachte `documentation/ai-usage/book-sync.md` bei der Übertragung in den Buchanhang.
+
+Behaupte nicht, dass der Autor das Ergebnis bereits persönlich geprüft hat. Die Autorenkontrolle erfolgt nach Abschluss dieses Auftrags.
+
+## 10. Abschlussregeln
+
+- Kein Commit.
+- Kein Push.
+- Kein Merge.
+- Kein Reset oder Clean.
+- Keine Änderungen an Engine oder Studiendaten.
+- Keine inhaltlichen Überarbeitungen der Kapitel.
+- Alle vorgenommenen Anpassungen müssen durch den Git-Diff nachvollziehbar sein.
+
+**Arbeite den vollständigen Auftrag selbstständig ab und stoppe danach zur Autorenkontrolle.**
+
+Gib am Ende eine kurze Zusammenfassung mit folgenden Angaben aus:
+
+- Anzahl und Art der Formatierungsverbesserungen.
+- Geänderte Dateien.
+- Renderstatus für HTML, PDF und DOCX.
+- Integritätsstatus.
+- Offene Probleme.
+- Pfad zum Abschlussbericht.
+
+STOPP.

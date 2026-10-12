@@ -17,10 +17,23 @@ body {
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   color: #16232e;
   font-weight: 650;
   line-height: 1.25;
+}
+
+.content h2,
+.content h3,
+.content h4 {
+  margin-top: 1.6em;
+  margin-bottom: 0.65em;
+  scroll-margin-top: 1rem;
+}
+
+.content h4 {
+  font-size: 1.1rem;
 }
 
 h1 {
@@ -39,6 +52,13 @@ a {
 
 .content p {
   max-width: 76ch;
+}
+
+.content p code,
+.content li code,
+.content td code,
+.content a {
+  overflow-wrap: anywhere;
 }
 
 .callout {
@@ -81,6 +101,38 @@ details.code-fold > summary {
   cursor: pointer;
   font-size: 0.94rem;
   padding: 0.45rem 0.75rem;
+}
+
+.cell {
+  margin-block: 1.1rem;
+}
+
+.cell-output pre {
+  padding: 0.75rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.cell-output img,
+.quarto-figure img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+
+.math.display {
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.25rem;
+  margin-block: 1rem;
+}
+
+.cell-output-display,
+.quarto-table,
+.table-responsive {
+  overflow-x: auto;
 }
 
 table {
