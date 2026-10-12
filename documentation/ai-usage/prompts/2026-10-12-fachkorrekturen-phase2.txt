@@ -1,0 +1,328 @@
+# AUFTRAG: Gezielte Korrektur der bestätigten Fehler aus dem wissenschaftlichen Gegenlesen
+
+## 1. Ziel
+
+Korrigiere die nachgewiesenen fachlichen, mathematischen, technischen und bibliografischen Fehler aus dem Gegenlesebericht meiner Maturarbeit «Langfristige Anlagestrategien anhand historischer Finanzdaten».
+
+Die Arbeit wurde inzwischen vollständig umstrukturiert und auf **7’849 Wörter Haupttext einschliesslich Überblick** gekürzt.
+
+**Es geht ausschliesslich um die Korrektur konkreter Fehler. Keine weiteren allgemeinen Verbesserungen, Kürzungsdurchläufe oder Umformulierungen.**
+
+Arbeite selbstständig und möglichst minimalinvasiv. Die fachliche Richtigkeit hat Vorrang vor der Wortzahl.
+
+## 2. Ausgangsstand
+
+Repository: `riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027`
+
+Branch: `dev`
+
+Bekannter HEAD: `6c9cb6991e95165744836d6da1c77c5280035ab5`.
+
+Prüfe den tatsächlichen HEAD, den Git-Status und die vorhandenen Projektanweisungen.
+
+Lies vollständig:
+
+- `documentation/gesamtgegenlesen-phase2-2026-10-12.md`
+- `documentation/kuerzung-haupttext-stufe2-2026-10-12.md`
+- Die betroffenen aktuellen Notebook-Abschnitte
+- `src/funktionen.py`
+- Die relevanten Anhänge und bibliografischen Originalbelege
+- Die geltenden KI-Dokumentationsregeln
+
+Wichtig: Die Kapitelstruktur wurde nach dem Gegenlesen geändert. Verwende die **aktuellen Zell-IDs und Dateipfade**, nicht blind die früheren Kapitelnummern.
+
+Arbeite ausschliesslich im normalen Maturarbeit-Repository. Der separate `study-v1`-Worktree mit Engine und historischen Originaldaten darf nicht verändert werden.
+
+## 3. Verbindlich zu korrigierende Befunde
+
+### R-001 – Falsche gespeicherte Portfolio-Volatilität
+
+Datei: `notebooks/Theorie.ipynb`
+
+Codezelle: `5b4e89ac`
+
+Die aktuellen Gewichte `0.20/0.40/0.40` sind korrekt und summieren sich auf 1.
+
+Die gespeicherte Ausgabe `Volatilität: 1.15%` ist veraltet. Die unabhängig geprüfte Stichprobenvolatilität beträgt ungefähr `0.015731073284`, also **1,57 %**.
+
+Auftrag:
+
+- Führe ausschliesslich dieses selbstständige, synthetische Beispiel isoliert aus.
+- Verwende keine echten Studiendaten.
+- Prüfe das Ergebnis zusätzlich unabhängig anhand der gewichteten Renditen.
+- Aktualisiere die gespeicherte Ausgabe der Zelle ausschliesslich anhand der tatsächlichen Ausführung.
+- Halte Execution Count und Output-Provenienz korrekt fest.
+- Verändere den Python-Quellcode nicht, sofern er bereits richtig ist.
+
+Falls die isolierte Ausführung wegen fehlender Abhängigkeiten nicht möglich ist, melde den Punkt ausdrücklich als offen. Keine Ausführung vortäuschen und keinen Output ohne Ausführungsnachweis als frisch berechnet ausgeben.
+
+### R-003 – Falsches Kommer-Buch bei Indexfonds-Erklärungen
+
+Datei: `notebooks/Theorie.ipynb`
+
+Zelle: `1941d2df`
+
+Zwei Quellenangaben verweisen auf die Seiten 464–465 beziehungsweise 465 des Buchs «Der leichte Einstieg in die Welt der ETFs». Dieses Werk besitzt in der verfügbaren Ausgabe nicht so viele Seiten.
+
+Der passende Abschnitt steht in «Souverän investieren mit Indexfonds und ETFs», insbesondere Abschnitt 9.2.
+
+Auftrag:
+
+- Überprüfe die zwei konkreten Belegstellen anhand der zugänglichen Originalquelle.
+- Ersetze ausschliesslich die falschen Werkzuordnungen durch den richtigen vorhandenen Citation Key.
+- Verwende korrekte, überprüfbare Seiten- oder Abschnittsangaben.
+- Verändere keine anderen korrekten Verweise auf das Starterbuch.
+- Fachtext und Lehrerfeedback-Ergänzungen erhalten.
+
+### R-004 – 60/40-Periodenrendite
+
+Datei: `notebooks/Theorie.ipynb`
+
+Zelle: `990d4cd6`
+
+Die bestehende Formel mit festen Gewichten von 60 % und 40 % gilt für eine einzelne Periode nur, wenn die tatsächlichen Gewichte zu deren Beginn diesen Anteilen entsprechen.
+
+Zwischen jährlichen Rebalancing-Terminen können die Gewichte abweichen.
+
+Auftrag:
+
+- Erläutere diese Anfangsbedingung direkt bei der Formel.
+- Stelle bei Bedarf die allgemeine gewichtete Portfoliorendite mit den tatsächlichen Periodenanfangsgewichten dar.
+- Verändere weder die Rebalancing-Regel noch die echte Engine.
+- Keine unnötigen ausführlichen Zusatzbeispiele.
+
+### R-005 – Veraltete lokale Drawdown-Hilfsfunktion
+
+Datei: `src/funktionen.py`
+
+Die Funktion `drawdown()` berücksichtigt den normalisierten Ausgangswert 1 bislang nicht als möglichen bisherigen Höchststand.
+
+Die aktuelle Theorieversion und die eingefrorene Engine berücksichtigen dies bereits.
+
+Auftrag:
+
+- Korrigiere ausschliesslich die lokale Referenzfunktion mit der bestehenden Ausgangswertkonvention, insbesondere `.cummax().clip(lower=1.0)`.
+- Prüfe einen sofortigen Verlust von −10 %, einen späteren neuen Höchststand und eine anschliessende Erholung.
+- Überprüfe, dass `maximum_drawdown()` weiterhin das richtige Minimum liefert.
+- Keine anderen Finanzfunktionen ändern.
+- Keine Änderungen an `study-v1` oder Engine v1.0.
+
+Die Tests dürfen isoliert stattfinden und keine Studie neu durchführen.
+
+### R-006 – Erholungsdauer und QuantStats-Ausgabe
+
+Datei: `notebooks/Theorie.ipynb`
+
+Betroffene Zellen: `d501a004`, `83fd3049` und die dazugehörige gespeicherte QuantStats-Tabelle.
+
+Die momentane Beschreibung vermischt die vollständige Erholungsdauer von einem früheren Höchststand bis zu dessen Wiedererreichung mit den von `drawdown_details()` ausgegebenen Unterwasser-Episoden.
+
+Im Beispiel beträgt die tatsächliche Dauer vom Höchststand 31.01.2024 bis zur Wiedererreichung am 30.04.2024 **90 Kalendertage**. Die gespeicherten 32 Tage der ersten Tabellenzeile beschreiben nicht diese vollständige Peak-to-Recovery-Dauer.
+
+Auftrag:
+
+- Unterscheide die beiden Zeitdefinitionen korrekt.
+- Erläutere die Bedeutung der Tabellenspalten im konkreten gespeicherten Beispiel.
+- Weise darauf hin, dass die letzte Episode am Ende der Beispielreihe noch nicht erholt ist.
+- Erhalte die bestehende gespeicherte Ausgabe unverändert.
+- Keine neue Kennzahl oder neue Berechnungsfunktion hinzufügen, sofern sie für die Korrektur nicht erforderlich ist.
+- Die vorhandene Code-Überschrift `Erholungsphasen` bei Bedarf als vereinfachende Bezeichnung erklären, statt den Output falsch umzudeuten.
+
+### R-007 – Falsche Vereinfachung zum S&P 500
+
+Datei: `notebooks/Theorie.ipynb`
+
+Zelle: `1941d2df`
+
+Die Aussage, der S&P 500 umfasse schlicht die 500 grössten Unternehmen der USA, ist zu ungenau.
+
+Korrigiere sie knapp anhand der offiziellen Auswahlbeschreibung von S&P Dow Jones Indices.
+
+Beispielsweise: 500 führende grosse US-Unternehmen, die zusätzliche Indexauswahlkriterien erfüllen.
+
+Wenn ein neuer Anbieterbeleg erforderlich ist, erstelle einen korrekten, nachvollziehbaren Bibliografieeintrag. Keine erfundenen Veröffentlichungsdaten oder Seitenangaben.
+
+### R-009 – Falscher `to_datetime`-Seitenverweis
+
+Die betroffene Zelle `7e670f16` befindet sich inzwischen im Datenanhang B.
+
+Die vorliegende PDF-Version von McKinney behandelt `to_datetime` im Abschnitt «Converting Between String and Datetime» von Kapitel 11; Datei-Seite 511 ist lediglich der Kapitelbeginn.
+
+Ersetze den ungenauen Beleg durch den überprüften Abschnittsverweis oder die korrekt bestimmte gedruckte Buchseite.
+
+Die PDF-Dateiseite darf nicht ungeprüft als gedruckte Seite ausgegeben werden.
+
+### R-010 – Gleiche Rendite versus gleiches arithmetisches Mittel
+
+Datei: `notebooks/Theorie.ipynb`
+
+Zelle: `5a028097`
+
+Die beiden Volatilitätsbeispiele besitzen dasselbe arithmetische Mittel der Monatsrenditen, aber nicht dieselbe geometrische Gesamtrendite.
+
+Präzisiere ausschliesslich diese Aussage. Die Illustration, Daten und Berechnungen bleiben unverändert.
+
+### R-011 – Historische pandas-Frequenzaliase
+
+Die frühere Aliasübersicht befindet sich inzwischen im technischen Datenanhang B.
+
+Prüfe die aktuelle Darstellung und kennzeichne die Tabelle ausdrücklich als historische Übersicht aus der verwendeten Literatur.
+
+Erkläre bei Bedarf kurz, dass neuere pandas-Versionen andere Aliase verwenden, insbesondere `ME` statt `M` für das Monatsende.
+
+Berücksichtige den dokumentierten Studienstand mit pandas 2.3.3.
+
+Keine Paketaktualisierungen, keine Änderung der Engine oder der tatsächlichen Frequenzregeln. Wenn der vorhandene historische Hinweis bereits vollständig genügt, den Befund mit Begründung als erledigt dokumentieren und nichts Zusätzliches ändern.
+
+### R-013 – Doppelter Gegenrechnungsabsatz
+
+Datei: `notebooks/Anhang_Tests_Validierung.ipynb`
+
+Originalzellen: `a4355b5e` und `008ef22e`.
+
+Ein Absatz über die zusätzliche KI-gestützte Gegenrechnung steht zweimal unmittelbar hintereinander.
+
+Entferne genau eine der beiden Textzellen. Erhalte den vollständigen Inhalt einmal und prüfe, dass dadurch keine Abschnittsverweise beschädigt werden.
+
+Es ist zulässig, dass dadurch die Notebook-Zellanzahl um genau eins sinkt. Keine Codezelle entfernen.
+
+### R-015 – Historisches Inflationsmittel
+
+Datei: `notebooks/Theorie.ipynb`
+
+Zelle: `621f9b9a`
+
+Die angegebene durchschnittliche Schweizer Inflation von rund 0,8 % ist als historischer Mittelwert für 2016–2025 plausibel.
+
+Daraus folgt jedoch nicht, dass in jedem Jahr 0,8 % nominale Rendite ausreichen, um die Kaufkraft zu erhalten.
+
+Auftrag:
+
+- Nenne den konkreten historischen Zeitraum.
+- Erkläre, dass die nominale Rendite zur Erhaltung der Kaufkraft die tatsächliche Inflation desselben Zeitraums erreichen muss.
+- Erhalte die ursprüngliche BFS-Quelle.
+- Keine rückwirkende Inflationsbereinigung der USD-Studienergebnisse.
+
+## 4. Befunde, die nicht Bestandteil dieses Auftrags sind
+
+Keine zusätzlichen Arbeiten an:
+
+- **R-002:** Wortumfang – bereits innerhalb des vorgesehenen Rahmens.
+- **R-008:** historische KI-Programmierung – folgt als eigener Dokumentationsauftrag.
+- **R-012:** Umfang der manuellen Autorenkontrolle – wird im separaten KI-Dokumentationsschritt mit dem Autor geklärt.
+- **R-014:** früherer QMD-Projektüberblick – bereits als historischer Projektstand in Anhang A eingeordnet. Historische Inhalte nicht rückwirkend umschreiben.
+- **R-016:** vollständige formale Abgabeteile – späterer Auftrag.
+- **R-017:** unabhängige Originaldaten-/Sharpe-Prüfung – späterer Auftrag im wiederhergestellten Studienarchiv.
+
+Berichte über den aktuellen Status dieser Befunde, aber verändere sie nicht.
+
+## 5. Schutz des bisherigen Arbeitsstands
+
+Die umfangreichen Kürzungen der beiden vorherigen Stufen dürfen nicht rückgängig gemacht werden.
+
+Unverändert bleiben müssen:
+
+- Forschungsfrage und wissenschaftliche Argumentationsstruktur
+- Anlageuniversen, Studienzeiträume und Strategieparameter
+- Alle realen Studienergebnisse und Ergebnisdateien
+- Sämtliche Ergebnistabellen und Grafiken
+- Alle nicht ausdrücklich betroffenen Formeln
+- Alle übrigen Python-Codezellen und Outputs
+- Persönliche Reflexion und Kernerkenntnisse aus F02/F04
+- Historische KI-Nachweise und Originalprompts
+- Die eingefrorene Engine sowie Roh- und Prozessdaten
+
+T01 ist gegen weitere Kürzungen gesperrt. Die zwei ausdrücklich freigegebenen sachlichen Korrekturen R-003 und R-007 in dieser Zelle sind jedoch erlaubt.
+
+Keine neuen Strategien, keine optimierten Parameter und keine neuen Studienläufe.
+
+## 6. Wortzahl
+
+Der Haupttext umfasst derzeit **7’849 Wörter einschliesslich Überblick**. Bis zur Obergrenze von 8’000 bestehen nach der bisherigen Zählmethode 151 Wörter Reserve.
+
+Formuliere Korrekturen so knapp wie möglich, ohne mathematische oder fachliche Richtigkeit zu beeinträchtigen.
+
+Zähle nach Abschluss erneut.
+
+Wenn die Grenze überschritten wird, melde die genaue Überschreitung. Keine wissenschaftlich notwendigen Erklärungen entfernen und keine zusätzliche Kürzung ausserhalb der konkret freigegebenen Problemstellen durchführen.
+
+## 7. Technische Prüfung
+
+Prüfe die Änderungen gegenüber dem tatsächlichen Ausgangsstand.
+
+Insbesondere:
+
+1. Alle ursprünglichen Codezellobjekte bleiben vollständig identisch; nur bei R-001 darf der nachweislich neu erzeugte Output samt notwendiger Ausführungsmetadaten abweichen.
+2. Die lokale Änderung in `src/funktionen.py` ist auf den Drawdown-Fehler begrenzt.
+3. Alle übrigen gespeicherten Outputs und acht PNGs bleiben unverändert.
+4. Reale Ergebnisdateien, Studienkonfigurationen und Freeze-Nachweise bleiben byteidentisch.
+5. Unveränderte Formeln, Tabellen und Quellen bleiben erhalten.
+6. Alle neuen oder korrigierten Quellenverweise sind auflösbar und nachweisbar.
+7. Alle Notebook-Dateien sind gültig und Zell-IDs eindeutig.
+8. Die Entfernung der einen doppelten Textzelle ist vollständig nachvollziehbar.
+9. Aktuelle Kapitel- und Anhangsverweise funktionieren.
+10. Die Korrekturen sind mathematisch und wissenschaftlich plausibel.
+
+Rendere HTML, PDF und DOCX ohne Notebook-Codeausführung in einer vollständig separaten externen Projektkopie.
+
+Wegen eines früheren DOCX-Ausgabevorfalls dürfen `_book`, `_freeze`, `.quarto` und bestehende generierte Ausgaben im produktiven Repository nicht verändert werden.
+
+Keine Paketdownloads oder automatischen Installationen.
+
+## 8. Änderungsbericht und KI-Dokumentation
+
+Erstelle:
+
+`documentation/fachkorrekturen-phase2-2026-10-12.md`
+
+Für jeden der elf Befunde dokumentieren:
+
+- Befundnummer
+- Originalproblem
+- Betroffene Datei und Zell-ID
+- Tatsächlich vorgenommene Korrektur
+- Wissenschaftliche Begründung beziehungsweise Quelle
+- Vorher-/nachher-Text oder Codeänderung
+- Verifikationsstatus
+- Offene Einschränkungen
+
+Füge eine Übersicht bei:
+
+- Gelöste Befunde
+- Teilweise gelöste Befunde
+- Offene Befunde
+- Vorherige und neue Wortzahl
+- Geänderte Dateien
+- Integritäts- und Renderergebnisse
+
+Aktualisiere ausserdem:
+
+- `documentation/ai-usage/ai-usage-log.md`
+- `ki-nutzung.qmd`
+- Promptkopie unter `documentation/ai-usage/prompts/`
+
+Dokumentiere die tatsächlichen Arbeiten korrekt. Unterscheide fachliche Erklärungs- und Textkorrekturen, Quellenkontrolle, lokale Programmkorrektur und technische Prüfung.
+
+Keine persönliche Autorenfreigabe behaupten.
+
+## 9. Abschluss
+
+Bearbeite ausschliesslich die genannten elf Befunde.
+
+Keine allgemeine Stilüberarbeitung, keine zusätzlichen Kürzungen und keine neuen wissenschaftlichen Ergebnisse.
+
+Kein Commit, Push, Merge, Reset oder Clean.
+
+Führe alle möglichen Prüfungen aus und stoppe danach zur Autorenkontrolle.
+
+Gib abschliessend eine kompakte Übersicht aus:
+
+- Anzahl vollständig korrigierter Befunde
+- Allenfalls teilweise oder nicht korrigierte Befunde
+- Neue Haupttext-Wortzahl
+- Geänderte Dateien
+- Integritätsstatus
+- HTML-/PDF-/DOCX-Status
+- Pfad zum vollständigen Bericht
+
+**STOPP.**

@@ -47,7 +47,7 @@ def annualisierte_volatilitaet(werte: np.ndarray, perioden_pro_jahr: int):
 
 def drawdown(renditen: pd.Series):
     vermoegen = (1 + renditen).cumprod()
-    bisheriger_hoechststand = vermoegen.cummax()
+    bisheriger_hoechststand = vermoegen.cummax().clip(lower=1.0)
     return vermoegen / bisheriger_hoechststand - 1
 
 
