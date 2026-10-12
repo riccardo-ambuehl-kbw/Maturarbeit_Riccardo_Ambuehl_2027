@@ -1,0 +1,287 @@
+# AUFTRAG: Unabhängige Originaldaten-, Freeze- und Sharpe-Prüfung (R-017)
+
+## 1. Ziel und Abgrenzung
+
+Führe die abschliessende, unabhängige Originaldatenprüfung meiner Informatik-Maturarbeit «Langfristige Anlagestrategien anhand historischer Finanzdaten» durch.
+
+Beim wissenschaftlichen Gegenlesen vom 12. Oktober 2026 blieb der Befund **R-017** offen, weil der separate Engine-Worktree mit den ursprünglichen, nicht auf GitHub gespeicherten Daten damals nicht zugänglich war.
+
+Inzwischen habe ich den vollständigen Engine-Ordner inklusive Raw-, Processed- und Freeze-Daten vom Laptop auf meinen Desktop übertragen. Beide Repository-Ordner stehen dir nun im Workspace zur Verfügung.
+
+**Ziel ist, den bislang fehlenden unabhängigen Nachweis nachzuholen. Es dürfen keine neuen Studienläufe und keine Änderungen an den eingefrorenen Daten oder Ergebnissen stattfinden.**
+
+Arbeite selbstständig, wissenschaftlich kritisch und nachvollziehbar. Suche ausdrücklich auch nach Fehlern, statt lediglich vorhandene Bestätigungen zu wiederholen.
+
+## 2. Repositories und Ausgangsstand
+
+**Hauptrepository (Maturarbeit):**
+
+`C:\Users\modic\Documents\GitHub\Maturarbeit_Riccardo_Ambuehl_2027`
+
+Erwarteter Branch: `dev`
+
+Erwarteter HEAD: `917abcf514be32696671c8ab780c7b49fd8182c8`
+
+**Separater Engine-Worktree:**
+
+`C:\Users\modic\Documents\GitHub\Maturarbeit_Engine`
+
+Erwarteter Branch: `study-v1`
+
+Bekannter Commit: `1954bfbcb257b51e7f9174aa824cb35e437de752`
+
+Zusätzliche Sicherung:
+
+`C:\Users\modic\Documents\GitHub\Maturarbeit_Engine_Backup`
+
+Die Sicherung ist nicht als Ersatz für ein fehlgeschlagenes Hash-Gate zu verwenden.
+
+Prüfe zuerst die tatsächlichen Repository-Stände, die Verfügbarkeit beider Ordner, den Git-Status und die geltenden Projektanweisungen. Bestehende lokale Änderungen dürfen nicht überschrieben werden.
+
+### Verbindliche Nachweise
+
+Lies zunächst diese Dateien:
+
+Im Hauptrepository:
+
+- `documentation/gesamtgegenlesen-phase2-2026-10-12.md`, insbesondere R-017 und die offenen Prüfungen.
+- `documentation/fachkorrekturen-phase2-2026-10-12.md`
+- `notebooks/Methodik.ipynb`
+- `notebooks/Analyse.ipynb`
+- `notebooks/Anhang_Datenaufbereitung.ipynb`
+- `notebooks/Anhang_Tests_Validierung.ipynb`
+- Alle fünf `results/study_v1/*/run_manifest.json` und die zugehörigen Ergebnisdateien.
+
+Im Engine-Worktree:
+
+- `documentation/study-v1-freeze-seal.md`
+- `documentation/study-v1-freeze-preparation.md`
+- `documentation/study-v1-data-preparation.md`
+- `documentation/study-v1-author-approval.md`
+- `scripts/study_v1/verify_freeze.py`
+- `scripts/study_v1/prepare_data.py`
+- `scripts/study_v1/weo_release_register.csv`
+- `configs/study_v1/*.json`
+- Relevante Engine-Quellen zur Datenvalidierung und Berechnung.
+
+Die historischen Dokumente beschreiben den damaligen Stand und dienen als Soll- und Methodenreferenz, nicht als Beweis dafür, dass die jetzt übertragenen Dateien korrekt sind.
+
+## 3. Verbindliche Schutzregeln
+
+Die Prüfung erfolgt grundsätzlich **rein lesend**.
+
+Verboten sind insbesondere:
+
+- Neue Backtests oder Strategie-Simulationen.
+- Erneutes Herunterladen von Yahoo-, FRED- oder IMF-Daten.
+- Neue Datenaufbereitungsläufe oder Überschreiben von Processed-Dateien.
+- Änderungen an Engine v1.0, Strategien, Parametern oder Studienkonfigurationen.
+- Änderungen an Raw-, Processed-, Archiv-, Freeze- oder Ergebnisdateien.
+- Ausführen von Notebooks, die reale Studienberechnungen starten.
+- Neue Paketinstallationen oder unaufgeforderte Updates.
+- Staging, Commits, Pushes, Merges, Resets oder Clean-Befehle.
+
+Die bestehende Prüfhilfe `verify_freeze.py` darf nach Kontrolle ihrer Nebenwirkungen ausgeführt werden, sofern die Ausführung nachweislich keine Studien- oder Quelldateien verändert. Sie ersetzt aber nicht deine unabhängige Nachrechnung.
+
+Eigene kleine Prüfprogramme dürfen erstellt und ausgeführt werden, jedoch ausschliesslich in einem neuen temporären Arbeitsverzeichnis **ausserhalb beider Repositories**. Verhindere Bytecode-, Notebook-, Test- und sonstige Cache-Schreibvorgänge in den geschützten Ordnern.
+
+Bei allen Prüfungen gilt: Quellen nur lesen, Werte separat berechnen, danach mit den unveränderten Originalen vergleichen.
+
+## 4. Prüfphase A – Vollständige Freeze-Integrität
+
+Das eingefrorene Archiv befindet sich unter:
+
+`Maturarbeit_Engine\data\study_v1\archive\study-freeze-v1`
+
+Laut historischem Nachweis enthält es 123 Dateien inklusive `freeze_manifest.json`, also 122 inventarisierte Einzeldateien.
+
+Der erwartete SHA-256-Hash von `freeze_manifest.json` lautet:
+
+`91d8fe30d1162bf467235a87d5688a13462277e31a6dcff1878ddc3bad0bd51c`
+
+Der verbindliche Hash von `processed_manifest.json` lautet:
+
+`948865ea3302ced267c9828b9a459ba03cd1c62971c070a818fd4c356c629c28`
+
+Prüfe unabhängig:
+
+1. Den vollständigen SHA-256-Hash des Freeze-Manifests gegen den extern dokumentierten Sollwert.
+2. Alle 122 inventarisierten Archivdateien einzeln auf Existenz, Dateigrösse und SHA-256.
+3. Das vollständige Dateiinventar einschliesslich fehlender, zusätzlicher und mehrfach aufgeführter Dateien.
+4. Die 54 ursprünglichen Raw-Dateien und die zwölf Processed-Artefakte anhand ihrer Herkunftsmanifeste.
+5. Die fünf ursprünglichen Studienkonfigurationen, Engine-Version, Quellenbindung und vorhandenen archivierten Code-/Umgebungsnachweise.
+6. Die sechs tatsächlich verwendeten Processed-Eingabedateien anhand der fünf Run-Manifeste im Hauptrepository.
+7. Die Integrität der 30 ursprünglichen Ergebnisdateien anhand der dokumentierten Run-Hashes.
+
+Beachte, dass die 468 risikofreien Monatsbeobachtungen aus zwei unterschiedlichen Reihen bestehen und dieselbe Hauptreihe von mehreren Studienläufen verwendet wird.
+
+Verwende die historischen Soll-Hashes. Keine nachträglich aus dem Ist-Zustand erzeugten Hashes als neue Referenzwerte akzeptieren.
+
+**Stop-Gate A:** Bei einer ungeklärten Abweichung im versiegelten Archiv keine inhaltliche Gesamtfreigabe erteilen. Den Fehler samt erwartetem und tatsächlichem Wert dokumentieren und keine stillschweigende Reparatur vornehmen.
+
+## 5. Prüfphase B – Marktdaten unabhängig rekonstruieren
+
+Vergleiche die originalen Yahoo-Daten mit den tatsächlich verwendeten Monatsreihen.
+
+Prüfe dabei:
+
+- Die neun historischen ETF-Quelldateien und deren Herkunftsmetadaten.
+- Die Abbildung der ursprünglichen `Adj Close`-Werte auf `performance_value` und, soweit vorgesehen, `signal_value`.
+- Die Wahl des letzten tatsächlich beobachteten Handelstages jedes Monats.
+- Die vollständigen Monatskalender und deren korrekte gemeinsame Ausrichtung.
+- Fehlende Werte, doppelte Beobachtungen, unerlaubte Auffüllungen oder nachträgliche Ersetzungen.
+- Die notwendige historische SMA-Vorlaufperiode.
+- Die korrekten Startbewertungen und Renditeperioden für H1/K1/S1/S2 (193 Bewertungen, 192 Renditeperioden) sowie Z1 (277 Bewertungen, 276 Renditeperioden).
+- Die für Trendfolge verwendeten SMA-Fenster 3/12, 2/12 und 6/12 und die Signalverzögerung um eine Periode anhand der Eingabedaten und gespeicherten Signale.
+
+Rechne repräsentative Werte nicht nur stichprobenartig, sondern nach Möglichkeit alle relevanten Original-zu-Monat-Zuordnungen unabhängig nach.
+
+Die historische Anbieteradjustierung darf nicht als unabhängig bewiesen bezeichnet werden, wenn nur der archivierte Yahoo-Snapshot und nicht dessen ursprüngliche Berechnungsgrundlage vorliegt.
+
+Keine neuen Strategie-Ergebnisreihen erzeugen.
+
+## 6. Prüfphase C – Risikofreie Renditen vollständig nachrechnen
+
+Dies ist einer der wichtigsten Teile der Untersuchung.
+
+Die verwendete Methode ist:
+
+`DGS3MO_LAGGED_ACT365_APPROX`
+
+Die DGS3MO-Reihe enthält annualisierte Zinssätze in Prozent.
+
+Für jede Periode wird die letzte gültige Quote verwendet, die **strikt vor dem tatsächlichen Quellhandelstag der Anfangsbewertung** liegt und höchstens sieben Kalendertage alt ist.
+
+Die Periodenapproximation lautet:
+
+`(annual_rate_percent / 100) * (Kalendertage der Periode / 365)`
+
+Die Tageszahl wird aus den tatsächlichen Kalender-Monatsendlabels bestimmt, nicht aus einer pauschalen Monatslänge. Schaltjahre ändern den Nenner 365 nicht.
+
+Prüfe die ursprüngliche FRED-Tagesdatei und berechne unabhängig alle **468 verschiedenen RF-Monatsperioden** (192 Hauptperioden, 276 US-Perioden).
+
+Vergleiche jede Berechnung mit:
+
+- `rf_main.csv`
+- `rf_us.csv`
+- `risk_free_provenance.csv`
+- den dokumentierten Rohdaten und Aufbereitungsnachweisen.
+
+Besonders wichtig sind eine korrekte zeitliche Verzögerung, die richtigen Prozent-/Dezimal-Einheiten, fehlende Tagesquoten, die Quote-Altersgrenze und die Kalenderzuordnung.
+
+Erstelle ein vollständiges Abweichungsprotokoll. Ein numerischer Unterschied ist nicht einfach mit einer pauschal grosszügigen Toleranz zu akzeptieren.
+
+## 7. Prüfphase D – Sharpe Ratio unabhängig nachrechnen
+
+Rechne sämtliche tatsächlich ausgewiesenen Sharpe-Werte der fünf eingefrorenen Untersuchungsläufe unabhängig nach.
+
+Nutze dazu die gespeicherten Portfolio-Renditen und die **zuvor unabhängig kontrollierten** risikofreien Monatsrenditen.
+
+Die verwendete Definition lautet:
+
+`Sharpe = Mittelwert(monatliche Portfolio-Rendite − monatliche RF-Rendite) / Stichprobenstandardabweichung(monatliche Überschussrendite, ddof=1) * sqrt(12)`
+
+Verwende nicht direkt die Engine-Funktion `sharpe_ratio()` als unabhängigen Rechenbeweis. Implementiere die Berechnung separat und vergleiche sie anschliessend mit der dokumentierten Engine-Definition.
+
+Prüfe:
+
+1. Dass die anfängliche Bewertung nicht als erste Renditeperiode gezählt wird.
+2. Dass RF- und Portfolio-Renditen anhand der tatsächlichen Periodenlabels exakt ausgerichtet sind.
+3. Dass keine Überschussrendite verloren geht oder doppelt vorkommt.
+4. Dass die arithmetischen monatlichen Überschussrenditen und deren Stichprobenstandardabweichung korrekt berechnet werden.
+5. Dass die Annualisierung mit zwölf Monatsperioden erfolgt.
+6. Dass die vollständigen Sharpe-Werte aller Strategien exakt mit den gespeicherten `summary.csv`-Werten übereinstimmen, soweit numerische Darstellungsgenauigkeit dies erlaubt.
+7. Dass zusätzlich die im Text ausgewiesenen Halbperioden-Sharpe-Werte, insbesondere für H1 2010–2017 und 2018–2025, unabhängig bestätigt werden.
+
+Kontrolliere ausserdem für die verwendeten Portfoliopfade die Verbindung zwischen gespeichertem Vermögensverlauf und periodischen Renditen. Sofern hierbei eine Inkonsistenz auftritt, dokumentiere sie, ohne einen neuen Backtest zu starten.
+
+Für jeden Vergleich dokumentieren: Lauf, Strategie, Zeitraum, Beobachtungszahl, RF-Reihe, unabhängig berechneter Wert, gespeicherter Wert und absolute Differenz.
+
+## 8. Prüfphase E – Historische BIP-Daten und Look-ahead Bias
+
+Prüfe sämtliche 16 archivierten historischen IMF-WEO-Ausgaben von 2009 bis 2024.
+
+Untersuche anhand der ursprünglichen Dateien:
+
+- Die tatsächlichen NGDPD-Werte der sieben G7-Länder.
+- Die Einheiten `USD_billions`.
+- Die historischen Veröffentlichungsstände und ihre dokumentierten Verfügbarkeitsdaten.
+- Die Behandlung des Feldes `Estimates Start After` und den Ausschluss nicht zugelassener Prognosejahre.
+- Die korrekte Erfassung aller 4’087 dokumentierten Makrodaten-Versionseinträge.
+- Den Abgleich der Werte und Provenienz mit `macro_g7.csv` und `macro_provenance.csv`.
+- Die 16 historischen BIP-Entscheidungszeitpunkte, sieben Länder pro Entscheidung (112 Zeilen).
+- Die Wahl des jüngsten gemeinsamen damals zulässigen Datenjahres.
+- Die Berechnung der sieben BIP-Gewichte und deren Summe.
+- Die Vermeidung von Look-ahead Bias: `available_from` darf nicht nach dem Entscheidungszeitpunkt liegen.
+
+Kontrolliere besonders die dokumentierten Sonderkonstellationen:
+
+- Verfügbarkeit der WEO-Ausgabe 2012: 10. Oktober 2012 gemäss genehmigtem Register.
+- Entscheid 2022: gemeinsames BIP-Jahr 2020 aus der Ausgabe Oktober 2022.
+- Historischer GBR-Wert im entsprechenden Datensatz: 2’758,87 Mrd. USD.
+
+Diese Konstellationen müssen sich aus den eingefrorenen Regeln und Rohdaten ergeben. Keine Jahresausnahmen hartcodieren.
+
+Unterscheide ausdrücklich zwischen einer Prüfung der archivierten Daten gegen die genehmigten historischen Veröffentlichungsdaten und einem unabhängigen kryptografischen Beweis, dass exakt dieselben Dateibytes bereits damals veröffentlicht waren.
+
+## 9. Ergebnisbewertung
+
+Bewerte jeden Bereich separat:
+
+- PASS: vollständig und unabhängig nachgewiesen.
+- FAIL: konkrete Abweichung oder nachgewiesener Fehler.
+- BLOCKED: Prüfung aufgrund fehlender Zugänglichkeit oder ungeklärter Integrität nicht möglich.
+- PARTIAL: nur ein begrenzter Teil konnte unabhängig nachgewiesen werden.
+
+Keine pauschale Gesamtfreigabe, wenn einzelne wesentliche Nachweise fehlen.
+
+Trenne klar zwischen:
+
+- mathematischer Richtigkeit,
+- Integrität und interner Konsistenz der archivierten Daten,
+- korrekter zeitlicher Zuordnung,
+- tatsächlicher historischer Herkunftsbeweiskraft,
+- und der grundsätzlichen Aussagegrenze eines Backtests.
+
+Bei Abweichungen dokumentiere deren fachliche Auswirkungen auf die Maturarbeit. Bevorzuge keine Erklärung, die nur deshalb plausibel erscheint, weil sie das bestehende Ergebnis bestätigt.
+
+## 10. Bericht und Dokumentation
+
+Erstelle im **Hauptrepository** diesen Abschlussbericht:
+
+`documentation/originaldaten-gegenpruefung-2026-10-13.md`
+
+Der Bericht soll enthalten:
+
+1. Geprüfte Repository-/Engine-/Freeze-Stände und tatsächlich verfügbare Dateien.
+2. Vollständige Integritätsbilanz des Archivs mit Anzahl geprüfter Hashes, fehlenden oder abweichenden Dateien.
+3. Ergebnisse der unabhängigen Marktdatenkontrolle.
+4. Vollständigen RF-Prüfnachweis für 468 Perioden.
+5. Alle unabhängigen Sharpe-Vergleiche einschliesslich Halbperioden.
+6. Ergebnisse der historischen WEO-/BIP-Kontrolle.
+7. Präzise Liste aller Abweichungen und verbleibenden Nachweisgrenzen.
+8. Abschliessende Entscheidung zu R-017: geschlossen, teilweise geschlossen oder offen, mit Begründung.
+9. Nachweis, dass sämtliche geschützten Dateien unverändert geblieben sind.
+10. Zusammenfassung dessen, was gegebenenfalls noch vom Autor entschieden oder freigegeben werden muss.
+
+Umfangreiche maschinenlesbare Vergleichsdateien und eigene Prüfprogramme dürfen ausschliesslich im externen temporären Prüfverzeichnis abgelegt werden. Verweise im Bericht auf deren tatsächlichen Ablageort und bewahre die wesentlichen Resultate zusätzlich im Bericht auf.
+
+Archivieren den vollständigen Codex-Auftrag unter `documentation/ai-usage/prompts/` und dokumentiere den KI-Einsatz sachlich im bestehenden `documentation/ai-usage/ai-usage-log.md`. Persönliche Autorenfreigaben dürfen nicht erfunden werden.
+
+**Wichtig:** `ki-nutzung.qmd` und die persönliche KI-Nutzungsreflexion sollen jetzt ausdrücklich nicht automatisch umgeschrieben werden. Diese Konsolidierung erfolgt in einem gesonderten, vom Autor geführten Schritt. Vermerke den später notwendigen Buch-Sync als offen.
+
+## 11. Abschliessende Integritätsprüfung und STOPP
+
+Vergleiche zum Abschluss die tatsächlichen Dateihashes aller untersuchten Original- und Ergebnisdateien mit den vor dem Auftrag gesicherten Werten.
+
+Zulässige Änderungen im Hauptrepository sind ausschliesslich der neue Bericht, die archivierte Promptkopie und der neue sachliche KI-Logeintrag.
+
+Es dürfen keine Änderungen im Engine-Worktree oder seiner Sicherung zurückbleiben, auch keine durch Prüfausführungen erzeugten Caches.
+
+Prüfe den Git-Diff und dokumentiere ausdrücklich, dass keine Backtests, Downloads, Datenaufbereitungen, Engine-Änderungen oder Git-Schreibaktionen erfolgt sind.
+
+**Am Ende STOPP zur Autorenkontrolle. Keine Commits und keine Pushes.**
+
+Gib mir eine kompakte Zusammenfassung mit den wichtigsten Zahlen, allen FAIL/BLOCKED/PARTIAL-Punkten und dem Link zum lokalen Abschlussbericht.
+
+**Oberstes Ziel: unabhängige Nachvollziehbarkeit und fachliche Richtigkeit – nicht ein erzwungenes PASS.**
