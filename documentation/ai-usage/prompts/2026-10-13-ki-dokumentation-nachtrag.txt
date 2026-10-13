@@ -1,0 +1,62 @@
+Datum des Dokumentationsauftrags: 2026-10-13
+Tool: Codex
+Zweck: Historische KI-Nutzung bei Engine-Entwicklung, Datenprüfung und Backtests nachtragen.
+
+1. Ursprüngliche Autorenanweisung
+
+Ich brauche deine Hilfe und zwar muss die KI Nutzung in meiner Arbeit aufarbeiten, also das heisst einfach ich habe paar Dinge noch nicht dokumentiert und ich will keine Nutzung von KI verschleiern oder irgendwas sondern zeigen wie ich KI genutzt habe, es ist ja in der heutigen Zeit absolut normal und sogar gewünscht weil es ein extrem starkes Tool ist, es ist nur wichtig dass man klar sagt, was man selber gemacht hat und was KI gemacht hat. Und genau das will ich jetzt noch teilweise aufholen. Ein Teil ist schon dokumentiert. Und ein Teil werden wir jetzt noch nachholen, also einerseits habe ich ja die Engine mit KI erstellt, mit Codex, aber alle Codex Prompts sind im Engine Ordner. Irgendwo alle abgelegt, diese Prompts sollen auch im Anhang angegeben werden so chronlogisch wie der Rest, also ich meine nicht, du sollst die ganzen Prompt übernehmen die ganzen Prompts sind ja vorhanden im Projekt und die kann man nachschauen wenn man will, das ist super, aber ich will auch dass die Prompts im chronologisches Verlauf vorhanden sind, also z.B. in dem Tag wurde das und das an der Engine gemacht usw. Und dann kannst du in den Refrenzen ganz viele ChatGPT Quellenangeben sehen immer Geteilter Inhalt einfach immer nur eine Nachricht und das ist eingetlich einfach die Plannung der Engine, ChatGPT hat mir geholfen, beim erstellen der Prompts und bei der Architektur der Engine, als Kontext hatte ChatGPT das aktuelle Github Repo zu der Zeit um die Engine zu erstellen und diese geteilten ChatGPT Nachrichten kann man eingetlich gerade auch einbauen, damit wird klar wie die Engine erstellt wurde, desweiteren will ich dass du ChatGPT und Codex beide als Überprüfer der Originaldaten und der Ausführung der Engine und dem Backtest angibst das kannst du vermutlich sogar auch chronologisch einordnen wenn du dich im Repo umsiehst, ich glaube das ist fürs erste mal alles was mir gerade einfällt was ich bis jetzt noch nicht in die KI-Dokumentation übernommen habe.
+
+2. Ergänzende historische Angaben und Präzisierung des Umfangs
+
+Also zu 4. kann ich dir direkt eine Antwort geben, grundsätzlich bin ich für alles verantwortlich. Das steht im letzten Absatz von KI-Dokumentation ich muss allen prüfen grundsätzlich, deswegen finde ich das wie unnötig wenn du mich fragst was habe ich gemacht, ich will von dir die KI Dokumentation nicht meine Arbeitsdokumentation und wie gesagt, am Ende hafte ich für alles. Das heisst für deinen Auftrag musst du nicht wissen was genau ich gemacht habe das muss darin nicht aufgenommen werden. Ich habe noch alle ChatGPT Nachrichten geteilt die diese Tests usw. beweisen, aber ChatGPT bekommt immer den aktuellen Stand der Arbeit auf Github und gibt deswegen Tipps oder Absätze wie es weiter gehen könnte in der Arbeit selber, aber zu meiner Verteidigung wurde das nicht einfach so direkt übernommen oder 1:1 kopiert auch teilweise schreibt ChatGPT figurativ wir obwohl ich gewisse Dinge selber getan habe. Ich habe jetzt nicht irgendwie Angst oderso dass man anhand der Chats denkt dass ChatGPT irgendwie alles gemacht hat oderso, aber ich wollte einfach aufklären und vielleicht solltest du es als Sidefakt so bisschen erwähnen, jetzt nicht irgendwie schreiben wie ein Mörderer der auf frischer Tat ertappt wurde der sich jetzt erklären muss, sondern mehr einfach als Hinweis, dass ChatGPT teilweise bisschen komisch geschrieben hat und auch direkt Vorschläge gemacht hat zu den nächsten Kapiteln in der Arbeit, einfach als ganz kleiner Hinweis.
+
+
+
+## Ergänzende historische Angaben zu den ChatGPT-Prüfungen
+
+**1. Zeitpunkt**
+
+Die unabhängigen ChatGPT-Prüfungen fanden zwischen dem 8. und 10. Oktober 2026 statt:
+
+- **08.10.2026:** Prüfung eines hochgeladenen Rohdaten-ZIPs mit neun ETF-Reihen und FRED-DGS3MO-Daten, einschliesslich Zeiträumen, Vollständigkeit und Manifest-Hashes.
+- **09.10.2026:** Prüfung von 16 historischen IMF-WEO-Ausgaben (2009–2024), 112 G7-BIP-Kombinationen und historischen Datenverfügbarkeiten.
+- **10.10.2026:** Unabhängige Prüfung der aufbereiteten Study-v1-Daten mit 2’406 ETF-Monatsbeobachtungen, 468 RF-Perioden, 4’087 BIP-Versionseinträgen und 112 G7-Gewichtszeilen.
+- **10.10.2026:** Unabhängige Prüfung des Freeze-Archivs mit 123 Dateien und 122 inventarisierten Hashes sowie der Studienkonfigurationen.
+- **10.10.2026, etwa 04:15 Uhr Schweizer Zeit:** Unabhängige Gegenprüfung der fünf tatsächlich durchgeführten Backtests H1, K1, Z1, S1 und S2.
+
+Diese ChatGPT-Prüfungen sind von den Codex-Arbeiten zur Datenaufbereitung am 10. Oktober und der weiteren Codex-Originaldatenprüfung vom 13. Oktober zu unterscheiden.
+
+**2. Nachweise**
+
+In den damaligen ChatGPT-Unterhaltungen wurden folgende Prüfberichte erstellt beziehungsweise angeboten:
+
+- `Maturarbeit_Rohdaten_Eingangspruefung_2026-10-08.md`
+- `IMF_WEO_Eingangsprüfung_2009-2024_2026-10-09.md`
+- `IMF_WEO_Pruefregister_2009-2024.json`
+- `Study_v1_Unabhaengige_Datenpruefung_2026-10-10.md`
+- `Study_v1_Freeze_Unabhaengige_Pruefung_2026-10-10.md`
+- `Study_v1_Hauptlaeufe_Unabhaengige_Pruefung_2026-10-10.md`
+
+Die Dateinamen sind aus früheren ChatGPT-Antworten rekonstruierbar. Ihre aktuelle lokale Verfügbarkeit ist noch nicht bestätigt. Ein öffentlicher ChatGPT-Share-Link ist bisher nicht nachgewiesen und darf nicht erfunden werden.
+
+Zusätzlich existieren die Codex-Originalprompts und Berichte zur Study-v1-Datenaufbereitung und Freeze-Vorbereitung auf dem Git-Branch `study-v1` sowie die eigenständige Gegenprüfung vom 13. Oktober auf `dev`.
+
+**3. Prüfumfang**
+
+ChatGPT erhielt vom Autor ZIP-Archive mit originalen ETF-, Zins- und IMF-Daten beziehungsweise aufbereiteten Daten, Freeze-Artefakten und später den Ergebnisdateien der echten Studienläufe.
+
+Es kontrollierte unter anderem Datei-Hashes, Datenumfang, Beobachtungskalender, zeitliche Zuordnung der Informationen, BIP-Gewichte, risikofreie Periodenrenditen, Strategievermögen, Monatsrenditen, CAGR, Volatilität, Sharpe Ratio, Maximum Drawdown, SMA-Signalverzögerungen und Rebalancing-Transaktionen.
+
+Die Prüfung der echten Backtests bezog sich auf fünf Ergebnisordner mit 25 Ergebnisdateien und elf Strategie-Zeitreihen.
+
+ChatGPT führte unabhängige Gegenrechnungen anhand bereitgestellter Daten durch. Es führte jedoch nicht die vollständigen originalen Backtests erneut mit der Engine aus. Historische Codex-Testprotokolle und Programmartefakte sind von einer tatsächlichen erneuten Ausführung durch ChatGPT zu unterscheiden.
+
+Grenzen waren insbesondere die fehlende vollständige unabhängige Rekonstruktion aller Yahoo-Dividenden-/Splitanpassungen, der Nachweis historischer Veröffentlichungszeitpunkte und die allgemeine Übertragbarkeit der Ergebnisse.
+
+**Dokumentationsvorgabe:** Diese Einsätze als historische ChatGPT-Prüfungen mit Datum, Eingaben, tatsächlichem Prüfumfang, Ergebnissen und Einschränkungen nachtragen. Keine Share-Links, erneuten Ausführungen oder persönlichen Freigaben behaupten, die nicht belegt sind.
+
+3. Nachgereichte Quellen
+
+Ich hab die letzten ChatGPT Chat erst jetzt in Refrenzen geaddet, ich hatte das vorhin vergessen, damit du Bescheid weist.
+
+Dokumentationshinweis von Codex: Die fünf nachgereichten Quellen wurden anschliessend tatsächlich in references.bib gefunden und im Browser gelesen. Die historische Angabe zur bis dahin fehlenden Share-Link-Bestätigung bleibt oben als damalige Autorenangabe erhalten; der heutige Nachtrag verwendet ausschliesslich die nun tatsächlich vorhandenen Links.

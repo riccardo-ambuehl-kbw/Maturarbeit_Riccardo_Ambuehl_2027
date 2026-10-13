@@ -1,14 +1,16 @@
 # Dokumentation der KI-Nutzung
 
-Dieses Kapitel dokumentiert transparent, wie Codex bei der Erstellung der Maturarbeit eingesetzt wurde. Die ausführlichen Arbeitsnachweise werden projektintern im KI-Nutzungslog geführt. Hier wird der für die Buchversion relevante aktuelle Stand zusammengefasst.
+Dieses Kapitel dokumentiert transparent, wie ChatGPT und Codex bei der Erstellung der Maturarbeit eingesetzt wurden. Die ausführlichen Arbeitsnachweise werden projektintern im KI-Nutzungslog geführt. Hier wird der für die Buchversion relevante aktuelle Stand zusammengefasst. Die Engine-Entwicklung und die Daten- und Ergebnisprüfungen wurden am 13. Oktober 2026 anhand der vorhandenen Prompts, Prüfberichte, geteilten ChatGPT-Antworten und ergänzenden historischen Angaben nachgetragen.
 
-Die KI-Nutzungsdokumentation wurde von Codex formuliert und fortgeführt. In den jeweiligen Prompts wurde Codex ausdrücklich gebeten, die ausgeführten Arbeiten und die Art der KI-Nutzung direkt zu dokumentieren. Der Autor hat diese Dokumentation gelesen und inhaltlich überprüft, sie jedoch nicht selbst geschrieben.
+Die KI-Nutzungsdokumentation wurde von Codex formuliert und fortgeführt. In den jeweiligen Prompts wurde Codex ausdrücklich gebeten, die ausgeführten Arbeiten und die Art der KI-Nutzung direkt zu dokumentieren. Frühere Fassungen wurden vom Autor gelesen und inhaltlich überprüft, jedoch nicht selbst geschrieben. Die Kontrolle der neu ergänzten Fassung bleibt beim Autor.
 
 ## Grundsätze
 
-Codex wurde vor allem für technische Einrichtung, Strukturierung, Übertragung bereits vorhandener Inhalte und sprachliche Unterstützung eingesetzt. KI-Ausgaben ersetzen keine fachliche Prüfung. Fachliche Aussagen, Quellenqualität, mathematische Korrektheit und die Interpretation der Resultate müssen vom Autor kontrolliert und verantwortet werden.
+ChatGPT unterstützte die Planung und Architektur der Engine, die Ausarbeitung der Codex-Prompts sowie die Prüfung von Code, Originaldaten, aufbereiteten Daten und Backtestergebnissen. Als Kontext erhielt ChatGPT jeweils den aktuellen Stand der Arbeit auf GitHub; für die Daten- und Ergebnisprüfungen wurden zusätzlich ZIP-Archive bereitgestellt. Codex implementierte wesentliche Teile der Engine, Tests und Datenaufbereitung und wurde auch für technische Einrichtung, Strukturierung, Textüberarbeitung und weitere Gegenprüfungen eingesetzt. Die folgenden Einträge benennen die jeweiligen Leistungen und Prüfgrenzen.
 
 Bei sprachlichen Korrekturen durfte Codex Rechtschreibung, Grammatik und Satzbau verbessern, den Inhalt und den persönlichen Schreibton jedoch grundsätzlich nicht verändern. Bei Überarbeitungen zur besseren Lesbarkeit durften Formulierungen und Satzstrukturen vereinfacht werden. Wichtige Fachbegriffe sollten dabei möglichst erhalten bleiben.
+
+Hinweis zu den geteilten ChatGPT-Antworten: ChatGPT verwendet teilweise «wir» und schlägt nächste Arbeitsschritte oder mögliche Kapitelabsätze vor. Diese Ausdrucksweise allein ordnet eine Tätigkeit nicht der KI zu. Die Vorschläge wurden nicht automatisch oder unverändert in die Arbeit übernommen.
 
 ## Bisherige Einsätze
 
@@ -56,6 +58,76 @@ Codex wurde mehrfach verwendet, um Dateien und Inhalte im gesamten Repository ei
 
 Am 8. August 2026 wurde Codex verwendet, um den bisherigen KI-Nutzungsnachweis als Anhang in das Quarto-Book einzubinden. Der Inhalt dieses Kapitels ist eine für die Arbeit aufbereitete Zusammenfassung des bestehenden KI-Nutzungslogs. Zusätzlich wurde ein wiederverwendbarer Ablauf eingerichtet, mit dem zukünftige Logeinträge in diese Buchversion übertragen werden können.
 
+### Engine-Planung und Audit – 2. Oktober 2026 {#sec-ki-engine-planung}
+
+ChatGPT half, den vorhandenen Entwurf in einen schrittweisen Entwicklungsablauf zu überführen, die Architektur und Zuständigkeiten der Dateien zu präzisieren und den ersten Audit-Prompt für Codex zu formulieren [@ChatGPTGeteilterInhalt; @ChatGPTGeteilterInhalta; @ChatGPTGeteilterInhaltb]. Die weiteren Antworten begleiteten die Ablage des Audits und empfahlen Lösungen für die 13 offenen methodischen und technischen Regeln. Dazu gehörten beispielsweise Datenkalender, SMA-Vorlauf, unverzinstes Cash, Rebalancing-Reihenfolge, Sharpe-Berechnung und historische BIP-Verfügbarkeit. Diese Präzisierungen wurden mit ChatGPT-Unterstützung erarbeitet und anschliessend als verbindliche Vorgaben dokumentiert [@ChatGPTGeteilterInhaltc; @ChatGPTGeteilterInhaltd; @ChatGPTGeteilterInhalte].
+
+Codex führte den [Audit vor der Implementierung](https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-02-engine-audit.md) aus. Dabei wurden Theorie, Analyse, Methodik und bestehende Funktionen verglichen, Fehler mit kleinen Gegenbeispielen untersucht und Anforderungen, Architektur, Testplan sowie offene Entscheidungen festgehalten. In diesem Schritt entstand noch keine Engine-Implementierung.
+
+Die folgenden Datierungen beruhen auf den archivierten Prompts, dem Engine-Log und der Git-Historie. Das Abrufdatum 13. Oktober 2026 im Literaturverzeichnis bezeichnet die Sicherung der geteilten Antworten, nicht den damaligen Arbeitsschritt. Die vollständigen Codex-Prompts bleiben im Engine-Projekt unter `documentation/ai-usage/prompts/` zugänglich; hier werden ihr Zweck und Ergebnis zusammengefasst.
+
+### Kernimplementierung und Review – 3. Oktober 2026 {#sec-ki-engine-core}
+
+ChatGPT formulierte den Auftrag für den ersten vollständigen Weg von lokalen Daten über Konfiguration und Buy-and-Hold bis zu Kennzahlen, Export und Manifest. Der [Kernimplementierungs-Prompt](https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-02-engine-v1-core-implementation.md) trägt noch das Datum 2. Oktober; die Umsetzung ist im Log und im Review-Commit `1a19309` am 3. Oktober dokumentiert.
+
+Codex erstellte das installierbare Python-Paket, Eingabeprüfungen, Konfiguration, Simulation, Kennzahlen, Exporte, eine künstliche Demo und 93 Tests. Die im Audit nachgewiesenen Probleme in bestehenden Berechnungsfunktionen wurden gemäss den festgelegten Regeln korrigiert. ChatGPT begleitete die lokalen Kontrollen und prüfte danach den veröffentlichten Code, die Tests und die Dokumentation [@ChatGPTGeteilterInhaltf; @ChatGPTGeteilterInhaltg; @ChatGPTGeteilterInhalth; @ChatGPTGeteilterInhalti]. Die Prüfungen betrafen künstliche Daten und die dokumentierte Windows-/Python-Umgebung.
+
+### Multi-Asset-Portfolios und Rebalancing – 4. Oktober 2026
+
+ChatGPT erarbeitete den nächsten [Prompt für Multi-Asset und jährliches Rebalancing](https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-rebalancing-implementation.md), begleitete die lokalen Kontrollen und prüfte den Review-Commit `37edc79` [@ChatGPTGeteilterInhaltj; @ChatGPTGeteilterInhaltk; @ChatGPTGeteilterInhaltl; @ChatGPTGeteilterInhaltm]. Codex implementierte den gemeinsamen Datenkalender, Positionen und Gewichtungsdrift, jährliche Umschichtungen sowie Gewichts- und Transaktionsexporte. Ein künstliches 60/40-Beispiel und 71 zusätzliche Tests ergänzten den Kern; insgesamt waren 164 Tests dokumentiert. Die Kontrollen umfassten insbesondere die Reihenfolge Rendite, Drift und Rebalancing sowie die Kapitalneutralität der Transaktionen.
+
+### SMA-Trendfolge – 4. Oktober 2026
+
+ChatGPT formulierte den [Trendfolge-Prompt](https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-trend-implementation.md), begleitete die Kontrollen und prüfte die Umsetzung im Commit `c101ca5` [@ChatGPTGeteilterInhaltn; @ChatGPTGeteilterInhalto; @ChatGPTGeteilterInhaltp; @ChatGPTGeteilterInhaltq]. Codex implementierte getrennte Signal- und Performancereihen, SMA-Vorlauf, Long/Cash-Signale mit einer Periode Verzögerung und den Signalexport. 78 zusätzliche Tests ergaben insgesamt 242. Die Prüfungen kontrollierten unter anderem, dass ein späteres Signal keine bereits vergangene Rendite beeinflusst und Cash gemäss Vorgabe unverzinst bleibt.
+
+### Historische BIP-Ländergewichtung – 4. Oktober 2026
+
+ChatGPT präzisierte die zeitlich zulässige BIP-Auswahl auch für die Startallokation und formulierte den [Prompt zur BIP-Ländergewichtung](https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-country-weighting-implementation.md). Die weiteren Antworten begleiteten die Kontrollen und den Review des Commits `5a06432` [@ChatGPTGeteilterInhaltr; @ChatGPTGeteilterInhalts; @ChatGPTGeteilterInhaltt; @ChatGPTGeteilterInhaltu]. Codex implementierte die Auswahl damals verfügbarer Datenversionen, das jüngste gemeinsame BIP-Jahr, Ländergewichte und jährliche Umschichtungen samt Herkunftsnachweis. 102 zusätzliche Tests ergaben insgesamt 344. Diese Entwicklungsprüfungen verwendeten künstliche Daten; sie bestätigten noch nicht die späteren Originaldaten.
+
+### Gesamtaudit und technische Korrekturen – 4. Oktober 2026
+
+ChatGPT entwarf den [Prompt für den finalen Engine-Audit](https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-final-audit.md). Codex prüfte die vollständige Engine, die Installation aus dem gebauten Paket und die künstlichen Demos mit zusätzlichen Gegenbeispielen. Der Audit fand drei technische Blocker; ChatGPT ordnete die Befunde ein und formulierte den begrenzten Korrekturauftrag [@ChatGPTGeteilterInhaltv; @ChatGPTGeteilterInhaltw].
+
+Codex bearbeitete zunächst den [Prompt zur Behebung der drei Blocker](https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-blocker-fixes.md). Die Korrekturen betrafen numerische Unterläufe bei der Allokation, die Validierung von Resultaten und Exporten sowie fehlerhafte CSV-Zeilenbreiten. ChatGPT begleitete die Kontrollen und identifizierte im anschliessenden Review eine verbleibende Lücke bei der wirtschaftlichen Portfoliozustandsfolge [@ChatGPTGeteilterInhaltx; @ChatGPTGeteilterInhalty; @ChatGPTGeteilterInhaltz].
+
+Mit dem [ergänzenden Portfoliozustands-Prompt](https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-portfolio-state-validation-fix.md) implementierte Codex die fehlende Kontrolle gegen die tatsächlichen Marktrenditen. ChatGPT prüfte auch diesen Stand und bereitete den Re-Audit vor [@ChatGPTGeteilterInhaltaa; @ChatGPTGeteilterInhaltab; @ChatGPTGeteilterInhaltac]. Die dokumentierte Testsuite wuchs über 406 auf 428 Fälle.
+
+### Re-Audits, CSV-Sicherung und Engine-Freeze – 4. Oktober 2026
+
+Codex führte den [Re-Audit der ehemaligen Blocker](https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-blocker-reaudit.md) aus. Dabei wurde ein weiteres Problem nachgewiesen: NUL-Zeichen konnten beim CSV-Einlesen zu stiller Feldkürzung führen. ChatGPT erläuterte den Befund und formulierte den [CSV-NUL-Korrekturprompt](https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-csv-nul-fix.md). Codex ergänzte die Ablehnung solcher Eingaben und 13 Tests; ChatGPT begleitete die Kontrollen und prüfte den Fix [@ChatGPTGeteilterInhaltad; @ChatGPTGeteilterInhaltae; @ChatGPTGeteilterInhaltaf; @ChatGPTGeteilterInhaltag].
+
+Der anschliessende [finale Freeze-Re-Audit](https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-final-freeze-reaudit.md) durch Codex bestätigte die Schliessung der dokumentierten Engine-Blocker im geprüften Umfang. Danach bearbeitete Codex den [Release- und Freeze-Prompt](https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-release-freeze.md) für Version 1.0.0. Dokumentiert sind 441 Tests sowohl aus den Quellen als auch aus dem installierten Paket sowie erfolgreiche Offline-Demos. ChatGPT prüfte den Re-Audit, die Release-Änderungen und die Zuordnung des Tags `engine-v1.0` zum Commit `4a98f3a` [@ChatGPTGeteilterInhaltah; @ChatGPTGeteilterInhaltai; @ChatGPTGeteilterInhaltaj; @ChatGPTGeteilterInhaltak; @ChatGPTGeteilterInhaltal; @ChatGPTGeteilterInhaltam]. Dieser technische Freeze war noch keine Prüfung der realen Studie.
+
+### ChatGPT-Prüfung der ETF-/Zinsrohdaten – 8. Oktober 2026
+
+ChatGPT prüfte das hochgeladene Rohdaten-ZIP mit neun ETF-Reihen, FRED-DGS3MO-Daten und zunächst zwei WEO-Ausgaben. Kontrolliert wurden Dateiumfang, Zeiträume, Monatsabdeckung, ungültige Kurswerte und die 21 vom Abrufmanifest gebundenen Dateihashes. Die benötigten Monatsbewertungen waren vorhanden; 258 leere FRED-Zinsfelder wurden als bei der weiteren Aufbereitung zu behandelnde Beobachtungen festgehalten. Die fehlenden 14 historischen WEO-Ausgaben wurden benannt. Diese Prüfung bestätigte die Eignung für die weitere Aufbereitung, noch keine fertigen Engine-Eingaben oder Backtestergebnisse [@ChatGPTGeteilterInhaltao].
+
+### ChatGPT-Prüfung der WEO-Rohdaten – 9. Oktober 2026
+
+ChatGPT las das ZIP mit den 16 WEO-Ausgaben von 2009 bis 2024 und den zugehörigen Downloadnotizen. Es kontrollierte die 112 G7-Länder-Ausgabe-Kombinationen, BIP-Einheiten, Schätzgrenzen, Dateikodierungen und historische Jahresauswahl; ergänzend wurden Veröffentlichungsbelege auf offiziellen IMF-Seiten recherchiert. Für die Ausgabe 2022 wurde das gemeinsame zulässige BIP-Jahr 2020 festgestellt. Die konservative Verfügbarkeitsdatierung für 2012 wurde als Vorschlag gekennzeichnet. Prüfbericht und JSON-Prüfregister wurden erstellt; Hauptläufe fanden dabei nicht statt. Publikationsbelege und heutige Hashes beweisen nicht rückwirkend die damalige Existenz exakt derselben Dateibytes [@ChatGPTGeteilterInhaltan].
+
+### Codex-Datenadapter und Echtdatenprüfung – 10. Oktober 2026
+
+Codex setzte den [Study-v1-Datenadapter-Prompt](https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-10-study-v1-data-adapter.md) um. Aus den vorhandenen lokalen ETF-, FRED- und WEO-Rohdateien entstanden zwölf normalisierte Daten- und Herkunftsartefakte. Codex implementierte den separaten Adapter, das WEO-Ausgabenregister und 30 Tests und prüfte die Zuordnungen und Umrechnungen gegen die Originaldaten. Dokumentiert sind 2’406 ETF-Monatsbeobachtungen, 468 risikofreie Perioden, 4’087 historische BIP-Versionen und 112 G7-Entscheidungszeilen. Die eingefrorene Engine blieb unverändert; in diesem Auftrag wurden keine echten Backtests ausgeführt.
+
+### ChatGPT-Prüfung der aufbereiteten Daten – 10. Oktober 2026
+
+ChatGPT verglich das Datenfreigabe-ZIP mit den zuvor hochgeladenen Originalarchiven. Mit einem getrennten Prüfverfahren wurden Roh- und Ausgabehashes, alle 2’406 ETF-Monatswerte, 468 RF-Perioden, 4’087 BIP-Versionen, 112 Ländergewichtszeilen und die gemeinsame Zeitachse kontrolliert. Im beschriebenen Umfang wurden keine Abweichungen gefunden. ChatGPT führte den Codex-Datenadapter und die 30 Adaptertests dabei nicht erneut aus; die Testdateien lagen im Prüf-ZIP nicht vor. Yahoo-Dividenden- und Splitanpassungen sowie die tägliche Börsenkalendervollständigkeit wurden nicht vollständig unabhängig rekonstruiert [@ChatGPTGeteilterInhaltap].
+
+### Codex-Freeze und Konfigurationsprüfung – 10. Oktober 2026
+
+Codex bearbeitete den [Study-v1-Freeze-Prompt](https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-10-study-v1-freeze-preparation.md). Der bereits bestätigte Datenstand wurde über seinen Manifesthash gebunden. Codex erstellte die fünf vorgegebenen Konfigurationen H1, K1, Z1, S1 und S2, die Archivkopien, eine Freeze-Prüfhilfe und 16 zusätzliche Tests. Das Archiv umfasst 123 Dateien, davon 122 im Manifest inventarisiert. Datenhashes, Kalender, Signalvorlauf und BIP-Auswahl wurden erneut geprüft. Die Konfigurationen wurden statisch vorbereitet, ohne die echten Backtests auszuführen.
+
+### ChatGPT-Prüfung des Freeze-Archivs – 10. Oktober 2026
+
+ChatGPT prüfte das hochgeladene Freeze-ZIP einschliesslich der 122 inventarisierten Hashes, der Roh- und aufbereiteten Daten, der fünf Konfigurationskopien und des Engine-Pakets. Die Konfigurationen wurden mit der archivierten Engine geladen und die statischen Kontexte geprüft; dies war keine Ausführung der Backtests. Im geprüften Umfang wurde kein blockierender Fehler gefunden. Zwei nicht im Upload enthaltene Git-Dateien und die externe Sicherung blieben als lokal zu kontrollierende Punkte festgehalten [@ChatGPTGeteilterInhaltaq].
+
+### ChatGPT-Prüfung der Backtestergebnisse – 10. Oktober 2026 {#sec-ki-backtest-pruefung}
+
+Nach den fünf tatsächlich durchgeführten Hauptläufen erhielt ChatGPT das Ergebnis-ZIP und verglich es mit dem zuvor bereitgestellten Freeze-Archiv. Die Prüfung ist nach ergänzender historischer Angabe ungefähr auf 04:15 Uhr Schweizer Zeit einzuordnen. Sie umfasste fünf Ergebnisordner, 25 Ergebnisdateien zusätzlich zu den fünf Run-Manifesten und elf Strategie-Zeitreihen. ChatGPT kontrollierte Hashes, Studienstand, Portfoliowerte und Monatsrenditen und berechnete CAGR, Volatilität, Sharpe Ratio und Maximum Drawdown getrennt nach. Auch SMA-Signalverzögerungen, Rebalancing-Transaktionen und historische BIP-Gewichte wurden anhand der eingefrorenen Eingaben rekonstruiert. Im dokumentierten Prüfumfang wurden keine rechnerischen Abweichungen gemeldet [@ChatGPTGeteilterInhaltar].
+
+ChatGPT führte dabei eigene Gegenrechnungen aus, jedoch nicht die vollständigen Originalbacktests erneut mit der Engine. Seine Hinweise zu Ergebnissen und folgenden Kapiteln sind von dieser technischen Prüfung zu unterscheiden. Die damaligen Prüfberichte und Codex-Testprotokolle dokumentieren jeweils ihren eigenen Umfang; sie belegen keine zusätzliche spätere Ausführung. Die Grenzen der Anbieter-Kursanpassungen, historischen Dateiverfügbarkeit und Übertragbarkeit der historischen Ergebnisse bleiben erhalten.
+
 ### Behebung eines Quarto-Renderfehlers
 
 Am 11. Oktober 2026 untersuchte Codex den Abbruch von `quarto render` mit der LaTeX-Meldung `\begin{aligned} allowed only in math mode`. Ursache waren 20 Markdown-Zellen im Analyse-Notebook, deren Formelblöcke mit `\[` und `\]` begrenzt waren. Pandoc behandelte diese Klammern als Text und die dazwischenliegenden LaTeX-Umgebungen als rohe LaTeX-Blöcke statt als Mathematik. Codex ersetzte die Begrenzungen durch die von Quarto vorgesehene Schreibweise `$$`.
@@ -85,11 +157,6 @@ Codex ergänzte gemeinsame HTML-Stile, PDF-Einstellungen für Schrift, Zeilenabs
 HTML, PDF und DOCX wurden nacheinander in einer separaten temporären Projektkopie ohne Codeausführung, Cache-Nutzung oder Paketinstallation gerendert. Codex kontrollierte Datei-Hashes, Notebook-Struktur, Überschriften, Tabellen, Formeln, gespeicherte Bilder, interne Links und tatsächliche Darstellungen. Für die Word-Sichtprüfung wurde das vorhandene Microsoft Word verwendet, da LibreOffice fehlt. Der vollständige Auftrag, die geänderten Dateien, Prüfergebnisse und verbleibenden Layout-Hinweise stehen im projektinternen Bericht `documentation/formatierung-gesamtbuch-2026-10-12.md` und im KI-Nutzungslog.
 
 Dieser Einsatz betraf keine fachliche Verfassung, sprachliche Überarbeitung, Neuberechnung oder fachliche Gesamtprüfung der Maturarbeit. Die bekannte mögliche Abweichung zwischen geänderten Portfolio-Gewichten und gespeicherter Volatilitätsausgabe wurde lediglich als Folgepunkt festgehalten. Codex formulierte den Bericht, den Logeintrag und diese Zusammenfassung. Autorenkontrolle ausstehend.
-
-## Manuelle Verantwortung
-
-Der Autor muss sämtliche übernommenen Änderungen kontrollieren. Dazu gehören insbesondere die unveränderte fachliche Bedeutung, die korrekte Wiedergabe der Quellen, die mathematische Richtigkeit, die Nachvollziehbarkeit des Codes und der Erhalt des persönlichen Schreibtons. Die Verantwortung für die endgültige Fassung der Arbeit bleibt beim Autor.
-
 
 ## Wissenschaftliches und technisches Gegenlesen
 
@@ -147,3 +214,17 @@ Nur das selbstständige synthetische Portfolio-Beispiel wurde in einem frischen 
 Die beiden falschen Kommer-Belege und der McKinney-Locator wurden auf überprüfte Abschnitte umgestellt, die S&P-Beschreibung mit einem offiziellen Anbieterbeleg versehen und die historische pandas-Aliasübersicht mit Versionskontext ergänzt. Ein doppelter Gegenrechnungsabsatz wurde einmal entfernt und vollständig einmal erhalten. Der Haupttext umfasst nach derselben Zählmethode neu 7’959 Wort-/Zahlentoken einschliesslich Überblick beziehungsweise 7’834 ohne; es bleiben 41 unter 8’000 mit Überblick.
 
 Reale Studienresultate, Parameter, übrige Codezellen/Ausgaben und alle acht Grafiken blieben erhalten. Es erfolgte kein neuer Studienlauf oder Paketwechsel. Die externen Integritäts- und Rendernachweise sowie sämtliche Vorher-/Nachher-Korrekturen stehen im Bericht `documentation/fachkorrekturen-phase2-2026-10-12.md`; der vollständige Auftrag ist unverändert archiviert. Log und Buchnachtrag wurden nach KI-DOKUMENTATION-BUCH-SYNC abgeglichen. Frühere Nachweise behalten ihren damaligen Stand; historische KI-Lücken und persönliche Kontrollnachweise wurden nicht erfunden. Autorenkontrolle und Freigabe stehen aus.
+
+## Codex-Originaldatenprüfung R-017 – 13. Oktober 2026 {#sec-ki-originaldaten-r017}
+
+Codex führte die gesonderte, lesende Originaldaten-, Freeze- und Sharpe-Prüfung R-017 durch. Der [Prüfbericht](documentation/originaldaten-gegenpruefung-2026-10-13.md) und der [archivierte Auftrag](documentation/ai-usage/prompts/2026-10-13-originaldaten-gegenpruefung-r017.txt) dokumentieren die erneute Kontrolle des Archivs mit 123 Dateien, der 54 Roh- und zwölf aufbereiteten Artefakte sowie der 30 Dateien in den fünf Ergebnisordnern. Codex rechnete Marktzuordnungen, SMA-Signale, risikofreie Perioden, BIP-Auswahl und die Sharpe-Werte der elf Gesamt- und acht Halbperiodenreihen mit getrennten Prüfprogrammen nach.
+
+Diese Prüfung rief keine Engine-Funktion auf und führte keine neuen Backtests, Datenaufbereitung oder Notebook-Ausführung durch. Das Archiv und die Daten- und Ergebnishashes waren intakt. Bei 23 Code- beziehungsweise Paketquelldateien wich die heutige Arbeitskopie ausschliesslich durch CRLF-/LF-Zeilenenden vom historischen Bytezustand ab. R-017 wurde deshalb nur teilweise geschlossen; die historischen Herkunfts- und Umgebungsgrenzen sowie der kleine dokumentierte RF-Konvertierungseffekt bleiben im Bericht erkennbar. Die Prüfung ist von den ChatGPT-Prüfungen vom 8. bis 10. Oktober und den damaligen Codex-Arbeiten zu unterscheiden.
+
+## Ergänzung des KI-Nachweises – 13. Oktober 2026
+
+Codex sichtete die vorhandenen Engine-Prompts und Logs, die Git-Historie, Prüfberichte und 45 geteilte ChatGPT-Antworten und formulierte daraus die historischen Ergänzungen. Die Engine-Schritte wurden chronologisch eingefügt und mit ihren vollständigen Originalprompts verlinkt, die ChatGPT-Quellen ihren jeweiligen Planungs- und Prüfschritten zugeordnet und die R-017-Prüfung in die Buchfassung übernommen. Ergänzende Datums- und Kontextangaben stammen aus dem aktuellen Auftrag. Dieser Einsatz ist Dokumentationsarbeit; die historischen Tests und Backtests wurden dafür nicht erneut ausgeführt. Das aktualisierte Log und die Buchdarstellung wurden technisch abgeglichen und geprüft.
+
+## Manuelle Verantwortung
+
+Der Autor muss sämtliche übernommenen Änderungen kontrollieren. Dazu gehören insbesondere die unveränderte fachliche Bedeutung, die korrekte Wiedergabe der Quellen, die mathematische Richtigkeit, die Nachvollziehbarkeit des Codes und der Erhalt des persönlichen Schreibtons. Die Verantwortung für die endgültige Fassung der Arbeit bleibt beim Autor.
