@@ -1,0 +1,95 @@
+# CODEX-AUFTRAG – Maturarbeit: Ich-/Wir-Formulierungen sachlich überarbeiten und KI-Nutzung dokumentieren
+
+## 0. Verbindlicher Auftrag und Anlass
+
+Die betreuende Lehrperson Herr Mock hat am 14.10.2026 auf die Rückfragen zum Umfang, zur Forschungsfrage und zum Schreibstil geantwortet:
+
+- Der Umfang bemisst sich ausschliesslich am Hauptteil. Die technische Dokumentation im Anhang gehört zur Arbeit und ist für die methodische Nachvollziehbarkeit wichtig.
+- Die Forschungsfrage darf und soll zum jetzigen Zeitpunkt nicht verändert werden; ihre Eingrenzung in der Methodik ist in Ordnung.
+- «Vermeiden Sie ich-Formulierungen, das ist in einem wissenschaftlichen Text unangemessen.»
+
+Daraus folgt eine **eng begrenzte stilistische Korrektur**, keine fachliche oder strukturelle Überarbeitung. Die Ich-/Wir-Perspektive des Autors im tatsächlich gerenderten wissenschaftlichen Buchtext ist durch sachliche, präzise Formulierungen zu ersetzen. Keine allgemeine Kürzung und keine Änderung von Forschungsfrage, Methodik, Kennzahlen, Ergebnissen oder Anhangsumfang.
+
+Die Umsetzung selbst ist ein neuer KI-Einsatz und MUSS in der vorhandenen KI-Nutzungsdokumentation vollständig und ehrlich ergänzt werden.
+
+## 1. Repository und Stop-Gates
+
+Arbeite ausschliesslich im Repository `Maturarbeit_Riccardo_Ambuehl_2027` (GitHub: `riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027`), auf dem autorisierten Buch-Branch **`dev`**. Der am 14.10.2026 bekannte `dev`-HEAD war `97045c6af65806145fc30117af5becc134ba93ae`; dieser Wert ist eine historische Referenz, keine automatische Anweisung für einen Checkout oder Reset.
+
+1. Zuerst tatsächliches Arbeitsverzeichnis, Repo/Remote, Branch, HEAD, `git status`, gegebenenfalls vorhandene Anweisungen und bereits offene Arbeiten prüfen. Wenn du nicht im richtigen Repo/Branch bist oder unbekannte/kollidierende Änderungen vorhanden sind: **STOPP vor Änderung**, keine fremde Arbeit überschreiben.
+2. Die ursprüngliche **`Maturarbeit_Engine`**, deren `study-v1`-Worktree, alle unveränderlichen historischen Studiendaten, Engine-Wheels, Ergebnisse und archivierten Analysen sind READ-ONLY. Das separate Projekt `backtest-service` ist ebenfalls vollständig ausserhalb des Auftrags.
+3. Kein Git-Commit, Staging, Push, Merge, Rebase, Reset, Clean, Branchwechsel oder Serverzugriff. Keine Downloads, Paket-/Systeminstallationen, Cloud-Uploads, Veröffentlichungen oder neue Backtests.
+4. Vor Eingriffen Dateien/Zellstrukturen und relevante Originalhashes aufnehmen; nachher gezielt die veränderten Stellen und unverändert gebliebenen Schutzbereiche prüfen. Änderungen bleiben bis zur Autorenkontrolle uncommitted.
+5. Falls eine gewünschte Stiländerung eine fachliche Aussage, den wissenschaftlichen Befund, die Verantwortung des Autors oder einen geschützten Quellwortlaut verfälschen würde: betreffende Stelle NICHT automatisch umschreiben, sondern im Schlussbericht als offene Einzelentscheidung ausweisen.
+
+## 2. Präziser Zielbereich
+
+Die tatsächlich in `_quarto.yml` eingebundenen Buchinhalte sind massgeblich:
+
+**Haupttext:**
+- `index.ipynb`
+- `notebooks/Einleitung.ipynb`
+- `notebooks/Theorie.ipynb`
+- `notebooks/Methodik.ipynb`
+- `notebooks/Analyse.ipynb`
+- `notebooks/Fazit.ipynb`
+
+**Technische Anhänge / KI-Anhang:**
+- `notebooks/Anhang_Technische_Engine.ipynb`
+- `notebooks/Anhang_Datenaufbereitung.ipynb`
+- `notebooks/Anhang_Tests_Validierung.ipynb`
+- `ki-nutzung.qmd`
+
+Prüfe in diesen Dateien **sichtbare redaktionelle Markdown-Prosa**, einschliesslich Fliesstext, redaktioneller Einleitungen, selbst verfasster Bild-/Tabellenbeschreibungen, Fazitformulierungen und Leserhinweise. Suche nicht nur nach «ich», sondern auch «mich», «mir», «mein/meine/meinen/meinem/meiner/meines» sowie «wir», «uns», «unser/unsere/...» – jeweils kontextbezogen und unabhängig von Gross-/Kleinschreibung. Auch Wendungen wie «aus meiner Sicht», «ich habe mich entschieden», «für mich» oder «wir sehen» beachten. Keine pauschale Annahme, dass jedes gefundene Wort einen Fehler darstellt.
+
+Nicht zu verändern: Codezellen, Code-Kommentare/Docstrings, Jupyter-Outputs, Notebook-IDs/-Metadaten/-Ausführungszahlen, Tabellenwerte, Formeln/LaTeX, Rohdaten, Abbildungen, Run-Manifeste, JSON-Configs, `references.bib`, CSL, Quarto-Projektkonfiguration, Literaturtitel, Zitationsschlüssel, Anker, interne Verweise, Bild-/Dateipfade, historische Prompttexte, originale Logs und Archivtexte. Insbesondere `README.md` und `archive/` sind **nicht** Teil des aktuellen gerenderten wissenschaftlichen Buchtexts; bloss gefundene Ich-Formulierungen dort begründen keine Änderung. Die generierte `.tex`-Datei nicht als Quelle bearbeiten.
+
+Wörtliche Zitate, Gesprächsausschnitte, Originalprompts, geteilte ChatGPT-Aussagen und fremde Quelltexte nicht umformulieren. Bei Zitaten stehen «ich»/«wir» gegebenenfalls korrekt im Original. Falls eine Formulierung innerhalb eines geschützten Zitats störend wirkt, nur ausserhalb davon eine sachliche Einordnung ergänzen und das im Bericht markieren.
+
+## 3. Regeln für die eigentliche Umformulierung
+
+- Verändere **nur** die Stellen, deren persönliche Autorenperspektive im wissenschaftlichen Text vermieden werden soll. Rechtschreibung, andere Stilfragen, Kapitelreihenfolge und wissenschaftliche Aussagen sind nicht Gegenstand dieses Auftrags.
+- Bevorzuge klare sachliche Subjekte («Die Untersuchung», «Die Auswertung», «Das Modell», «Der Vergleich», «Die Datenaufbereitung», «Für diese Arbeit wurde …») und verständliche Aktivkonstruktionen, statt wahllos Passiv oder überladene Nominalisierungen einzusetzen.
+- Eigene Entscheidungen bleiben als solche erkennbar: Aus «Ich habe X gewählt, weil Y» nicht machen «X ist allgemein die beste Wahl», sondern beispielsweise «Für diese Untersuchung wurde X gewählt, weil Y». Urteile, Grenzen, Unsicherheiten und subjektive Auswahlgründe nicht als universell bewiesen darstellen.
+- Keine neuen oder verschwundenen Behauptungen, keine Verschiebung von Sicherheit/Unsicherheit («kann», «dürfte», «in dieser Stichprobe»), keine stärkere Kausalbehauptung, kein automatisches Ändern von Zeitformen, Datensätzen, Quellen oder mathematischen Symbolen.
+- Die KI-Dokumentation ist ein Sonderfall: Die **Eigenverantwortung des Autors** sowie die tatsächlichen Aufgaben von ChatGPT und Codex müssen erkennbar bleiben. Autorschaft nicht zur anonymen Maschinenhandlung verschleiern. Original-Promptzitate, auch mit «ich» oder «wir», bleiben unverändert. Die vorhandene Aussage, dass die Endkontrolle der neu ergänzten KI-Fassung beim Autor aussteht, darf ohne dessen ausdrückliche Bestätigung NICHT in «kontrolliert» umgedeutet werden.
+- Jede geänderte Stelle in einem nachvollziehbaren Fundstellenprotokoll dokumentieren (Datei, Notebook-Zell-ID bzw. QMD-Abschnitt, vorher/nachher, kurze Begründung). Keine unnötige Wiederholung ganzer Kapitel im Bericht.
+- In `.ipynb` nur die tatsächlich betroffenen Markdown-`source`-Texte verändern. JSON-Struktur, Zellreihenfolge, IDs, Ausgaben, Codebytes, Metadaten und Leerraum ausserhalb der geänderten Markdownzellen unverändert lassen. KEIN grossflächiges Notebook-Reformatting oder Re-Saving, das einen riesigen Diff ohne inhaltliche Notwendigkeit erzeugt.
+
+## 4. Wissenschaftliche Schutzbedingungen und Wortzahl
+
+Der letzte dokumentierte Referenzwert nach der projektspezifischen Zählmethode liegt bei **7’959** Wörtern/Zahlentoken im Haupttext **einschliesslich Überblick** und **7’834 ohne Überblick**; die obere Vorgabe beträgt **8’000**. Die Zählmethode ist in `documentation/fachkorrekturen-phase2-2026-10-12.md` dokumentiert und darf für Vorher/Nachher nicht still verändert werden. Sie zählt Prosa der sechs Hauptnotebooks und schliesst u. a. Code, Outputs, Überschriften, Tabellenzeilen, Formeln, Zitationsklammern und Anhänge aus. Die konkrete Tokenregel lautet `\b\w+(?:[’'-]\w+)*\b` nach der dort beschriebenen Filterfolge.
+
+- Vor und nach den Änderungen dieselbe Zählung direkt aus den aktuellen Quellen nachvollziehen und mit dem bisherigen Referenzwert vergleichen; Abweichungen im Ausgangswert offen erläutern.
+- **8’000 Haupttextwörter nicht überschreiten.** Formuliere bewusst knapp, aber nicht auf Kosten der fachlichen Genauigkeit. Wenn eine bedeutungserhaltende Fassung an der Wortgrenze scheitert: STOPP und konkrete Alternativen zur Entscheidung vorlegen, keine fachliche Kürzung im Verborgenen.
+- Forschungsfrage, Studienlaufnamen H1/K1/Z1/S1/S2, untersuchte Strategien, Zeiträume, Zahlenwerte, Tabellen, Risiken, Einschränkungen, Literaturverweise und alle eingefrorenen Ergebnisse müssen unverändert bleiben. Technische Anhänge nicht verkürzen oder auslagern.
+- Quarto-/Jupyter-Dateien müssen weiterhin syntaktisch gültig und die Markdown-Strukturen intakt sein. Statische JSON-/Zell-/Citation-/Linkprüfungen durchführen. Ein Render ist nur zulässig, wenn garantiert **keine Notebookausführung oder neue Daten-/Backtestarbeit** ausgelöst und keine historischen Artefakte verändert werden; andernfalls `RENDER_NOT_RUN` dokumentieren statt zu improvisieren.
+
+## 5. KI-Nutzung: DIREKT im gleichen Auftrag dokumentieren
+
+Arbeite gemäss:
+- `documentation/ai-usage/README.md`
+- `documentation/ai-usage/book-sync.md` (`KI-DOKUMENTATION-BUCH-SYNC`)
+
+Verpflichtende Änderungen:
+
+1. Archiviere **diesen vollständigen tatsächlichen Codex-Prompt bytegleich** unter `documentation/ai-usage/prompts/2026-10-14-ich-formulierungen-wissenschaftlicher-stil.txt` (bei späterer Ausführung ggf. das tatsächliche Ausführungsdatum im Dateinamen verwenden; nicht den Inhalt nachträglich bearbeiten).
+2. Ergänze `documentation/ai-usage/ai-usage-log.md` um den tatsächlichen KI-Einsatz: Ausführungsdatum, **ChatGPT: Vorbereitung des Auftrags / Codex: tatsächliche stilistische Bearbeitung, Analyse, Prüfung und KI-Dokumentsynchronisation** (nur soweit wirklich erfolgt), Anlass Lehrerrückmeldung, vollständiger Promptpfad, bearbeitete Kapitel/Stellen, Art der übernommenen Formulierungsarbeit, Test-/Wortzahlstand und Grenzen. Unterscheide tatsächlich technische Kontrolle durch Codex von der noch offenen persönlichen Endkontrolle des Autors. Keine eigene fachliche Forschung und keine neuen Backtests behaupten.
+3. Aktualisiere `ki-nutzung.qmd` als lesbare Buchfassung um eine kurze sachliche Notiz zur neuen **stilistischen Überarbeitung auf Lehrerrückmeldung** und zur konkreten Codex-Unterstützung; dafür den bestehenden KI-DOKUMENTATION-BUCH-SYNC ausführen. Keine neuen ChatGPT-Share-Links oder erfundene bibliografische Quellen anlegen. Die bisherige historische KI-Dokumentation nicht komplett umschreiben.
+4. Auch den KI-Dokumentationsabgleich selbst im Log erwähnen. In der Buchfassung darf ein kurzer Verweis auf den archivierten Originalprompt stehen, sofern ein stabiler projektrelativer Link möglich ist.
+
+WICHTIG: Das KI-Log und die KI-Buchfassung müssen zusammen wahrheitsgetreu bleiben. Keine Behauptung, der Autor habe eigenhändig alle Textänderungen geschrieben oder die neue Fassung bereits persönlich geprüft. Die Notiz soll nicht so tun, als sei eine wissenschaftliche Inhalterneuerung vorgenommen worden.
+
+## 6. Abschlussbericht und Abnahme
+
+Schreibe `documentation/ich-formulierungen-korrektur-2026-10-14.md` (bei späterer Ausführung Datum entsprechend anpassen) mit:
+
+- Eingangslage: Repo/Branch/HEAD/Git-Status, Anlass/Herr-Mock-Vorgabe, bearbeitete Zieldateien.
+- Vollständigem Inventar der gefundenen persönlichen Formulierungen, getrennt nach: geändert; berechtigt unverändert (z. B. Zitat/Originalprompt); fachlich unklar und zur Autorenentscheidung offen. Anzahl und Fundstellen.
+- Kurzen Vorher-/Nachherbeispielen und begründeter Prüfung, dass keine fachliche Aussage verschoben wurde.
+- Wortzahl vorher/nachher mit **identischer** dokumentierter Zählmethode, insbesondere mit und ohne Überblick, sowie Reserve zu 8’000.
+- Notebookintegrität (Zell-IDs, Code-/Outputbytes, Metadaten), Zitierungen/Verweise, ggf. sicherer Render oder begründetes NOT_RUN.
+- KI-Dokumentations-Logeintrag, Archivprompt, Synchronisation mit `ki-nutzung.qmd`; welche Aussagen der Autor persönlich noch gegenlesen muss.
+- Git-Diff/Dateiliste und Testresultate; Schutzstatus der Engine, Daten, Ergebnisse, Originalarchivdateien. Fehler oder nicht abgedeckte Bereiche ungeschönt nennen.
+
+Prüfe am Ende `git diff --check` und den tatsächlichen Git-Status. **Keine Commits, Pushes, Engine-Läufe oder Serverzugriffe. STOPP zur Autorenkontrolle** und melde mir: Anzahl geänderter Stellen, verbleibende bewusst unveränderte Ich-/Wir-Vorkommen, Wortzahl, betroffene Dateien und Berichtspfad.

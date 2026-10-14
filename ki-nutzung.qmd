@@ -225,6 +225,14 @@ Diese Prüfung rief keine Engine-Funktion auf und führte keine neuen Backtests,
 
 Codex sichtete die vorhandenen Engine-Prompts und Logs, die Git-Historie, Prüfberichte und 45 geteilte ChatGPT-Antworten und formulierte daraus die historischen Ergänzungen. Die Engine-Schritte wurden chronologisch eingefügt und mit ihren vollständigen Originalprompts verlinkt, die ChatGPT-Quellen ihren jeweiligen Planungs- und Prüfschritten zugeordnet und die R-017-Prüfung in die Buchfassung übernommen. Ergänzende Datums- und Kontextangaben stammen aus dem aktuellen Auftrag. Dieser Einsatz ist Dokumentationsarbeit; die historischen Tests und Backtests wurden dafür nicht erneut ausgeführt. Das aktualisierte Log und die Buchdarstellung wurden technisch abgeglichen und geprüft.
 
+## Stilistische Überarbeitung nach Lehrerrückmeldung – 14. Oktober 2026
+
+Auf die Rückmeldung der Betreuungsperson Herr Mock vom 14. Oktober 2026 hin wurde die persönliche Autorenperspektive in der redaktionellen Prosa sachlich formuliert. ChatGPT unterstützte laut bereitgestellter Arbeitsanweisung die Vorbereitung des Auftrags; Codex sichtete den Buchtext und überarbeitete 70 Stellen in 50 Markdown-Zellen der neun eingebundenen Notebooks. Eigene Auswahlentscheidungen, Motivation und Verantwortung bleiben erkennbar. Als unveränderter Originalstand gekennzeichnete historische Planungsabsätze und die zitierte Ausdrucksweise im Hinweis zu ChatGPT bleiben erhalten.
+
+Diese Unterstützung ist stilistische Formulierungsarbeit. Forschungsfrage, fachliche Aussagen, Berechnungen, Ergebnisse, Quellen und technische Nachweise wurden nicht verändert. Nach der bisherigen Zählmethode steigt der Haupttext von 7’959 auf 7’969 Wort-/Zahlentoken mit Überblick beziehungsweise von 7’834 auf 7’844 ohne Überblick. Die Obergrenze von 8’000 bleibt eingehalten.
+
+Der [vollständige Originalauftrag](documentation/ai-usage/prompts/2026-10-14-ich-formulierungen-wissenschaftlicher-stil.txt) ist bytegleich archiviert. Codex formulierte den [Abschlussbericht](documentation/ich-formulierungen-korrektur-2026-10-14.md), ergänzte das KI-Log und führte KI-DOKUMENTATION-BUCH-SYNC für diesen Eintrag aus. Die technische Kontrolle umfasste Wortzählung, Notebookintegrität, Quellen und Verweise sowie die Buchdarstellung in einer separaten Kopie ohne Notebook-Ausführung. Es wurden keine historischen Tests oder Backtests wiederholt. Die persönliche Endkontrolle der neuen Formulierungen und des KI-Nachtrags steht beim Autor noch aus.
+
 ## Manuelle Verantwortung
 
 Der Autor muss sämtliche übernommenen Änderungen kontrollieren. Dazu gehören insbesondere die unveränderte fachliche Bedeutung, die korrekte Wiedergabe der Quellen, die mathematische Richtigkeit, die Nachvollziehbarkeit des Codes und der Erhalt des persönlichen Schreibtons. Die Verantwortung für die endgültige Fassung der Arbeit bleibt beim Autor.
