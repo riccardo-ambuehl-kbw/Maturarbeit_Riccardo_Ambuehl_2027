@@ -5,7 +5,8 @@ project:
     - python filters/docx-layout.py
 
 book:
-  title: "Langfristige Anlagestrategien anhand historischer Finanzdaten"
+  title: "Anlagestrategien: Risiko und Rendite im Backtest"
+  output-file: "Anlagestrategien-Risiko-und-Rendite-im-Backtest"
   author: "Riccardo Ambühl"
   date: today
   chapters:
