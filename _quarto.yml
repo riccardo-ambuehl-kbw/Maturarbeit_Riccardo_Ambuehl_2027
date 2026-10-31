@@ -100,7 +100,7 @@ format:
       text: |
         \titlehead{Kantonsschule Büelrain Winterthur}
         \subject{Maturitätsarbeit}
-        \publishers{\normalsize Klasse 4gW\\Betreuung: Jacques Mock}
+        \publishers{\normalsize Klasse 4gW\\Betreuung: Jacques Mock Schindler}
         \usepackage{pdfpages}
         \usepackage{booktabs}
         \usepackage{float}
