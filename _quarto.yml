@@ -36,7 +36,9 @@ book:
     right: "Maturarbeit"
 
 lang: de
-bibliography: references.bib
+bibliography:
+  - references.bib
+  - references-supplement.bib
 csl: styles/chicago-shortened-notes-bibliography-17th-edition.csl
 filters:
   - filters/date-icon.lua
