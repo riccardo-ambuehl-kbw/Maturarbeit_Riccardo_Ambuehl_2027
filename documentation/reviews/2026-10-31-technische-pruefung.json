@@ -1,0 +1,1831 @@
+{
+  "date": "2026-10-31",
+  "pdf": {
+    "checked_at_utc": "2026-10-31T19:42:06.361689+00:00",
+    "pdf": "C:\\Users\\modic\\.codex\\scratch\\schlusspruefung-2026-10-31\\render-project\\_book\\Anlagestrategien-Risiko-und-Rendite-im-Backtest.pdf",
+    "sha256": "84a195136f10b0f1061d40bdd3212432d6ebd46243f41e1b0927366bb9b8c5c2",
+    "page_count": 123,
+    "method": "Read-only pypdf text extraction and link annotations; no render/no source modifications. Visual appearance and signature authenticity not evaluated.",
+    "title": {
+      "pdf_page": 1,
+      "fields": {
+        "Kantonsschule Büelrain Winterthur": true,
+        "Maturitätsarbeit": true,
+        "Anlagestrategien: Risiko und Rendite im Backtest": true,
+        "Riccardo Ambühl": true,
+        "Klasse 4gW": true,
+        "Betreuung: Jacques Mock": true,
+        "2026-10-31": true
+      }
+    },
+    "abstract": {
+      "pdf_page": 2,
+      "exact_original_after_whitespace_normalization": true,
+      "normalized_character_count": 681,
+      "expected_character_count": 681
+    },
+    "toc": {
+      "pdf_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figures_entry": "vi",
+      "figures_actual_printed_page": "vi",
+      "figures_page_matches": true,
+      "tables_entry": "vii",
+      "tables_actual_printed_page": "vii",
+      "tables_page_matches": true,
+      "declaration_entry_present": true
+    },
+    "figures": {
+      "list_pdf_page": 7,
+      "count": 8,
+      "expected_count": 8,
+      "entries": [
+        {
+          "number": "3.1",
+          "printed_page_in_list": 22,
+          "entry_text": "Synthetische Monatsrenditen mit gleichem Mittel und unterschiedlicher Volatilität. Quelle: Eigene Darstellung. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22",
+          "caption_pdf_pages": [
+            30
+          ],
+          "caption_printed_pages": [
+            "22"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "5.1",
+          "printed_page_in_list": 44,
+          "entry_text": "Vermögensentwicklung der vier H1-Strategien . . . . . . . . . . . . . . . . . . . . 44",
+          "caption_pdf_pages": [
+            52
+          ],
+          "caption_printed_pages": [
+            "44"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "5.2",
+          "printed_page_in_list": 44,
+          "entry_text": "Drawdown-Verläufe der vier H1-Strategien . . . . . . . . . . . . . . . . . . . . . . 44",
+          "caption_pdf_pages": [
+            52
+          ],
+          "caption_printed_pages": [
+            "44"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "5.3",
+          "printed_page_in_list": 45,
+          "entry_text": "Rendite und Volatilität im Hauptlauf . . . . . . . . . . . . . . . . . . . . . . . . . 45",
+          "caption_pdf_pages": [
+            53
+          ],
+          "caption_printed_pages": [
+            "45"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "5.4",
+          "printed_page_in_list": 46,
+          "entry_text": "Vermögensentwicklung im G7-Kontrollvergleich . . . . . . . . . . . . . . . . . . . 46",
+          "caption_pdf_pages": [
+            54
+          ],
+          "caption_printed_pages": [
+            "46"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "5.5",
+          "printed_page_in_list": 47,
+          "entry_text": "Vermögensentwicklung im längeren US-Lauf . . . . . . . . . . . . . . . . . . . . . 47",
+          "caption_pdf_pages": [
+            55
+          ],
+          "caption_printed_pages": [
+            "47"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "5.6",
+          "printed_page_in_list": 48,
+          "entry_text": "Drawdown-Verläufe im längeren US-Lauf . . . . . . . . . . . . . . . . . . . . . . . 48",
+          "caption_pdf_pages": [
+            56
+          ],
+          "caption_printed_pages": [
+            "48"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "5.7",
+          "printed_page_in_list": 49,
+          "entry_text": "Vermögensentwicklung der drei VT-Trendvarianten . . . . . . . . . . . . . . . . . 49",
+          "caption_pdf_pages": [
+            57
+          ],
+          "caption_printed_pages": [
+            "49"
+          ],
+          "list_page_matches_first_caption": true
+        }
+      ]
+    },
+    "tables": {
+      "list_pdf_page": 8,
+      "count": 22,
+      "expected_count": 22,
+      "entries": [
+        {
+          "number": "3.1",
+          "printed_page_in_list": 26,
+          "entry_text": "Zeichen der annualisierten Sharpe Ratio. Quelle: Eigene Erläuterung nach Sharpe. 26",
+          "caption_pdf_pages": [
+            34
+          ],
+          "caption_printed_pages": [
+            "26"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "4.1",
+          "printed_page_in_list": 33,
+          "entry_text": "Festgelegte Vergleichsläufe. Quelle: Eigenes Untersuchungsdesign. . . . . . . . . . 33",
+          "caption_pdf_pages": [
+            41
+          ],
+          "caption_printed_pages": [
+            "33"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "5.1",
+          "printed_page_in_list": 37,
+          "entry_text": "Verwendete ETF-Reihen und ihre Modellrollen . . . . . . . . . . . . . . . . . . . 37",
+          "caption_pdf_pages": [
+            45
+          ],
+          "caption_printed_pages": [
+            "37"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "5.2",
+          "printed_page_in_list": 38,
+          "entry_text": "Studienblöcke und Vergleichszwecke . . . . . . . . . . . . . . . . . . . . . . . . . 38",
+          "caption_pdf_pages": [
+            46
+          ],
+          "caption_printed_pages": [
+            "38"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "5.3",
+          "printed_page_in_list": 42,
+          "entry_text": "Tatsächlich ausgeführte Untersuchungen . . . . . . . . . . . . . . . . . . . . . . . 42",
+          "caption_pdf_pages": [
+            50
+          ],
+          "caption_printed_pages": [
+            "42"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "5.4",
+          "printed_page_in_list": 43,
+          "entry_text": "Ergebnisse des Hauptlaufs H1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43",
+          "caption_pdf_pages": [
+            51
+          ],
+          "caption_printed_pages": [
+            "43"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "5.5",
+          "printed_page_in_list": 45,
+          "entry_text": "Ergebnisse des Kontrolllaufs K1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45",
+          "caption_pdf_pages": [
+            53
+          ],
+          "caption_printed_pages": [
+            "45"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "5.6",
+          "printed_page_in_list": 46,
+          "entry_text": "Ergebnisse des US-Zusatzlaufs Z1 . . . . . . . . . . . . . . . . . . . . . . . . . . . 46",
+          "caption_pdf_pages": [
+            54
+          ],
+          "caption_printed_pages": [
+            "46"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "5.7",
+          "printed_page_in_list": 48,
+          "entry_text": "Die drei vorab festgelegten VT-Trendvarianten, 2010–2025 . . . . . . . . . . . . . 48",
+          "caption_pdf_pages": [
+            56
+          ],
+          "caption_printed_pages": [
+            "48"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "5.8",
+          "printed_page_in_list": 49,
+          "entry_text": "Vergleich zweier gleich langer Abschnitte von H1 . . . . . . . . . . . . . . . . . . 49",
+          "caption_pdf_pages": [
+            57
+          ],
+          "caption_printed_pages": [
+            "49"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "5.9",
+          "printed_page_in_list": 51,
+          "entry_text": "Signal und tatsächlich gehaltene Position der H1-Trendfolge im Jahr 2020 . . . . 51",
+          "caption_pdf_pages": [
+            59
+          ],
+          "caption_printed_pages": [
+            "51"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "5.10",
+          "printed_page_in_list": 52,
+          "entry_text": "Ausgewählte Zielgewichte des BIP-Portfolios und der Kontrolle . . . . . . . . . . 52",
+          "caption_pdf_pages": [
+            60
+          ],
+          "caption_printed_pages": [
+            "52"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "5.11",
+          "printed_page_in_list": 53,
+          "entry_text": "Investitionsdauer und Positionswechsel der VT-Trendvarianten . . . . . . . . . . 53",
+          "caption_pdf_pages": [
+            61
+          ],
+          "caption_printed_pages": [
+            "53"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "A.1",
+          "printed_page_in_list": 71,
+          "entry_text": "Geplante Zuordnung vorhandener Funktionen. Quelle: Eigene Systemplanung. . . 71",
+          "caption_pdf_pages": [
+            79
+          ],
+          "caption_printed_pages": [
+            "71"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "B.1",
+          "printed_page_in_list": 85,
+          "entry_text": "Pflichtfelder einer Marktzeitreihe. Quelle: Eigener Datenvertrag. . . . . . . . . . . 85",
+          "caption_pdf_pages": [
+            93
+          ],
+          "caption_printed_pages": [
+            "85"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "B.2",
+          "printed_page_in_list": 85,
+          "entry_text": "Optionales Feld für Handelssignale. Quelle: Eigener Datenvertrag. . . . . . . . . . 85",
+          "caption_pdf_pages": [
+            93
+          ],
+          "caption_printed_pages": [
+            "85"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "B.3",
+          "printed_page_in_list": 85,
+          "entry_text": "Künstliches Beispiel einer Marktdatei. Quelle: Eigene Darstellung. . . . . . . . . 85",
+          "caption_pdf_pages": [
+            93
+          ],
+          "caption_printed_pages": [
+            "85"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "B.4",
+          "printed_page_in_list": 88,
+          "entry_text": "Schema der Anlagenmetadaten. Quelle: Eigener Datenvertrag. . . . . . . . . . . . 88",
+          "caption_pdf_pages": [
+            96
+          ],
+          "caption_printed_pages": [
+            "88"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "B.5",
+          "printed_page_in_list": 88,
+          "entry_text": "Schema der Zinsquelldaten. Quelle: Eigener Datenvertrag. . . . . . . . . . . . . . 88",
+          "caption_pdf_pages": [
+            96
+          ],
+          "caption_printed_pages": [
+            "88"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "B.6",
+          "printed_page_in_list": 89,
+          "entry_text": "Schema der Makrodaten. Quelle: Eigener Datenvertrag. . . . . . . . . . . . . . . 89",
+          "caption_pdf_pages": [
+            97
+          ],
+          "caption_printed_pages": [
+            "89"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "B.7",
+          "printed_page_in_list": 91,
+          "entry_text": "Künstliches Beispiel einer fremden CSV-Datei. Quelle: Eigene Darstellung. . . . . 91",
+          "caption_pdf_pages": [
+            99
+          ],
+          "caption_printed_pages": [
+            "91"
+          ],
+          "list_page_matches_first_caption": true
+        },
+        {
+          "number": "B.8",
+          "printed_page_in_list": 92,
+          "entry_text": "Historische pandas-Frequenzaliase. Quelle: Hilpisch (2019), PDF-S. 191–192. . . . 92",
+          "caption_pdf_pages": [
+            100
+          ],
+          "caption_printed_pages": [
+            "92"
+          ],
+          "list_page_matches_first_caption": true
+        }
+      ]
+    },
+    "new_ki_record": {
+      "heading_pdf_pages": [
+        6,
+        120
+      ],
+      "ki46_pdf_pages": [
+        69,
+        120
+      ],
+      "review_uri_annotation_pdf_pages": [
+        69,
+        69
+      ],
+      "role_separation_present": true
+    },
+    "declaration": {
+      "last_pdf_page": 123,
+      "heading_present": true,
+      "signature_authenticity_checked": false,
+      "source_inclusion_only": true
+    },
+    "unresolved_question_marks": [],
+    "all_requested_semantic_checks_passed": true,
+    "extraction_warnings": [
+      "Multiple definitions in dictionary at byte 0xc557e for key /Group"
+    ],
+    "final_layout_revision": "Final PDF after Root minipage fix for D02 and paragraph integration for D03; no source changes by checker.",
+    "figure_5_6_final_layout": {
+      "list_printed_page": 48,
+      "caption_pdf_pages": [
+        56
+      ],
+      "source_paragraph_complete_on_pdf56": true,
+      "method": "Root changed samepage to LaTeX minipage; text location read-only verified with pypdf; visual layout checked separately."
+    }
+  },
+  "html": {
+    "html_files": 11,
+    "local_targets_checked": 1907,
+    "errors": [],
+    "duplicate_ids": []
+  },
+  "notebook_integrity": {
+    "notebooks": 9,
+    "code_cells": 28,
+    "stored_outputs": 28,
+    "changed_code_comments_only": [
+      [
+        "notebooks/Theorie.ipynb",
+        "061f64f4"
+      ],
+      [
+        "notebooks/Theorie.ipynb",
+        "c09ff8c4"
+      ]
+    ],
+    "declaration_source_sha256": "feaebe2907967697278e9d3e15cea03929a0f10cca7b303f62623a1628e425e4"
+  },
+  "latex": {
+    "passes": 3,
+    "overfull_hbox": 14,
+    "underfull": 9,
+    "class_warning_makechapterhead": true,
+    "undefined_references": false,
+    "missing_characters": false
+  },
+  "visual_qa": {
+    "pages": 123,
+    "full_contact_sheets_reviewed": true,
+    "targeted_details": [
+      "title",
+      "abstract",
+      "contents",
+      "lists",
+      "theory tables and figure",
+      "analysis tables and figures",
+      "figure5.6 and full source",
+      "bibliography Yahoo question mark",
+      "new AI appendix",
+      "declaration final page"
+    ],
+    "finding": "No clipped tables/figures, overlapping text or remaining detached source for figure5.6 observed."
+  },
+  "public_links": {
+    "date_local": "2026-10-31",
+    "scope": "45 historische ChatGPT-Freigabelinks aus HEAD:references.bib, neuer Review-Link, explizite GitHub-Links aus ki-nutzung.qmd",
+    "method": "Anonyme HTTP-GET-Anfragen mit Python urllib; keine Cookies, keine Anmeldung; 4 Worker; Timeout 25 s; keine Umgehung von Zugriffsfehlern.",
+    "results": [
+      {
+        "url": "https://chatgpt.com/s/t_6acd8441b0fc81918f751e8eb334a2cc",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:52.502868+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8441b0fc81918f751e8eb334a2cc",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 624033,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.74
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd84c0f1748191b6431744f2b3886b",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:52.504472+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd84c0f1748191b6431744f2b3886b",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 590275,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.78
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8c57a66c8191b16bc21ee0532b05",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:52.504765+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8c57a66c8191b16bc21ee0532b05",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 590745,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.94
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8c7267c48191bba7a927ff307f98",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:52.504976+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8c7267c48191bba7a927ff307f98",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 591496,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.67
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8c813cd48191b35fabd10aea02b8",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:53.174061+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8c813cd48191b35fabd10aea02b8",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 605457,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.68
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8c96f5c081918b851992aa3f43ac",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:53.245321+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8c96f5c081918b851992aa3f43ac",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 594750,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.9
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8ca720508191a30c5abacf74a4ba",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:53.284069+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8ca720508191a30c5abacf74a4ba",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 591151,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.62
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8ccc4dc48191b55fe2bbbc9ac5c5",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:53.441197+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8ccc4dc48191b55fe2bbbc9ac5c5",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 592239,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.64
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8cddc6e481918e85ba761be09802",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:53.857318+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8cddc6e481918e85ba761be09802",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 603215,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.57
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8cefd8b881919ee1b191bfd1b554",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:53.905246+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8cefd8b881919ee1b191bfd1b554",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 602161,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.8
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8cfc67b481919d5728be71b9adfe",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:54.085628+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8cfc67b481919d5728be71b9adfe",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 591518,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.76
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8d0b53048191a5dab58096e2e540",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:54.146464+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8d0b53048191a5dab58096e2e540",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 591214,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.61
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8d179ea48191a85fa762da686595",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:54.422808+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8d179ea48191a85fa762da686595",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 590929,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.67
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8d3437ac81919e8220fefc55d992",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:54.701793+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8d3437ac81919e8220fefc55d992",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 588300,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.8
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8d620e4881919698680a05a0f0c4",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:54.759110+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8d620e4881919698680a05a0f0c4",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 593808,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.53
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd9b6c4aac8191b733f8cb425fc218",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:54.850143+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd9b6c4aac8191b733f8cb425fc218",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 697507,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.75
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd98ec15f88191b6b7108cd5a58da0",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:55.093452+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd98ec15f88191b6b7108cd5a58da0",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 621664,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.74
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acda7ebe8608191acca957223db0fa0",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:55.286228+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acda7ebe8608191acca957223db0fa0",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 596463,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.61
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acda86619608191a7289c979bcfe389",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:55.498911+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acda86619608191a7289c979bcfe389",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 599208,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.6
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acda9395eac8191ae1a12850817f3a7",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:55.605280+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acda9395eac8191ae1a12850817f3a7",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 598593,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.6
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd851e7d7881918b55b8a1931af8a9",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:55.832938+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd851e7d7881918b55b8a1931af8a9",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 591781,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.88
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd857650848191834bc1a507108c38",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:55.892191+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd857650848191834bc1a507108c38",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 592056,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.53
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd86090c7c8191ae2ee2c950c41b57",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:56.100039+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd86090c7c8191ae2ee2c950c41b57",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 605519,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.52
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd867ccf3c81918d2111ca1a6d0909",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:56.209272+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd867ccf3c81918d2111ca1a6d0909",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 616169,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.53
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd869b5a9c8191870f50d701c06cc1",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:56.419859+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd869b5a9c8191870f50d701c06cc1",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 593720,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.67
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd86de8c2481919f9cd9bc933db1ac",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:56.624786+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd86de8c2481919f9cd9bc933db1ac",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 593186,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.72
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd86fe9af481919cc18b1eaffe62d0",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:56.708372+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd86fe9af481919cc18b1eaffe62d0",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 591027,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.62
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd870fc7c48191a9fde49f87e389f2",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:56.736610+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd870fc7c48191a9fde49f87e389f2",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 597827,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.56
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8728159c819181c4b11407d9612a",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:57.089710+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8728159c819181c4b11407d9612a",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 616568,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.62
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd873acedc8191afa783c17195e04d",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:57.299326+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd873acedc8191afa783c17195e04d",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 590641,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.84
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd877bc82481919581e8bcf9a5027c",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:57.329632+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd877bc82481919581e8bcf9a5027c",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 592378,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.58
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd878f254c8191b0a8d33b9c2394d8",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:57.346073+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd878f254c8191b0a8d33b9c2394d8",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 593502,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.61
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8b35011c8191b7f36a01b167de4a",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:57.705235+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8b35011c8191b7f36a01b167de4a",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 614282,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.61
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8b48605c8191b4bb390f8aabc5b1",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:57.908642+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8b48605c8191b4bb390f8aabc5b1",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 590737,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.74
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8b567704819191935cd2baf30030",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:57.955172+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8b567704819191935cd2baf30030",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 585179,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.6
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8b69f28c8191b5407ddb25ab6506",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:58.141594+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8b69f28c8191b5407ddb25ab6506",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 592946,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.66
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8b8235648191ab881e49cb4dfcc0",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:58.319546+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8b8235648191ab881e49cb4dfcc0",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 612324,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.64
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8b97fbb8819190ba29eef74ebfc0",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:58.550982+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8b97fbb8819190ba29eef74ebfc0",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 590131,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.57
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8bc54d78819192d15265a65bd880",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:58.646818+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8bc54d78819192d15265a65bd880",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 593430,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.62
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8bd881c881918da6540384acc7d0",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:58.804100+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8bd881c881918da6540384acc7d0",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 593958,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.68
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8bf2ddf88191855f52573868cfe5",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:58.964510+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8bf2ddf88191855f52573868cfe5",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 611953,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.9
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8c071d688191a35d8a08773a409c",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:59.119714+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8c071d688191a35d8a08773a409c",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 607085,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.69
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8c19d8388191b20ba6a135b7d196",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:59.267636+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8c19d8388191b20ba6a135b7d196",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 590636,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.81
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8c2de0708191bb233e4f7afc157b",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:59.487641+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8c2de0708191bb233e4f7afc157b",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 591560,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.57
+      },
+      {
+        "url": "https://chatgpt.com/s/t_6acd8c44a9a48191ac15d84e954e3c3e",
+        "kind": "ChatGPT historisch",
+        "checked_at_utc": "2026-10-31T19:26:59.808699+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/s/t_6acd8c44a9a48191ac15d84e954e3c3e",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 598722,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Shared Content",
+        "http_reachable": true,
+        "observed_markers": [
+          "Log in",
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.65
+      },
+      {
+        "url": "https://chatgpt.com/share/6ae63fdb-e3b0-83eb-8465-345769041156",
+        "kind": "ChatGPT Schlussbeurteilung",
+        "checked_at_utc": "2026-10-31T19:26:59.860565+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://chatgpt.com/share/6ae63fdb-e3b0-83eb-8465-345769041156",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 854722,
+        "body_truncated": false,
+        "html_title": "ChatGPT - Prüfbericht Maturarbeit",
+        "http_reachable": true,
+        "observed_markers": [
+          "__reactRouterContext",
+          "conversation",
+          "messages"
+        ],
+        "content_verification": "Nicht abschliessend geprüft: HTML-Antwort kann dynamische App-Shell enthalten; HTTP-Erfolg bestätigt weder vollständigen Chatinhalt noch Zuordnung.",
+        "elapsed_seconds": 0.62
+      },
+      {
+        "url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-02-engine-audit.md",
+        "kind": "GitHub Arbeitsnachweis",
+        "checked_at_utc": "2026-10-31T19:27:00.060166+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-02-engine-audit.md",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 214368,
+        "body_truncated": false,
+        "html_title": "Maturarbeit_Riccardo_Ambuehl_2027/documentation/ai-usage/prompts/2026-10-02-engine-audit.md at 1954bfbcb257b51e7f9174aa824cb35e437de752 · riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027 · GitHub",
+        "http_reachable": true,
+        "content_verification": "HTML-Antwort/Titel erfasst; kein vollständiger Dateiinhaltsabgleich in diesem Linkcheck.",
+        "elapsed_seconds": 0.73
+      },
+      {
+        "url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-02-engine-v1-core-implementation.md",
+        "kind": "GitHub Arbeitsnachweis",
+        "checked_at_utc": "2026-10-31T19:27:00.080995+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-02-engine-v1-core-implementation.md",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 284938,
+        "body_truncated": false,
+        "html_title": "Maturarbeit_Riccardo_Ambuehl_2027/documentation/ai-usage/prompts/2026-10-02-engine-v1-core-implementation.md at 1954bfbcb257b51e7f9174aa824cb35e437de752 · riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027 · GitHub",
+        "http_reachable": true,
+        "content_verification": "HTML-Antwort/Titel erfasst; kein vollständiger Dateiinhaltsabgleich in diesem Linkcheck.",
+        "elapsed_seconds": 0.75
+      },
+      {
+        "url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-rebalancing-implementation.md",
+        "kind": "GitHub Arbeitsnachweis",
+        "checked_at_utc": "2026-10-31T19:27:00.459413+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-rebalancing-implementation.md",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 279249,
+        "body_truncated": false,
+        "html_title": "Maturarbeit_Riccardo_Ambuehl_2027/documentation/ai-usage/prompts/2026-10-04-engine-v1-rebalancing-implementation.md at 1954bfbcb257b51e7f9174aa824cb35e437de752 · riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027 · GitHub",
+        "http_reachable": true,
+        "content_verification": "HTML-Antwort/Titel erfasst; kein vollständiger Dateiinhaltsabgleich in diesem Linkcheck.",
+        "elapsed_seconds": 0.8
+      },
+      {
+        "url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-trend-implementation.md",
+        "kind": "GitHub Arbeitsnachweis",
+        "checked_at_utc": "2026-10-31T19:27:00.482589+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-trend-implementation.md",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 339084,
+        "body_truncated": false,
+        "html_title": "Maturarbeit_Riccardo_Ambuehl_2027/documentation/ai-usage/prompts/2026-10-04-engine-v1-trend-implementation.md at 1954bfbcb257b51e7f9174aa824cb35e437de752 · riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027 · GitHub",
+        "http_reachable": true,
+        "content_verification": "HTML-Antwort/Titel erfasst; kein vollständiger Dateiinhaltsabgleich in diesem Linkcheck.",
+        "elapsed_seconds": 0.55
+      },
+      {
+        "url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-country-weighting-implementation.md",
+        "kind": "GitHub Arbeitsnachweis",
+        "checked_at_utc": "2026-10-31T19:27:00.787059+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-country-weighting-implementation.md",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 303964,
+        "body_truncated": false,
+        "html_title": "Maturarbeit_Riccardo_Ambuehl_2027/documentation/ai-usage/prompts/2026-10-04-engine-v1-country-weighting-implementation.md at 1954bfbcb257b51e7f9174aa824cb35e437de752 · riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027 · GitHub",
+        "http_reachable": true,
+        "content_verification": "HTML-Antwort/Titel erfasst; kein vollständiger Dateiinhaltsabgleich in diesem Linkcheck.",
+        "elapsed_seconds": 0.62
+      },
+      {
+        "url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-final-audit.md",
+        "kind": "GitHub Arbeitsnachweis",
+        "checked_at_utc": "2026-10-31T19:27:00.832134+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-final-audit.md",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 296188,
+        "body_truncated": false,
+        "html_title": "Maturarbeit_Riccardo_Ambuehl_2027/documentation/ai-usage/prompts/2026-10-04-engine-v1-final-audit.md at 1954bfbcb257b51e7f9174aa824cb35e437de752 · riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027 · GitHub",
+        "http_reachable": true,
+        "content_verification": "HTML-Antwort/Titel erfasst; kein vollständiger Dateiinhaltsabgleich in diesem Linkcheck.",
+        "elapsed_seconds": 0.58
+      },
+      {
+        "url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-blocker-fixes.md",
+        "kind": "GitHub Arbeitsnachweis",
+        "checked_at_utc": "2026-10-31T19:27:01.032406+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-blocker-fixes.md",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 303430,
+        "body_truncated": false,
+        "html_title": "Maturarbeit_Riccardo_Ambuehl_2027/documentation/ai-usage/prompts/2026-10-04-engine-v1-blocker-fixes.md at 1954bfbcb257b51e7f9174aa824cb35e437de752 · riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027 · GitHub",
+        "http_reachable": true,
+        "content_verification": "HTML-Antwort/Titel erfasst; kein vollständiger Dateiinhaltsabgleich in diesem Linkcheck.",
+        "elapsed_seconds": 0.57
+      },
+      {
+        "url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-portfolio-state-validation-fix.md",
+        "kind": "GitHub Arbeitsnachweis",
+        "checked_at_utc": "2026-10-31T19:27:01.260505+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-portfolio-state-validation-fix.md",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 215940,
+        "body_truncated": false,
+        "html_title": "Maturarbeit_Riccardo_Ambuehl_2027/documentation/ai-usage/prompts/2026-10-04-engine-v1-portfolio-state-validation-fix.md at 1954bfbcb257b51e7f9174aa824cb35e437de752 · riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027 · GitHub",
+        "http_reachable": true,
+        "content_verification": "HTML-Antwort/Titel erfasst; kein vollständiger Dateiinhaltsabgleich in diesem Linkcheck.",
+        "elapsed_seconds": 0.52
+      },
+      {
+        "url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-blocker-reaudit.md",
+        "kind": "GitHub Arbeitsnachweis",
+        "checked_at_utc": "2026-10-31T19:27:01.407393+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-blocker-reaudit.md",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 265658,
+        "body_truncated": false,
+        "html_title": "Maturarbeit_Riccardo_Ambuehl_2027/documentation/ai-usage/prompts/2026-10-04-engine-v1-blocker-reaudit.md at 1954bfbcb257b51e7f9174aa824cb35e437de752 · riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027 · GitHub",
+        "http_reachable": true,
+        "content_verification": "HTML-Antwort/Titel erfasst; kein vollständiger Dateiinhaltsabgleich in diesem Linkcheck.",
+        "elapsed_seconds": 0.55
+      },
+      {
+        "url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-csv-nul-fix.md",
+        "kind": "GitHub Arbeitsnachweis",
+        "checked_at_utc": "2026-10-31T19:27:01.408078+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-csv-nul-fix.md",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 257890,
+        "body_truncated": false,
+        "html_title": "Maturarbeit_Riccardo_Ambuehl_2027/documentation/ai-usage/prompts/2026-10-04-engine-v1-csv-nul-fix.md at 1954bfbcb257b51e7f9174aa824cb35e437de752 · riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027 · GitHub",
+        "http_reachable": true,
+        "content_verification": "HTML-Antwort/Titel erfasst; kein vollständiger Dateiinhaltsabgleich in diesem Linkcheck.",
+        "elapsed_seconds": 0.5
+      },
+      {
+        "url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-final-freeze-reaudit.md",
+        "kind": "GitHub Arbeitsnachweis",
+        "checked_at_utc": "2026-10-31T19:27:01.607471+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-final-freeze-reaudit.md",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 236675,
+        "body_truncated": false,
+        "html_title": "Maturarbeit_Riccardo_Ambuehl_2027/documentation/ai-usage/prompts/2026-10-04-engine-v1-final-freeze-reaudit.md at 1954bfbcb257b51e7f9174aa824cb35e437de752 · riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027 · GitHub",
+        "http_reachable": true,
+        "content_verification": "HTML-Antwort/Titel erfasst; kein vollständiger Dateiinhaltsabgleich in diesem Linkcheck.",
+        "elapsed_seconds": 0.5
+      },
+      {
+        "url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-release-freeze.md",
+        "kind": "GitHub Arbeitsnachweis",
+        "checked_at_utc": "2026-10-31T19:27:01.782156+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-04-engine-v1-release-freeze.md",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 235622,
+        "body_truncated": false,
+        "html_title": "Maturarbeit_Riccardo_Ambuehl_2027/documentation/ai-usage/prompts/2026-10-04-engine-v1-release-freeze.md at 1954bfbcb257b51e7f9174aa824cb35e437de752 · riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027 · GitHub",
+        "http_reachable": true,
+        "content_verification": "HTML-Antwort/Titel erfasst; kein vollständiger Dateiinhaltsabgleich in diesem Linkcheck.",
+        "elapsed_seconds": 0.78
+      },
+      {
+        "url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-10-study-v1-data-adapter.md",
+        "kind": "GitHub Arbeitsnachweis",
+        "checked_at_utc": "2026-10-31T19:27:01.908051+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-10-study-v1-data-adapter.md",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 266299,
+        "body_truncated": false,
+        "html_title": "Maturarbeit_Riccardo_Ambuehl_2027/documentation/ai-usage/prompts/2026-10-10-study-v1-data-adapter.md at 1954bfbcb257b51e7f9174aa824cb35e437de752 · riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027 · GitHub",
+        "http_reachable": true,
+        "content_verification": "HTML-Antwort/Titel erfasst; kein vollständiger Dateiinhaltsabgleich in diesem Linkcheck.",
+        "elapsed_seconds": 0.49
+      },
+      {
+        "url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-10-study-v1-freeze-preparation.md",
+        "kind": "GitHub Arbeitsnachweis",
+        "checked_at_utc": "2026-10-31T19:27:01.954050+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/1954bfbcb257b51e7f9174aa824cb35e437de752/documentation/ai-usage/prompts/2026-10-10-study-v1-freeze-preparation.md",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 254467,
+        "body_truncated": false,
+        "html_title": "Maturarbeit_Riccardo_Ambuehl_2027/documentation/ai-usage/prompts/2026-10-10-study-v1-freeze-preparation.md at 1954bfbcb257b51e7f9174aa824cb35e437de752 · riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027 · GitHub",
+        "http_reachable": true,
+        "content_verification": "HTML-Antwort/Titel erfasst; kein vollständiger Dateiinhaltsabgleich in diesem Linkcheck.",
+        "elapsed_seconds": 0.5
+      },
+      {
+        "url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/229166b485daa8c04a969d4a319d6eeb70da883f/documentation/originaldaten-gegenpruefung-2026-10-13.md",
+        "kind": "GitHub Arbeitsnachweis",
+        "checked_at_utc": "2026-10-31T19:27:02.105869+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/229166b485daa8c04a969d4a319d6eeb70da883f/documentation/originaldaten-gegenpruefung-2026-10-13.md",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 463934,
+        "body_truncated": false,
+        "html_title": "Maturarbeit_Riccardo_Ambuehl_2027/documentation/originaldaten-gegenpruefung-2026-10-13.md at 229166b485daa8c04a969d4a319d6eeb70da883f · riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027 · GitHub",
+        "http_reachable": true,
+        "content_verification": "HTML-Antwort/Titel erfasst; kein vollständiger Dateiinhaltsabgleich in diesem Linkcheck.",
+        "elapsed_seconds": 1.04
+      },
+      {
+        "url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/229166b485daa8c04a969d4a319d6eeb70da883f/documentation/ai-usage/prompts/2026-10-13-originaldaten-gegenpruefung-r017.txt",
+        "kind": "GitHub Arbeitsnachweis",
+        "checked_at_utc": "2026-10-31T19:27:02.394891+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/229166b485daa8c04a969d4a319d6eeb70da883f/documentation/ai-usage/prompts/2026-10-13-originaldaten-gegenpruefung-r017.txt",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 313122,
+        "body_truncated": false,
+        "html_title": "Maturarbeit_Riccardo_Ambuehl_2027/documentation/ai-usage/prompts/2026-10-13-originaldaten-gegenpruefung-r017.txt at 229166b485daa8c04a969d4a319d6eeb70da883f · riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027 · GitHub",
+        "http_reachable": true,
+        "content_verification": "HTML-Antwort/Titel erfasst; kein vollständiger Dateiinhaltsabgleich in diesem Linkcheck.",
+        "elapsed_seconds": 0.57
+      },
+      {
+        "url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/229166b485daa8c04a969d4a319d6eeb70da883f/documentation/ai-usage/prompts/2026-10-14-ich-formulierungen-wissenschaftlicher-stil.txt",
+        "kind": "GitHub Arbeitsnachweis",
+        "checked_at_utc": "2026-10-31T19:27:02.456070+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/229166b485daa8c04a969d4a319d6eeb70da883f/documentation/ai-usage/prompts/2026-10-14-ich-formulierungen-wissenschaftlicher-stil.txt",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 242960,
+        "body_truncated": false,
+        "html_title": "Maturarbeit_Riccardo_Ambuehl_2027/documentation/ai-usage/prompts/2026-10-14-ich-formulierungen-wissenschaftlicher-stil.txt at 229166b485daa8c04a969d4a319d6eeb70da883f · riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027 · GitHub",
+        "http_reachable": true,
+        "content_verification": "HTML-Antwort/Titel erfasst; kein vollständiger Dateiinhaltsabgleich in diesem Linkcheck.",
+        "elapsed_seconds": 0.49
+      },
+      {
+        "url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/229166b485daa8c04a969d4a319d6eeb70da883f/documentation/ich-formulierungen-korrektur-2026-10-14.md",
+        "kind": "GitHub Arbeitsnachweis",
+        "checked_at_utc": "2026-10-31T19:27:02.567060+00:00",
+        "authenticated": false,
+        "request_method": "GET",
+        "status": 200,
+        "final_url": "https://github.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/blob/229166b485daa8c04a969d4a319d6eeb70da883f/documentation/ich-formulierungen-korrektur-2026-10-14.md",
+        "content_type": "text/html; charset=utf-8",
+        "read_bytes": 633101,
+        "body_truncated": false,
+        "html_title": "Maturarbeit_Riccardo_Ambuehl_2027/documentation/ich-formulierungen-korrektur-2026-10-14.md at 229166b485daa8c04a969d4a319d6eeb70da883f · riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027 · GitHub",
+        "http_reachable": true,
+        "content_verification": "HTML-Antwort/Titel erfasst; kein vollständiger Dateiinhaltsabgleich in diesem Linkcheck.",
+        "elapsed_seconds": 0.88
+      }
+    ]
+  },
+  "fixed_repository_evidence": [
+    {
+      "path": "documentation/originaldaten-gegenpruefung-2026-10-13.md",
+      "status": 200,
+      "same": true,
+      "url": "https://raw.githubusercontent.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/229166b485daa8c04a969d4a319d6eeb70da883f/documentation/originaldaten-gegenpruefung-2026-10-13.md"
+    },
+    {
+      "path": "documentation/ai-usage/prompts/2026-10-13-originaldaten-gegenpruefung-r017.txt",
+      "status": 200,
+      "same": true,
+      "url": "https://raw.githubusercontent.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/229166b485daa8c04a969d4a319d6eeb70da883f/documentation/ai-usage/prompts/2026-10-13-originaldaten-gegenpruefung-r017.txt"
+    },
+    {
+      "path": "documentation/ai-usage/prompts/2026-10-14-ich-formulierungen-wissenschaftlicher-stil.txt",
+      "status": 200,
+      "same": true,
+      "url": "https://raw.githubusercontent.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/229166b485daa8c04a969d4a319d6eeb70da883f/documentation/ai-usage/prompts/2026-10-14-ich-formulierungen-wissenschaftlicher-stil.txt"
+    },
+    {
+      "path": "documentation/ich-formulierungen-korrektur-2026-10-14.md",
+      "status": 200,
+      "same": true,
+      "url": "https://raw.githubusercontent.com/riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027/229166b485daa8c04a969d4a319d6eeb70da883f/documentation/ich-formulierungen-korrektur-2026-10-14.md"
+    }
+  ]
+}

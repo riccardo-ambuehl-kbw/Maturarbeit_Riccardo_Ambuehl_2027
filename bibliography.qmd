@@ -2,3 +2,7 @@
 
 ::: {#refs}
 :::
+
+## Kurzübersicht zur KI-Nutzung {.unnumbered}
+
+ChatGPT unterstützte die Planung der Engine, die Vorbereitung von Arbeitsaufträgen sowie die Prüfung von Daten, Ergebnissen und der Schlussfassung. Codex wurde für technische Umsetzung, Tests, Formatierung, Text- und Belegkorrekturen sowie die KI-Dokumentation eingesetzt. Die jeweiligen Aufgaben, übernommenen Änderungen, Prüfgrenzen und öffentlichen Chatnachweise sind in @sec-ki-dokumentation aufgeführt. Die fachliche Kontrolle und Verantwortung für die endgültige Fassung bleiben beim Autor.

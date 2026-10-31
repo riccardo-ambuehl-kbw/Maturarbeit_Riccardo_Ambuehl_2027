@@ -1,0 +1,242 @@
+## Ergebnis: Die Arbeit ist weit fortgeschritten, aber noch nicht unverändert abgabefertig.
+
+Ich habe die **aktuelle Fassung vom 31.10.2026 mit 118 PDF-Seiten vollständig neu geprüft**: Haupttext, Literaturverzeichnis und sämtliche Anhänge A–D. Dazu kamen die visuelle Kontrolle der Seiten, der Abgleich mit den Schulunterlagen, gezielte Vergleiche mit Originalquellen und unabhängige Nachrechnungen. Frühere Prüfberichte und die im Anhang genannten Tests habe ich nicht als eigene neue Prüfungsergebnisse übernommen. **An deiner Arbeit und den Originaldateien wurde nichts verändert.**
+
+Der vollständige, **18-seitige Prüfbericht** enthält alle Befunde mit Fundstellen, Regelgrundlage, Priorität und konkreten Korrekturvorschlägen:
+
+**:chatgpt-content-reference{index="2"}[Pruefbericht_Maturarbeit_KBW_2026-10-31.pdf](sandbox:/workspace/scratch/f398a04994ad/output/pdf/Pruefbericht_Maturarbeit_KBW_2026-10-31.pdf)**
+
+Die wichtigsten Ergebnisse stehen nachfolgend auch direkt hier.
+
+### Prüfgrundlage und Einordnung
+
+Geprüft wurde Anlagestrategien-Risiko-und-Rendite-im-Backtest.pdf[Anlagestrategien: Risiko und Rendite im Backtest](sandbox:/workspace/scratch/f398a04994ad/review_input/Maturarbeit/Anlagestrategien-Risiko-und-Rendite-im-Backtest.pdf). Massgeblich waren der 10-Leitfaden_MA_f-r_SuS_KBW_2026.pdf[KBW-Leitfaden 2026](sandbox:/workspace/scratch/f398a04994ad/project_sources/10-Leitfaden_MA_f-r_SuS_KBW_2026.pdf) und die 08-Maturarbeit_Vorgaben_2027-1-.pdf[Vorgaben für 2027](sandbox:/workspace/scratch/f398a04994ad/project_sources/08-Maturarbeit_Vorgaben_2027-1-.pdf), ergänzt durch die Einführung und deine Vereinbarung.
+
+Ich unterscheide im Bericht vier Kategorien:
+
+- **A – nachgewiesene Abweichung von den Schulvorgaben**
+- **B – bestätigter sachlicher, sprachlicher oder redaktioneller Fehler**
+- **C – mögliches Problem oder noch offene Prüfung**
+- **D – freiwillige Verbesserung**
+
+Die Priorität ist davon getrennt: **P1 zuerst beheben oder zwingend klären**, **P2 anschliessend für die Endfassung korrigieren**, **P3 freiwillig bzw. nachrangig**.
+
+**Seitenangaben:** „S.“ bezeichnet die gedruckte Seitenzahl deiner Arbeit. Bei den arabisch nummerierten Seiten gilt durchgehend: **PDF-Seite = gedruckte Seite + 6**. Beim Leitfaden bedeutet beispielsweise „S. 2“ die PDF-Seite 4.
+
+---
+
+## 1. Tatsächliche Abweichungen von den Schulvorgaben
+
+Diese Punkte sind anhand der vorliegenden Unterlagen belegt. Für abweichende Gestaltungsvereinbarungen habe ich keinen Nachweis gefunden.
+
+| Priorität | Befund und Fundstelle | Schulvorgabe | Konkrete Korrektur |
+|---|---|---|---|
+| **P1 · A01** | **Ehrlichkeitserklärung fehlt.** Die Arbeit endet auf S. 112 / PDF 118 mit „Manuelle Verantwortung“. | LF §3.10, S. 3: Erklärung als letzte Seite. V27 §6.1, S. 3: persönlich unterschrieben in den Druckexemplaren. | Aktuelle KBW-Vorlage vollständig als letzte Seite einfügen, Felder ausfüllen, zutreffende Mediotheksoption ankreuzen und die Druckexemplare persönlich unterschreiben. |
+| **P1 · A02** | **Titelblatt unvollständig**, PDF 1. | LF §3.1, S. 2. | „Kantonsschule Büelrain Winterthur“, „Maturitätsarbeit“, aktuelle Klasse und Betreuungsperson ergänzen. Jacques Mock ist in der Vereinbarung als Betreuungsperson genannt. |
+| **P1 · A03** | **Abbildungs- und Tabellenverzeichnis fehlen.** | LF §3.4, S. 2 verlangt entsprechende Verzeichnisse; §3.3 verlangt deren Aufnahme ins Inhaltsverzeichnis. | Verzeichnisse mit Nummer, Titel und Seitenzahl erzeugen und ins Inhaltsverzeichnis aufnehmen. Jeweils eine eigene Seite ist nicht ausdrücklich vorgeschrieben. |
+| **P1 · A04** | **Redaktionelle Tabellen sind nicht nummeriert.** Besonders die neun Analyse-Tabellen auf S. 42, 43, 45, 46, 48, 49, 50, 51 und 52; weitere Tabellen im Grundlagen- und Anhangsteil. | LF §§3.4 und 4.2, S. 2 und 9: getrennte, fortlaufende Nummerierung und Bezugnahme im Text. | Tabellennummern und eindeutige Titel ergänzen; im erklärenden Text auf die Tabellen verweisen. |
+| **P1 · A05** | **Volatilitätsgrafik auf S. 22 / PDF 28 ohne Abbildungsnummer und Eigenkennzeichnung.** Ausdrückliche Nummernverweise auf Abb. 5.1–5.7 fehlen ebenfalls. | LF §4.2, S. 9. | Synthetische Grafik nummerieren und beispielsweise mit „Eigene Darstellung; synthetische Monatsrenditen“ kennzeichnen. Passende Abbildungsverweise im Fliesstext ergänzen. |
+| **P1 · A06** | **45 unterschiedliche ChatGPT-Belege sind über identische Kurzbelege nicht eindeutig zuordenbar.** Literaturverzeichnis S. 57–60; Fussnoten S. 101–105. | LF §4.1, S. 4: eindeutige Zuordnung und Auffindbarkeit; §5.1, S. 16: unterscheidbare KI-Belege. | Individuelle Titel und eindeutige Kennzeichnungen vergeben; Kurzbeleg, Vollbeleg, Abfragedatum und öffentlicher Link müssen dieselbe Abfrage identifizieren. |
+| **P1 · A07** | **Eine tatsächlich zitierte pandas-Quelle fehlt im Literaturverzeichnis.** S. 92 / PDF 98: Link „ME statt M für das Monatsende“. | LF §3.7, S. 3 und §4.3, S. 10: sämtliche tatsächlich zitierten Quellen aufnehmen. | Vollbeleg der Release Notes zu pandas 2.2.0 ergänzen und im Absatz regulär zitieren. |
+| **P2 · A08** | **WEO wird bei der ersten Nennung nicht ausgeschrieben.** S. 34 / PDF 40; ausdrückliche Einführung erst auf S. 96. | LF §3.5, S. 2: nicht im Duden enthaltene Abkürzungen bei der ersten Nennung ausschreiben. | Bereits auf S. 34 „World Economic Outlook (WEO)“ schreiben. IMF ist dort bereits korrekt eingeführt. |
+
+### Zwei wichtige Abgrenzungen
+
+**Die Ergebnistabellen sind nicht pauschal unbelegt.** Bei vielen stehen konkrete Herkunftsangaben wie `summary.csv`, `portfolio_history.csv`, `signals.csv` oder `run_manifest.json`. Der klare Mangel ist ihre fehlende Nummerierung. Eine einheitliche Formulierung wie „Quelle: Eigene Berechnung und Darstellung; H1, summary.csv“ verbessert die Beschriftung zusätzlich.
+
+**Die Position der Abbildungstitel unter den Grafiken ist nicht gleich schwer zu gewichten.** Der Leitfaden schreibt, Nummer und Titel *sollten* darüber stehen. Das ist eine Gestaltungsempfehlung. Fehlende Nummern und fehlende Herkunftsangaben sind wesentlich klarere Befunde.
+
+---
+
+## 2. Quellen und KI-Dokumentation: die wichtigsten Korrekturen
+
+### Die ChatGPT-Belege müssen eindeutig werden
+
+Das grösste Nachweisproblem liegt nicht in einer grundsätzlich fehlenden Offenlegung. Deine KI-Dokumentation ist umfangreich. Das Problem ist die **Zuordnung**:
+
+Im Literaturverzeichnis stehen 45 verschiedene ChatGPT-URLs unter demselben Titel **„ChatGPT – Geteilter Inhalt“**. In den betreffenden Fussnoten wird dieser identische Titel teilweise mehrfach wiederholt. Auch die Fussnotensprünge führen nicht unmittelbar zum jeweils gemeinten Chat.
+
+Ein Leser kann daher nicht zuverlässig feststellen, welche konkrete Abfrage eine bestimmte Aussage oder einen bestimmten Arbeitsschritt belegt.
+
+Die Korrektur sollte von den ursprünglichen Zotero-/BibTeX-Daten oder den Arbeitsunterlagen ausgehen. Für jeden tatsächlich verwendeten Chat braucht es eine eindeutige Bezeichnung, etwa:
+
+> ChatGPT (2026a), „Prüfung der Drawdown-Berechnung“, Abfragedatum …, öffentlicher Link …
+
+Die genaue Bezeichnung ist weniger wichtig als die **korrekte, durchgängige Verbindung zwischen Fussnote und Verzeichniseintrag**. Die Reihenfolge im Literaturverzeichnis allein reicht nicht zur Rekonstruktion aus.
+
+### Präzise Fundstellen nachtragen
+
+Einige Belege verweisen für konkrete Aussagen nur auf ein ganzes Buch oder einen umfangreichen Beitrag. Besonders relevant sind:
+
+- **S. 69, FN 4 / PDF 75:** Hilpisch ohne genaue Fundstelle zur Aussage über Funktionen und Module.
+- **S. 83, FN 1 / PDF 89:** McKinney ohne genaue Fundstelle zum Datenanalyseprozess.
+- **S. 19, FN 56 und S. 26, FN 71:** Sharpe ohne präzisen Abschnitt oder passende Seiten der verwendeten Ausgabe.
+- **Mehrere sehr kurze Kommer-Folgebelege:** Bei zwei Kommer-Büchern im Literaturverzeichnis kann „Kommer, 58.“ nach einem Kontextwechsel mehrdeutig werden.
+
+Dabei habe ich nicht jeden kurzen Folgebeleg als falsch gewertet. Ist der unmittelbare Bezug eindeutig, kann eine verkürzte Angabe funktionieren. Problematisch wird sie dort, wo der Leser zwischen mehreren Werken wählen müsste.
+
+### Internetdaten sind teilweise unklar gekennzeichnet
+
+Der Bericht enthält eine vollständige Matrix der **26 Nicht-KI-Einträge mit URL oder DOI**. Bei sechs steht ausdrücklich „Zugegriffen“. Bei anderen erscheinen Daten, ohne dass klar ist, ob sie Veröffentlichung, Versionsstand oder Zugriff bezeichnen.
+
+Daraus folgt **nicht**, dass 20 Abrufdaten sicher fehlen. Die sinnvolle Korrektur ist, diese Rollen eindeutig zu unterscheiden und tatsächliche Zugriffsdaten aus deinen Unterlagen zu übernehmen. Neue Abrufdaten sollten nicht rückwirkend erfunden werden.
+
+---
+
+## 3. Bestätigte fachliche und quellenbezogene Fehler
+
+### Sharpe Ratio: Berechnung und Quellenfehler auseinanderhalten
+
+**S. 26 / PDF 32, FN 70** behauptet, die verwendete periodische Sharpe-Formel sei bei Pham et al. angegeben.
+
+Deine Formel arbeitet mit dem **arithmetischen Mittel der Überschussrenditen und deren Standardabweichung**. Die Darstellung im Appendix von Pham et al. passt dazu nicht genau: Dort werden andere Grössen verwendet und das Mittel zuvor geometrisch definiert. Sharpe selbst ist für die von dir verwendete ex-post-Definition die passendere Primärquelle. [rpc.cfainstitute.org](https://rpc.cfainstitute.org/sites/default/files/docs/research-reports/monash-report-1_performance-of-the-6040_online.pdf?utm_source=chatgpt.com)
+
+**Korrektur:** Den Beleg präzisieren und arithmetisches Mittel, Differenzrenditen sowie Annualisierung sauber auseinanderhalten. Auch den verwandten Beleg auf S. 17, FN 46 prüfen.
+
+**Die unabhängig nachgerechnete Sharpe-Beispielrechnung ist dagegen korrekt:** Sie ergibt rund **1,23**. Der Quellenfehler rechtfertigt daher keine ungeprüfte Änderung der Formel oder sämtlicher Resultate.
+
+### Weitere fachliche Korrekturen
+
+| Fundstelle | Problem | Verbesserung |
+|---|---|---|
+| **S. 28 / PDF 34, FN 77** | Die SMA-Einteilung „kurz 10–20, mittel 20–100, lang 100–200“ ist an der genannten Hilpisch-Stelle nicht belegt. Zudem fehlt die Datenfrequenz. | Unbelegte Typologie entfernen oder als eigene, begründete Einteilung kennzeichnen. Die zeitliche Bedeutung eines Fensters hängt von der Datenfrequenz ab. |
+| **S. 31 FN 91, S. 36 FN 1, S. 65 FN 2** | Hilpischs PDF-Seite 697 zeigt die Optimierung; die ausdrückliche Overfitting-Warnung folgt auf PDF-Seiten 698–699. | Passende Fundstelle und Abschnittstitel ergänzen. PDF-Seiten nicht als ungeprüfte gedruckte Buchseiten ausgeben. |
+| **S. 2 / PDF 8** | „Drawdown“ wird als grösster beobachteter Rückgang definiert. | Hier **„maximaler Drawdown“** schreiben. Die spätere Unterscheidung in der Arbeit ist genauer. |
+| **S. 20 / PDF 26** | Diversifikation wird zu eng an nicht zusammenhängende Renditen gebunden. | Auch positive, nicht perfekte Korrelationen können Diversifikation ermöglichen. Formulierung mit der korrekten Erklärung auf S. 5 vereinheitlichen. |
+| **S. 22 / PDF 28** | Die Grafik zeigt Monatsrenditen; der Text spricht von einem Kurs. | Von **zwei Renditereihen mit gleichem Mittel und unterschiedlicher Volatilität** sprechen. |
+| **S. 14 / PDF 20** | „Immer den letzten Wert“ ist als allgemeine Aggregationsregel zu weit gefasst. | Auf passend datierte Monatsendpreise eingrenzen; tägliche Renditen werden zur Monatsrendite multiplikativ aggregiert. |
+| **S. 16 / PDF 22** | `shift(1)` wird als Verschiebung um einen Tag beschrieben. | „Um eine Beobachtung/Periode“ schreiben; bei Monatsdaten ist das ein Monat. |
+| **S. 49 / PDF 55** | Die Sharpe Ratio wird unter „drei Risikokennzahlen“ eingeordnet. | Sie als risikoadjustierte Renditekennzahl behandeln oder Volatilität, maximalen Drawdown und Sharpe Ratio einzeln benennen. |
+
+Diese Befunde erfordern überwiegend **gezielte Text- und Belegkorrekturen**. Ich habe daraus keinen Grund abgeleitet, die Untersuchung vollständig neu aufzubauen.
+
+---
+
+## 4. Rechtschreibung, Grammatik und Redaktion
+
+Die Hauptprosa ist weitgehend verständlich und sachlich. Dennoch enthält die aktuelle Fassung mehrere echte, im PDF sichtbare Redaktionsfehler.
+
+### Acht fehlerhafte „Quelle …:.“-Stellen
+
+Die Kombination aus Doppelpunkt und Punkt erscheint auf:
+
+- **S. 11 / PDF 17**
+- **S. 14 / PDF 20**
+- **S. 16 / PDF 22**
+- **S. 19 / PDF 25**
+- **S. 23 / PDF 29 zweimal**
+- **S. 28 / PDF 34**
+- **S. 29 / PDF 35**
+
+Beispielsweise steht auf S. 11:
+
+> „Quelle der kumulierten Vermögensformel:.“
+
+Daraus sollte ein vollständiger Belegsatz werden, etwa „Die kumulierte Vermögensformel folgt Pham et al.“ mit der passenden Fussnote. Alternativ kann die Fussnote an den erklärenden Satz angeschlossen werden. **Den Quellenbeleg dabei erhalten.**
+
+### Weitere konkrete Korrekturen
+
+| Stelle | Aktueller Wortlaut | Vorschlag |
+|---|---|---|
+| **S. 29 / PDF 35** | „Grundidee nach;“ | „Die Grundidee folgt Hilpisch; die Long/Cash-Anpassung ist eine eigene methodische Entscheidung.“ |
+| **S. 12 / PDF 18** | „2022 verloren beide; Anleihen schützen nicht jede Phase.“ | „2022 verloren beide Anlageklassen an Wert; Anleihen schützen nicht in jeder Marktphase vor Verlusten.“ |
+| **S. 111 / PDF 117** | „der Betreuungsperson Herr Mock“ | „der Betreuungsperson **Herrn** Mock“ |
+| **S. 34 FN 4, S. 39 FN 18 und S. 62** | Beschädigter Titel „What Is the Adjusted Close¿‘“ | Titel und Anführungszeichen in den Literaturmetadaten korrigieren: „What Is the Adjusted Close?“ |
+
+### Veraltete Querverweise
+
+Auf **S. 92 / PDF 98** kündigst du ein nachfolgendes Beispiel an, das inzwischen auf **S. 13–14** steht. Auf S. 93 bleibt dadurch ein isolierter `to_datetime`-Quellenhinweis. Auf **S. 96 / PDF 102** ist von „den folgenden Tabellen und Grafiken“ die Rede, obwohl die gemeinten Ergebnisse bereits in Kapitel 5.4 stehen.
+
+Diese Stellen sollten auf den tatsächlichen Standort verweisen.
+
+Anders zu behandeln sind ausdrücklich archivierte Originaltexte: Die Schreibfehler und alten Aufgabenformulierungen in A.7 sind als historischer Stand gekennzeichnet. Eine stille Überarbeitung würde dort die Aussage der Unverändertheit verfälschen. Dafür eignet sich allenfalls eine redaktionelle Anmerkung.
+
+---
+
+## 5. Mögliche Probleme, die vor der Abgabe geklärt werden müssen
+
+### A. Wortumfang: nahe an der Grenze, aber kein bewiesener Verstoss
+
+Die Vorgaben nennen **6’000 bis 8’000 Wörter für den reinen Textteil**. Die Angabe „etwa 20 A4-Seiten“ ist eine Umrechnung und keine starre Grenze für das gesamte Dokument. **118 PDF-Seiten sind daher für sich genommen kein Verstoss.** Grundlage: V27 §3.4, S. 1.
+
+D.11 auf S. 112 nennt für den Stand vom 14.10.2026 **7’969 Wort-/Zahlentoken**, also nur 31 unter der Obergrenze. Diese Angabe konnte ich nicht als exakte Wortzahl der aktuellen Quelldatei bestätigen.
+
+Meine unabhängige PDF-Näherung liegt ebenfalls nahe an der Grenze. Das Ergebnis hängt insbesondere davon ab, wie Zahlen, Beschriftungen, Überschriften und Trennungen behandelt werden. Der Bericht legt die Näherung offen.
+
+**Vor Abgabe erforderlich:** Die endgültige Quelldatei erneut zählen und nachvollziehbar festhalten, welche Teile zum reinen Text gerechnet wurden. Bei einem knappen Ergebnis die Zählweise mit der Betreuung klären. Ich behaupte weder eine sicher überschrittene Grenze noch eine unabhängig bestätigte Einhaltung mit exakt 7’969 Wörtern.
+
+### B. Persönliche Endkontrolle ist im jüngsten KI-Eintrag noch offen
+
+Auf **S. 112 / PDF 118** steht ausdrücklich, dass die persönliche Endkontrolle der neuen Formulierungen und des KI-Nachtrags noch aussteht.
+
+Das sollte tatsächlich abgeschlossen werden: Quellenbezug, fachlicher Sinn, mathematische Bedeutung, Codeverständnis und Schlussfolgerungen prüfen. Erst danach den Abschluss wahrheitsgemäss dokumentieren. Der Hinweis sollte nicht einfach ersatzlos gelöscht werden.
+
+Falls du Ergebnisse dieses Reviews übernimmst, gehört auch diese Unterstützung in eine passende Aktualisierung deiner KI-Dokumentation.
+
+### C. Vier Arbeitsnachweise sind nur relativ verlinkt
+
+Auf **S. 111–112 / PDF 117–118** verweisen vier Dateilinks auf lokale `documentation`-Dateien, darunter die Originaldaten-Gegenprüfung und die Stilkorrektur vom 14.10.2026. Diese Dateien sind nicht in die PDF eingebettet.
+
+Ein Leser mit nur der PDF erhält diese Nachweise daher nicht automatisch. Für wesentliche Prüfbehauptungen braucht es einen zugänglichen, stabilen Nachweis oder eine passende Beilage. Daraus folgt keine Pflicht, sämtliche technischen Prompts vollständig abzudrucken.
+
+### D. Öffentliche KI- und Repository-Links prüfen
+
+Die Links sind vorhanden. Ausgewählte öffentliche Abrufversuche scheiterten an einer technischen Beschränkung der Prüfumgebung. **Das beweist keine defekten oder privaten Links.**
+
+Vor der Abgabe sollten die finalen ChatGPT-Belege und zentralen Repository-Nachweise in einem Browserfenster ohne Anmeldung auf Erreichbarkeit, Inhalt und richtige Zuordnung geprüft werden.
+
+### E. Zitierstil: Absprache berücksichtigen
+
+Die Arbeit verwendet kein „Vgl.“ für indirekte Belege, keine „Internet“-Zusätze in Webfussnoten und beginnt die Fussnotenzählung je Kapitel neu. Auch die Reihenfolge mancher Mehrfachbelege weicht vom beschriebenen Schema ab.
+
+Der Leitfaden bezeichnet Chicago jedoch ausdrücklich als **Empfehlung** und sieht eine vorgängige Absprache vor. Deshalb sind diese Punkte nicht ohne Weiteres als universelle schwere Verstösse einzustufen. Wenn keine abweichende Vereinbarung besteht, ist eine konsequente Anpassung an das KBW-Schema die sicherste Umsetzung.
+
+---
+
+## 6. Was bereits stimmt
+
+Eine kritische Prüfung sollte auch festhalten, welche Teile sich bestätigt haben.
+
+- **Titel:** 48 Zeichen inklusive Leerzeichen; damit innerhalb der elektronischen Grenze von 50 Zeichen.
+- **Abstract:** nach Normalisierung der Zeilenumbrüche 681 Zeichen inklusive Leerzeichen, an der richtigen Stelle und auf einer Seite.
+- **Grundstruktur:** Haupttext, Literaturverzeichnis und Anhänge sind vorhanden; die römische und arabische Paginierung ist grundsätzlich stimmig.
+- **Haupttextgestaltung:** Serifenschrift, Blocksatz, reguläre Schriftgrösse und Zeilenabstand sind unauffällig.
+- **Literaturbasis:** Neben Grundlagenwerken ist auch aktuelle Forschung vorhanden, insbesondere Pham et al. 2025.
+- **KI-Offenlegung:** Ein ausführlicher KI-Anhang existiert. Eine pauschale Behauptung „KI-Nutzung nicht dokumentiert“ wäre falsch.
+- **Herkunft der Ergebnisse:** Zahlreiche Tabellen und Grafiken nennen konkrete Ergebnisdateien.
+- **Unabhängig nachgerechnete Beispiele:** Portfoliovolatilität, Gewichtungsdrift, Rebalancing, geometrische Verkettung, Volatilität, Drawdown und Sharpe-Beispiel sind rechnerisch konsistent.
+- **Ergebnistabellen:** Die geprüften Zusammenhänge zwischen Startvermögen, Endwert, Gesamtrendite und CAGR stimmen.
+
+Beispielsweise passen der H1-Endwert von **466’061** bei einem Startwert von **100’000**, die Gesamtrendite von **366,06 %** und die CAGR von **10,10 % über 16 Jahre** zusammen. Die Sharpe-Beispielrechnung ergibt **1,23**, der gezeigte Detail-Drawdown rund **−29,69 %**.
+
+Die Grenze dieser Aussage ist klar: Ich habe **keine vollständige erneute Ausführung der Engine mit sämtlichen originalen Eingabedateien** vorgenommen. Die genannten Resultate belegen die überprüfte innere Konsistenz; sie sind kein behaupteter neuer Gesamttest des Projekts.
+
+---
+
+## 7. Freiwillige Verbesserungen
+
+Nach den Pflichtkorrekturen wären insbesondere diese Anpassungen sinnvoll:
+
+- Den über zwei Seiten getrennten Quellenabsatz zu **Abb. 5.6 auf S. 47–48** mit der Grafik zusammenhalten.
+- Die fast leere **S. 97 / PDF 103** zur Ausführungsumgebung in die vorhergehende Seite integrieren oder mit einer knappen Umgebungstabelle sinnvoll nutzen.
+- Wiederholungen zwischen Überblick und Einleitung auf **S. 1–3** kürzen; das schafft zugleich Reserve beim Umfang.
+- „Wahre Performance“ auf **S. 5** durch eine präzise Beschreibung der Gesamtrendite ersetzen.
+- In Spielbeispielen „Aktien, Anleihen, ETF“ nicht als drei gleichrangige Anlageklassen verwenden.
+- Zahlenformate im redaktionellen deutschen Text vereinheitlichen, ohne originale Codeausgaben mechanisch umzuformatieren.
+
+Die Position des ausführlichen KI-Anhangs habe ich bewusst nicht als eindeutigen Verstoss gewertet: Der Leitfaden verlangt einen kurzen Abschnitt **nach** dem Quellenverzeichnis, sagt aber nicht ausdrücklich „unmittelbar danach“. Eine kurze Übersicht direkt beim Quellenverzeichnis mit Verweis auf Anhang D wäre dennoch übersichtlicher.
+
+---
+
+## 8. Empfohlene Reihenfolge bis zur definitiven Abgabe
+
+1. **Pflichtbestandteile ergänzen:** Titelblatt, Ehrlichkeitserklärung und Verzeichnisse.
+2. **Nachweise eindeutig machen:** Tabellen und Grafik nummerieren, Textverweise setzen, KI-Belege zuordnen, pandas-Quelle ergänzen.
+3. **Sach- und Sprachfehler korrigieren:** besonders Sharpe-Beleg, SMA-Einteilung, unpräzise Fundstellen, Satzreste und beschädigte Literaturmetadaten.
+4. **Offene Punkte schliessen:** endgültige Wortzahl, vereinbarter Zitierstil, Zugänglichkeit externer Nachweise und persönliche Endkontrolle.
+5. **PDF neu erzeugen und endgültig kontrollieren:** Verzeichnisse, Seitenzahlen, Querverweise, Umbrüche und Unterschriftenfelder.
+6. **Abgabe vollständig vorbereiten:** zwei gebundene, persönlich unterschriebene Exemplare für die Schule, eigenes drittes Exemplar, PDF und elektronisches Abstract.
+
+Die Vorgaben nennen **Mittwoch, 25. November 2026**, als Abgabetermin; die Einführung nennt **Mittag**. Für die Titelregistrierung war der Zeitraum **19.–30. Oktober 2026** vorgesehen. Hier ist zu prüfen, ob die Eingabe bereits erfolgt ist; aus einer historischen To-do-Liste lässt sich kein Versäumnis ableiten.
+
+**Meine wichtigste Empfehlung ist, die verbleibende Zeit zuerst für die belegten formalen Lücken und die eindeutige Quellenzuordnung einzusetzen.** Die überprüften Rechnungen geben keinen Anlass zu einem grundlegenden Neuaufbau. Die Abgabereife hängt jetzt vor allem an diesen gezielten Korrekturen und einer tatsächlich abgeschlossenen persönlichen Endkontrolle.

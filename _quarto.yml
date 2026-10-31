@@ -67,9 +67,13 @@ format:
     fig-height: 5
   pdf:
     documentclass: scrreprt
+    latex-min-runs: 3
+    lof: true
+    lot: true
     classoption:
       - oneside
       - numbers=noenddot
+      - listof=totoc
     papersize: a4
     fontsize: 11pt
     linestretch: 1.2
@@ -87,8 +91,15 @@ format:
         Welche Anlagestrategie ist langfristig wirklich überzeugend? Ein hoher Endwert verrät wenig darüber, welche Schwankungen und Verluste auf dem Weg dorthin aufgetreten sind. Diese Maturarbeit vergleicht vier Ansätze: Buy-and-Hold, 60/40, Trendfolge und BIP-Gewichtung. Ein Python-Modell simuliert die Strategien mit historischen Finanzdaten und wertet Rendite sowie verschiedene Risikokennzahlen aus. Untersucht werden ein weltweiter Hauptvergleich von 2010 bis 2025 und ein längerer US-Vergleich von 2003 bis 2025. Dabei zeigt sich, wie stark die Beurteilung vom gewählten Massstab abhängt und weshalb auch die Datenwahl und die Grenzen eines Backtests berücksichtigt werden müssen.
 
         \clearpage
+    include-after-body:
+      text: |
+        \includepdf[pages=-,pagecommand={},addtotoc={1,chapter,0,Ehrlichkeitserklärung,sec-ehrlichkeitserklaerung}]{assets/ehrlichkeitserklaerung-2026-27.pdf}
     include-in-header:
       text: |
+        \titlehead{Kantonsschule Büelrain Winterthur}
+        \subject{Maturitätsarbeit}
+        \publishers{\normalsize Klasse 4gW\\Betreuung: Jacques Mock}
+        \usepackage{pdfpages}
         \usepackage{booktabs}
         \usepackage{float}
         \usepackage{fontawesome5}

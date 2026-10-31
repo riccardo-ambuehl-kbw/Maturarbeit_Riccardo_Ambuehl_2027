@@ -8,3 +8,6 @@ __pycache__/
 
 /.quarto/
 **/*.quarto_ipynb
+
+!assets/ehrlichkeitserklaerung-2026-27.pdf
+!documentation/reviews/2026-10-31-chatgpt-pruefbericht.pdf
