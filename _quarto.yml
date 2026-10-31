@@ -82,6 +82,11 @@ format:
       text: |
         \clearpage
         \pagenumbering{roman}
+        \chapter*{Abstract}
+
+        Welche Anlagestrategie ist langfristig wirklich überzeugend? Ein hoher Endwert verrät wenig darüber, welche Schwankungen und Verluste auf dem Weg dorthin aufgetreten sind. Diese Maturarbeit vergleicht vier Ansätze: Buy-and-Hold, 60/40, Trendfolge und BIP-Gewichtung. Ein Python-Modell simuliert die Strategien mit historischen Finanzdaten und wertet Rendite sowie verschiedene Risikokennzahlen aus. Untersucht werden ein weltweiter Hauptvergleich von 2010 bis 2025 und ein längerer US-Vergleich von 2003 bis 2025. Dabei zeigt sich, wie stark die Beurteilung vom gewählten Massstab abhängt und weshalb auch die Datenwahl und die Grenzen eines Backtests berücksichtigt werden müssen.
+
+        \clearpage
     include-in-header:
       text: |
         \usepackage{booktabs}
