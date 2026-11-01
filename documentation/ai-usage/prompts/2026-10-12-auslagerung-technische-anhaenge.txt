@@ -1,0 +1,215 @@
+# AUFTRAG: Technische Dokumentation der Maturarbeit in Anhänge auslagern
+
+## Ausgangslage
+
+Die erste vollständige Fassung der Maturarbeit «Langfristige Anlagestrategien anhand historischer Finanzdaten» wurde bereits formatiert und wissenschaftlich gegengelesen.
+
+Der Haupttext enthält derzeit ungefähr 14’838 Wörter ohne Überblick, Code und Tabellen. Die Schulvorgabe beträgt 6’000–8’000 Wörter.
+
+Mein Betreuungslehrer, Herr Mock, hat ausdrücklich folgende Lösung genehmigt:
+
+> Lagern Sie die technische Dokumentation, die Beschreibung der Datenaufbereitung sowie den Testbericht in den Anhang aus. Der Anhang zählt nicht zum Umfang.
+
+Setze diese Vorgabe um.
+
+**Wichtig: Dieser Auftrag ist zunächst eine strukturelle Auslagerung, keine allgemeine sprachliche oder fachliche Überarbeitung.**
+
+## 1. Arbeitsumgebung
+
+Arbeite im normalen Maturarbeit-Repository auf `dev`.
+
+Prüfe zunächst Branch, HEAD, Git-Status und vorhandene Projektanweisungen.
+
+Lies vollständig:
+
+- `notebooks/Analyse.ipynb`
+- `notebooks/Methodik.ipynb`
+- `notebooks/Theorie.ipynb`
+- `index.ipynb`
+- `_quarto.yml`
+- `documentation/gesamtgegenlesen-phase2-2026-10-12.md`
+- `documentation/formatierung-gesamtbuch-2026-10-12.md`
+- bestehende KI-Dokumentationsregeln
+
+Der separate Worktree `Maturarbeit_Engine` auf `study-v1` und alle eingefrorenen Daten und Resultate bleiben unberührt.
+
+Keine neuen Backtests, keine Datenbeschaffung und keine Änderung von Studienkonfigurationen.
+
+## 2. Inhaltliche Zuordnung
+
+Prüfe insbesondere die Analyseabschnitte:
+
+- 5.2 Reihenfolge der technischen Entwicklung
+- 5.3 Entwicklung eines einheitlichen Datenformats
+- 5.4 Datenquellen und Umwandlung
+- 5.5 Datenaufbereitung und Qualitätskontrolle
+- 5.6 Veränderbare Einstellungen des Systems
+- 5.7 Einheitliches Ergebnisformat
+- 5.8 Grundgerüst der Simulationsengine
+- 5.9 Vorbereitung der technischen Implementierung
+- 5.10 Festlegung der Untersuchungsdaten und Parameter
+- 5.11 Datenbeschaffung, Aufbereitung und Durchführung
+
+Identifiziere die technischen Implementierungsdetails, ausführlichen Datenaufbereitungsbeschreibungen, Prüfabläufe und Testnachweise.
+
+Ordne diese den vom Lehrer genehmigten Anhangskategorien zu.
+
+Erstelle sinnvoll gegliederte Anhänge, beispielsweise:
+
+1. Technische Entwicklung und Aufbau der Python-Engine
+2. Datenbeschaffung, Datenformate und Aufbereitung
+3. Tests, Validierung und technische Nachweise
+
+Eine andere Aufteilung ist zulässig, wenn sie die vorhandenen Inhalte besser bewahrt.
+
+## 3. Was im Haupttext bleiben muss
+
+Der Haupttext muss weiterhin eine vollständige wissenschaftliche Untersuchung darstellen.
+
+Insbesondere erhalten bleiben müssen:
+
+- Forschungsfrage und Zielsetzung
+- Für den Vergleich wesentliche theoretische Grundlagen
+- Auswahl und Begründung der Untersuchungsdaten
+- Anlageuniversen und Vergleichsbedingungen
+- Strategiedefinitionen und Parameter
+- Zeiträume, Datenfrequenz und Startkapital
+- Zentrale Annahmen und methodische Grenzen
+- Wichtigste Schritte der Untersuchungsdurchführung
+- Ergebnisse, Tabellen und relevante Diagramme
+- Vergleich und Interpretation der Strategien
+- Beantwortung der Forschungsfrage
+
+Technische Details dürfen durch knappe, sachlich genaue Zusammenfassungen mit Verweisen auf den entsprechenden Anhang ersetzt werden.
+
+**Nicht einfach sämtliche Abschnitte zur Datenaufbereitung entfernen.** Die Methodik muss auch ohne Studium der Anhänge nachvollziehbar bleiben.
+
+Die Ergebnisabschnitte 5.12 und die Interpretation 5.13 grundsätzlich im Haupttext belassen.
+
+## 4. Schutz der Originalinhalte
+
+Beim Verschieben vorhandener Inhalte gelten folgende Regeln:
+
+- Keine fachlichen Aussagen verändern.
+- Keine Berechnungen oder Ergebnisse verändern.
+- Keine Quellen und Citation Keys verlieren.
+- Keine Python-Codezellen ausführen.
+- Gespeicherte Outputs und Abbildungen erhalten.
+- Originalinhalte möglichst unverändert in den Anhang übernehmen.
+- Alle übernommenen Inhalte auf Vollständigkeit prüfen.
+- Keine Doppelungen zwischen Haupttext und Anhang erzeugen, ausser einer bewusst verkürzten Zusammenfassung im Haupttext.
+- Keine technischen Erläuterungen erfinden.
+- Keine vorhandenen KI-Nachweise löschen.
+
+Falls Codezellen verschoben werden müssen, müssen Zell-ID, Codequelle und gespeicherte Ausgaben nachvollziehbar erhalten bleiben. Prüfe vorher mögliche Abhängigkeiten zwischen Notebook-Zellen.
+
+## 5. Quarto-Struktur
+
+Binde die neuen Anhänge korrekt in das bestehende Quarto-Buch ein.
+
+Beachte:
+
+- Literaturverzeichnis vor den Anhängen
+- Einheitliche Anhangsüberschriften
+- Korrekte Überschriftenhierarchie
+- Keine doppelten oder lückenhaften sichtbaren Abschnittsnummern
+- Korrekte Querverweise
+- Erhalt bestehender Formeln und Zitationen
+- Korrekte Darstellung in HTML, PDF und DOCX
+- Bestehende Formatierungsregeln aus Phase 1
+
+Die aktuelle Analyse verwendet teilweise manuell nummerierte HTML-Überschriften. Berücksichtige das bei der Umgliederung ausdrücklich.
+
+Bei umfangreichen Umnummerierungen sämtliche betroffenen Verweise und die tatsächlichen Renderausgaben kontrollieren.
+
+Keine vollständige Neugestaltung der Arbeit.
+
+## 6. Überblickskapitel gesondert prüfen
+
+Das bestehende `index.ipynb` enthält viele technische Hinweise zur Projektinstallation, zu Quarto, Zotero und zur Repository-Struktur.
+
+Bewerte, ob diese Inhalte ebenfalls in einen technischen Anhang oder in die Repository-README gehören.
+
+Wichtig: Das Überblickskapitel ist aktuell ein regulärer Buchteil. Eine Verschiebung verändert unter Umständen die Nummerierung aller nachfolgenden Kapitel.
+
+Daher zunächst nur eine begründete Empfehlung im Abschlussbericht abgeben. **Keine eigenmächtige Entfernung oder vollständige Umstellung dieses Kapitels**, wenn dadurch sämtliche Kapitelnummern geändert werden müssten.
+
+## 7. Umfangskontrolle
+
+Zähle die Wörter vor und nach der Auslagerung nach einer einheitlichen, nachvollziehbaren Methode.
+
+Unterscheide mindestens:
+
+- Haupttext einschliesslich Überblick
+- Haupttext ohne technischen Überblick
+- Technische Anhänge
+- Übrige Anhänge
+- Code, Tabellen, Formeln und andere ausgeschlossene Bestandteile
+
+Dokumentiere die Zählmethode und die Kapitelzahlen.
+
+Das langfristige Ziel ist ein wissenschaftlicher Haupttext von maximal 8’000 Wörtern.
+
+**Nicht erzwingen:** Sollte die Arbeit nach der genehmigten Auslagerung noch darüber liegen, darfst du nicht wahllos weitere Absätze kürzen oder wissenschaftlich notwendige Inhalte entfernen.
+
+Stattdessen den verbleibenden Umfang und die möglichen nächsten Kürzungsschritte dokumentieren.
+
+## 8. Qualitätskontrollen
+
+Prüfe nach der Umgliederung:
+
+1. Vollständige Erhaltung aller verschobenen Inhalte.
+2. Übereinstimmung der fachlichen Aussagen.
+3. Erhalt aller Codezellen, Outputs und Bilder.
+4. Erhalt aller Zitationen.
+5. Plausibler und nachvollziehbarer roter Faden des Haupttexts.
+6. Korrekte Kapitelnummerierung.
+7. Korrekte interne Links und Verweise.
+8. Erfolgreiches Rendering in HTML, PDF und DOCX ohne Notebook-Codeausführung.
+9. Unveränderte eingefrorene Studienresultate.
+10. Keine Änderungen ausserhalb des genehmigten Aufgabenbereichs.
+
+Führe Renderprüfungen in einer separaten temporären Projektkopie durch.
+
+## 9. Dokumentation
+
+Erstelle:
+
+`documentation/auslagerung-technische-anhaenge-2026-10-12.md`
+
+Der Bericht muss enthalten:
+
+- Ausgangszustand und Ausgangscommit
+- Begründung anhand der Lehrerantwort
+- Alle neu angelegten Anhänge
+- Tabelle mit den verschobenen Abschnitten und ihren Zielstellen
+- Ursprüngliche und neue Wortzahlen
+- Erhalt der fachlichen Inhalte, Codezellen und Quellen
+- Render- und Integritätsprüfungen
+- Noch offene Probleme
+- Vorschlag für die anschliessende gezielte Kürzung des Haupttexts
+
+Ergänze die KI-Dokumentation und speichere den vollständigen ausgeführten Prompt entsprechend den bestehenden Projektregeln.
+
+Vermerke ausdrücklich, dass Codex vorhandene Inhalte strukturell ausgelagert und nicht die wissenschaftlichen Ergebnisse neu erarbeitet hat.
+
+## 10. Abschluss
+
+Arbeite den Auftrag vollständig selbstständig ab, soweit die genannten Schutzregeln eingehalten werden können.
+
+Keine unnötigen stilistischen Verbesserungen oder fachlichen Korrekturen aus dem Gegenlesebericht durchführen.
+
+Kein Commit, Push, Merge, Reset oder Clean.
+
+Stoppe nach Abschluss zur Autorenkontrolle.
+
+Gib am Ende an:
+
+- Welche Inhalte ausgelagert wurden
+- Wie viele Wörter im Haupttext verbleiben
+- Welche Anhänge entstanden sind
+- Integritätsstatus
+- HTML-/PDF-/DOCX-Status
+- Welche weiteren Kürzungen erforderlich erscheinen
+
+STOPP.

@@ -1,0 +1,361 @@
+# AUFTRAG: Umfassendes wissenschaftliches und technisches Gegenlesen der Maturarbeit – Phase 2
+
+## 1. Ziel
+
+Führe ein gründliches, unabhängiges Gegenlesen der ersten vollständigen Fassung meiner Maturarbeit **«Langfristige Anlagestrategien anhand historischer Finanzdaten»** durch.
+
+Untersuche die Arbeit auf wissenschaftliche, fachliche, mathematische, programmiertechnische, sprachliche und strukturelle Schwächen sowie auf Probleme bei Quellen, Daten und Schlussfolgerungen.
+
+**Ziel ist ein begründeter, priorisierter Fehlerbericht mit konkreten Korrekturvorschlägen.**
+
+Die Formatierung wurde bereits in Phase 1 vereinheitlicht. Wiederhole keine rein ästhetische Neugestaltung.
+
+Prüfe kritisch, aber fair. Suche nach tatsächlichen Fehlern und relevanten Verbesserungsmöglichkeiten, nicht nach möglichst vielen Beanstandungen. Ein korrekt formulierter, nachvollziehbarer Abschnitt benötigt keine Überarbeitung.
+
+## 2. Arbeitsumgebung und Schutzregeln
+
+Repository: `riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027`
+
+Arbeite im normalen Schreib-Repository auf Branch `dev`, nicht im separaten Engine-Worktree.
+
+Bekannter Referenzstand: `c2cb80eb8bb512d562cdd43ed1a168f20cece5f6`. Prüfe den tatsächlichen lokalen HEAD, bevor du beginnst.
+
+Lies gegebenenfalls `AGENTS.md` und weitere vorhandene Projektregeln.
+
+Prüfe `git status` und sichere bei Bedarf den Ausgangszustand.
+
+Nicht erlaubt:
+
+- Automatischer Pull, Checkout, Reset, Clean oder Merge.
+- Änderungen an Kapiteln, Formeln, Notebook-Code oder Ergebnisdateien.
+- Änderungen an der Engine oder am eingefrorenen Studienstand.
+- Ausführung der fünf echten Backtests.
+- Neue Datenbeschaffung oder nachträgliche Optimierung von Strategien.
+- Neue Berechnungen, die vorhandene Studienergebnisse ersetzen.
+- Automatisches Committen oder Pushen.
+
+Für Prüfzwecke sind kleine, isolierte Gegenrechnungen erlaubt, sofern sie ausschliesslich lesend arbeiten und weder Originaldaten noch Ergebnisse verändern.
+
+## 3. Zu prüfende Unterlagen
+
+Lies alle Kapitel vollständig:
+
+1. `index.ipynb` – Überblick
+2. `notebooks/Einleitung.ipynb`
+3. `notebooks/Theorie.ipynb`
+4. `notebooks/Methodik.ipynb`
+5. `notebooks/Analyse.ipynb`
+6. `notebooks/Fazit.ipynb`
+7. `ki-nutzung.qmd`
+
+Prüfe zusätzlich die zugehörigen Projektunterlagen, insbesondere:
+
+- `_quarto.yml`
+- `references.bib` und die vorhandene CSL-Datei
+- relevante technische Dokumentation
+- Ergebnisse und Manifeste unter `results/study_v1/`, soweit vorhanden
+- die verfügbaren Engine-Verträge und Prüfnachweise
+- den Formatierungsbericht `documentation/formatierung-gesamtbuch-2026-10-12.md`
+- den Bericht zur Lehrer-Rückmeldung unter `documentation/theorie-lehrerfeedback-umgliederung.md`
+- die formalen Vorgaben in `documents/`
+
+Nutze für fachliche Quellenprüfungen möglichst die tatsächlich verfügbaren Originalpublikationen. Wenn eine Quelle oder ihr genauer Seiteninhalt nicht zugänglich ist, kennzeichne den Punkt als **nicht verifiziert**. Erfinde weder Quelleninhalte noch Seitenbelege.
+
+## 4. Wissenschaftliche Prüfung
+
+### 4.1 Forschungsfrage und roter Faden
+
+Kontrolliere, ob:
+
+- Die Forschungsfrage in Einleitung und Fazit identisch ist.
+- Die Ziele der Einleitung mit der tatsächlichen Untersuchung übereinstimmen.
+- Theorie und Methodik die spätere Analyse ausreichend vorbereiten.
+- Die Analyse die Forschungsfrage tatsächlich untersucht.
+- Das Fazit die Forschungsfrage nachvollziehbar beantwortet.
+- Wesentliche Schlussfolgerungen durch die Ergebnisse gedeckt sind.
+- Sich Aussagen zwischen Kapiteln widersprechen.
+- Unnötige Wiederholungen oder inhaltliche Lücken entstehen.
+
+Unterscheide zwischen einem nachweisbaren Widerspruch und einer bloss möglichen stilistischen Verbesserung.
+
+### 4.2 Finanzwissenschaftliche Richtigkeit
+
+Prüfe besonders die Aussagen zu:
+
+- Indexfonds und ETFs
+- Buy-and-Hold
+- 60/40-Portfolios und Rebalancing
+- Diversifikation und Korrelation
+- Marktkapitalisierungs- und BIP-Gewichtung
+- SMA-Trendfolge
+- Renditen und deren Annualisierung
+- Volatilität
+- Sharpe Ratio
+- Drawdown
+- historischen Risiken und Aussagegrenzen
+
+Prüfe die mathematischen Definitionen gegen ihre Verwendung im Python-Code und gegen die tatsächlichen Kennzahlen der Analyse.
+
+Achte besonders darauf, ob eine Aussage mehr behauptet, als die verwendete Methode nachweisen kann.
+
+### 4.3 Vergleichbarkeit der Strategien
+
+Überprüfe die tatsächlichen Untersuchungsblöcke und ihre Interpretation:
+
+- H1: globaler Hauptvergleich 2010–2025
+- K1: BIP-Gewichtung gegen Gleichgewichtung derselben sieben Länder
+- Z1: längere US-Untersuchung 2003–2025
+- S1/S2: ergänzende SMA-Varianten
+
+Prüfe, ob die untersuchten Märkte, Zeiträume, Fondsauswahlen und Parameter korrekt zugeordnet sind.
+
+Insbesondere dürfen:
+
+- H1 und Z1 nicht als reiner Zeitraumeffekt interpretiert werden.
+- Unterschiedliche Anlageuniversen nicht als isolierter Beweis für eine Gewichtungsmethode gelten.
+- Eine Gleichgewichtung der G7 nicht mit einer Marktkapitalisierungsgewichtung verwechselt werden.
+- Nachträglich bessere SMA-Einstellungen nicht zur ursprünglichen Hauptstrategie erklärt werden.
+- Niedrige Volatilität und geringer maximaler Drawdown nicht gleichgesetzt werden.
+- Historische Ergebnisse nicht als sichere zukünftige Renditeprognosen dargestellt werden.
+
+Untersuche selbstständig auch weitere mögliche methodische Fehler.
+
+## 5. Mathematische und programmiertechnische Kontrolle
+
+Prüfe alle Formeln auf:
+
+- mathematische Richtigkeit
+- korrekt definierte Variablen
+- konsistente Indizes
+- einheitliche Zeit- und Periodenbegriffe
+- korrekte Annualisierung
+- eindeutige Einheiten
+- Übereinstimmung mit dem dazugehörigen Python-Code
+
+Kontrolliere die Python-Beispiele in Theorie und Analyse.
+
+Unterscheide dabei ausdrücklich:
+
+1. Ist der Code mathematisch und logisch korrekt?
+2. Stimmen gespeicherte Ausgaben mit dem aktuellen Code überein?
+3. Werden Funktionen korrekt und in sinnvoller Reihenfolge verwendet?
+4. Sind die Erklärungen des Codes richtig?
+5. Stimmen die Beispiele mit der tatsächlichen Engine-Definition überein, soweit sie dieselbe Methode darstellen sollen?
+
+Nutze vorhandene Tests und dokumentierte Gegenrechnungen, aber behandle deren Bestehen nicht als automatischen Beweis für sämtliche fachlichen Aussagen.
+
+**Bekannter offener Punkt:** Im Theoriekapitel wurden Beispielgewichte auf `0.20/0.40/0.40` geändert. Die gespeicherte Ausgabe zeigt möglicherweise weiterhin `Volatilität: 1.15%`. Prüfe dies unabhängig anhand der vorliegenden Zahlen und klassifiziere das Ergebnis.
+
+Korrigiere in dieser Phase weder die Ausgabe noch andere Codezellen.
+
+## 6. Daten und Ergebnisse
+
+Prüfe bei den realen Ergebnissen die Konsistenz zwischen:
+
+- Versuchskonfigurationen
+- Ergebnisdateien
+- Tabellen
+- Diagrammen
+- textlichen Beschreibungen
+- Interpretation
+- Fazit
+
+Soweit die eingefrorenen Daten und Exporte verfügbar sind, prüfe die relevanten Zahlen mittels einfacher unabhängiger Gegenrechnungen oder anhand der archivierten Nachweise.
+
+Achte auf Rundungsdifferenzen, Bezugszeiträume, Prozent versus Prozentpunkte, Monats- versus Jahreswerte und korrekte Vorzeichen.
+
+Prüfe besonders die Verwendung der risikofreien Vergleichsreihe und die Unterscheidung zwischen dieser und den unverzinsten Cash-Phasen der Trendstrategie.
+
+Kontrolliere ebenfalls, ob die zeitliche Verfügbarkeit historischer BIP-Daten korrekt beschrieben und berücksichtigt wird.
+
+**Keine erneute vollständige Durchführung der Studie.** Die eingefrorenen Untersuchungen bleiben unverändert.
+
+Falls benötigte Originaldaten nicht verfügbar sind, halte die Einschränkung fest.
+
+## 7. Literatur und wissenschaftliche Quellen
+
+Prüfe die Zitationen und das Literaturverzeichnis systematisch.
+
+Kontrolliere:
+
+- Sind alle Citation Keys auflösbar?
+- Belegen die angegebenen Quellen tatsächlich die jeweils damit verbundenen Aussagen?
+- Sind Seiten- und Abschnittsverweise plausibel und, soweit zugänglich, korrekt?
+- Sind eigene Schlussfolgerungen von Literaturbehauptungen unterscheidbar?
+- Sind Zitate, sinngemässe Übernahmen und eigene Erläuterungen korrekt gekennzeichnet?
+- Gibt es fehlende Belege für relevante externe Behauptungen?
+- Stimmen Quellenangaben in Theorie, Analyse und Fazit überein?
+
+Melde mögliche Quellenprobleme mit der genauen Textstelle und dem Prüfergebnis.
+
+Kennzeichne ausdrücklich, ob eine Quelle im Original kontrolliert wurde oder ob der Befund nur aus Metadaten beziehungsweise Sekundärangaben stammt.
+
+Dies ist **kein kostenpflichtiger Plagiatscheck**. Führe keine pauschale Umformulierung zur Umgehung von Textähnlichkeitssystemen durch.
+
+## 8. Sprachliche und didaktische Lesbarkeit
+
+Lies die Maturarbeit auch aus der Sicht einer Person, die grundlegende Kenntnisse in Informatik besitzt, aber nicht sämtliche finanzwirtschaftlichen Fachbegriffe kennt.
+
+Prüfe:
+
+- Verständlichkeit zentraler Erklärungen
+- logische Übergänge
+- Definitionen vor der ersten Verwendung
+- unnötig komplizierte Sätze
+- missverständliche Formulierungen
+- Rechtschreibung und Grammatik
+- unnötige Wiederholungen
+- uneinheitliche Terminologie
+- offensichtlich unvollständige Textstellen
+
+Erhalte den persönlichen, sachlichen Schreibstil des Autors als Massstab.
+
+Keine pauschale stilistische Glättung. Ein natürlicher Text soll nicht wegen rein subjektiver Präferenzen zu einem generischen KI-Text umgeschrieben werden.
+
+Berücksichtige, dass es sich um eine Maturarbeit handelt, nicht um eine wissenschaftliche Dissertation.
+
+## 9. Formale Anforderungen und KI-Dokumentation
+
+Prüfe die Schulvorgaben und stelle fest, welche formalen Abgabeteile noch fehlen.
+
+Im vorangegangenen Formatierungsbericht wurden unter anderem Abstract, vollständige Titelseite, Abbildungs-/Tabellenverzeichnisse und Eigenständigkeitserklärung als offen notiert. Prüfe diese Befunde gegen die tatsächlichen Schulvorgaben.
+
+Untersuche ebenfalls den geforderten Textumfang. Gib bei einer Wortzählung genau an, welche Inhalte mitgezählt wurden und welche nicht. Kürze keinen Text automatisch.
+
+Prüfe die KI-Dokumentation auf Vollständigkeit und innere Konsistenz.
+
+Achte besonders auf eine korrekte Unterscheidung zwischen:
+
+- fachlichen Entscheidungen des Autors
+- KI-gestützter Textformulierung
+- KI-gestützter Programmierung
+- technischen Prüfungen
+- Strukturierung und Formatierung
+- selbstständig durchgeführten Kontrollen
+
+Die tatsächliche KI-Nutzung darf nicht heruntergespielt oder übertrieben werden.
+
+Wenn historische Einsätze nicht ausreichend dokumentiert sind, nenne konkret, welche Angaben noch fehlen. Erfinde keine Gesprächsverläufe oder Prompts.
+
+Die persönliche Überarbeitung der KI-Dokumentation durch den Autor erfolgt später.
+
+## 10. Priorisierung und Beweisstandard
+
+Ordne jeden Befund einer der folgenden Klassen zu:
+
+- **P0 – Kritisch:** Nachgewiesener Fehler, der wesentliche Berechnungen, wissenschaftliche Ergebnisse oder die Aussage der Arbeit gefährdet.
+- **P1 – Wichtig:** Fachliche, mathematische, methodische oder Quellenfehler, die vor der Abgabe korrigiert werden sollten.
+- **P2 – Mittel:** Relevante sprachliche, didaktische oder strukturelle Verbesserungen.
+- **P3 – Optional:** Kleine Hinweise, die weder Richtigkeit noch Verständlichkeit wesentlich beeinträchtigen.
+
+Unterscheide ausserdem:
+
+- **BESTÄTIGT:** Durch Originalquelle, Rechnung, konkrete Daten oder direkte Textprüfung belegt.
+- **VERDACHT:** Plausibles Problem, für das noch ein Prüfschritt fehlt.
+- **NICHT VERIFIZIERBAR:** Die erforderlichen Nachweise sind nicht zugänglich.
+
+Führe keine unbewiesenen Vermutungen als gesicherte Fehler auf.
+
+Keine künstliche Mindestanzahl an Befunden. Wenn ein Abschnitt korrekt ist, melde ihn als unauffällig.
+
+Vermeide wiederholte Meldungen desselben Problems in verschiedenen Kapiteln; verweise stattdessen auf den ursprünglichen Befund.
+
+## 11. Verbindlicher Abschlussbericht
+
+Erstelle folgenden Bericht:
+
+`documentation/gesamtgegenlesen-phase2-2026-10-12.md`
+
+Der Bericht muss enthalten:
+
+### A. Zusammenfassung
+
+- Gesamturteil zum ersten Entwurf
+- Anzahl der Befunde je Prioritätsklasse
+- Anzahl bestätigter und ungeklärter Befunde
+- Wichtigste wissenschaftliche Risiken
+- Bereiche ohne relevante Auffälligkeiten
+- Empfohlene Korrekturreihenfolge
+
+### B. Kapitelweise Prüfung
+
+Für jedes Buchkapitel:
+
+- Was wurde geprüft?
+- Welche Befunde liegen vor?
+- Welche wesentlichen Aussagen erscheinen fachlich tragfähig?
+- Was konnte nicht überprüft werden?
+
+### C. Vollständige Befundliste
+
+Vergib eindeutige Kennungen wie `R-001`, `R-002` usw.
+
+Zu jedem Befund:
+
+1. Priorität und Bestätigungsstatus
+2. Dateipfad
+3. Abschnitt und, bei Notebooks, möglichst Zell-ID
+4. Kurzer relevanter Originalauszug
+5. Genaues Problem
+6. Begründung beziehungsweise Prüfnachweis
+7. Vorschlag zur kleinsten ausreichenden Korrektur
+8. Mögliche Auswirkungen auf andere Kapitel
+9. Erforderliche Autorenentscheidung, falls vorhanden
+
+Bei Formeln oder Ergebnissen die überprüfbare Rechnung angeben.
+
+### D. Offene Prüfungen
+
+Separate Liste aller Punkte, bei denen Daten, Originalquellen oder andere Nachweise fehlen.
+
+### E. Formale Abgabe-Checkliste
+
+Fehlende und bereits erfüllte Bestandteile anhand der Schulvorgaben auflisten.
+
+### F. Korrekturplan
+
+Erstelle einen konkreten Plan für einen späteren Codex-Korrekturlauf:
+
+- Welche bestätigten Fehler können eindeutig korrigiert werden?
+- Welche Änderungen benötigen zuerst eine Autorenentscheidung?
+- Welche Änderungen sind rein optional?
+- Welche Stellen müssen nach Änderungen erneut geprüft werden?
+
+Wichtig: Diesen Korrekturplan **nicht selbst ausführen**.
+
+## 12. Integrität und KI-Dokumentation
+
+Während des Gegenlesens bleiben sämtliche bestehenden Fachdateien unverändert.
+
+Erlaubte Schreibziele sind ausschliesslich:
+
+- Der neue Gegenlesebericht
+- Eine unveränderte Kopie des ausgeführten Prompts unter `documentation/ai-usage/prompts/`
+- Ein sachlicher neuer Eintrag in `documentation/ai-usage/ai-usage-log.md`
+- Ein kurzer entsprechender Nachtrag in `ki-nutzung.qmd`
+
+Dokumentiere bei diesem Einsatz, welche Kapitel und Quellen geprüft wurden, welche Prüfschritte tatsächlich stattfanden und welche Grenzen bestehen.
+
+Die KI-Dokumentation darf nicht behaupten, dass die gefundenen Fehler bereits behoben oder vom Autor freigegeben wurden.
+
+Prüfe abschliessend den Git-Diff und bestätige, dass keine wissenschaftlichen Inhalte geändert wurden.
+
+## 13. Abschluss
+
+Arbeite den gesamten Gegenleseauftrag selbstständig und sorgfältig ab.
+
+Erzeuge keine unnötigen Nebenberichte, Zwischenkopien oder neuen Projektstrukturen.
+
+Am Ende gib eine kompakte Zusammenfassung aus mit:
+
+- Geprüften Kapiteln
+- Anzahl P0/P1/P2/P3-Befunde
+- Anzahl bestätigter und ungeklärter Probleme
+- Drei bis fünf wichtigsten Erkenntnissen
+- Pfad zum vollständigen Bericht
+- Integritätsstatus
+- Git-Status
+
+**Kein Commit. Kein Push. Keine eigenmächtigen Fachkorrekturen.**
+
+STOPP zur gemeinsamen Durchsicht des Prüfberichts.

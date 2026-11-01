@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-31",
+  "method": "Markdown prose; six main notebooks; excludes raw/YAML, code/outputs, headers, tables/captions, images, math and citation brackets; preserves visible link text and counts words/numbers with documented regex.",
+  "before": {
+    "chapters": [
+      {
+        "file": "index.ipynb",
+        "word_number_tokens": 125,
+        "tokens_with_letters": 125
+      },
+      {
+        "file": "notebooks/Einleitung.ipynb",
+        "word_number_tokens": 435,
+        "tokens_with_letters": 427
+      },
+      {
+        "file": "notebooks/Theorie.ipynb",
+        "word_number_tokens": 2771,
+        "tokens_with_letters": 2705
+      },
+      {
+        "file": "notebooks/Methodik.ipynb",
+        "word_number_tokens": 853,
+        "tokens_with_letters": 825
+      },
+      {
+        "file": "notebooks/Analyse.ipynb",
+        "word_number_tokens": 2956,
+        "tokens_with_letters": 2736
+      },
+      {
+        "file": "notebooks/Fazit.ipynb",
+        "word_number_tokens": 829,
+        "tokens_with_letters": 816
+      }
+    ],
+    "with_overview": 7969,
+    "without_overview": 7844,
+    "with_overview_letters": 7634
+  },
+  "after": {
+    "chapters": [
+      {
+        "file": "index.ipynb",
+        "word_number_tokens": 87,
+        "tokens_with_letters": 87
+      },
+      {
+        "file": "notebooks/Einleitung.ipynb",
+        "word_number_tokens": 396,
+        "tokens_with_letters": 388
+      },
+      {
+        "file": "notebooks/Theorie.ipynb",
+        "word_number_tokens": 2794,
+        "tokens_with_letters": 2728
+      },
+      {
+        "file": "notebooks/Methodik.ipynb",
+        "word_number_tokens": 859,
+        "tokens_with_letters": 831
+      },
+      {
+        "file": "notebooks/Analyse.ipynb",
+        "word_number_tokens": 2961,
+        "tokens_with_letters": 2743
+      },
+      {
+        "file": "notebooks/Fazit.ipynb",
+        "word_number_tokens": 829,
+        "tokens_with_letters": 816
+      }
+    ],
+    "with_overview": 7926,
+    "without_overview": 7839,
+    "with_overview_letters": 7593
+  }
+}

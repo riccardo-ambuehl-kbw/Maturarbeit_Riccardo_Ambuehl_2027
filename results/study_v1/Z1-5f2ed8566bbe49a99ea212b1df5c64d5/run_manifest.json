@@ -1,0 +1,162 @@
+{
+  "base_currency": "USD",
+  "code": {
+    "files": {
+      "../pyproject.toml": "54067d49e7515f95dec27c52b50a1ec42fd9a709c646f94298abd3cec4061a58",
+      "../requirements.lock": "5854ff8091c3d4d73b5f35baf66c55279b41e363550234bcf548008585772eaa",
+      "__init__.py": "dd5e668e7ec8d8feffff2c77a7a6f463394f1692920398d3d3338721dc7db309",
+      "__main__.py": "433af79aef67b86ec37a2dfa500ace7d9f8d285b2b2f819056924c2f91eb7122",
+      "analysis/__init__.py": "a11362736df2309044bf156076d4fb4259fb7dc34b3e0edc09e4819deff3ad99",
+      "analysis/metrics.py": "c955eb9a3157a946de58e9cdd3b397ba851eb104744402c824114964d64ec454",
+      "data/__init__.py": "a452c43bc2c059d9c856148c2ee40aebb88853a3b109ba392870869119880ee2",
+      "data/macro.py": "b6c36625ee591d8053c49f4c4ef185c89e8445747b67afd7e661b0625d0bf961",
+      "data/normalize.py": "42afd037e91f3fc0b8d68d3170c6fcee6712b7230ba1536a7a9d280efab7b996",
+      "data/validate.py": "22ded40e463a70e194d4e5514b1bf2a49145c121bc11eb23af1a8e5ccca3d76a",
+      "engine/__init__.py": "acde14569fa368b317836dd52dec56b36fb360fa456de4190aeb755ee6c2f3b6",
+      "engine/config.py": "3e1304d32b827e25235b009ed8481631a0c7782365af9b884481a6ca17600580",
+      "engine/context.py": "2d787f4b3a81ee3f9c69e391a3f939749ae68077eb0b6ada19b687db76d016ba",
+      "engine/portfolio.py": "9456a06e00204c94364630ef4bc7058b5222f40b5d82384e1847f6be5c5a8cd9",
+      "engine/result.py": "03a831cb330fd88545ab81d8e0fb0020bc3a7e2ffb061833af96908136269c30",
+      "engine/simulation.py": "dcdd7f20f8210e0bb3339c9d30740a624e927e45713ccde0827b53413520586f",
+      "export/__init__.py": "46ac359a7e65b21b643763faf4f71d486458449c405a19d4ec29d1cf9f67bb4b",
+      "export/results.py": "7470781d55d3111d8ec970e4e62a41a1b79bb6b2af06a83f05eccbae756cdbc3",
+      "funktionen.py": "9afa6e3371f6ff70184456a67c0a59824999749d125161eaf9c1d729c5cf5fd1",
+      "strategies/__init__.py": "1dfe627e6ba9925e92a8977b72285e6945ee31361e4e51cb5542fefe129f8041",
+      "strategies/buy_hold.py": "01eca8c59da976097e33f62c59ffe7f59775d57336f921225bab5d761534ab74",
+      "strategies/country_weighting.py": "bc2d996c6652ffce2124d85453cc0a0a22dc9b6f6617e6c7448a3dbaea036a4d",
+      "strategies/rebalance.py": "24a4b8a6c48b6a2424997d7dcfddc4a9508041ed0f81cb484bea2acf42befc88",
+      "strategies/trend.py": "0824da2d4724abf2e081d2b0273840bf42b5275903c1d6fdb7f8d011dd673f79"
+    },
+    "git": {
+      "commit": "1954bfbcb257b51e7f9174aa824cb35e437de752",
+      "dirty": false,
+      "status": "available"
+    },
+    "sha256": "3291b8da984b5b918e82ef6a8129448bdc1f5d9d5434e0ebe6d680a4f71a196e"
+  },
+  "config": {
+    "base_currency": "USD",
+    "data": {
+      "assets": "C:\\Users\\modic\\Documents\\GitHub\\Maturarbeit_Engine\\data\\study_v1\\archive\\study-freeze-v1\\processed\\assets.csv",
+      "market": "C:\\Users\\modic\\Documents\\GitHub\\Maturarbeit_Engine\\data\\study_v1\\archive\\study-freeze-v1\\processed\\us_market.csv",
+      "risk_free": {
+        "path": "C:\\Users\\modic\\Documents\\GitHub\\Maturarbeit_Engine\\data\\study_v1\\archive\\study-freeze-v1\\processed\\rf_us.csv",
+        "series_id": "DGS3MO_LAGGED_ACT365_APPROX"
+      }
+    },
+    "output_dir": "C:\\Users\\modic\\Documents\\GitHub\\Maturarbeit_Engine\\outputs\\runs",
+    "period": {
+      "end": "2025-12-31",
+      "start": "2002-12-31"
+    },
+    "period_frequency": "ME",
+    "periods_per_year": 12.0,
+    "run_name": "Z1",
+    "schema_version": "1.0",
+    "start_capital": 100000.0,
+    "strategies": {
+      "buy_hold": {
+        "asset": "US_EQ",
+        "enabled": true
+      },
+      "rebalance": {
+        "enabled": true,
+        "rebalance_frequency": "annual",
+        "target_weights": {
+          "US_EQ": 0.6,
+          "US_TREASURY_7_10": 0.4
+        }
+      },
+      "trend": {
+        "asset": "US_EQ",
+        "enabled": true,
+        "long_window": 12,
+        "short_window": 3,
+        "signal_lag": 1,
+        "signal_source": "performance_value"
+      }
+    }
+  },
+  "effective_period": {
+    "end": "2025-12-31",
+    "start": "2002-12-31"
+  },
+  "engine_version": "1.0.0",
+  "executed_strategies": [
+    "buy_hold",
+    "rebalance",
+    "trend"
+  ],
+  "input_files": [
+    {
+      "kind": "market",
+      "path": "C:\\Users\\modic\\Documents\\GitHub\\Maturarbeit_Engine\\data\\study_v1\\archive\\study-freeze-v1\\processed\\us_market.csv",
+      "sha256": "8ad63517b6ffca26fb6239290bf8f7730bdba63d1ffa113e57b8f75afcc3f8aa"
+    },
+    {
+      "kind": "assets",
+      "path": "C:\\Users\\modic\\Documents\\GitHub\\Maturarbeit_Engine\\data\\study_v1\\archive\\study-freeze-v1\\processed\\assets.csv",
+      "sha256": "3f554cfe8945e09ef040838dac8585d259d1f43a2a98410eb302a1c6f1891a2b"
+    },
+    {
+      "kind": "config",
+      "path": "C:\\Users\\modic\\Documents\\GitHub\\Maturarbeit_Engine\\configs\\study_v1\\Z1.json",
+      "sha256": "5d267c474e1d4ee7220f53f9341b52ef07fed51077352c9528e773ddebeb3527"
+    },
+    {
+      "kind": "risk_free",
+      "path": "C:\\Users\\modic\\Documents\\GitHub\\Maturarbeit_Engine\\data\\study_v1\\archive\\study-freeze-v1\\processed\\rf_us.csv",
+      "sha256": "67ac6617bd91dccc9f4d5669b2bdc2af9ef6d3e57307855946dfa226b87c2e6c"
+    }
+  ],
+  "metric_status": {
+    "buy_hold": {},
+    "rebalance": {},
+    "trend": {}
+  },
+  "metric_status_by_strategy": {
+    "buy_hold": {},
+    "rebalance": {},
+    "trend": {}
+  },
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.3.3"
+  },
+  "periods_per_year": 12.0,
+  "python_version": "3.14.0 (tags/v3.14.0:ebf955d, Oct  7 2025, 10:15:03) [MSC v.1944 64 bit (AMD64)]",
+  "requested_period": {
+    "end": "2025-12-31",
+    "start": "2002-12-31"
+  },
+  "results": [
+    {
+      "path": "portfolio_history.csv",
+      "sha256": "df3e79ee0b1800d34e673c878a9fce1213eb25d2265fdb48b25e1cd696a5df3a"
+    },
+    {
+      "path": "summary.csv",
+      "sha256": "c4d38b933ee5dbed69b31f7c64aa8f70223d1fce7f8e121ea2d38a08b553c038"
+    },
+    {
+      "path": "data_quality.json",
+      "sha256": "4db02cd8b9236b8b74e529b77a08df7c1cb4d15799b9ec69a720e2a11f3ea0ce"
+    },
+    {
+      "path": "weights_history.csv",
+      "sha256": "7d0e923d7ae6f8e43702b54de3eebe241711774f035785105a4f799bf1d84af7"
+    },
+    {
+      "path": "trades.csv",
+      "sha256": "7862daf77dd95b31b63322c21aab44528046f8738c865c42d76e360e5450bfbb"
+    },
+    {
+      "path": "signals.csv",
+      "sha256": "75e567e07f1f02c7768535043c103360dbc0987a704734423684237fda18a388"
+    }
+  ],
+  "run_id": "Z1-5f2ed8566bbe49a99ea212b1df5c64d5",
+  "run_name": "Z1",
+  "schema_version": "1.0",
+  "timestamp_utc": "2026-10-10T02:08:49.983047+00:00"
+}

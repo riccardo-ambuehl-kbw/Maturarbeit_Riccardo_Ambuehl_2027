@@ -1,6 +1,6 @@
 # Maturarbeit
 
-**Titel:** Langfristige Anlagestrategien anhand historischer Finanzdaten 
+**Titel:** Anlagestrategien: Risiko und Rendite im Backtest
 **Autor:** Riccardo Ambühl
 
 Dieses Repository enthält ein Quarto-Book-Setup für die Maturarbeit. Die Arbeit ist in einzelne Kapitel aufgeteilt, Python-Experimente liegen in `notebooks/`, Quellen in `references.bib`, Styles in `styles/` und spätere Ergebnisse in `outputs/`.
@@ -89,20 +89,20 @@ Nutze `notebooks/` für explorative Arbeit, Zwischenschritte und Tests. Übertra
 
 ```text
 .
-├── _quarto.yml
-├── index.qmd
-├── einleitung.qmd
-├── theorie.qmd
-├── methodik.qmd
-├── fazit.qmd
-├── references.bib
-├── styles/
-├── src/
-├── notebooks/
-├── data/
-├── images/
-├── outputs/
-└── documentation/ai-usage/
+|-- _quarto.yml
+|-- index.qmd
+|-- einleitung.qmd
+|-- theorie.qmd
+|-- methodik.qmd
+|-- fazit.qmd
+|-- references.bib
+|-- styles/
+|-- src/
+|-- notebooks/
+|-- data/
+|-- images/
+|-- outputs/
+`-- documentation/ai-usage/
 ```
 
 ## KI-Nachweise

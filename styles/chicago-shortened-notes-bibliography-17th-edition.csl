@@ -3875,6 +3875,17 @@
     <group delimiter=". ">
       <choose>
         <if variable="DOI"/>
+        <!-- For cited web pages and software, retain the documented access date even when an issue date exists. -->
+        <else-if type="webpage post-weblog software" match="any">
+          <choose>
+            <if variable="accessed URL">
+              <group delimiter=" ">
+                <text term="accessed" text-case="capitalize-first"/>
+                <date form="text" variable="accessed"/>
+              </group>
+            </if>
+          </choose>
+        </else-if>
         <else-if match="any" variable="available-date event-date issued status"/>
         <else-if variable="accessed URL">
           <group delimiter=" ">
@@ -4357,14 +4368,8 @@
   </macro>
   <citation disambiguate-add-givenname="true" disambiguate-add-names="true" et-al-min="4" et-al-use-first="1">
     <layout delimiter="; " suffix=".">
-      <choose>
-        <if match="any" position="ibid ibid-with-locator">
-          <text macro="citation-notes-shortened-author-only"/>
-        </if>
-        <else>
-          <text macro="citation-notes-shortened-author-title"/>
-        </else>
-      </choose>
+      <!-- Retain a short title in repeated notes so the cited work remains unambiguous. -->
+      <text macro="citation-notes-shortened-author-title"/>
     </layout>
   </citation>
   <!-- Bibliography -->

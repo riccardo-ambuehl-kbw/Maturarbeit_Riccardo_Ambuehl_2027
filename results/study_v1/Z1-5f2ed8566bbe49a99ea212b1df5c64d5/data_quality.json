@@ -1,0 +1,78 @@
+{
+  "annualization": {
+    "available": true,
+    "period_frequency": "ME",
+    "status": "available"
+  },
+  "common_observations": 282,
+  "effective_period": {
+    "end": "2025-12-31",
+    "start": "2002-12-31"
+  },
+  "loaded_assets": [
+    "US_EQ",
+    "US_TREASURY_7_10"
+  ],
+  "periods_per_year": 12.0,
+  "requested_period": {
+    "end": "2025-12-31",
+    "start": "2002-12-31"
+  },
+  "required_assets": [
+    "US_EQ",
+    "US_TREASURY_7_10"
+  ],
+  "risk_free": {
+    "loaded_periods": 276,
+    "series_id": "DGS3MO_LAGGED_ACT365_APPROX",
+    "unused_periods": 0,
+    "used_periods": 276
+  },
+  "series": {
+    "US_EQ": {
+      "loaded_observations": 288,
+      "original_end": "2025-12-31",
+      "original_start": "2002-01-31",
+      "outside_requested_period": 11,
+      "removed_non_common_dates": [
+        "2002-01-31",
+        "2002-02-28",
+        "2002-03-31",
+        "2002-04-30",
+        "2002-05-31",
+        "2002-06-30"
+      ],
+      "used_observations": 277
+    },
+    "US_TREASURY_7_10": {
+      "loaded_observations": 282,
+      "original_end": "2025-12-31",
+      "original_start": "2002-07-31",
+      "outside_requested_period": 5,
+      "removed_non_common_dates": [],
+      "used_observations": 277
+    }
+  },
+  "trend": {
+    "asset_id": "US_EQ",
+    "available_warm_up_observations": 11,
+    "effective_start": "2002-12-31",
+    "long_window": 12,
+    "signal_calendar": "observed_asset_history; sampled_at_shared_valuations",
+    "signal_source": "performance_value",
+    "study_signal_observations": 277,
+    "used_signal_observations": 288,
+    "used_warm_up_observations": 11,
+    "valid_start_signal": true,
+    "warm_up_period": {
+      "end": "2002-11-30",
+      "start": "2002-01-31"
+    }
+  },
+  "unused_market_columns": [],
+  "used_observations": 277,
+  "validation_status": "passed",
+  "warnings": [
+    "US_EQ: 6 non-common valuations removed before returns."
+  ]
+}

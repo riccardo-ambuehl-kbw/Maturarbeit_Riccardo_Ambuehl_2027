@@ -1,0 +1,1083 @@
+{
+  "annualization": {
+    "available": true,
+    "period_frequency": "ME",
+    "status": "available"
+  },
+  "common_observations": 204,
+  "effective_period": {
+    "end": "2025-12-31",
+    "start": "2009-12-31"
+  },
+  "loaded_assets": [
+    "CA_EQ",
+    "DE_EQ",
+    "FR_EQ",
+    "GB_EQ",
+    "IT_EQ",
+    "JP_EQ",
+    "US_EQ",
+    "US_TREASURY_7_10",
+    "WORLD_EQ"
+  ],
+  "macro": {
+    "configured_countries": [
+      "CAN",
+      "DEU",
+      "FRA",
+      "GBR",
+      "ITA",
+      "JPN",
+      "USA"
+    ],
+    "decisions": [
+      {
+        "countries": [
+          {
+            "asset_id": "CA_EQ",
+            "available_from": "2009-10-02",
+            "country": "CAN",
+            "target_weight": 0.04630299308486233,
+            "value": 1499.551
+          },
+          {
+            "asset_id": "DE_EQ",
+            "available_from": "2009-10-02",
+            "country": "DEU",
+            "target_weight": 0.11341778666745797,
+            "value": 3673.105
+          },
+          {
+            "asset_id": "FR_EQ",
+            "available_from": "2009-10-02",
+            "country": "FRA",
+            "target_weight": 0.08852544016684938,
+            "value": 2866.951
+          },
+          {
+            "asset_id": "GB_EQ",
+            "available_from": "2009-10-02",
+            "country": "GBR",
+            "target_weight": 0.08275278497859097,
+            "value": 2680.0
+          },
+          {
+            "asset_id": "IT_EQ",
+            "available_from": "2009-10-02",
+            "country": "ITA",
+            "target_weight": 0.07144816787032343,
+            "value": 2313.893
+          },
+          {
+            "asset_id": "JP_EQ",
+            "available_from": "2009-10-02",
+            "country": "JPN",
+            "target_weight": 0.1516318802880921,
+            "value": 4910.692
+          },
+          {
+            "asset_id": "US_EQ",
+            "available_from": "2009-10-02",
+            "country": "USA",
+            "target_weight": 0.44592094694382384,
+            "value": 14441.425
+          }
+        ],
+        "decision_date": "2009-12-31",
+        "decision_type": "initial",
+        "indicator": "NGDPD",
+        "selected_period": "2008",
+        "unit": "USD_billions"
+      },
+      {
+        "countries": [
+          {
+            "asset_id": "CA_EQ",
+            "available_from": "2010-10-07",
+            "country": "CAN",
+            "target_weight": 0.04335610599493318,
+            "value": 1336.07
+          },
+          {
+            "asset_id": "DE_EQ",
+            "available_from": "2010-10-07",
+            "country": "DEU",
+            "target_weight": 0.10834175152736272,
+            "value": 3338.68
+          },
+          {
+            "asset_id": "FR_EQ",
+            "available_from": "2010-10-07",
+            "country": "FRA",
+            "target_weight": 0.08620079250549793,
+            "value": 2656.38
+          },
+          {
+            "asset_id": "GB_EQ",
+            "available_from": "2010-10-07",
+            "country": "GBR",
+            "target_weight": 0.07070504173293325,
+            "value": 2178.86
+          },
+          {
+            "asset_id": "IT_EQ",
+            "available_from": "2010-10-07",
+            "country": "ITA",
+            "target_weight": 0.06873854295420688,
+            "value": 2118.26
+          },
+          {
+            "asset_id": "JP_EQ",
+            "available_from": "2010-10-07",
+            "country": "JPN",
+            "target_weight": 0.16448788769799252,
+            "value": 5068.89
+          },
+          {
+            "asset_id": "US_EQ",
+            "available_from": "2010-10-07",
+            "country": "USA",
+            "target_weight": 0.45816987758707356,
+            "value": 14119.05
+          }
+        ],
+        "decision_date": "2010-12-31",
+        "decision_type": "annual_rebalance",
+        "indicator": "NGDPD",
+        "selected_period": "2009",
+        "unit": "USD_billions"
+      },
+      {
+        "countries": [
+          {
+            "asset_id": "CA_EQ",
+            "available_from": "2011-09-21",
+            "country": "CAN",
+            "target_weight": 0.049722383046037,
+            "value": 1577.04
+          },
+          {
+            "asset_id": "DE_EQ",
+            "available_from": "2011-09-21",
+            "country": "DEU",
+            "target_weight": 0.1036182820245722,
+            "value": 3286.451
+          },
+          {
+            "asset_id": "FR_EQ",
+            "available_from": "2011-09-21",
+            "country": "FRA",
+            "target_weight": 0.08080051195414635,
+            "value": 2562.742
+          },
+          {
+            "asset_id": "GB_EQ",
+            "available_from": "2011-09-21",
+            "country": "GBR",
+            "target_weight": 0.07094668101737424,
+            "value": 2250.209
+          },
+          {
+            "asset_id": "IT_EQ",
+            "available_from": "2011-09-21",
+            "country": "ITA",
+            "target_weight": 0.06479554450823903,
+            "value": 2055.114
+          },
+          {
+            "asset_id": "JP_EQ",
+            "available_from": "2011-09-21",
+            "country": "JPN",
+            "target_weight": 0.1721100260009623,
+            "value": 5458.797
+          },
+          {
+            "asset_id": "US_EQ",
+            "available_from": "2011-09-21",
+            "country": "USA",
+            "target_weight": 0.45800657144866885,
+            "value": 14526.55
+          }
+        ],
+        "decision_date": "2011-12-31",
+        "decision_type": "annual_rebalance",
+        "indicator": "NGDPD",
+        "selected_period": "2010",
+        "unit": "USD_billions"
+      },
+      {
+        "countries": [
+          {
+            "asset_id": "CA_EQ",
+            "available_from": "2012-10-10",
+            "country": "CAN",
+            "target_weight": 0.05160612357426523,
+            "value": 1738.954
+          },
+          {
+            "asset_id": "DE_EQ",
+            "available_from": "2012-10-10",
+            "country": "DEU",
+            "target_weight": 0.10705405224137943,
+            "value": 3607.364
+          },
+          {
+            "asset_id": "FR_EQ",
+            "available_from": "2012-10-10",
+            "country": "FRA",
+            "target_weight": 0.0824439276771051,
+            "value": 2778.085
+          },
+          {
+            "asset_id": "GB_EQ",
+            "available_from": "2012-10-10",
+            "country": "GBR",
+            "target_weight": 0.07215284838319289,
+            "value": 2431.31
+          },
+          {
+            "asset_id": "IT_EQ",
+            "available_from": "2012-10-10",
+            "country": "ITA",
+            "target_weight": 0.06525073998431893,
+            "value": 2198.732
+          },
+          {
+            "asset_id": "JP_EQ",
+            "available_from": "2012-10-10",
+            "country": "JPN",
+            "target_weight": 0.17409856051015146,
+            "value": 5866.54
+          },
+          {
+            "asset_id": "US_EQ",
+            "available_from": "2012-10-10",
+            "country": "USA",
+            "target_weight": 0.44739374762958706,
+            "value": 15075.675
+          }
+        ],
+        "decision_date": "2012-12-31",
+        "decision_type": "annual_rebalance",
+        "indicator": "NGDPD",
+        "selected_period": "2011",
+        "unit": "USD_billions"
+      },
+      {
+        "countries": [
+          {
+            "asset_id": "CA_EQ",
+            "available_from": "2013-10-09",
+            "country": "CAN",
+            "target_weight": 0.05270310571723135,
+            "value": 1821.445
+          },
+          {
+            "asset_id": "DE_EQ",
+            "available_from": "2013-10-09",
+            "country": "DEU",
+            "target_weight": 0.09923236903461458,
+            "value": 3429.519
+          },
+          {
+            "asset_id": "FR_EQ",
+            "available_from": "2013-10-09",
+            "country": "FRA",
+            "target_weight": 0.07563365643545475,
+            "value": 2613.936
+          },
+          {
+            "asset_id": "GB_EQ",
+            "available_from": "2013-10-09",
+            "country": "GBR",
+            "target_weight": 0.07166175059975283,
+            "value": 2476.665
+          },
+          {
+            "asset_id": "IT_EQ",
+            "available_from": "2013-10-09",
+            "country": "ITA",
+            "target_weight": 0.05827689870226655,
+            "value": 2014.078
+          },
+          {
+            "asset_id": "JP_EQ",
+            "available_from": "2013-10-09",
+            "country": "JPN",
+            "target_weight": 0.1724590570728937,
+            "value": 5960.269
+          },
+          {
+            "asset_id": "US_EQ",
+            "available_from": "2013-10-09",
+            "country": "USA",
+            "target_weight": 0.47003316243778626,
+            "value": 16244.575
+          }
+        ],
+        "decision_date": "2013-12-31",
+        "decision_type": "annual_rebalance",
+        "indicator": "NGDPD",
+        "selected_period": "2012",
+        "unit": "USD_billions"
+      },
+      {
+        "countries": [
+          {
+            "asset_id": "CA_EQ",
+            "available_from": "2014-10-08",
+            "country": "CAN",
+            "target_weight": 0.052901088084499545,
+            "value": 1826.769
+          },
+          {
+            "asset_id": "DE_EQ",
+            "available_from": "2014-10-08",
+            "country": "DEU",
+            "target_weight": 0.10529310894296372,
+            "value": 3635.959
+          },
+          {
+            "asset_id": "FR_EQ",
+            "available_from": "2014-10-08",
+            "country": "FRA",
+            "target_weight": 0.08129628978056015,
+            "value": 2807.306
+          },
+          {
+            "asset_id": "GB_EQ",
+            "available_from": "2014-10-08",
+            "country": "GBR",
+            "target_weight": 0.07306937651789504,
+            "value": 2523.216
+          },
+          {
+            "asset_id": "IT_EQ",
+            "available_from": "2014-10-08",
+            "country": "ITA",
+            "target_weight": 0.06000138712783021,
+            "value": 2071.955
+          },
+          {
+            "asset_id": "JP_EQ",
+            "available_from": "2014-10-08",
+            "country": "JPN",
+            "target_weight": 0.14185568455265202,
+            "value": 4898.53
+          },
+          {
+            "asset_id": "US_EQ",
+            "available_from": "2014-10-08",
+            "country": "USA",
+            "target_weight": 0.48558306499359943,
+            "value": 16768.05
+          }
+        ],
+        "decision_date": "2014-12-31",
+        "decision_type": "annual_rebalance",
+        "indicator": "NGDPD",
+        "selected_period": "2013",
+        "unit": "USD_billions"
+      },
+      {
+        "countries": [
+          {
+            "asset_id": "CA_EQ",
+            "available_from": "2015-10-07",
+            "country": "CAN",
+            "target_weight": 0.05023353389378616,
+            "value": 1785.387
+          },
+          {
+            "asset_id": "DE_EQ",
+            "available_from": "2015-10-07",
+            "country": "DEU",
+            "target_weight": 0.10901091044061549,
+            "value": 3874.437
+          },
+          {
+            "asset_id": "FR_EQ",
+            "available_from": "2015-10-07",
+            "country": "FRA",
+            "target_weight": 0.07972843532459978,
+            "value": 2833.687
+          },
+          {
+            "asset_id": "GB_EQ",
+            "available_from": "2015-10-07",
+            "country": "GBR",
+            "target_weight": 0.08300210771921776,
+            "value": 2950.039
+          },
+          {
+            "asset_id": "IT_EQ",
+            "available_from": "2015-10-07",
+            "country": "ITA",
+            "target_weight": 0.06042878715884896,
+            "value": 2147.744
+          },
+          {
+            "asset_id": "JP_EQ",
+            "available_from": "2015-10-07",
+            "country": "JPN",
+            "target_weight": 0.12949190214006429,
+            "value": 4602.367
+          },
+          {
+            "asset_id": "US_EQ",
+            "available_from": "2015-10-07",
+            "country": "USA",
+            "target_weight": 0.48810432332286746,
+            "value": 17348.075
+          }
+        ],
+        "decision_date": "2015-12-31",
+        "decision_type": "annual_rebalance",
+        "indicator": "NGDPD",
+        "selected_period": "2014",
+        "unit": "USD_billions"
+      },
+      {
+        "countries": [
+          {
+            "asset_id": "CA_EQ",
+            "available_from": "2016-10-05",
+            "country": "CAN",
+            "target_weight": 0.045375689599645545,
+            "value": 1550.537
+          },
+          {
+            "asset_id": "DE_EQ",
+            "available_from": "2016-10-05",
+            "country": "DEU",
+            "target_weight": 0.09848361605034898,
+            "value": 3365.293
+          },
+          {
+            "asset_id": "FR_EQ",
+            "available_from": "2016-10-05",
+            "country": "FRA",
+            "target_weight": 0.07082485943163366,
+            "value": 2420.163
+          },
+          {
+            "asset_id": "GB_EQ",
+            "available_from": "2016-10-05",
+            "country": "GBR",
+            "target_weight": 0.08365204568363993,
+            "value": 2858.482
+          },
+          {
+            "asset_id": "IT_EQ",
+            "available_from": "2016-10-05",
+            "country": "ITA",
+            "target_weight": 0.053137278743920845,
+            "value": 1815.759
+          },
+          {
+            "asset_id": "JP_EQ",
+            "available_from": "2016-10-05",
+            "country": "JPN",
+            "target_weight": 0.12069297164752842,
+            "value": 4124.211
+          },
+          {
+            "asset_id": "US_EQ",
+            "available_from": "2016-10-05",
+            "country": "USA",
+            "target_weight": 0.5278335388432827,
+            "value": 18036.65
+          }
+        ],
+        "decision_date": "2016-12-31",
+        "decision_type": "annual_rebalance",
+        "indicator": "NGDPD",
+        "selected_period": "2015",
+        "unit": "USD_billions"
+      },
+      {
+        "countries": [
+          {
+            "asset_id": "CA_EQ",
+            "available_from": "2017-10-11",
+            "country": "CAN",
+            "target_weight": 0.04307195722086542,
+            "value": 1529.76
+          },
+          {
+            "asset_id": "DE_EQ",
+            "available_from": "2017-10-11",
+            "country": "DEU",
+            "target_weight": 0.09796127871140022,
+            "value": 3479.23
+          },
+          {
+            "asset_id": "FR_EQ",
+            "available_from": "2017-10-11",
+            "country": "FRA",
+            "target_weight": 0.06944598520457321,
+            "value": 2466.47
+          },
+          {
+            "asset_id": "GB_EQ",
+            "available_from": "2017-10-11",
+            "country": "GBR",
+            "target_weight": 0.07402753321143653,
+            "value": 2629.19
+          },
+          {
+            "asset_id": "IT_EQ",
+            "available_from": "2017-10-11",
+            "country": "ITA",
+            "target_weight": 0.05210947737353864,
+            "value": 1850.74
+          },
+          {
+            "asset_id": "JP_EQ",
+            "available_from": "2017-10-11",
+            "country": "JPN",
+            "target_weight": 0.1389933320907142,
+            "value": 4936.54
+          },
+          {
+            "asset_id": "US_EQ",
+            "available_from": "2017-10-11",
+            "country": "USA",
+            "target_weight": 0.5243904361874718,
+            "value": 18624.45
+          }
+        ],
+        "decision_date": "2017-12-31",
+        "decision_type": "annual_rebalance",
+        "indicator": "NGDPD",
+        "selected_period": "2016",
+        "unit": "USD_billions"
+      },
+      {
+        "countries": [
+          {
+            "asset_id": "CA_EQ",
+            "available_from": "2018-10-10",
+            "country": "CAN",
+            "target_weight": 0.044837977044475154,
+            "value": 1653.043
+          },
+          {
+            "asset_id": "DE_EQ",
+            "available_from": "2018-10-10",
+            "country": "DEU",
+            "target_weight": 0.10037730461003515,
+            "value": 3700.613
+          },
+          {
+            "asset_id": "FR_EQ",
+            "available_from": "2018-10-10",
+            "country": "FRA",
+            "target_weight": 0.0701895994928151,
+            "value": 2587.682
+          },
+          {
+            "asset_id": "GB_EQ",
+            "available_from": "2018-10-10",
+            "country": "GBR",
+            "target_weight": 0.07129432642917875,
+            "value": 2628.41
+          },
+          {
+            "asset_id": "IT_EQ",
+            "available_from": "2018-10-10",
+            "country": "ITA",
+            "target_weight": 0.052585712833003166,
+            "value": 1938.679
+          },
+          {
+            "asset_id": "JP_EQ",
+            "available_from": "2018-10-10",
+            "country": "JPN",
+            "target_weight": 0.13218320358822513,
+            "value": 4873.202
+          },
+          {
+            "asset_id": "US_EQ",
+            "available_from": "2018-10-10",
+            "country": "USA",
+            "target_weight": 0.5285318760022675,
+            "value": 19485.4
+          }
+        ],
+        "decision_date": "2018-12-31",
+        "decision_type": "annual_rebalance",
+        "indicator": "NGDPD",
+        "selected_period": "2017",
+        "unit": "USD_billions"
+      },
+      {
+        "countries": [
+          {
+            "asset_id": "CA_EQ",
+            "available_from": "2019-10-16",
+            "country": "CAN",
+            "target_weight": 0.04402183026274838,
+            "value": 1712.479
+          },
+          {
+            "asset_id": "DE_EQ",
+            "available_from": "2019-10-16",
+            "country": "DEU",
+            "target_weight": 0.1015750959809774,
+            "value": 3951.34
+          },
+          {
+            "asset_id": "FR_EQ",
+            "available_from": "2019-10-16",
+            "country": "FRA",
+            "target_weight": 0.07146795928513018,
+            "value": 2780.152
+          },
+          {
+            "asset_id": "GB_EQ",
+            "available_from": "2019-10-16",
+            "country": "GBR",
+            "target_weight": 0.07271937709464542,
+            "value": 2828.833
+          },
+          {
+            "asset_id": "IT_EQ",
+            "available_from": "2019-10-16",
+            "country": "ITA",
+            "target_weight": 0.0533629787471308,
+            "value": 2075.856
+          },
+          {
+            "asset_id": "JP_EQ",
+            "available_from": "2019-10-16",
+            "country": "JPN",
+            "target_weight": 0.12780669601199998,
+            "value": 4971.767
+          },
+          {
+            "asset_id": "US_EQ",
+            "available_from": "2019-10-16",
+            "country": "USA",
+            "target_weight": 0.5290460626173678,
+            "value": 20580.25
+          }
+        ],
+        "decision_date": "2019-12-31",
+        "decision_type": "annual_rebalance",
+        "indicator": "NGDPD",
+        "selected_period": "2018",
+        "unit": "USD_billions"
+      },
+      {
+        "countries": [
+          {
+            "asset_id": "CA_EQ",
+            "available_from": "2020-10-14",
+            "country": "CAN",
+            "target_weight": 0.043783725653326284,
+            "value": 1736.426
+          },
+          {
+            "asset_id": "DE_EQ",
+            "available_from": "2020-10-14",
+            "country": "DEU",
+            "target_weight": 0.09736841408536967,
+            "value": 3861.55
+          },
+          {
+            "asset_id": "FR_EQ",
+            "available_from": "2020-10-14",
+            "country": "FRA",
+            "target_weight": 0.06847895057800638,
+            "value": 2715.818
+          },
+          {
+            "asset_id": "GB_EQ",
+            "available_from": "2020-10-14",
+            "country": "GBR",
+            "target_weight": 0.07137729702579466,
+            "value": 2830.764
+          },
+          {
+            "asset_id": "IT_EQ",
+            "available_from": "2020-10-14",
+            "country": "ITA",
+            "target_weight": 0.05046667018834108,
+            "value": 2001.466
+          },
+          {
+            "asset_id": "JP_EQ",
+            "available_from": "2020-10-14",
+            "country": "JPN",
+            "target_weight": 0.12808933319700502,
+            "value": 5079.916
+          },
+          {
+            "asset_id": "US_EQ",
+            "available_from": "2020-10-14",
+            "country": "USA",
+            "target_weight": 0.5404356092721568,
+            "value": 21433.225
+          }
+        ],
+        "decision_date": "2020-12-31",
+        "decision_type": "annual_rebalance",
+        "indicator": "NGDPD",
+        "selected_period": "2019",
+        "unit": "USD_billions"
+      },
+      {
+        "countries": [
+          {
+            "asset_id": "CA_EQ",
+            "available_from": "2021-10-13",
+            "country": "CAN",
+            "target_weight": 0.0425418168898807,
+            "value": 1644.04
+          },
+          {
+            "asset_id": "DE_EQ",
+            "available_from": "2021-10-13",
+            "country": "DEU",
+            "target_weight": 0.09945175696792906,
+            "value": 3843.34
+          },
+          {
+            "asset_id": "FR_EQ",
+            "available_from": "2021-10-13",
+            "country": "FRA",
+            "target_weight": 0.06791051013487549,
+            "value": 2624.42
+          },
+          {
+            "asset_id": "GB_EQ",
+            "available_from": "2021-10-13",
+            "country": "GBR",
+            "target_weight": 0.07011673097380351,
+            "value": 2709.68
+          },
+          {
+            "asset_id": "IT_EQ",
+            "available_from": "2021-10-13",
+            "country": "ITA",
+            "target_weight": 0.04877543875356544,
+            "value": 1884.94
+          },
+          {
+            "asset_id": "JP_EQ",
+            "available_from": "2021-10-13",
+            "country": "JPN",
+            "target_weight": 0.1305489649832955,
+            "value": 5045.1
+          },
+          {
+            "asset_id": "US_EQ",
+            "available_from": "2021-10-13",
+            "country": "USA",
+            "target_weight": 0.5406547812966502,
+            "value": 20893.75
+          }
+        ],
+        "decision_date": "2021-12-31",
+        "decision_type": "annual_rebalance",
+        "indicator": "NGDPD",
+        "selected_period": "2020",
+        "unit": "USD_billions"
+      },
+      {
+        "countries": [
+          {
+            "asset_id": "CA_EQ",
+            "available_from": "2022-10-12",
+            "country": "CAN",
+            "target_weight": 0.04246979477741958,
+            "value": 1645.42
+          },
+          {
+            "asset_id": "DE_EQ",
+            "available_from": "2022-10-12",
+            "country": "DEU",
+            "target_weight": 0.10031566748315192,
+            "value": 3886.56
+          },
+          {
+            "asset_id": "FR_EQ",
+            "available_from": "2022-10-12",
+            "country": "FRA",
+            "target_weight": 0.06803808658529345,
+            "value": 2636.02
+          },
+          {
+            "asset_id": "GB_EQ",
+            "available_from": "2022-10-12",
+            "country": "GBR",
+            "target_weight": 0.0712089574197345,
+            "value": 2758.87
+          },
+          {
+            "asset_id": "IT_EQ",
+            "available_from": "2022-10-12",
+            "country": "ITA",
+            "target_weight": 0.048809987791437484,
+            "value": 1891.06
+          },
+          {
+            "asset_id": "JP_EQ",
+            "available_from": "2022-10-12",
+            "country": "JPN",
+            "target_weight": 0.12987071312975404,
+            "value": 5031.62
+          },
+          {
+            "asset_id": "US_EQ",
+            "available_from": "2022-10-12",
+            "country": "USA",
+            "target_weight": 0.5392867928132089,
+            "value": 20893.75
+          }
+        ],
+        "decision_date": "2022-12-31",
+        "decision_type": "annual_rebalance",
+        "indicator": "NGDPD",
+        "selected_period": "2020",
+        "unit": "USD_billions"
+      },
+      {
+        "countries": [
+          {
+            "asset_id": "CA_EQ",
+            "available_from": "2023-10-11",
+            "country": "CAN",
+            "target_weight": 0.04881375591067152,
+            "value": 2137.94
+          },
+          {
+            "asset_id": "DE_EQ",
+            "available_from": "2023-10-11",
+            "country": "DEU",
+            "target_weight": 0.09328483785752284,
+            "value": 4085.68
+          },
+          {
+            "asset_id": "FR_EQ",
+            "available_from": "2023-10-11",
+            "country": "FRA",
+            "target_weight": 0.06347655937841769,
+            "value": 2780.14
+          },
+          {
+            "asset_id": "GB_EQ",
+            "available_from": "2023-10-11",
+            "country": "GBR",
+            "target_weight": 0.07036570246518668,
+            "value": 3081.87
+          },
+          {
+            "asset_id": "IT_EQ",
+            "available_from": "2023-10-11",
+            "country": "ITA",
+            "target_weight": 0.04593850390087196,
+            "value": 2012.01
+          },
+          {
+            "asset_id": "JP_EQ",
+            "available_from": "2023-10-11",
+            "country": "JPN",
+            "target_weight": 0.09675189906365372,
+            "value": 4237.53
+          },
+          {
+            "asset_id": "US_EQ",
+            "available_from": "2023-10-11",
+            "country": "USA",
+            "target_weight": 0.5813687414236756,
+            "value": 25462.73
+          }
+        ],
+        "decision_date": "2023-12-31",
+        "decision_type": "annual_rebalance",
+        "indicator": "NGDPD",
+        "selected_period": "2022",
+        "unit": "USD_billions"
+      },
+      {
+        "countries": [
+          {
+            "asset_id": "CA_EQ",
+            "available_from": "2024-10-23",
+            "country": "CAN",
+            "target_weight": 0.04525091979943677,
+            "value": 2142.471
+          },
+          {
+            "asset_id": "DE_EQ",
+            "available_from": "2024-10-23",
+            "country": "DEU",
+            "target_weight": 0.09561451295738818,
+            "value": 4527.009
+          },
+          {
+            "asset_id": "FR_EQ",
+            "available_from": "2024-10-23",
+            "country": "FRA",
+            "target_weight": 0.06447603065935464,
+            "value": 3052.712
+          },
+          {
+            "asset_id": "GB_EQ",
+            "available_from": "2024-10-23",
+            "country": "GBR",
+            "target_weight": 0.0714333191055898,
+            "value": 3382.115
+          },
+          {
+            "asset_id": "IT_EQ",
+            "available_from": "2024-10-23",
+            "country": "ITA",
+            "target_weight": 0.0486119311594617,
+            "value": 2301.603
+          },
+          {
+            "asset_id": "JP_EQ",
+            "available_from": "2024-10-23",
+            "country": "JPN",
+            "target_weight": 0.08912657319301763,
+            "value": 4219.828
+          },
+          {
+            "asset_id": "US_EQ",
+            "available_from": "2024-10-23",
+            "country": "USA",
+            "target_weight": 0.5854867131257514,
+            "value": 27720.725
+          }
+        ],
+        "decision_date": "2024-12-31",
+        "decision_type": "annual_rebalance",
+        "indicator": "NGDPD",
+        "selected_period": "2023",
+        "unit": "USD_billions"
+      }
+    ],
+    "identical_duplicate_rows": 0,
+    "loaded_rows": 4087,
+    "validated_version_rows": 4087
+  },
+  "periods_per_year": 12.0,
+  "requested_period": {
+    "end": "2025-12-31",
+    "start": "2009-12-31"
+  },
+  "required_assets": [
+    "CA_EQ",
+    "DE_EQ",
+    "FR_EQ",
+    "GB_EQ",
+    "IT_EQ",
+    "JP_EQ",
+    "US_EQ",
+    "US_TREASURY_7_10",
+    "WORLD_EQ"
+  ],
+  "risk_free": {
+    "loaded_periods": 192,
+    "series_id": "DGS3MO_LAGGED_ACT365_APPROX",
+    "unused_periods": 0,
+    "used_periods": 192
+  },
+  "series": {
+    "CA_EQ": {
+      "loaded_observations": 204,
+      "original_end": "2025-12-31",
+      "original_start": "2009-01-31",
+      "outside_requested_period": 11,
+      "removed_non_common_dates": [],
+      "used_observations": 193
+    },
+    "DE_EQ": {
+      "loaded_observations": 204,
+      "original_end": "2025-12-31",
+      "original_start": "2009-01-31",
+      "outside_requested_period": 11,
+      "removed_non_common_dates": [],
+      "used_observations": 193
+    },
+    "FR_EQ": {
+      "loaded_observations": 204,
+      "original_end": "2025-12-31",
+      "original_start": "2009-01-31",
+      "outside_requested_period": 11,
+      "removed_non_common_dates": [],
+      "used_observations": 193
+    },
+    "GB_EQ": {
+      "loaded_observations": 204,
+      "original_end": "2025-12-31",
+      "original_start": "2009-01-31",
+      "outside_requested_period": 11,
+      "removed_non_common_dates": [],
+      "used_observations": 193
+    },
+    "IT_EQ": {
+      "loaded_observations": 204,
+      "original_end": "2025-12-31",
+      "original_start": "2009-01-31",
+      "outside_requested_period": 11,
+      "removed_non_common_dates": [],
+      "used_observations": 193
+    },
+    "JP_EQ": {
+      "loaded_observations": 204,
+      "original_end": "2025-12-31",
+      "original_start": "2009-01-31",
+      "outside_requested_period": 11,
+      "removed_non_common_dates": [],
+      "used_observations": 193
+    },
+    "US_EQ": {
+      "loaded_observations": 204,
+      "original_end": "2025-12-31",
+      "original_start": "2009-01-31",
+      "outside_requested_period": 11,
+      "removed_non_common_dates": [],
+      "used_observations": 193
+    },
+    "US_TREASURY_7_10": {
+      "loaded_observations": 204,
+      "original_end": "2025-12-31",
+      "original_start": "2009-01-31",
+      "outside_requested_period": 11,
+      "removed_non_common_dates": [],
+      "used_observations": 193
+    },
+    "WORLD_EQ": {
+      "loaded_observations": 204,
+      "original_end": "2025-12-31",
+      "original_start": "2009-01-31",
+      "outside_requested_period": 11,
+      "removed_non_common_dates": [],
+      "used_observations": 193
+    }
+  },
+  "trend": {
+    "asset_id": "WORLD_EQ",
+    "available_warm_up_observations": 11,
+    "effective_start": "2009-12-31",
+    "long_window": 12,
+    "signal_calendar": "observed_asset_history; sampled_at_shared_valuations",
+    "signal_source": "performance_value",
+    "study_signal_observations": 193,
+    "used_signal_observations": 204,
+    "used_warm_up_observations": 11,
+    "valid_start_signal": true,
+    "warm_up_period": {
+      "end": "2009-11-30",
+      "start": "2009-01-31"
+    }
+  },
+  "unused_market_columns": [],
+  "used_observations": 193,
+  "validation_status": "passed",
+  "warnings": []
+}

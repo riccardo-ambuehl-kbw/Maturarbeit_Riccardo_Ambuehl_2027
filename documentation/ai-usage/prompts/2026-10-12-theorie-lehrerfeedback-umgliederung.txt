@@ -1,0 +1,107 @@
+AUFTRAG: THEORIEKAPITEL NACH LEHRERFEEDBACK UMGLIEDERN
+Ziel und Arbeitsort
+Arbeite im normalen Schreib-Repository Maturarbeit_Riccardo_Ambuehl_2027 auf dem Branch dev, nicht im separaten Engine-Worktree.
+Repository: riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027.
+Die drei inhaltlichen Korrekturstellen werden vom Autor zuerst anhand der Datei Theorie_Gezielte_Korrekturen.ipynb eingearbeitet. Dein Auftrag ist anschliessend die Umgliederung dieses korrigierten Bestands, die Aktualisierung eindeutig betroffener interner Verweise und die Erweiterung der KI-Dokumentation. Schreibe keine weiteren Fachabsätze neu.
+Als geprüfte Ausgangsreferenz vor den Textkorrekturen dient Commit 8a3f41b58ae42eb25e49e4b1cad267aba031d5a8. Das ist kein Auftrag, auf diesen Commit zurückzusetzen. Massgeblich ist der tatsächliche lokale Stand mit den eingearbeiteten Korrekturen. Neuere Änderungen des Autors bleiben erhalten.
+1. Vorbereitung und erlaubter Umfang
+1. Prüfe Repository-Wurzel, Branch, HEAD, Index und lokale Änderungen. Kein automatischer Pull, Checkout, Worktree-Wechsel oder Merge.
+2. Lies AGENTS.md, falls vorhanden, sowie:
+   - notebooks/Theorie.ipynb
+   - _quarto.yml
+   - documentation/ai-usage/README.md
+   - documentation/ai-usage/book-sync.md
+   - documentation/ai-usage/ai-usage-log.md
+   - ki-nutzung.qmd
+3. Sichere den tatsächlichen Ausgangsstand der betroffenen Dateien ausserhalb der versionierten Fachkapitel. Protokolliere Hashes und vorhandene Änderungen. Nicht committen und nichts stagen.
+4. Prüfe, dass die angekündigten Textkorrekturen vorhanden sind: Erklärung der praktischen Indexnachbildung, ausgeschriebene ETF-Bezeichnung, sichtbarer Zeitbereich der MDD-Formel und vollständige Sharpe-Zeichentabelle. Fehlen sie noch, STOPP und konkret melden. Nicht selbst zusätzliche Formulierungen erfinden oder die Korrekturdatei still einarbeiten.
+Die Lehrer-Rückmeldung war:
+- 3.1: Indexnachbildung nachvollziehbarer erklären und ETF ausschreiben.
+- 3.2–3.4 sowie 3.7–3.8: Erklärungen grundsätzlich nachvollziehbar.
+- 3.5: Darstellung des Zeitindex in der MDD-Formel prüfen.
+- 3.6: Formelbestandteile und Variablen erklären.
+- 3.9–3.11: Portfoliokonzepte gegebenenfalls mit 3.1 zusammenführen.
+- 3.12: dem Berechnungsbereich zuordnen.
+- 3.13: eigener Bereich für methodische Grenzen.
+- Tabellen oder Listen für Variablenerklärungen erwägen.
+- Drei übergeordnete Bereiche waren ausdrücklich ein optionaler Vorschlag: Portfolio, Berechnungen und methodische Grenzen.
+Der Autor nimmt diesen Gliederungsvorschlag für diesen Auftrag an. Die oben genannten inhaltlichen Korrekturen sind bereits eingearbeitet. Die allgemeine Tabellenempfehlung wird zunächst nur bei der Sharpe Ratio umgesetzt; kein Umbau sämtlicher Formelerklärungen.
+2. Verbindliche Zielgliederung
+Verwende drei übergeordnete Bereiche. Verschiebe bestehende Themenblöcke jeweils einschliesslich ihrer Erläuterungen, Formeln, Quellen, Codezellen und vorhandenen Ausgaben. Die Reihenfolge innerhalb eines bisherigen Themenblocks bleibt gleich.
+3.1 Portfolio
+  3.1.1 Grundlagen historischer Finanzdaten        <- bisher 3.1
+  3.1.2 Diversifikation und Korrelation             <- bisher 3.7
+  3.1.3 Asset-Allokation und Rebalancing            <- bisher 3.8
+  3.1.4 Marktbreites Buy-and-Hold                   <- bisher 3.9
+  3.1.5 Das 60/40-Portfolio                        <- bisher 3.10
+  3.1.6 Marktkapitalisierungs- und BIP-Gewichtung   <- bisher 3.11
+3.2 Berechnungen und Daten
+  3.2.1 Historische Finanzdaten und Zeitreihen      <- bisher 3.2
+  3.2.2 Rendite                                    <- bisher 3.3
+  3.2.3 Volatilität                                <- bisher 3.4
+  3.2.4 Drawdown                                   <- bisher 3.5
+  3.2.5 Sharpe Ratio                               <- bisher 3.6
+  3.2.6 Trendfolge mit gleitenden Durchschnitten    <- bisher 3.12
+3.3 Methodische Grenzen                            <- bisher 3.13
+  3.3.1 Historische Stichprobe und Vergleichbarkeit <- bisher 3.13.1
+  3.3.2 Foresight Bias                             <- bisher 3.13.2
+  3.3.3 Data Snooping und Overfitting               <- bisher 3.13.3
+  3.3.4 Kosten, Inflation und Datenqualität         <- bisher 3.13.4
+Die Unterabschnitte eines verschobenen Blocks werden entsprechend eine Ebene tiefer geführt. Beispiele:
+- bisher 3.1.1 Indexfonds und ETFs -> 3.1.1.1 Indexfonds und ETFs
+- bisher 3.5.2 Berechnung -> 3.2.4.2 Berechnung
+- bisher 3.6.2 Berechnung -> 3.2.5.2 Berechnung
+- bisher 3.12.2 Handelssignal -> 3.2.6.2 Handelssignal
+Die letzten vier Unterabschnitte unter 3.3 erhalten dagegen keine unnötige zusätzliche Zwischenebene.
+Diese Gliederung bündelt Themen; sie verlangt keine vollständige Trennung jedes Formelblocks vom zugehörigen Portfoliokonzept. Beispielsweise bleiben die Rechnungen zur Gewichtungsdrift bei der Erklärung des Rebalancings. Keine neuen Überleitungsabsätze oder Inhaltszusammenfassungen hinzufügen.
+3. Notebook sorgfältig bearbeiten
+Das Notebook ist keine Sammlung von genau einer Überschrift pro Zelle. Im geprüften Stand enthält die Markdown-Zelle mit ID 1941d2df sowohl den bisherigen Abschnitt 3.1 als auch Teile von 3.2. Trenne solche Zellen nur an den tatsächlichen Abschnittsgrenzen. Der Textinhalt muss bei der Aufteilung vollständig erhalten bleiben.
+- Vorhandene Zell-IDs soweit möglich erhalten; bei notwendigen Teilungen neue eindeutige IDs vergeben und im Bericht zuordnen.
+- Keine Codezelle inhaltlich verändern. Kommentare, Variablen, Funktionen und Beispieldaten bleiben ebenfalls identisch.
+- Vorhandene Outputs, Bilder, Anhänge und execution_count unverändert mitführen. Sie dokumentieren den bisherigen Ausführungsstand; sie sind kein Nachweis einer neuen Ausführung nach der Umgliederung.
+- Keine globale Neuformatierung der JSON-Datei, kein Notebook-Cleaner, keine Löschung von Ausgaben.
+- Keine Verallgemeinerung der drei Textkorrekturen auf das gesamte Kapitel.
+- Neue Hauptüberschriften und angepasste Überschriftenebenen sind erlaubt. Die vorhandenen Untertitel bleiben im Wortlaut erhalten; nur der bisherige Haupttitel 3.13 wird unter dem neuen Gruppentitel «Methodische Grenzen» geführt.
+- Die vorhandene Titel-/YAML-Zelle bleibt erhalten. Kein doppelter Kapitelkopf.
+Kontrolliere die Darstellung mit der bestehenden Quarto-Konfiguration. Die Zielnummern oben sind die beabsichtigten sichtbaren Nummern, nicht die Anweisung, bereits automatisch erzeugte Nummern ein zweites Mal einzutragen. Im aktuellen Notebook gibt es manuell nummerierte HTML-Überschriften. Passe die Überschriften kontrolliert an die tatsächlich verwendete Darstellung an. Eine Umstellung ausschliesslich der betroffenen Überschriften auf native Markdown-Überschriften ist erlaubt, wenn sie für korrekte Hierarchie und Nummerierung nötig ist; Fachabsätze nicht umformatieren.
+_quarto.yml, globale Nummerierung, toc-depth und Formatvorlagen nicht ändern. Die neue vierte Überschriftenebene muss im Text richtig erscheinen; sie muss bei der bisherigen Inhaltsverzeichnistiefe nicht zusätzlich im Inhaltsverzeichnis aufgeführt werden.
+4. Interne Verweise abgleichen
+Erstelle vor den Ersetzungen eine vollständige Alt-neu-Zuordnung einschliesslich Unterabschnitten.
+Prüfe eindeutige Verweise auf das Theoriekapitel in den aktuell eingebundenen Buchquellen, insbesondere index.ipynb sowie notebooks/Einleitung.ipynb, notebooks/Methodik.ipynb, notebooks/Analyse.ipynb und notebooks/Fazit.ipynb. Auch README.md darf ausschliesslich hinsichtlich solcher eindeutigen Theorie-Verweise korrigiert werden.
+Ersetze nur nachweislich betroffene Abschnittsnummern oder Anker. Der umgebende Wortlaut bleibt unverändert. Keine globale Zahlenersetzung: «3.1» könnte auch eine Versionsnummer, eine Zahl, einen Quellenabschnitt oder einen anderen Kontext bezeichnen. Verweise wie «Abschnitt 9.3» innerhalb eines Literaturbelegs sind keine internen Theorienummern.
+Sammelverweise wie «3.2 bis 3.13» können nach der Umgliederung mehrere Bereiche betreffen. Erhalte ihre Bedeutung durch eine präzise Aufzählung der neuen betroffenen Bereiche; nicht einfach einen irreführenden neuen Bereich einsetzen. Bei unklarer Bedeutung keine Vermutung, sondern Fundstelle im Bericht zur Autorenprüfung angeben.
+Bibliografie, Quellen-Citation-Keys, zitierte Buchseiten und explizite Quellenverweise bleiben unverändert. Die aktuell gültigen Linkziele prüfen. Bestehende eindeutige explizite Anker möglichst erhalten, damit Links nicht unnötig brechen.
+Historische Prompts, alte Prüfberichte, eingefrorene Engine-Nachweise, Run-Manifeste sowie Dateien unter archive/ nicht nachträglich auf die neue Nummerierung umschreiben. Für sie genügt die dokumentierte Alt-neu-Zuordnung.
+5. Änderungen nachvollziehbar prüfen
+Erstelle einen Vorher-nachher-Vergleich auf Basis des tatsächlichen lokalen Stands NACH den eingearbeiteten Textkorrekturen, nicht bloss gegen den älteren Git-Commit.
+Nachweisen:
+1. Alle ursprünglichen Fachabsätze, Formeln und Quellenangaben sind weiterhin vollständig vorhanden. Erlaubte Unterschiede sind nur neue Gruppenüberschriften, notwendige Überschriftenänderungen und einzeln dokumentierte interne Verweisanpassungen.
+2. Anzahl und Inhalte sämtlicher Codezellen sind identisch; bei der geprüften alten Fassung waren es 17, massgeblich ist aber der protokollierte lokale Ausgangsstand. Nicht nur die Anzahl, sondern auch Quelltext und Ausgaben vergleichen.
+3. Keine Bilder, Anhänge oder bestehenden Ausgaben verloren.
+4. Jede neue Nummer ist eindeutig; keine Überschrift doppelt oder ausgelassen.
+5. Das Notebook ist formal gültig; Tabellen und Formeln, insbesondere MDD-Zeitindex und Sharpe-Tabelle, bleiben korrekt eingebunden.
+6. Interne Verweise und erforderliche Funktionsdefinitionen nach der Umordnung prüfen. Eine Umordnung kann Auswirkungen auf die Ausführungsreihenfolge haben: bei tatsächlichen Abhängigkeitsproblemen STOPP mit konkretem Befund, keinen Code still reparieren.
+Für den Darstellungscheck das Buch beziehungsweise die relevanten Kapitel in einer temporären Kopie OHNE Codeausführung rendern. HTML und PDF prüfen, soweit lokal verfügbar. Dabei nach Möglichkeit vorhandene lokale Quellen und Werkzeuge verwenden; keine Paket-Upgrades. Keine Quarto-Caches oder generierten Dateien im Arbeitsrepository überschreiben. Ein Render mit vorhandenen Ausgaben prüft nur die Darstellung, nicht die erneute Ausführbarkeit aller Beispiele.
+Die Theorie-Beispiele und die fünf Echtdaten-Backtests in diesem Auftrag nicht neu ausführen. Insbesondere keine Engine-Läufe, Datendownloads oder Strategieoptimierung. Ist eine notwendige Prüfung nicht möglich, genau als NICHT GEPRÜFT kennzeichnen; kein erfundenes PASS.
+6. KI-Dokumentation ergänzen
+Erweitere documentation/ai-usage/ai-usage-log.md append-only und ergänze ki-nutzung.qmd um einen passenden kurzen Abschnitt. Verwende die vorhandenen Dokumentationsregeln, ohne dabei die gesamte frühere KI-Dokumentation neu zu formulieren oder andere, nicht beauftragte Lücken aufzuarbeiten.
+Unterscheide genau:
+- Lehrer: Rückmeldung zu Nachvollziehbarkeit, Formelbeschriftung und optionaler Gliederung.
+- Autor: Entscheidung, die drei Korrekturstellen zu übernehmen und die Umgliederung per KI ausführen zu lassen. Eine bereits abgeschlossene manuelle Fachprüfung nur angeben, wenn sie tatsächlich bestätigt ist; sonst «Autorenkontrolle ausstehend».
+- ChatGPT: lieferte die ergänzende Erklärung der Indexnachbildung, die ausgeschriebene ETF-Bezeichnung, die präzisierte MDD-Darstellung und die vervollständigte Sharpe-Zeichenerklärung. Das ist inhaltliche Erklärungsarbeit beziehungsweise Formulierungsunterstützung, nicht bloss Rechtschreibkorrektur. Es wurde kein neues Finanzmodell entwickelt.
+- Codex: hat die bereits korrigierten Inhalte umgeordnet, Überschriften/Verweise angepasst und die tatsächlich ausgeführten Struktur-/Integritäts-/Darstellungsprüfungen dokumentiert. Keine Autorschaft an übernommenen Formulierungen behaupten.
+Keine Behauptung, das ganze Kapitel sei von Codex neu geschrieben oder neu fachlich validiert worden. Keine Aussage, der Lehrer verlange diese Umgliederung zwingend. Die Entscheidung des Autors und die spätere Verantwortlichkeit klar benennen.
+Speichere den tatsächlich ausgeführten Auftrag als einzelne Datei unter documentation/ai-usage/prompts/; verwende das tatsächliche Ausführungsdatum. Keine vorhandene Promptdatei überschreiben. Die Dokumentation darf die übernommenen Korrekturstellen nennen, ohne den kompletten Korrekturentwurf zusätzlich ins Buch aufzunehmen.
+7. Abschluss und Grenzen
+Erstelle einen kompakten Änderungsbericht unter documentation/theorie-lehrerfeedback-umgliederung.md mit:
+- Ausgangscommit und tatsächlichem lokalen Vorzustand;
+- vollständiger Alt-neu-Zuordnung;
+- geteilten beziehungsweise verschobenen Zellen;
+- jeder Verweisanpassung mit Datei und Fundstelle;
+- Nachweis der unveränderten Fachtexte, Formeln, Codezellen und Ausgaben gegenüber dem korrigierten Vorzustand;
+- ergänzten KI-Nachweisen;
+- wirklich ausgeführten Prüfungen und offenen Punkten;
+- abschliessendem git diff --check und git status --short.
+Zusätzliche ausserhalb dieses Auftrags entdeckte fachliche Auffälligkeiten nur separat melden, nicht korrigieren. Insbesondere keine bestehenden Drawdown-, Sharpe-, Portfolio- oder SMA-Beispielimplementierungen verändern.
+Nicht ändern: src/, Engine, Engine-Versionen und Tags, Daten, Ergebnisse, Konfigurationen der Studie, eingefrorene Archive, references.bib oder historische Auditnachweise. Keine Änderungen am Dateisystem ausserhalb des Auftrags ausser der genannten temporären Sicherung/Prüfung. Keine Änderung von Berechtigungen.
+Kein git add, Commit, Push, Merge, Reset oder Clean. Keine Dateien des Autors löschen. Nach dem Abschlussbericht stoppen. Der Autor kontrolliert und übernimmt den Diff anschliessend selbst.

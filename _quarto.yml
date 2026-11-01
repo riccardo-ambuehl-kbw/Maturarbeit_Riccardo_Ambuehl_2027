@@ -1,30 +1,48 @@
 project:
   type: book
   output-dir: _book
+  post-render:
+    - python filters/docx-layout.py
 
 book:
-  title: "Langfristige Anlagestrategien anhand historischer Finanzdaten"
+  title: "Anlagestrategien: Risiko und Rendite im Backtest"
+  output-file: "Anlagestrategien-Risiko-und-Rendite-im-Backtest"
   author: "Riccardo Ambühl"
   date: today
   chapters:
-    - index.qmd
-    - einleitung.qmd
+    - href: index.ipynb
+      text: Überblick
+    - href: notebooks/Einleitung.ipynb
+      text: Einleitung
     - href: notebooks/Theorie.ipynb
       text: Theorie
-    - methodik.qmd
-    - notebooks/02_analyse.ipynb
-    - fazit.qmd
+    - href: notebooks/Methodik.ipynb
+      text: Methodik
+    - href: notebooks/Analyse.ipynb
+      text: Analyse
+    - href: notebooks/Fazit.ipynb
+      text: Fazit
+    - bibliography.qmd
   appendices:
+    - href: notebooks/Anhang_Technische_Engine.ipynb
+      text: Technische Entwicklung und Aufbau der Python-Engine
+    - href: notebooks/Anhang_Datenaufbereitung.ipynb
+      text: Datenbeschaffung, Datenformate und Aufbereitung
+    - href: notebooks/Anhang_Tests_Validierung.ipynb
+      text: Tests, Validierung und technische Nachweise
     - ki-nutzung.qmd
   page-footer:
     left: "Riccardo Ambühl"
     right: "Maturarbeit"
 
 lang: de
-bibliography: references.bib
+bibliography:
+  - references.bib
+  - references-supplement.bib
 csl: styles/chicago-shortened-notes-bibliography-17th-edition.csl
 filters:
   - filters/date-icon.lua
+  - filters/book-format.lua
 
 number-sections: true
 toc: true
@@ -51,22 +69,50 @@ format:
     fig-height: 5
   pdf:
     documentclass: scrreprt
+    latex-min-runs: 3
+    lof: true
+    lot: true
     classoption:
       - oneside
+      - numbers=noenddot
+      - listof=totoc
     papersize: a4
+    fontsize: 11pt
+    linestretch: 1.2
     geometry:
       - margin=2.5cm
     colorlinks: true
     fig-width: 6.5
     fig-height: 4.2
+    include-before-body:
+      text: |
+        \clearpage
+        \pagenumbering{roman}
+        \chapter*{Abstract}
+
+        Welche Anlagestrategie ist langfristig wirklich überzeugend? Ein hoher Endwert verrät wenig darüber, welche Schwankungen und Verluste auf dem Weg dorthin aufgetreten sind. Diese Maturarbeit vergleicht vier Ansätze: Buy-and-Hold, 60/40, Trendfolge und BIP-Gewichtung. Ein Python-Modell simuliert die Strategien mit historischen Finanzdaten und wertet Rendite sowie verschiedene Risikokennzahlen aus. Untersucht werden ein weltweiter Hauptvergleich von 2010 bis 2025 und ein längerer US-Vergleich von 2003 bis 2025. Dabei zeigt sich, wie stark die Beurteilung vom gewählten Massstab abhängt und weshalb auch die Datenwahl und die Grenzen eines Backtests berücksichtigt werden müssen.
+
+        \clearpage
+    include-after-body:
+      text: |
+        \includepdf[pages=-,pagecommand={},addtotoc={1,chapter,0,Ehrlichkeitserklärung,sec-ehrlichkeitserklaerung}]{assets/ehrlichkeitserklaerung-2026-27.pdf}
     include-in-header:
       text: |
+        \titlehead{Kantonsschule Büelrain Winterthur}
+        \subject{Maturitätsarbeit}
+        \publishers{\normalsize Klasse 4gW\\Betreuung: Jacques Mock Schindler}
+        \usepackage{pdfpages}
         \usepackage{booktabs}
         \usepackage{float}
         \usepackage{fontawesome5}
         \usepackage{fvextra}
+        \usepackage{xurl}
         \floatplacement{figure}{H}
-        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},breaklines=true,breakanywhere=true}
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},breaklines=true,breakanywhere=true,fontsize=\footnotesize}
+        \DefineVerbatimEnvironment{verbatim}{Verbatim}{breaklines=true,breakanywhere=true,fontsize=\footnotesize}
   docx:
+    crossref:
+      appendix-title: Anhang
+    reference-doc: styles/reference.docx
     toc: true
     number-sections: true

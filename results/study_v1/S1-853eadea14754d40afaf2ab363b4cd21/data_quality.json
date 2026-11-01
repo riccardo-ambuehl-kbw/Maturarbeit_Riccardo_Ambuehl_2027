@@ -1,0 +1,67 @@
+{
+  "annualization": {
+    "available": true,
+    "period_frequency": "ME",
+    "status": "available"
+  },
+  "common_observations": 204,
+  "effective_period": {
+    "end": "2025-12-31",
+    "start": "2009-12-31"
+  },
+  "loaded_assets": [
+    "CA_EQ",
+    "DE_EQ",
+    "FR_EQ",
+    "GB_EQ",
+    "IT_EQ",
+    "JP_EQ",
+    "US_EQ",
+    "US_TREASURY_7_10",
+    "WORLD_EQ"
+  ],
+  "periods_per_year": 12.0,
+  "requested_period": {
+    "end": "2025-12-31",
+    "start": "2009-12-31"
+  },
+  "required_assets": [
+    "WORLD_EQ"
+  ],
+  "risk_free": {
+    "loaded_periods": 192,
+    "series_id": "DGS3MO_LAGGED_ACT365_APPROX",
+    "unused_periods": 0,
+    "used_periods": 192
+  },
+  "series": {
+    "WORLD_EQ": {
+      "loaded_observations": 204,
+      "original_end": "2025-12-31",
+      "original_start": "2009-01-31",
+      "outside_requested_period": 11,
+      "removed_non_common_dates": [],
+      "used_observations": 193
+    }
+  },
+  "trend": {
+    "asset_id": "WORLD_EQ",
+    "available_warm_up_observations": 11,
+    "effective_start": "2009-12-31",
+    "long_window": 12,
+    "signal_calendar": "observed_asset_history; sampled_at_shared_valuations",
+    "signal_source": "performance_value",
+    "study_signal_observations": 193,
+    "used_signal_observations": 204,
+    "used_warm_up_observations": 11,
+    "valid_start_signal": true,
+    "warm_up_period": {
+      "end": "2009-11-30",
+      "start": "2009-01-31"
+    }
+  },
+  "unused_market_columns": [],
+  "used_observations": 193,
+  "validation_status": "passed",
+  "warnings": []
+}

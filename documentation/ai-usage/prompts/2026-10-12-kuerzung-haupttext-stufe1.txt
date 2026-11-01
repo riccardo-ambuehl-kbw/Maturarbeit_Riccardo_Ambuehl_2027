@@ -1,0 +1,297 @@
+# AUFTRAG: Wissenschaftlich kontrollierte Kürzung des Haupttexts – Stufe 1
+
+## Ziel
+
+Setze die **46 freigegebenen Massnahmen** aus dem bestehenden Kürzungsplan der Maturarbeit «Langfristige Anlagestrategien anhand historischer Finanzdaten» um.
+
+Verbindliche Grundlage:
+
+`documentation/kuerzungsplan-haupttext-2026-10-12.md`
+
+Der Plan enthält 49 Massnahmen. Davon sind in diesem Auftrag **46 freigegeben und drei ausdrücklich zurückgestellt**.
+
+Ziel ist eine deutlich kürzere, weiterhin wissenschaftlich vollständige und gut lesbare Maturarbeit.
+
+**Wissenschaftliche Qualität, Richtigkeit und Nachvollziehbarkeit haben Vorrang vor jeder Wortzahl.**
+
+## 1. Arbeitsumgebung
+
+Repository: `riccardo-ambuehl-kbw/Maturarbeit_Riccardo_Ambuehl_2027`
+
+Branch: `dev`
+
+Bekannter Ausgangscommit: `89a8fd130865fe40e2c33449efc6a8dacc2c0227`.
+
+Prüfe zunächst den tatsächlichen lokalen HEAD und Git-Status sowie vorhandene Projektregeln.
+
+Lies vollständig:
+
+- Den gesamten Kürzungsplan einschliesslich Massnahmentabelle, Ersatzbeispielen und Sperrstellen.
+- Alle sechs Hauptkapitel.
+- Die bestehenden Anhänge A–D.
+- Den Phase-2-Gegenlesebericht.
+- Den Bericht zur technischen Auslagerung.
+- Die bestehenden KI-Dokumentationsregeln.
+- `documentation/readme-ueberblick-sync.md`.
+
+Vor dem ersten Eingriff den Ausgangszustand extern sichern.
+
+## 2. Verbindlich freigegebene Massnahmen
+
+Setze ausschliesslich folgende Massnahmen-IDs um:
+
+**Überblick:** P01
+
+**Einleitung:** E01, E02, E04
+
+**Theorie:** T02, T03, T04, T05, T06, T07, T08, T09, T10, T11, T12, T13
+
+**Methodik:** M01, M02, M03, M04
+
+**Analyse:** A01, A03 sowie A04 bis A25 einschliesslich
+
+**Fazit:** F01 und F03
+
+Die Massnahmen dürfen nur innerhalb ihrer im Kürzungsplan beschriebenen inhaltlichen Grenzen umgesetzt werden.
+
+Nutze dortige Ersatzbeispiele als Grundlage, aber übernimm sie nicht blind. Kontrolliere jeweils den Originaltext, den Informationsgehalt, die Quellenanbindung und die Übereinstimmung mit den Studienergebnissen.
+
+Wenn eine einzelne Massnahme nach genauer Prüfung nicht ohne Verlust wesentlicher Aussagen umgesetzt werden kann, überspringe sie und dokumentiere den Grund.
+
+## 3. Ausdrücklich nicht freigegeben
+
+Folgende Massnahmen bleiben unverändert:
+
+**T01:** Kürzung der Indexfonds-/ETF-Erläuterungen, die kürzlich nach Lehrerfeedback ergänzt wurden.
+
+**F02:** Kürzung der persönlichen Gewichtung der Kernerkenntnisse.
+
+**F04:** Kürzung des persönlichen Rückblicks und Ausblicks.
+
+Keine zusätzlichen, nicht im Kürzungsplan enthaltenen Kürzungen durchführen.
+
+Keine allgemeinen Fachkorrekturen aus dem Gegenlesebericht vornehmen. Die dortigen Befunde werden später getrennt behandelt.
+
+Insbesondere nicht versuchen, die offenen Fehler durch ersatzloses Löschen der betroffenen Passagen zu beseitigen.
+
+## 4. Auslagerung des Überblicks
+
+Setze P01 gemäss Plan um.
+
+Verlagere die vorhandenen technischen Originalinhalte nach Anhang A.7:
+
+- A.7.1 Installation, Quarto und Quellenverwaltung
+- A.7.2 Historische Quellen- und Werkzeugplanung
+- A.7.3 Projektpendenzen mit ihrem ursprünglichen dokumentierten Stand
+
+Erhalte historische Originalangaben vollständig und kennzeichne sie als damaligen Projektstand, wenn sie mittlerweile veraltet sein könnten.
+
+Im Hauptbuch bleibt Kapitel 1 «Überblick» mit einer kurzen Darstellung von Forschungsfrage, Untersuchungsweg und Buchaufbau bestehen.
+
+**Die Forschungsfrage muss wortgleich erhalten bleiben.**
+
+Die besondere Raw-YAML-/HTML-Titelkonstruktion von `index.ipynb` darf nicht beschädigt werden.
+
+### README-Synchronisation
+
+Die bisherige Datei `documentation/readme-ueberblick-sync.md` beschreibt eine vollständige Übernahme von `README.md` in `index.ipynb`.
+
+Diese alte Regel wäre nach P01 nicht mehr sachgerecht, weil sie die technische Anleitung erneut in den Haupttext kopieren würde.
+
+Passe die Arbeitsanweisung minimal und nachvollziehbar an:
+
+- Die vollständige README-Übertragung als historischen Vorgang dokumentiert lassen.
+- Für künftige Synchronisationen die wissenschaftliche Überblicksseite ausdrücklich von der ausführlichen technischen Projektdokumentation trennen.
+- Kein automatisches Wiederauffüllen von `index.ipynb` mit sämtlichen README-Abschnitten.
+- Keine vorhandenen historischen Arbeitsnachweise überschreiben.
+
+Die README selbst nur ändern, wenn es für diese Synchronisationsregel zwingend erforderlich ist. Keine allgemeinen README-Überarbeitungen.
+
+## 5. Analysekapitel zusammenführen
+
+Setze A01 um.
+
+Führe die bisherigen Abschnitte 5.1 bis 5.9 zu einem gemeinsamen Abschnitt zusammen:
+
+**5.1 Vom Modell zur Untersuchung**
+
+Die wissenschaftlich relevanten Informationen bleiben in der kompakten Modellbrücke erhalten; technische Details sind bereits in A–C dokumentiert.
+
+Nummeriere die nachfolgenden Hauptabschnitte wie im Kürzungsplan vorgesehen:
+
+- Bisher 5.10 → neu 5.2
+- Bisher 5.11 → neu 5.3
+- Bisher 5.12 → neu 5.4
+- Bisher 5.13 → neu 5.5
+
+Passe zugehörige Unterabschnittsnummern und alle aktiven Querverweise im gesamten aktuellen Buch an.
+
+Berücksichtige insbesondere Referenzen aus Methodik, Fazit, Anhangseinleitungen und KI-Dokumentation, soweit diese auf die aktuelle Kapitelstruktur verweisen.
+
+Historische Berichte und Promptkopien bleiben mit ihrer damaligen Nummerierung unverändert.
+
+Originalcode-Kommentare nicht allein wegen einer neuen Kapitelnummer verändern. Ergänze nötigenfalls ausserhalb des Codes einen Zuordnungshinweis.
+
+Erhalte die funktionierende Einbindung der Original-Plotcodezelle `99cad7ec`.
+
+## 6. Weitere technische Auslagerungen
+
+Setze ausschliesslich die im Kürzungsplan konkret bezeichneten technischen Teilverlagerungen um:
+
+- T07 nach B.3.3
+- A06 nach B.3.2
+- A09 nach B.5.1
+- A10 nach B.4.1 und B.5.2
+- A12 nach C.3.1
+- A13 nach A.6.2
+
+Erhalte die ursprünglichen technischen Informationen und Quellen.
+
+Bei gemischten Markdown-Zellen ausschliesslich die klar abgegrenzten technischen Teile verschieben. Fachliche Aussagen und wesentliche Studienannahmen im Haupttext belassen.
+
+Keine Python-Codezellen verschieben, löschen oder verändern.
+
+Keine eingefrorenen Daten, Konfigurationen oder Ergebnisdateien ändern.
+
+## 7. Sprachliche Verdichtung
+
+Bei allen freigegebenen sprachlichen Massnahmen gilt:
+
+- Formuliere sachlich und natürlich, passend zum vorhandenen persönlichen Schreibstil.
+- Erhalte eigene Entscheidungen und Ich-Formulierungen, wo sie sinnvoll sind.
+- Entferne inhaltliche Wiederholungen, nicht eigenständige Argumente.
+- Streiche unnötige Erklärungen zu Tabellenwerten, wenn die Werte weiterhin gut lesbar in der Tabelle stehen.
+- Erhalte die tatsächliche Interpretation und Einordnung der Ergebnisse.
+- Stelle keine neuen wissenschaftlichen Behauptungen auf.
+- Verändere keine Kausalität, Einschränkung oder Aussage zur Übertragbarkeit der Resultate.
+- Erhalte notwendige Quellenbelege an den jeweils verbleibenden Aussagen.
+
+Kürzere Formulierungen dürfen nicht fachlich unpräziser sein.
+
+**Wichtig zur KI-Darstellung:** Beim Zusammenfassen technischer Abschnitte darf die tatsächliche Rolle von Codex nicht unzutreffend verkleinert werden. Wesentliche KI-gestützte Implementierungs- und Testarbeiten müssen weiterhin als solche erkennbar bleiben. Eigene Entscheidungen des Autors und technische Umsetzung durch KI sind korrekt abzugrenzen.
+
+Keine Behauptungen über eine persönliche Autorenprüfung erfinden.
+
+## 8. Wissenschaftliche Schutzregeln
+
+Folgende Bestandteile bleiben vollständig nachvollziehbar:
+
+- Forschungsfrage und methodisches Untersuchungsdesign
+- Strategieregeln und ihre wesentlichen Parameter
+- H1, K1, Z1, S1 und S2
+- Unterschiede der Anlageuniversen und Zeiträume
+- Monatliche Signallogik und Verzögerung
+- BIP-Vintage- und Verfügbarkeitsregeln
+- Risikofreie Vergleichsreihe und ihre Abgrenzung zur Cash-Position
+- Dividenden-/Splitbehandlung und Kostenannahmen
+- Sämtliche relevanten Kennzahlen und Ergebnisvergleiche
+- Grenzen der historischen Interpretation
+- Alle wesentlichen Schlussfolgerungen
+
+Die Studienergebnisse dürfen nicht verändert oder nachträglich optimiert werden.
+
+Formeln und Variablenerklärungen müssen fachlich und mathematisch vollständig bleiben.
+
+Alle ursprünglichen Codezellen sind einschliesslich Quelle, ID, Metadaten, Execution Counts und gespeicherten Outputs zu bewahren.
+
+Diagramme und Ergebnistabellen müssen weiterhin vorhanden und unverändert sein.
+
+Keine Ausführung von Notebook-Code, Backtests, Engine-Tests oder Datenbeschaffung.
+
+## 9. Zielumfang
+
+Aktueller Haupttext einschliesslich Überblick: ungefähr **12’742 Wörter** nach der dokumentierten Zählmethode.
+
+Für die freigegebenen 46 Massnahmen wird eine Ersparnis von ungefähr **3’415–4’100 Wörtern** erwartet.
+
+Das entspricht einer ersten Zielspanne von ungefähr **8’642–9’327 Wörtern**.
+
+Diese Spanne ist keine Erfolgsgarantie und keine zwingend zu erreichende Untergrenze.
+
+**Nicht eigenmächtig weiterkürzen, um bereits jetzt unter 8’000 oder 7’700 Wörter zu gelangen.**
+
+Führe die beschlossenen 46 Massnahmen sorgfältig aus, zähle die tatsächliche Einsparung und dokumentiere den verbleibenden Umfang.
+
+Falls weniger Einsparung als erwartet erreicht wird, begründe das transparent.
+
+Danach wird eine zweite gezielte Verdichtungsstufe separat beschlossen.
+
+## 10. Integritäts- und Qualitätsprüfung
+
+Prüfe nach Abschluss:
+
+1. Alle ursprünglichen ausführbaren Codezellen vollständig unverändert.
+2. Alle gespeicherten Ausgaben und PNG-Daten vollständig erhalten.
+3. Alle relevanten Formeln und mathematischen Aussagen korrekt erhalten.
+4. Alle wissenschaftlich wesentlichen Zahlen, Parameter, Tabellen und Diagramme erhalten.
+5. Quellenverweise an den weiterhin vorhandenen Behauptungen sinnvoll und korrekt.
+6. Keine verlorenen oder doppelt eingefügten technischen Originalinhalte.
+7. Alle aktuellen Kapitelnummern und Querverweise angepasst.
+8. Historische Dokumentation unverändert.
+9. Keine Änderungen an Engine und eingefrorenen Studienartefakten.
+10. Notebook-JSON weiterhin gültig und alle Zell-IDs eindeutig.
+
+Erstelle ausserdem einen nach Massnahmen-ID aufgeschlüsselten Vorher-nachher-Vergleich.
+
+Kürzungen sind nicht allein deshalb korrekt, weil die Wortzahl sinkt. Vergleiche insbesondere jede wissenschaftlich wichtige Aussage mit der ursprünglichen Textfassung.
+
+## 11. Renderprüfung und Schutz der Ausgabedateien
+
+Rendere die vollständige Arbeit in HTML, PDF und DOCX mit deaktivierter Notebook-Codeausführung.
+
+**Wegen des dokumentierten Word-Ausgabevorfalls vom vorherigen Auftrag:**
+
+- Erzeuge vor Renderprüfungen eine vollständige externe Arbeitskopie.
+- Starte sämtliche Renderbefehle ausschliesslich innerhalb dieser externen Kopie.
+- Prüfe ausdrücklich den tatsächlichen Arbeitsordner und die Ausgabeziele, bevor ein Renderbefehl startet.
+- Erzeuge keinerlei neue Ausgabedateien im ursprünglichen Schreibrepository.
+- Prüfe die vorhandenen `_book`-, `_freeze`- und `.quarto`-Dateien vor und nach den Tests mittels Hashes.
+
+Nutze keine Netzwerkdownloads, automatischen Paketinstallationen oder erneuten Studienläufe.
+
+Überprüfe tatsächliche Überschriften, Seitenumbrüche, Formeln, Tabellen, Grafiken, Literaturverzeichnis und Anhänge.
+
+Stelle sicher, dass keine ungültigen Links oder doppelten Abschnittsnummern entstehen.
+
+Fehlgeschlagene Prüfungen ausdrücklich als solche dokumentieren; nicht durch eine pauschale Erfolgsmeldung ersetzen.
+
+## 12. Bericht und KI-Nachweis
+
+Erstelle:
+
+`documentation/kuerzung-haupttext-stufe1-2026-10-12.md`
+
+Der Bericht muss enthalten:
+
+1. Ausgangscommit und Arbeitsstand.
+2. Vollständige Liste der 46 freigegebenen Massnahmen.
+3. Status je Massnahme: umgesetzt, teilweise umgesetzt oder begründet ausgesetzt.
+4. Tatsächliche Nettoersparnis pro Massnahme und Kapitel.
+5. Alte und neue Wortzahlen des Haupttexts.
+6. Beschreibung sämtlicher zusätzlicher technischer Auslagerungen.
+7. Übersicht über Nummern- und Verweisänderungen.
+8. Nachweis der inhaltlichen und technischen Integrität.
+9. HTML-/PDF-/DOCX-Renderergebnisse.
+10. Verbleibende Wortzahl bis zur Obergrenze.
+11. Konkrete Hinweise für eine zweite Verdichtungsstufe, ohne diese bereits auszuführen.
+12. Offene Fachkorrekturen aus dem Gegenlesebericht.
+
+Dokumentiere auch diesen KI-Einsatz im Projektlog und im KI-Anhang. Speichere den ausgeführten Prompt vollständig unter `documentation/ai-usage/prompts/`.
+
+Unterscheide deutlich zwischen technischer Auslagerung, Strukturänderung und KI-gestützter sprachlicher Verdichtung.
+
+Fachliche Erstellung neuer wissenschaftlicher Ergebnisse darf nicht behauptet werden.
+
+## 13. Abschluss
+
+Führe die 46 freigegebenen Massnahmen selbstständig und sorgfältig aus.
+
+T01, F02 und F04 sind ausdrücklich gesperrt.
+
+Keine zusätzlichen Kürzungen.
+
+Kein Commit, Push, Merge, Reset oder Clean.
+
+Schliesse mit einem kurzen Bericht über die tatsächlich umgesetzten Massnahmen, die neue Wortzahl, offene Probleme und die Integritäts-/Renderprüfungen.
+
+**STOPP zur Autorenkontrolle.**
