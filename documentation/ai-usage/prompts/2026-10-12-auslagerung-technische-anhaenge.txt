@@ -6,7 +6,7 @@ Die erste vollständige Fassung der Maturarbeit «Langfristige Anlagestrategien 
 
 Der Haupttext enthält derzeit ungefähr 14’838 Wörter ohne Überblick, Code und Tabellen. Die Schulvorgabe beträgt 6’000–8’000 Wörter.
 
-Mein Betreuungslehrer, Herr Mock, hat ausdrücklich folgende Lösung genehmigt:
+Mein Betreuungslehrer, hat ausdrücklich folgende Lösung genehmigt:
 
 > Lagern Sie die technische Dokumentation, die Beschreibung der Datenaufbereitung sowie den Testbericht in den Anhang aus. Der Anhang zählt nicht zum Umfang.
 

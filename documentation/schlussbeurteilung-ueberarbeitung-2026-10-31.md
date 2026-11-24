@@ -26,7 +26,7 @@ Die von ChatGPT gemeldeten Fundstellen wurden von Codex an den aktuellen Quellen
 | B02 | Unbelegte Kurz-/Mittel-/Lang-Typologie für SMA entfernt; Fensterbedeutung ausdrücklich von der Datenfrequenz abhängig erklärt. |
 | B03 | Overfitting-Warnung auf den überprüften Abschnitt und ausdrücklich PDF-S.698–699 bezogen; Optimierungsbeleg nicht pauschal als falsch entfernt. |
 | B04–B09 | Maximaler Drawdown, Diversifikation bei nicht perfekter Korrelation, Renditereihen statt Kursen, Monatsendpreise, Verschiebung um Beobachtung/Periode und Sharpe als risikoadjustierte Rendite präzisiert. |
-| B10–B12 | Acht Quellen-Satzreste, Long/Cash-Satz, 2022-Aussage, Herrn Mock, Yahoo-Fragezeichen und veraltete Vorwärtsverweise korrigiert. Hilpisch-/McKinney-Abschnitte präzisiert. |
+| B10–B12 | Acht Quellen-Satzreste, Long/Cash-Satz, 2022-Aussage, Yahoo-Fragezeichen und veraltete Vorwärtsverweise korrigiert. Hilpisch-/McKinney-Abschnitte präzisiert. |
 | C01 | Zählmethode am Ausgangsstand mit 7’969 reproduziert; neu 7’926 mit / 7’839 ohne Überblick. Zählweise und alle Kapitelzahlen unten und als ausführbares Leseskript offengelegt. Schulische Auslegung bleibt zu klären. |
 | C02 | Nur eindeutige Kurztitel und vorhandene Abrufdaten im CSL korrigiert. Keine pauschale Umstellung auf Vgl./Internet-Zusätze oder globale Fussnotenzählung; abweichende Vereinbarungen unbekannt. |
 | C03 | Persönliche Endkontrolle offen belassen und im neuen Nachtrag ausdrücklich genannt. |

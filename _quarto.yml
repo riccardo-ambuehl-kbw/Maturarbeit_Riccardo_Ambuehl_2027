@@ -8,7 +8,7 @@ book:
   title: "Anlagestrategien: Risiko und Rendite im Backtest"
   output-file: "Anlagestrategien-Risiko-und-Rendite-im-Backtest"
   author: "Riccardo Ambühl"
-  date: today
+  date: 2026-11-25
   chapters:
     - href: index.ipynb
       text: Überblick
@@ -68,6 +68,7 @@ format:
     fig-width: 8
     fig-height: 5
   pdf:
+    date-format: "DD.MM.YYYY"
     documentclass: scrreprt
     latex-min-runs: 3
     lof: true

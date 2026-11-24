@@ -10,10 +10,6 @@ Codex hat vorhandene Inhalte strukturell ausgelagert, kurze Zusammenfassungen un
 
 Arbeitsort war das normale Repository `C:\Users\modic\Documents\GitHub\Maturarbeit_Riccardo_Ambuehl_2027`, Branch `dev`, HEAD **`7a166fbb80fb3c83dfab763e2134bd361f14b170`**. Der Git-Arbeitsstand war zu Beginn sauber. In den geprüften Projekt- und übergeordneten Verzeichnissen lagen keine `AGENTS.md`-Anweisungen vor. HEAD, Branch und Git-Index blieben unverändert; kein Staging, Commit, Push, Merge, Reset oder Clean.
 
-Die vom Autor im Auftrag wiedergegebene Antwort von Herrn Mock lautet:
-
-> Lagern Sie die technische Dokumentation, die Beschreibung der Datenaufbereitung sowie den Testbericht in den Anhang aus. Der Anhang zählt nicht zum Umfang.
-
 Dies erlaubt die Auslagerung der ausführlichen Implementierungsbeschreibung, jedoch keine beliebige Kürzung der wissenschaftlichen Untersuchung. Daher bleiben insbesondere die vollständige Daten- und Parameterfestlegung in 5.10, die wesentlichen Durchführungsschritte in 5.11 sowie Ergebnisse und Interpretation in 5.12/5.13 im Haupttext. Das Überblickskapitel bleibt als Kapitel 1 bestehen.
 
 Gelesen wurden die vollständigen Analyse-, Methodik-, Theorie- und Überblick-Notebooks, die Buchkonfiguration, der [Gegenlesebericht aus Phase 2](C:/Users/modic/Documents/GitHub/Maturarbeit_Riccardo_Ambuehl_2027/documentation/gesamtgegenlesen-phase2-2026-10-12.md), der [Formatierungsbericht aus Phase 1](C:/Users/modic/Documents/GitHub/Maturarbeit_Riccardo_Ambuehl_2027/documentation/formatierung-gesamtbuch-2026-10-12.md) sowie die KI-Regeln und die Arbeitsanweisung `KI-DOKUMENTATION-BUCH-SYNC`.
